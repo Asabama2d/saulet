@@ -1,0 +1,166 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Палитра инструмента проектировщика: нейтральный технический фон, цвет несёт
+  смысл. Акцент один, остальные цвета зарезервированы за статусами. Цвета
+  функциональных групп приходят из базы знаний, а не из темы.
+*/
+:root {
+  --app-bg: #ffffff;
+  --app-panel: #f6f7f8;
+  --app-raised: #eceef0;
+  --app-line: #d5dade;
+  --app-line-strong: #b3bbc2;
+  --app-fg: #14181b;
+  --app-muted: #5c656d;
+  --app-accent: #0b6bcb;
+  --app-accent-soft: #e4effb;
+  --app-ok: #1c7c4a;
+  --app-ok-soft: #e2f3e9;
+  --app-warn: #96650a;
+  --app-warn-soft: #fbf0d8;
+  --app-err: #b3261e;
+  --app-err-soft: #fbe6e4;
+  --app-grid: #e9ecee;
+}
+
+.dark {
+  --app-bg: #0d1013;
+  --app-panel: #14181c;
+  --app-raised: #1b2126;
+  --app-line: #293138;
+  --app-line-strong: #3d484f;
+  --app-fg: #e4e9ed;
+  --app-muted: #8d979f;
+  --app-accent: #5aa9f5;
+  --app-accent-soft: #12283d;
+  --app-ok: #52c48b;
+  --app-ok-soft: #10281c;
+  --app-warn: #d9a441;
+  --app-warn-soft: #2c2210;
+  --app-err: #f27a72;
+  --app-err-soft: #331615;
+  --app-grid: #1a2025;
+}
+
+@theme inline {
+  --color-bg: var(--app-bg);
+  --color-panel: var(--app-panel);
+  --color-raised: var(--app-raised);
+  --color-line: var(--app-line);
+  --color-line-strong: var(--app-line-strong);
+  --color-fg: var(--app-fg);
+  --color-muted: var(--app-muted);
+  --color-accent: var(--app-accent);
+  --color-accent-soft: var(--app-accent-soft);
+  --color-ok: var(--app-ok);
+  --color-ok-soft: var(--app-ok-soft);
+  --color-warn: var(--app-warn);
+  --color-warn-soft: var(--app-warn-soft);
+  --color-err: var(--app-err);
+  --color-err-soft: var(--app-err-soft);
+  --color-grid: var(--app-grid);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+@layer base {
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    background: var(--app-bg);
+    color: var(--app-fg);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    line-height: 1.45;
+    /* табличные цифры по умолчанию: колонки площадей должны выстраиваться */
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--app-accent);
+    outline-offset: 1px;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--app-line);
+    border: 3px solid var(--app-bg);
+    border-radius: 6px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--app-line-strong);
+  }
+}
+
+/*
+  React Flow приходит со своей светлой темой. Его стиль подключается из
+  клиентского компонента и попадает в документ после globals.css, поэтому
+  селекторы здесь намеренно на класс длиннее — иначе кнопки остаются белыми
+  в тёмной теме.
+*/
+.react-flow .react-flow__controls {
+  box-shadow: none;
+}
+.react-flow .react-flow__controls-button {
+  background: var(--app-bg);
+  border-bottom: 1px solid var(--app-line);
+  color: var(--app-fg);
+  width: 22px;
+  height: 22px;
+}
+.react-flow .react-flow__controls-button:hover {
+  background: var(--app-raised);
+}
+.react-flow .react-flow__controls-button svg {
+  fill: currentColor;
+  max-width: 11px;
+  max-height: 11px;
+}
+.react-flow__node:focus,
+.react-flow__node:focus-visible {
+  outline: none;
+}
+
+@layer utilities {
+  .num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 12px;
+  }
+
+  /* Штриховка «требует проверки» — читается и в ч/б печати */
+  .hatched {
+    background-image: repeating-linear-gradient(
+      135deg,
+      transparent,
+      transparent 5px,
+      var(--app-warn-soft) 5px,
+      var(--app-warn-soft) 10px
+    );
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

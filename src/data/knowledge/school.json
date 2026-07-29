@@ -1,0 +1,3670 @@
+{
+  "id": "school",
+  "name": "Общеобразовательная организация",
+  "normBase": [
+    {
+      "doc": "СП РК 3.02-111-2012*",
+      "clause": "раздел 4.4; приложения Б, Е, Ж, М",
+      "edition": "с изм. по приказу КДСиЖКХ от 02.02.2024 г. №24-НҚ",
+      "source": "norm",
+      "verified": true
+    },
+    {
+      "doc": "СН РК 3.02-11-2011",
+      "clause": "весь документ",
+      "edition": "с изм. по 30.11.2022",
+      "source": "norm",
+      "verified": false
+    },
+    {
+      "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам образования» (приказ МЗ РК от 05.08.2021 № ҚР ДСМ-76)",
+      "clause": "пп. 11, 13, 21; приложение 2",
+      "edition": "с изм. по 18.10.2022",
+      "source": "sanpin",
+      "verified": true
+    },
+    {
+      "doc": "СП РК 3.02-112-2013",
+      "clause": "весь документ",
+      "source": "norm",
+      "verified": false
+    }
+  ],
+  "unitCounts": {
+    "class": "classMatrix_units",
+    "place": "places_total",
+    "floor": "floors",
+    "building": "1"
+  },
+  "sections": [
+    { "id": "general", "label": "Общие" },
+    { "id": "capacity", "label": "Вместимость и режим" },
+    { "id": "study", "label": "Учебные помещения" },
+    { "id": "blocks", "label": "Общешкольные блоки" },
+    { "id": "extra", "label": "Дополнительно" }
+  ],
+  "grossAreaLimit": {
+    "by": "places_total",
+    "points": [
+      { "at": 300, "value": 5054.148 },
+      { "at": 600, "value": 7384.212 },
+      { "at": 900, "value": 8838.875 },
+      { "at": 1200, "value": 11334.5 }
+    ],
+    "title": "Превышена предельная общая площадь по приложению Ж",
+    "detail": "СП РК 3.02-111-2012*, приложение Ж, таблица Ж.1: общая площадь выше отметки 0,000 для школ на 300 / 600 / 900 / 1200 обучающихся — не более 5054,148 / 7384,212 / 8838,875 / 11334,5 м². Примечание 3 допускает увеличение в пределах 5 % в обоснованных случаях."
+  },
+  "parameters": [
+    {
+      "id": "kind",
+      "label": "Вид организации",
+      "control": "select",
+      "section": "general",
+      "default": "secondary",
+      "options": [
+        { "value": "primary", "label": "Начальная школа" },
+        { "value": "basic", "label": "Основная средняя школа" },
+        { "value": "secondary", "label": "Общая средняя (полная) школа" },
+        { "value": "small", "label": "Малокомплектная школа", "hint": "До 300 обучающихся, приложение Л" },
+        {
+          "value": "profile",
+          "label": "Профильная школа, лицей, гимназия",
+          "hint": "Приложение К, состав по заданию на проектирование"
+        }
+      ],
+      "helpNorm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "приложение А; п. 4.1.2",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Классификация и назначение видов общеобразовательных организаций — приложение А.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "id": "fireResistance",
+      "label": "Степень огнестойкости",
+      "control": "select",
+      "section": "general",
+      "default": "II",
+      "options": [
+        { "value": "I", "label": "I" },
+        { "value": "II", "label": "II" },
+        { "value": "III", "label": "III" },
+        { "value": "IIIa", "label": "IIIа" },
+        { "value": "IIIb", "label": "IIIб" },
+        { "value": "IV", "label": "IV" },
+        { "value": "IVa", "label": "IVа" },
+        { "value": "V", "label": "V" }
+      ],
+      "help": "Принимается по СН РК 2.02-01-2023 и СП РК 2.02-101-2022. На состав помещений не влияет."
+    },
+    {
+      "id": "fireClass",
+      "label": "Класс функциональной пожарной опасности",
+      "control": "select",
+      "section": "general",
+      "default": "Ф4.1",
+      "options": [
+        { "value": "Ф4.1", "label": "Ф4.1", "hint": "Здания общеобразовательных организаций" },
+        { "value": "Ф1.1", "label": "Ф1.1", "hint": "Спальные корпуса, дошкольные отделения" }
+      ],
+      "help": "Для общеобразовательной организации подставляется Ф4.1. Класс уточнить по СН РК 2.02-01-2023."
+    },
+    {
+      "id": "floors",
+      "label": "Этажность",
+      "control": "number",
+      "section": "general",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "unit": "эт.",
+      "default": 3,
+      "helpNorm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "п. 4.3.22",
+        "edition": "с изм. по 30.11.2022 №215-НҚА",
+        "quote": "При проектировании 5-этажных зданий общеобразовательных организаций ширина марша лестницы, предназначенной для эвакуации людей, должна быть не менее 1,8 м.",
+        "source": "norm",
+        "verified": true
+      },
+      "help": "Для малокомплектных школ — не более 4 этажей, в сейсмических районах не более 3 (приложение Л, п. Л.3)."
+    },
+    {
+      "id": "hasBasement",
+      "label": "Подвал",
+      "control": "toggle",
+      "section": "general",
+      "default": false,
+      "helpNorm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "п. 4.3.4",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Из групп помещений, расположенных в подвальном или цокольном этажах зданий школ, необходимо предусматривать не менее двух эвакуационных выходов непосредственно наружу.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "id": "hasGroundFloor",
+      "label": "Цокольный этаж",
+      "control": "toggle",
+      "section": "general",
+      "default": false
+    },
+    {
+      "id": "placement",
+      "label": "Тип размещения",
+      "control": "select",
+      "section": "general",
+      "default": "detached",
+      "options": [
+        { "value": "detached", "label": "Отдельно стоящее" },
+        { "value": "built-in", "label": "Встроенное" },
+        { "value": "built-attached", "label": "Встроенно-пристроенное" },
+        { "value": "blocked", "label": "Блокированное" }
+      ],
+      "helpNorm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "п. 4.4.1.2",
+        "edition": "с изм. по 02.03.2018 №45-НҚ",
+        "quote": "В общеобразовательных организациях, размещаемых на первых и (или) вторых этажах многоквартирных жилых зданий, в частных домовладениях, во встроенно-пристроенных помещениях вместимость обучающихся следует принимать не более 300.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "id": "climateArea",
+      "label": "Климатический район",
+      "control": "select",
+      "section": "general",
+      "default": "III",
+      "options": [
+        { "value": "I", "label": "I" },
+        { "value": "II", "label": "II" },
+        { "value": "III", "label": "III" },
+        { "value": "IV", "label": "IV" }
+      ],
+      "help": "Подрайон уточнить по СП РК 2.04-01-2017 «Строительная климатология»."
+    },
+    {
+      "id": "seismicity",
+      "label": "Расчётная сейсмичность",
+      "control": "number",
+      "section": "general",
+      "min": 0,
+      "max": 9,
+      "step": 1,
+      "unit": "баллов",
+      "default": 6,
+      "help": "0 — площадка вне сейсмического района."
+    },
+    {
+      "id": "mgn",
+      "label": "Требования МГН",
+      "control": "select",
+      "section": "general",
+      "default": "basic",
+      "options": [
+        { "value": "basic", "label": "Базовые" },
+        {
+          "value": "extended",
+          "label": "Расширенные",
+          "hint": "Обучающиеся с особыми образовательными потребностями"
+        }
+      ],
+      "help": "Состав и параметры доступности — СП РК 3.06-101-2012."
+    },
+    {
+      "id": "floorHeight",
+      "label": "Высота этажа",
+      "control": "number",
+      "section": "general",
+      "min": 2.9,
+      "max": 6,
+      "step": 0.1,
+      "unit": "м",
+      "default": 3.3,
+      "helpNorm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "п. 4.4.3.1*",
+        "edition": "с изм. по 02.03.2018 №45-НҚ",
+        "quote": "Высота надземных этажей здания должна быть не менее 3,3 м (от пола до пола вышележащего этажа), в чистоте — не менее 3 м. Для организаций, размещаемых на первых и (или) вторых этажах многоквартирных жилых зданий, во встроенно-пристроенных помещениях высота этажей в чистоте должна составлять не менее 2,9 метров.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "id": "coefK",
+      "label": "Коэффициент перехода к общей площади K",
+      "control": "number",
+      "section": "general",
+      "min": 1,
+      "max": 1.6,
+      "step": 0.01,
+      "default": 1.32,
+      "helpNorm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "приложение Ж, таблица Ж.1, примечание 2",
+        "edition": "с изм. по 02.03.2018 №45-НҚ",
+        "quote": "Эмпирический коэффициент отношения общей площади к расчетной принят для школы на 12 и 24 класса — 1,32; для школы на 36 и 48 классов — 1,25.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "id": "classMatrix",
+      "label": "Матрица классов",
+      "control": "group-matrix",
+      "section": "capacity",
+      "default": [],
+      "helpNorm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "п. 4.1.3*",
+        "edition": "с изм. по 02.03.2018 №45-НҚ",
+        "quote": "Наполняемость классов и площадь на одного учащегося для общеобразовательных организаций устанавливается в соответствии с Санитарными правилами «Санитарно-эпидемиологические требования к объектам образования».",
+        "source": "norm",
+        "verified": true
+      },
+      "help": "СП наполняемость не задаёт, а отсылает к санитарным правилам. По умолчанию подставлено 25 мест — расчётная база площадей в приложении Б («на 1 обучающегося (25 мест)»). Сверьте с приложением 2 санитарных правил и правьте вручную.",
+      "matrix": {
+        "rowLabel": "Ступень обучения",
+        "countLabel": "Классов",
+        "capacityLabel": "Мест в классе",
+        "rows": [
+          {
+            "id": "grade-1",
+            "label": "1 классы",
+            "defaultCount": 2,
+            "defaultCapacity": 25,
+            "tags": ["primary", "grade1"],
+            "hint": "В учебной секции не более трёх классных помещений (п. 4.4.1.7 а)",
+            "capacityNorm": null
+          },
+          {
+            "id": "grade-2-4",
+            "label": "2–4 классы",
+            "defaultCount": 6,
+            "defaultCapacity": 25,
+            "tags": ["primary"],
+            "hint": "В учебной секции не более шести классных помещений (п. 4.4.1.7 б)",
+            "capacityNorm": null
+          },
+          {
+            "id": "grade-5-9",
+            "label": "5–9 классы",
+            "defaultCount": 12,
+            "defaultCapacity": 25,
+            "tags": ["basic"],
+            "capacityNorm": null
+          },
+          {
+            "id": "grade-10-11",
+            "label": "10–11 (12) классы",
+            "defaultCount": 4,
+            "defaultCapacity": 25,
+            "tags": ["senior"],
+            "capacityNorm": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "parallels",
+      "label": "Количество параллельных классов",
+      "control": "number",
+      "section": "capacity",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "unit": "пар.",
+      "default": 2,
+      "helpNorm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "приложение Б, таблица Б.8",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Площадь при количестве параллельных классов, не менее: 1 / 2 / 3 / 4.",
+        "source": "norm",
+        "verified": true
+      },
+      "help": "От числа параллелей зависят площади кабинета завучей, методического кабинета и помещения охраны."
+    },
+    {
+      "id": "shifts",
+      "label": "Сменность",
+      "control": "select",
+      "section": "capacity",
+      "default": "one",
+      "options": [
+        { "value": "one", "label": "1 смена" },
+        { "value": "two", "label": "2 смены" }
+      ],
+      "helpNorm": {
+        "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам образования» (приказ МЗ РК от 05.08.2021 № ҚР ДСМ-76)",
+        "clause": "п. 13",
+        "edition": "с изм. по 18.10.2022",
+        "quote": "Допускается организация двухсменного режима обучения при условии соблюдения в каждой смене нормы площади на 1 обучающегося и требований настоящих Санитарных правил.",
+        "source": "sanpin",
+        "verified": true
+      }
+    },
+    {
+      "id": "schoolSystem",
+      "label": "Организация обучения",
+      "control": "select",
+      "section": "capacity",
+      "default": "mixed",
+      "options": [
+        { "value": "classroom", "label": "Классно-урочная" },
+        { "value": "cabinet", "label": "Кабинетная" },
+        { "value": "mixed", "label": "Смешанная" }
+      ],
+      "help": "На состав помещений в базе пока не влияет — учитывается при распределении классов-кабинетов по секциям (п. 4.4.1.7)."
+    },
+    {
+      "id": "sciences",
+      "label": "Кабинеты по естественным наукам",
+      "control": "multiselect",
+      "section": "study",
+      "default": ["physics", "chemistry", "biology"],
+      "options": [
+        { "value": "physics", "label": "Физика" },
+        { "value": "chemistry", "label": "Химия" },
+        { "value": "biology", "label": "Биология" }
+      ],
+      "helpNorm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "приложение Б, таблица Б.4",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Учебные кабинеты по естественным наукам (физика, химия, биология): 2,5 м2 на 1 обучающегося; лаборатория (лекционное помещение) на каждый предмет — 3,5 м2 на 1 обучающегося; лаборантская на каждый предмет — 18 м2 на помещение.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "id": "specialRooms",
+      "label": "Специализированные кабинеты",
+      "control": "multiselect",
+      "section": "study",
+      "default": ["foreign", "informatics"],
+      "options": [
+        { "value": "foreign", "label": "Иностранного языка с лингвистической лабораторией" },
+        { "value": "informatics", "label": "Информатики и вычислительной техники" },
+        { "value": "computer", "label": "Компьютерный класс" },
+        { "value": "nvp", "label": "Начальной военной подготовки" }
+      ],
+      "helpNorm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "приложение Б, таблица Б.4",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Специализированные кабинеты: иностранного языка, информатики и вычислительной техники, компьютерный класс — 3,5 м2 на 1 обучающегося; кабинет начальной военной подготовки — 2,5 м2 на 1 обучающегося и 18 м2 лаборантская.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "id": "workshops",
+      "label": "Мастерские и технологии",
+      "control": "multiselect",
+      "section": "study",
+      "default": ["combined", "textile", "cooking", "tools"],
+      "options": [
+        { "value": "combined", "label": "Учебная комплексная мастерская" },
+        { "value": "textile", "label": "Кабинет по обработке тканей (5–9 классы)" },
+        { "value": "cooking", "label": "Кабинет кулинарии (5–9 классы)" },
+        { "value": "tools", "label": "Инструментальная" },
+        { "value": "ceramic", "label": "Мастерская керамики" }
+      ],
+      "helpNorm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "приложение Б, таблица Б.6",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Учебная комплексная мастерская — 60 м2; кабинет по обработке тканей для девочек 5–9 классов — 50 м2; кабинет кулинарии для девочек 5–9 классов — от 21 до 25 м2; инструментальная — 10–18 м2; мастерская керамики — 50 м2.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "id": "libraryType",
+      "label": "Тип центра информации — библиотеки",
+      "control": "select",
+      "section": "blocks",
+      "default": "2",
+      "options": [
+        { "value": "1", "label": "Тип 1 — до 10 000 ед. хранения", "hint": "Однопараллельная школа, 20 читательских мест" },
+        { "value": "2", "label": "Тип 2 — 12 000–14 000 ед. хранения", "hint": "Двухпараллельная школа, 25 мест" },
+        { "value": "3", "label": "Тип 3 — 15 000–17 000 ед. хранения", "hint": "Трёхпараллельная школа, 30 мест" },
+        { "value": "4", "label": "Тип 4 — 20 000–30 000 ед. хранения", "hint": "Гимназии, лицеи, профильные школы, 35–40 мест" }
+      ],
+      "helpNorm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "приложение Б, таблица Б.7",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Тип библиотеки устанавливается в зависимости от назначения общеобразовательной организации заданием на проектирование: расчетный показатель на единицу фонда хранения — 0,0035 м, на одно читательское место не более 2,5 м².",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "id": "sportHalls",
+      "label": "Количество спортивных залов",
+      "control": "number",
+      "section": "blocks",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "шт.",
+      "default": 1,
+      "helpNorm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "п. 4.4.2.18; приложение Б, таблица Б.10",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Количество и площади спортивных залов определяются заданием на проектирование, при этом их общая площадь не должна превышать площади, указанной в приложении Б (таблице Б.10). Допускается принимать размеры и количество залов по заданию на проектирование, один из которых не менее размеров баскетбольной площадки.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "id": "assemblyHall",
+      "label": "Зрительный (актовый) зал",
+      "control": "toggle",
+      "section": "blocks",
+      "default": true,
+      "helpNorm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "п. 4.4.2.19",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Необходимость проектирования актового зала в общеобразовательных организациях устанавливается в задании на проектирование.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "id": "assemblySeatsShare",
+      "label": "Посадка в зрительном зале",
+      "control": "number",
+      "section": "blocks",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 20,
+      "visibleIf": { "eq": ["assemblyHall", true] },
+      "helpNorm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "приложение Б, таблица Б.9",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Количество мест в зале принимается из расчета посадки не менее 20% от количества обучающихся школы и должно быть кратным вместимости классов. Дополнительно предусматриваются места для преподавателей из расчета 2 преподавателя на 1 классную группу.",
+        "source": "norm",
+        "verified": true
+      },
+      "help": "Приложение М для той же группы помещений называет 30 % — расхождение вынесено в «Проверки». Места преподавателей движок не добавляет, учтите вручную."
+    },
+    {
+      "id": "diningSeatsDivisor",
+      "label": "Посадка в столовой — 1 из N",
+      "control": "number",
+      "section": "blocks",
+      "min": 3,
+      "max": 6,
+      "step": 1,
+      "unit": "чел.",
+      "default": 3,
+      "helpNorm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "п. 4.4.2.8",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Площадь обеденного зала столовой следует принимать из расчета не менее 0,8 м2 на одно посадочное место. Число посадочных мест определяется из расчета 1/3 от численности обучающихся, преподавателей и администрации. По заданию на проектирование допускается число посадочных мест уменьшать до 1/6.",
+        "source": "norm",
+        "verified": true
+      },
+      "help": "3 — посадка в три очереди (1/3 численности), 6 — в шесть (1/6). Преподаватели и администрация в расчёт движка не включены."
+    },
+    {
+      "id": "recreationCenter",
+      "label": "Рекреационный центр (центр досуга)",
+      "control": "toggle",
+      "section": "blocks",
+      "default": false,
+      "helpNorm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "приложение Б, таблица Б.5, примечание",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Рекреационный центр предусматривается для учебных заведений, рассчитанных на обслуживание наряду с обучающимися также и взрослого населения микрорайона (района). Возможно также предусматривать в составе школ с профильным обучением.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "id": "boarding",
+      "label": "Интернат при школе",
+      "control": "toggle",
+      "section": "extra",
+      "default": false
+    },
+    {
+      "id": "boardingPlaces",
+      "label": "Мест в интернате",
+      "control": "number",
+      "section": "extra",
+      "min": 0,
+      "max": 600,
+      "step": 10,
+      "unit": "мест",
+      "default": 0,
+      "visibleIf": { "eq": ["boarding", true] },
+      "helpNorm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "приложение Л, п. Л.4",
+        "edition": "с изм. по 22.10.2021 №162-НҚ",
+        "quote": "При проектировании мкш-интерната (интерната) норма площади спальной комнаты должны приниматься из расчета 4 м на одно спальное место. Спальные комнаты должны проектироваться для обучающихся 1–4 классов вместимостью 4–6 мест, 5–9 классов — 3–4 места, 10–12 классов — 2–3 места.",
+        "source": "norm",
+        "verified": true
+      },
+      "help": "Полный состав помещений интерната — СП РК 3.02-112-2013 «Здания интернатных организаций», в базу не заведён."
+    },
+    {
+      "id": "extras",
+      "label": "Дополнительные помещения",
+      "control": "multiselect",
+      "section": "extra",
+      "default": [],
+      "options": [
+        {
+          "value": "sleep-room",
+          "label": "Спальня-игровая для 1-х классов",
+          "hint": "Необходимость устанавливается заданием на проектирование (п. 4.4.2.2)"
+        },
+        {
+          "value": "inclusive-hall",
+          "label": "Спортивный зал 12 × 12 м для обучающихся-инвалидов",
+          "hint": "Рекомендуется по п. 4.4.2.7"
+        },
+        { "value": "isolation", "label": "Палата изолятора при медицинском кабинете" }
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "id": "sch.primary",
+      "name": "Блок начальных классов",
+      "color": "#0072B2",
+      "order": 1,
+      "isCell": true,
+      "cellSource": "classMatrix"
+    },
+    {
+      "id": "sch.classes",
+      "name": "Классы-кабинеты основной и старшей школы",
+      "color": "#56B4E9",
+      "order": 2,
+      "isCell": true,
+      "cellSource": "classMatrix"
+    },
+    {
+      "id": "sch.special",
+      "name": "Специализированные кабинеты и мастерские",
+      "color": "#CC79A7",
+      "order": 3
+    },
+    { "id": "sch.library", "name": "Центр информации — библиотека", "color": "#009E73", "order": 4 },
+    { "id": "sch.sport", "name": "Спортивно-оздоровительная группа", "color": "#E69F00", "order": 5 },
+    { "id": "sch.assembly", "name": "Группа зрительного зала", "color": "#B08800", "order": 6 },
+    { "id": "sch.dining", "name": "Столовая", "color": "#D55E00", "order": 7 },
+    { "id": "sch.common", "name": "Общешкольные помещения", "color": "#7A828C", "order": 8 }
+  ],
+  "rooms": [
+    {
+      "id": "sch.primary.class",
+      "code": "1.01",
+      "name": "Классное помещение начальной школы",
+      "nameKz": "Бастауыш сынып бөлмесі",
+      "group": "sch.primary",
+      "status": "required",
+      "condition": { "in": ["row_tags", ["primary"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "2.5 * row_places",
+        "unit": "м²/учащегося",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.1; п. 4.4.2.1",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Таблица Б.1: классное помещение для 1–4 классов и для игровых форм ведения урока — 2,5 м2 на 1 обучающегося (25 мест). П. 4.4.2.1: площади в классах и учебных кабинетах принимаются при смешанных формах обучения не менее 2,5 м2 на одного обучающегося.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "minHeight": 3 },
+      "flows": ["children"],
+      "zone": "clean",
+      "notes": "П. 4.4.1.7: в учебных секциях 1-х классов не более трёх классных помещений с санузлами, 2–4 классов — не более шести. Секции должны быть обособленными и непроходными для обучающихся других возрастных групп.",
+      "norms": [
+        {
+          "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам образования» (приказ МЗ РК от 05.08.2021 № ҚР ДСМ-76)",
+          "clause": "п. 21",
+          "quote": "Эксплуатация помещений для пребывания обучающихся и воспитанников, медицинского назначения не допускается в подвальных и цокольных этажах зданий.",
+          "source": "sanpin",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "sch.primary.sleep",
+      "code": "1.02",
+      "name": "Спальня-игровая",
+      "group": "sch.primary",
+      "status": "optional",
+      "condition": {
+        "and": [{ "in": ["row_tags", ["grade1"]] }, { "in": ["extras", ["sleep-room"]] }]
+      },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "2.5 * row_places",
+        "unit": "м²/учащегося",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "п. 4.4.2.2",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Площадь спальни-игровой для первого и предшкольных классов определяется из расчета не менее 2,5 м2 на одного обучающегося. Необходимость проектирования спальни-игровой для первых классов устанавливается заданием на проектирование.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "minHeight": 3 },
+      "flows": ["children"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.classes.basic",
+      "code": "2.01",
+      "name": "Класс — учебный кабинет основной школы",
+      "group": "sch.classes",
+      "status": "required",
+      "condition": { "in": ["row_tags", ["basic"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "2.5 * row_places",
+        "unit": "м²/учащегося",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.2; п. 4.4.2.1",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Таблица Б.2: класс-кабинет, рассчитанный на фронтальные, групповые и индивидуальные формы работы — 2,5 м2 на 1 обучающегося (25 мест).",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "minHeight": 3 },
+      "flows": ["children"],
+      "zone": "clean",
+      "notes": "П. 4.4.1.7 г): учебные секции-блоки 5–8 (9) классов должны быть обособленными и непроходными для обучающихся других возрастных групп.",
+      "norms": []
+    },
+    {
+      "id": "sch.classes.senior",
+      "code": "2.02",
+      "name": "Кабинет универсального назначения старшей школы",
+      "group": "sch.classes",
+      "status": "required",
+      "condition": { "in": ["row_tags", ["senior"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "2.5 * row_places",
+        "unit": "м²/учащегося",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.3",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Таблица Б.3: класс-кабинет старшей школы — 2,5 м2 на 1 обучающегося (25 мест).",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "minHeight": 3 },
+      "flows": ["children"],
+      "zone": "clean",
+      "notes": "Оснащается в зависимости от профиля обучения (приложение М, У-КСШ).",
+      "norms": []
+    },
+    {
+      "id": "sch.special.physics",
+      "code": "3.01",
+      "name": "Учебный кабинет физики",
+      "group": "sch.special",
+      "status": "conditional",
+      "condition": { "in": ["sciences", ["physics"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "2.5 * classMatrix_capacity_max",
+        "unit": "м²/учащегося",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.4",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Учебные кабинеты по естественным наукам (физика, химия, биология) — 2,5 м2 на 1 обучающегося.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "minHeight": 3 },
+      "flows": ["children"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.special.physics-lab",
+      "code": "3.02",
+      "name": "Лаборатория физики",
+      "group": "sch.special",
+      "status": "conditional",
+      "condition": { "in": ["sciences", ["physics"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "3.5 * classMatrix_capacity_max",
+        "unit": "м²/учащегося",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.4; п. 4.4.2.5",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Лаборатория (лекционное помещение) на каждый предмет — 3,5 м2 на 1 обучающегося. П. 4.4.2.5: площади лабораторий — специализированных кабинетов следует принимать не менее 3,5 м2 на одно ученическое место.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "minHeight": 3 },
+      "flows": ["children"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.special.physics-lat",
+      "code": "3.03",
+      "name": "Лаборантская при кабинете физики",
+      "group": "sch.special",
+      "status": "conditional",
+      "condition": { "in": ["sciences", ["physics"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.4",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Лаборантская на каждый предмет — 18 м2 на 1 помещение.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "sch.special.chemistry",
+      "code": "3.04",
+      "name": "Учебный кабинет химии",
+      "group": "sch.special",
+      "status": "conditional",
+      "condition": { "in": ["sciences", ["chemistry"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "2.5 * classMatrix_capacity_max",
+        "unit": "м²/учащегося",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.4",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Учебные кабинеты по естественным наукам (физика, химия, биология) — 2,5 м2 на 1 обучающегося.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "minHeight": 3 },
+      "flows": ["children"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.special.chemistry-lab",
+      "code": "3.05",
+      "name": "Лаборатория химии",
+      "group": "sch.special",
+      "status": "conditional",
+      "condition": { "in": ["sciences", ["chemistry"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "3.5 * classMatrix_capacity_max",
+        "unit": "м²/учащегося",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.4",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Лаборатория (лекционное помещение) на каждый предмет — 3,5 м2 на 1 обучающегося.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "minHeight": 3, "wetZone": true },
+      "flows": ["children"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.special.chemistry-lat",
+      "code": "3.06",
+      "name": "Лаборантская при кабинете химии",
+      "group": "sch.special",
+      "status": "conditional",
+      "condition": { "in": ["sciences", ["chemistry"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.4",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Лаборантская на каждый предмет — 18 м2 на 1 помещение.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "sch.special.biology",
+      "code": "3.07",
+      "name": "Учебный кабинет биологии",
+      "group": "sch.special",
+      "status": "conditional",
+      "condition": { "in": ["sciences", ["biology"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "2.5 * classMatrix_capacity_max",
+        "unit": "м²/учащегося",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.4",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Учебные кабинеты по естественным наукам (физика, химия, биология) — 2,5 м2 на 1 обучающегося.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "minHeight": 3 },
+      "flows": ["children"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.special.biology-lab",
+      "code": "3.08",
+      "name": "Лаборатория биологии",
+      "group": "sch.special",
+      "status": "conditional",
+      "condition": { "in": ["sciences", ["biology"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "3.5 * classMatrix_capacity_max",
+        "unit": "м²/учащегося",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.4",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Лаборатория (лекционное помещение) на каждый предмет — 3,5 м2 на 1 обучающегося.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "minHeight": 3, "wetZone": true },
+      "flows": ["children"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.special.biology-lat",
+      "code": "3.09",
+      "name": "Лаборантская при кабинете биологии",
+      "group": "sch.special",
+      "status": "conditional",
+      "condition": { "in": ["sciences", ["biology"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.4",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Лаборантская на каждый предмет — 18 м2 на 1 помещение.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "sch.special.foreign",
+      "code": "3.10",
+      "name": "Кабинет иностранного языка с лингвистической лабораторией",
+      "group": "sch.special",
+      "status": "conditional",
+      "condition": { "in": ["specialRooms", ["foreign"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "3.5 * classMatrix_capacity_max",
+        "unit": "м²/учащегося",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.4",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Специализированные кабинеты: иностранного языка — 3,5 м2 на 1 обучающегося. Число определяется программой обучения, количеством часов в неделю и делением класса на подгруппы.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Количество кабинетов определяется программой обучения и делением класса на подгруппы (сноска «Х» к таблице Б.4) — задайте вручную."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "minHeight": 3 },
+      "flows": ["children"],
+      "zone": "clean",
+      "notes": "П. 4.1.4: при занятиях по иностранному языку с 1 по 11 классы и трудовому обучению класс делится на подгруппы.",
+      "norms": []
+    },
+    {
+      "id": "sch.special.informatics",
+      "code": "3.11",
+      "name": "Кабинет информатики и вычислительной техники",
+      "group": "sch.special",
+      "status": "conditional",
+      "condition": { "in": ["specialRooms", ["informatics"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "3.5 * classMatrix_capacity_max",
+        "unit": "м²/учащегося",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.4",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Специализированные кабинеты: информатики и вычислительной техники — 3,5 м2 на 1 обучающегося.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "orientation": "N", "floorsForbidden": [-1, 0] },
+      "flows": ["children"],
+      "zone": "clean",
+      "notes": "Для малокомплектных школ при наполняемости 15–20 обучающихся площадь кабинета информатики принимать от 60 до 80 м², при наполняемости 10–12 — от 40 до 48 м² (приложение Л, п. Л.9).",
+      "norms": []
+    },
+    {
+      "id": "sch.special.computer",
+      "code": "3.12",
+      "name": "Компьютерный класс",
+      "group": "sch.special",
+      "status": "conditional",
+      "condition": { "in": ["specialRooms", ["computer"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "3.5 * classMatrix_capacity_max",
+        "unit": "м²/учащегося",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.4",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Специализированные кабинеты: компьютерный класс — 3,5 м2 на 1 обучающегося.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "orientation": "N", "floorsForbidden": [-1, 0] },
+      "flows": ["children"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.special.it-lat",
+      "code": "3.13",
+      "name": "Лаборантская при кабинетах информатики",
+      "group": "sch.special",
+      "status": "conditional",
+      "condition": { "in": ["specialRooms", ["informatics", "computer"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.4",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Лаборантская — 18 м2 на 1 помещение. Из расчета одна лаборантская на 2 кабинета информатики, мультимедийных кабинетов.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "sch.special.nvp",
+      "code": "3.14",
+      "name": "Кабинет начальной военной подготовки",
+      "group": "sch.special",
+      "status": "conditional",
+      "condition": { "in": ["specialRooms", ["nvp"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "2.5 * classMatrix_capacity_max",
+        "unit": "м²/учащегося",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.4",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Кабинет начальной военной подготовки — 2,5 м2 на 1 обучающегося и 18 м2 на 1 помещение (лаборантская).",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
+      "flows": ["children"],
+      "zone": "clean",
+      "notes": "Дополнительно предусматривается лаборантская 18 м² (таблица Б.4).",
+      "norms": []
+    },
+    {
+      "id": "sch.special.workshop-combined",
+      "code": "3.15",
+      "name": "Учебная комплексная мастерская",
+      "group": "sch.special",
+      "status": "conditional",
+      "condition": { "in": ["workshops", ["combined"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 60,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.6",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Учебная комплексная мастерская — 60 м2 (площадь на 1 учащегося при 12 местах).",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "minHeight": 3 },
+      "flows": ["children", "goods"],
+      "zone": "dirty",
+      "notes": "П. 4.4.2.1: площадь мастерских по изучению технологий и труда — не менее 3,75 м²/уч без учёта площади под оборудование. В учебных мастерских следует применять по 3 умывальника (примечание к таблице Е.1).",
+      "norms": []
+    },
+    {
+      "id": "sch.special.workshop-textile",
+      "code": "3.16",
+      "name": "Кабинет по обработке тканей",
+      "group": "sch.special",
+      "status": "conditional",
+      "condition": { "in": ["workshops", ["textile"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 50,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.6",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Кабинет по обработке тканей для девочек 5–9 классов — 50 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
+      "flows": ["children"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.special.workshop-cooking",
+      "code": "3.17",
+      "name": "Кабинет кулинарии",
+      "group": "sch.special",
+      "status": "conditional",
+      "condition": { "in": ["workshops", ["cooking"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "range",
+        "min": 21,
+        "max": 25,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.6",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Кабинет кулинарии для девочек 5–9 классов — от 21 до 25 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "wetZone": true, "floorsForbidden": [-1, 0] },
+      "flows": ["children", "food"],
+      "zone": "clean",
+      "notes": "В помещении кулинарии, как правило, следует устанавливать электроплиты (примечание 1 к таблице Б.6).",
+      "norms": []
+    },
+    {
+      "id": "sch.special.workshop-tools",
+      "code": "3.18",
+      "name": "Инструментальная",
+      "group": "sch.special",
+      "status": "conditional",
+      "condition": { "in": ["workshops", ["tools"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "range",
+        "min": 10,
+        "max": 18,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.6",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Инструментальная — 10–18 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["staff", "goods"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "sch.special.workshop-ceramic",
+      "code": "3.19",
+      "name": "Мастерская керамики",
+      "group": "sch.special",
+      "status": "optional",
+      "condition": { "in": ["workshops", ["ceramic"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 50,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.6",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Мастерская керамики — 50 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "wetZone": true, "floorsForbidden": [-1, 0] },
+      "flows": ["children"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.library.main",
+      "code": "4.01",
+      "name": "Библиотека — справочно-информационный центр",
+      "group": "sch.library",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "match",
+          "cases": [
+            { "when": { "eq": ["libraryType", "1"] }, "value": 110, "label": "тип 1" },
+            { "when": { "eq": ["libraryType", "2"] }, "value": 120, "label": "тип 2" },
+            { "when": { "eq": ["libraryType", "3"] }, "value": 170, "label": "тип 3" },
+            { "when": { "eq": ["libraryType", "4"] }, "value": 240, "label": "тип 4" }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.7",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Всего площадь библиотеки: тип 1 — 110; тип 2 — 120; тип 3 — 170; тип 4 — 240 м2. В том числе по зонам (фонд хранения / общешкольный ресурсный центр / медиатека): 35/18/25, 40/18/30, 50/50/50, 80/100/60. Читательских мест: 20, 25, 30, 35–40.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Указана общая площадь библиотеки. Разбивка по зонам приведена в цитате — при детализации заведите зоны отдельными строками."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
+      "flows": ["children", "staff"],
+      "zone": "clean",
+      "notes": "Общешкольный ресурсный центр уточняется заданием на проектирование (примечание к таблице Б.7).",
+      "norms": []
+    },
+    {
+      "id": "sch.sport.hall",
+      "code": "5.01",
+      "name": "Спортивный зал 36 × 18 м",
+      "group": "sch.sport",
+      "status": "required",
+      "condition": { "gt": ["sportHalls", 0] },
+      "count": { "kind": "formula", "expr": "sportHalls", "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 648,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.10",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Спортивный зал: площадь в осях ограждающих конструкций не менее 648 м2, длина 36 м, ширина 18 м, высота до низа выступающих конструкций не менее 7 м. Пропускная способность: игровые виды — 20 м2, гимнастика — от 6 до 8 м2 на 1 занимающегося.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Допускается принимать размеры и количество залов по заданию на проектирование, один из которых не менее размеров баскетбольной площадки (сноска к таблице Б.10). Рекомендуемые размеры: 9 × 18, 12 × 24, 18 × 30, 18 × 36 м (п. 4.4.3.3)."
+      },
+      "constraints": { "daylight": "required", "minHeight": 7, "floorsForbidden": [-1] },
+      "flows": ["children"],
+      "zone": "clean",
+      "notes": "П. 4.4.1.12*: учебно-спортивный зал, оборудованный для лиц с особыми образовательными потребностями, размещать не выше второго этажа и не над учебными помещениями.",
+      "norms": []
+    },
+    {
+      "id": "sch.sport.locker",
+      "code": "5.02",
+      "name": "Раздевальные при спортивном зале, включая уборные и душевые",
+      "group": "sch.sport",
+      "status": "required",
+      "condition": { "gt": ["sportHalls", 0] },
+      "count": { "kind": "formula", "expr": "sportHalls", "round": "up" },
+      "area": {
+        "kind": "range",
+        "min": 55,
+        "max": 60,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.11",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Раздевальные, включая уборные и душевые, при зале 36 (30) × 18 — 55–60 или 2 × (27,5–30) м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["children", "waste"],
+      "zone": "dirty",
+      "notes": "На 1 раздевальную: 2 м² уборной и 4 м² душевой, 1 унитаз, 1 умывальник, 2 душевые сетки (таблица Е.1).",
+      "norms": []
+    },
+    {
+      "id": "sch.sport.equipment",
+      "code": "5.03",
+      "name": "Снарядная (инвентарная)",
+      "group": "sch.sport",
+      "status": "required",
+      "condition": { "gt": ["sportHalls", 0] },
+      "count": { "kind": "formula", "expr": "sportHalls", "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Снарядная названа в приложении М (группа О-СЗ) как обслуживающее помещение, но в таблице Б.11 её площадь не приведена. Принять по расстановке оборудования и заданию на проектирование."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "sch.sport.cleaning",
+      "code": "5.04",
+      "name": "Помещение уборочного инвентаря при спортивном зале",
+      "group": "sch.sport",
+      "status": "required",
+      "condition": { "gt": ["sportHalls", 0] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 8,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.11",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Помещение уборочного инвентаря (в том числе для уборки территории) — 8 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["waste", "staff"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.sport.inclusive",
+      "code": "5.05",
+      "name": "Спортивный зал 12 × 12 м для обучающихся-инвалидов",
+      "group": "sch.sport",
+      "status": "recommended",
+      "condition": { "in": ["extras", ["inclusive-hall"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 144,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "п. 4.4.2.7",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Для обучающихся-инвалидов рекомендуется, по возможности, предусматривать спортивный зал площадью не менее 144 м2 (12 × 12 м).",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsAllowed": [1, 2] },
+      "flows": ["children"],
+      "zone": "clean",
+      "notes": "П. 4.4.1.12*: размещать не выше второго этажа и не над учебными помещениями.",
+      "norms": []
+    },
+    {
+      "id": "sch.assembly.hall",
+      "code": "6.01",
+      "name": "Зрительный зал",
+      "group": "sch.assembly",
+      "status": "conditional",
+      "condition": { "eq": ["assemblyHall", true] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "0.9 * places_total * assemblySeatsShare / 100",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.9",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Зрительный зал — 0,7–0,9 м2 на одно зрительское место. Количество мест в зале принимается из расчета посадки не менее 20% от количества обучающихся школы и должно быть кратным вместимости классов.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Принята верхняя граница нормы 0,9 м²/место. Места для преподавателей (2 на классную группу) в расчёт не включены — добавьте вручную."
+      },
+      "constraints": { "daylight": "desirable", "floorsForbidden": [-1] },
+      "flows": ["children", "visitors"],
+      "zone": "clean",
+      "notes": "П. 4.3.5*: помещения актового зала выделяются противопожарными перегородками первого типа и перекрытиями третьего типа. Зал проектируется с учётом использования как киноаудитории и учебной аудитории по музыке и пению.",
+      "norms": []
+    },
+    {
+      "id": "sch.assembly.stage",
+      "code": "6.02",
+      "name": "Эстрада",
+      "group": "sch.assembly",
+      "status": "conditional",
+      "condition": { "eq": ["assemblyHall", true] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "range",
+        "min": 30,
+        "max": 70,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.9",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Эстрада — от 30 до 70 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["children"],
+      "zone": "clean",
+      "notes": "Эстраду следует проектировать с учётом проведения на ней занятий по хореографии. Пол эстрады должен быть выше пола зала на 0,9 м (примечание 2 к таблице Б.9).",
+      "norms": []
+    },
+    {
+      "id": "sch.assembly.store",
+      "code": "6.03",
+      "name": "Кладовая инвентарная при зрительном зале",
+      "group": "sch.assembly",
+      "status": "recommended",
+      "condition": { "eq": ["assemblyHall", true] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "range",
+        "min": 14,
+        "max": 25,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.9",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Кладовая инвентарная — от 14 до 25 м2. Количество кладовых и артистических определяется заданием на проектирование.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "sch.assembly.artist",
+      "code": "6.04",
+      "name": "Артистическая уборная",
+      "group": "sch.assembly",
+      "status": "recommended",
+      "condition": { "eq": ["assemblyHall", true] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "range",
+        "min": 14,
+        "max": 20,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.9",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Артистическая уборная — от 14 до 20 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["children"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "sch.assembly.wc",
+      "code": "6.05",
+      "name": "Уборные и умывальные при зрительном зале",
+      "group": "sch.assembly",
+      "status": "conditional",
+      "condition": { "eq": ["assemblyHall", true] },
+      "count": { "kind": "fixed", "value": 2, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Е, таблица Е.1",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Уборные и умывальные при актовом зале — лекционной аудитории в блоке общешкольных помещений: 2 санузла (женский и мужской), 1 умывальник, 1 унитаз на 30 обучающихся.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Таблица Е.1 задаёт количество приборов, но не площадь этих санузлов. Принять по расстановке оборудования."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["visitors", "waste"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.hall",
+      "code": "7.01",
+      "name": "Обеденный зал",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "0.8 * places_total / diningSeatsDivisor",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "п. 4.4.2.8",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Площадь обеденного зала столовой следует принимать из расчета не менее 0,8 м2 на одно посадочное место. Число посадочных мест определяется из расчета 1/3 от численности обучающихся, преподавателей и администрации.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Таблица Б.12 задаёт для обеденного зала минимум 80 / 120 / 140 м² при 9–12, 14–24 и 30–40 классах. Принимается большее из двух значений — расхождение вынесено в «Проверки». Преподаватели и администрация в расчёт не включены."
+      },
+      "constraints": { "daylight": "required", "floorsAllowed": [1, 2] },
+      "flows": ["children", "food"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.serving",
+      "code": "7.02",
+      "name": "Раздаточная при обеденном зале",
+      "group": "sch.dining",
+      "status": "conditional",
+      "condition": { "gte": ["classMatrix_units", 14] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 15,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Раздаточная при обеденном зале: 9–12 классов — прочерк; 14–24 классов — 15; 30–40 классов — 15 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1, 2] },
+      "flows": ["food"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.washbasins",
+      "code": "7.03",
+      "name": "Умывальные перед обеденным залом",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "classMatrix_units",
+          "points": [
+            { "at": 12, "value": 10 },
+            { "at": 24, "value": 10 },
+            { "at": 40, "value": 15 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Умывальные: 9–12 классов — 10; 14–24 классов — 10; 30–40 классов — 15 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true, "floorsAllowed": [1, 2] },
+      "flows": ["children"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.veg-prep",
+      "code": "7.04",
+      "name": "Цех первичной обработки овощей (заготовочный)",
+      "group": "sch.dining",
+      "status": "conditional",
+      "condition": { "gte": ["classMatrix_units", 14] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "classMatrix_units",
+          "points": [
+            { "at": 24, "value": 8 },
+            { "at": 40, "value": 12 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Цех первичной обработки овощей (заготовочный): 9–12 классов — прочерк; 14–24 классов — 8; 30–40 классов — 12 м2. Помещение с обязательной подводкой холодной и горячей воды.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true, "floorsAllowed": [1, 2] },
+      "flows": ["food"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.veg-semi",
+      "code": "7.05",
+      "name": "Доготовочный цех овощных полуфабрикатов",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "classMatrix_units",
+          "points": [
+            { "at": 12, "value": 8 },
+            { "at": 24, "value": 8 },
+            { "at": 40, "value": 12 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Доготовочный цех овощных полуфабрикатов: 9–12 классов — 8; 14–24 классов — 8; 30–40 классов — 12 м2. Минимально необходимое помещение с подводкой холодной и горячей воды.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true, "floorsAllowed": [1, 2] },
+      "flows": ["food"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.meat",
+      "code": "7.06",
+      "name": "Доготовочный цех мясных и рыбных полуфабрикатов",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "classMatrix_units",
+          "points": [
+            { "at": 12, "value": 10 },
+            { "at": 24, "value": 18 },
+            { "at": 40, "value": 20 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Доготовочный цех мясных и рыбных полуфабрикатов: 9–12 классов — 10; 14–24 классов — 18; 30–40 классов — 20 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true, "floorsAllowed": [1, 2] },
+      "flows": ["food"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.hot",
+      "code": "7.07",
+      "name": "Горячий цех",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "classMatrix_units",
+          "points": [
+            { "at": 12, "value": 30 },
+            { "at": 24, "value": 45 },
+            { "at": 40, "value": 60 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12; п. 4.4.2.10",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Горячий цех: 9–12 классов — 30; 14–24 классов — 45; 30–40 классов — 60 м2. П. 4.4.2.10: площадь кухни принимается не менее 18 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "wetZone": true, "floorsAllowed": [1, 2] },
+      "flows": ["food"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.bakery",
+      "code": "7.08",
+      "name": "Цех мучных, кулинарных и булочных изделий",
+      "group": "sch.dining",
+      "status": "conditional",
+      "condition": { "gte": ["classMatrix_units", 14] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "classMatrix_units",
+          "points": [
+            { "at": 24, "value": 7 },
+            { "at": 40, "value": 12 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Цех мучных, кулинарных и булочных изделий (п/ф): 9–12 классов — прочерк; 14–24 классов — 7; 30–40 классов — 12 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true, "floorsAllowed": [1, 2] },
+      "flows": ["food"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.cold",
+      "code": "7.09",
+      "name": "Холодный цех",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "classMatrix_units",
+          "points": [
+            { "at": 12, "value": 10 },
+            { "at": 24, "value": 10 },
+            { "at": 40, "value": 15 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Холодный цех: 9–12 классов — 10; 14–24 классов — 10; 30–40 классов — 15 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true, "floorsAllowed": [1, 2] },
+      "flows": ["food"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.eggs",
+      "code": "7.10",
+      "name": "Помещение обработки яиц",
+      "group": "sch.dining",
+      "status": "conditional",
+      "condition": { "gte": ["classMatrix_units", 30] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 4,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Помещение обработки яиц: 9–12 и 14–24 классов — прочерк; 30–40 классов — 4 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true, "floorsAllowed": [1, 2] },
+      "flows": ["food"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.wash-tare",
+      "code": "7.11",
+      "name": "Моечная оборотной (полуфабрикатной) тары",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 4,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Моечная оборотной (полуфабрикатной) тары: 9–12 / 14–24 / 30–40 классов — 4 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true, "floorsAllowed": [1, 2] },
+      "flows": ["waste", "goods"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.wash-tableware",
+      "code": "7.12",
+      "name": "Моечная столовой посуды",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "classMatrix_units",
+          "points": [
+            { "at": 12, "value": 18 },
+            { "at": 24, "value": 30 },
+            { "at": 40, "value": 30 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Моечная столовой посуды: 9–12 классов — 18; 14–24 классов — 30; 30–40 классов — 30 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true, "floorsAllowed": [1, 2] },
+      "flows": ["waste"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.wash-kitchen",
+      "code": "7.13",
+      "name": "Моечная кухонной посуды",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "classMatrix_units",
+          "points": [
+            { "at": 12, "value": 6 },
+            { "at": 24, "value": 8 },
+            { "at": 40, "value": 10 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Моечная кухонной посуды: 9–12 классов — 6; 14–24 классов — 8; 30–40 классов — 10 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true, "floorsAllowed": [1, 2] },
+      "flows": ["waste"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.loading",
+      "code": "7.14",
+      "name": "Загрузочная платформа",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "classMatrix_units",
+          "points": [
+            { "at": 12, "value": 8 },
+            { "at": 24, "value": 8 },
+            { "at": 40, "value": 10 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Комплекс складских и загрузочных помещений: разгрузочная платформа / загрузочная платформа / помещение для хранения тары — 4, 8, прочерк (9–12 классов); 6, 8, 4 (14–24); 6, 10, 6 (30–40) м2.",
+          "source": "norm",
+          "verified": false
+        },
+        "sourceHint": "Три строки таблицы («разгрузочная платформа», «загрузочная платформа», «помещение для хранения тары») в PDF слиты в один блок. Принята строка загрузочной платформы. Сверьте по печатному тексту таблицы Б.12."
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1], "separateEntrance": true },
+      "flows": ["goods", "food"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.dry",
+      "code": "7.15",
+      "name": "Кладовая сухих продуктов",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "classMatrix_units",
+          "points": [
+            { "at": 12, "value": 8 },
+            { "at": 24, "value": 10 },
+            { "at": 40, "value": 12 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Кладовая сухих продуктов: 9–12 классов — 8; 14–24 классов — 10; 30–40 классов — 12 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1, 2] },
+      "flows": ["food", "goods"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.veg-store",
+      "code": "7.16",
+      "name": "Овощная кладовая (неохлаждаемая)",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "classMatrix_units",
+          "points": [
+            { "at": 12, "value": 8 },
+            { "at": 24, "value": 13 },
+            { "at": 40, "value": 15 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Овощная кладовая (неохлаждаемая): 9–12 классов — 8; 14–24 классов — 13; 30–40 классов — 15 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1, 2] },
+      "flows": ["food", "goods"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.cold-meat",
+      "code": "7.17",
+      "name": "Охлаждаемая камера для мясных и рыбных полуфабрикатов",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 6,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Охлаждаемая камера для мясных и рыбных полуфабрикатов (среднетемпературная): 9–12 / 14–24 / 30–40 классов — 6 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1, 2] },
+      "flows": ["food"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.cold-frozen",
+      "code": "7.18",
+      "name": "Охлаждаемая камера для замороженных полуфабрикатов",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 6,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Охлаждаемая камера для замороженных полуфабрикатов (низкотемпературная): 9–12 / 14–24 / 30–40 классов — 6 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1, 2] },
+      "flows": ["food"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.cold-veg",
+      "code": "7.19",
+      "name": "Охлаждаемая камера овощных полуфабрикатов",
+      "group": "sch.dining",
+      "status": "conditional",
+      "condition": { "gte": ["classMatrix_units", 14] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 6,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Охлаждаемая камера овощных полуфабрикатов: 9–12 классов — прочерк; 14–24 и 30–40 классов — 6 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1, 2] },
+      "flows": ["food"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.cold-dairy",
+      "code": "7.20",
+      "name": "Охлаждаемая камера для молочно-жировых и гастрономических продуктов",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "classMatrix_units",
+          "points": [
+            { "at": 12, "value": 6 },
+            { "at": 24, "value": 6 },
+            { "at": 40, "value": 10 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Охлаждаемая камера (среднетемпературная) для молочно-жировых и гастрономических продуктов: 9–12 классов — 6; 14–24 классов — 6; 30–40 классов — 10 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1, 2] },
+      "flows": ["food"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.bread",
+      "code": "7.21",
+      "name": "Помещение для хранения и резки хлеба",
+      "group": "sch.dining",
+      "status": "conditional",
+      "condition": { "gte": ["classMatrix_units", 14] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "classMatrix_units",
+          "points": [
+            { "at": 24, "value": 6 },
+            { "at": 40, "value": 8 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Помещение для хранения и резки хлеба: 9–12 классов — прочерк; 14–24 классов — 6; 30–40 классов — 8 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1, 2] },
+      "flows": ["food"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.inventory",
+      "code": "7.22",
+      "name": "Инвентарная кладовая столовой",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "classMatrix_units",
+          "points": [
+            { "at": 12, "value": 4 },
+            { "at": 24, "value": 4 },
+            { "at": 40, "value": 6 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Инвентарная кладовая: 9–12 классов — 4; 14–24 классов — 4; 30–40 классов — 6 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1, 2] },
+      "flows": ["goods"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.waste",
+      "code": "7.23",
+      "name": "Охлаждаемая камера для пищевых отходов",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 8,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Охлаждаемая камера для пищевых отходов с помещением для обработки баков или помещением для хранения пищевых отходов: 9–12 / 14–24 / 30–40 классов — 8 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true, "floorsAllowed": [1] },
+      "flows": ["waste"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.cleaning",
+      "code": "7.24",
+      "name": "Комната уборочного инвентаря и приготовления дезсредств",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "classMatrix_units",
+          "points": [
+            { "at": 12, "value": 1 },
+            { "at": 24, "value": 2 },
+            { "at": 40, "value": 2 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Комната уборочного инвентаря и приготовление дезосредств: 9–12 классов — 1; 14–24 классов — 2; 30–40 классов — 2 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["waste", "staff"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.staff",
+      "code": "7.25",
+      "name": "Гардеробная персонала столовой с душевой и уборной",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "classMatrix_units",
+          "points": [
+            { "at": 12, "value": 13 },
+            { "at": 24, "value": 18 },
+            { "at": 40, "value": 18 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12; приложение Е",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Гардеробная персонала, душевая, уборная: 9–12 классов — 13; 14–24 классов — 18; 30–40 классов — 18 м2. Таблица Е.1: уборные и душевые для персонала в столовой — 1 санузел и 1 душевая кабина, 3 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "sch.dining.manager",
+      "code": "7.26",
+      "name": "Кабинет заведующего производством (столовой)",
+      "group": "sch.dining",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 7,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.12",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Кабинет зав. производством (столовой): 9–12 / 14–24 / 30–40 классов — 7 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.common.lobby",
+      "code": "8.01",
+      "name": "Вестибюль",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "0.3 * places_total",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.8",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Вестибюль — от 0,3 до 0,6 м2 на уч. + персонал.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Принята нижняя граница диапазона 0,3–0,6 м²/чел. Персонал в расчёт не включён — добавьте вручную."
+      },
+      "constraints": { "daylight": "desirable", "floorsAllowed": [1] },
+      "flows": ["children", "visitors", "staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "sch.common.wardrobe",
+      "code": "8.02",
+      "name": "Гардеробная",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "0.15 * places_total",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.8",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Гардеробная — от 0,15 до 0,3 м2 на уч. + персонал.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Принята нижняя граница диапазона 0,15–0,3 м²/чел."
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1] },
+      "flows": ["children"],
+      "zone": "neutral",
+      "notes": "П. 4.4.2.6: гардеробные для преподавателей — не менее двух мест на один класс.",
+      "norms": []
+    },
+    {
+      "id": "sch.common.recreation",
+      "code": "8.03",
+      "name": "Рекреации",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "1.5 * places_total",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "п. 4.4.2.16; приложение Б, таблица Б.5",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Рекреации следует проектировать из расчета не более 1,5 м2 на 1 обучающегося.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Норма задана как предельная («не более»). Рекреации распределяются по учебным секциям (п. 4.4.1.7), в экспликации показаны одной строкой."
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["children"],
+      "zone": "neutral",
+      "notes": "Ширина рекреационных помещений при одностороннем расположении классов — см. приложение Л, п. Л.5.",
+      "norms": []
+    },
+    {
+      "id": "sch.common.wc",
+      "code": "8.04",
+      "name": "Уборные и умывальные обучающихся",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "0.15 * places_total",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Е, таблица Е.1",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Уборные и умывальные обучающихся (девочек и мальчиков) — 0,15 м2 на 1 учащегося. 1 унитаз на 20 девочек, 1 умывальник на 30 девочек; 1 унитаз на 30 мальчиков, 0,5 лотков писсуара на 40 мальчиков, 1 умывальник на 30 мальчиков.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Показана суммарная площадь. Разнесение по учебным секциям и этажам — п. 4.4.1.9."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["children", "waste"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.common.wc-staff",
+      "code": "8.05",
+      "name": "Уборные и умывальные персонала",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 2, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 3,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Е, таблица Е.1",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Уборные и умывальные персонала (индивидуальные): 2 санузла, 3 м2, 1 унитаз, 1 умывальник.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["staff", "waste"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.common.hygiene-girls",
+      "code": "8.06",
+      "name": "Кабина личной гигиены для девочек",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "formula", "expr": "max(1, ceil(places_total / 140))", "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 3,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Е, таблица Е.1",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Кабина личной гигиены для девочек: 1 кабина, 3 м2, 1 гигиенический душ, 1 унитаз, 1 умывальник на кабину, одна кабина на 70 девочек.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Количество посчитано из допущения, что девочки составляют половину контингента (одна кабина на 140 обучающихся). Уточните по фактической демографии."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["children"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.common.hygiene-staff",
+      "code": "8.07",
+      "name": "Кабинет личной гигиены женщин (для персонала)",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 3,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Е, таблица Е.1",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Кабинет личной гигиены женщин (для персонала): 1 кабина, 3 м2, 1 гигиенический душ, 1 унитаз, 1 умывальник.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["staff"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.common.director",
+      "code": "8.08",
+      "name": "Кабинет директора",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 32,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.8",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Кабинет директора при 1 / 2 / 3 / 4 параллелях и для старшей профильной школы, лицея, гимназии — 32 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required" },
+      "flows": ["staff", "visitors"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.common.reception",
+      "code": "8.09",
+      "name": "Приёмная — кабинет делопроизводства",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 12,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.8",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Приемная-кабинет делопроизводства — 12 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required" },
+      "flows": ["staff", "visitors"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.common.deputy",
+      "code": "8.10",
+      "name": "Кабинет завучей",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "parallels",
+          "points": [
+            { "at": 1, "value": 15 },
+            { "at": 2, "value": 30 },
+            { "at": 3, "value": 30 },
+            { "at": 4, "value": 30 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.8",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Кабинет завучей при 1 параллели — 15; при 2, 3 и 4 параллелях — 30 (15 × 2) м2.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "При двух и более параллелях таблица даёт «30 (15 × 2)» — два кабинета по 15 м². Принята суммарная площадь."
+      },
+      "constraints": { "daylight": "required" },
+      "flows": ["staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.common.accounting",
+      "code": "8.11",
+      "name": "Бухгалтерия",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 12,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.8",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Бухгалтерия — 12 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required" },
+      "flows": ["staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.common.method",
+      "code": "8.12",
+      "name": "Методический кабинет (учительская)",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "parallels",
+          "points": [
+            { "at": 1, "value": 45 },
+            { "at": 2, "value": 58 },
+            { "at": 3, "value": 80 },
+            { "at": 4, "value": 100 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.8",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Методический кабинет при 1 / 2 / 3 / 4 параллелях — 45 / 58 / 80 / 100 м2; для старшей профильной школы, лицея, гимназии — 100 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required" },
+      "flows": ["staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.common.doctor",
+      "code": "8.13",
+      "name": "Кабинет врача (медицинский кабинет)",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.8; п. 4.4.2.13",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Кабинет врача (медицинский кабинет) — 18 м2. П. 4.4.2.13: минимальный набор помещений медицинского пункта включает кабинет врача площадью не менее 18 м2, процедурный кабинет площадью не менее 14 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
+      "flows": ["medical", "children"],
+      "zone": "clean",
+      "notes": "Медицинские помещения следует проектировать в едином блоке (примечание 2 к таблице Б.8).",
+      "norms": []
+    },
+    {
+      "id": "sch.common.procedure",
+      "code": "8.14",
+      "name": "Процедурная",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 14,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.8; п. 4.4.2.13",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Процедурная — 14 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "wetZone": true, "floorsForbidden": [-1, 0] },
+      "flows": ["medical"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.common.isolation",
+      "code": "8.15",
+      "name": "Палата изолятора",
+      "group": "sch.common",
+      "status": "optional",
+      "condition": { "in": ["extras", ["isolation"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "п. 4.4.2.14",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Палаты изолятора должны быть непроходными, размещаться смежно с медицинским кабинетом с устройством между ними остекленной перегородки на высоте 1,2 м.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Норматив задаёт требования к размещению, но площадь палаты изолятора в приложении Б не приведена. Принять по заданию на проектирование."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
+      "flows": ["medical"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.common.wc-med",
+      "code": "8.16",
+      "name": "Уборная для персонала в медицинском кабинете",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 3,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Е, таблица Е.1",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Уборные для персонала в мед. кабинете: 1 санузел, 3 м2, 1 унитаз, 1 умывальник.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["medical", "waste"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "sch.common.psych",
+      "code": "8.17",
+      "name": "Кабинет психолога и логопеда",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 20,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.8",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Кабинет психолога и логопеда — 20 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required" },
+      "flows": ["children", "staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "sch.common.supply",
+      "code": "8.18",
+      "name": "Кабинет заведующего хозяйством",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 12,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.8",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Кабинет заведующего хозяйством — 12 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "sch.common.techstaff",
+      "code": "8.19",
+      "name": "Комната техперсонала",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 15,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.8",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Комната техперсонала — 15 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "sch.common.security",
+      "code": "8.20",
+      "name": "Помещение охраны с системой видеонаблюдения",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "parallels",
+          "points": [
+            { "at": 1, "value": 15 },
+            { "at": 2, "value": 15 },
+            { "at": 3, "value": 20 },
+            { "at": 4, "value": 20 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.8",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Помещение охраны (с оборудованием системы видеонаблюдения) при 1 / 2 / 3 / 4 параллелях — 15 / 15 / 20 / 20 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsAllowed": [1] },
+      "flows": ["staff", "visitors"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "sch.common.radio",
+      "code": "8.21",
+      "name": "Радиоузел",
+      "group": "sch.common",
+      "status": "conditional",
+      "condition": { "eq": ["recreationCenter", true] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 9,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Б, таблица Б.5",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Радиоузел — 9 м2 (в составе рекреационного центра).",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "sch.common.boarding",
+      "code": "8.22",
+      "name": "Спальные комнаты интерната",
+      "group": "sch.common",
+      "status": "conditional",
+      "condition": { "and": [{ "eq": ["boarding", true] }, { "gt": ["boardingPlaces", 0] }] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "4 * boardingPlaces",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "приложение Л, п. Л.4",
+          "edition": "с изм. по 22.10.2021 №162-НҚ",
+          "quote": "При проектировании мкш-интерната (интерната) норма площади спальной комнаты должны приниматься из расчета 4 м на одно спальное место.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Норма приведена в приложении Л для малокомплектных школ-интернатов. Полный состав помещений интерната — СП РК 3.02-112-2013, в базу не заведён."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
+      "flows": ["children"],
+      "zone": "clean",
+      "notes": "Спальные комнаты: для 1–4 классов 4–6 мест, 5–9 классов 3–4 места, 10–12 классов 2–3 места (п. Л.4).",
+      "norms": []
+    },
+    {
+      "id": "sch.common.electric",
+      "code": "8.23",
+      "name": "Электрощитовая",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-111-2012*",
+          "clause": "п. 4.6.3.2",
+          "edition": "с изм. по 02.02.2024 №24-НҚ",
+          "quote": "Электрощитовые должны размещаться на первом этаже. Допускается размещение электрощитовой в подвале при условии низкого уровня грунтовых вод.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Площадь по расчёту раздела ЭО (СП РК 4.04-106-2013) и техническим условиям электроснабжения."
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1, -1] },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "sch.common.itp",
+      "code": "8.24",
+      "name": "Индивидуальный тепловой пункт и венткамеры",
+      "group": "sch.common",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Площадь по расчёту разделов ОВ и ТС (СП РК 4.02-101-2012, СП РК 4.02-108-2014). Расчётная температура и кратность воздухообмена — приложение С СП РК 3.02-111-2012*."
+      },
+      "constraints": { "daylight": "not-required", "separateEntrance": true },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    }
+  ],
+  "validations": [
+    {
+      "id": "built-in-capacity",
+      "level": "error",
+      "when": {
+        "and": [
+          { "in": ["placement", ["built-in", "built-attached"]] },
+          { "gt": ["places_total", 300] }
+        ]
+      },
+      "title": "Встроенное размещение при вместимости более 300",
+      "detail": "СП РК 3.02-111-2012*, п. 4.4.1.2: в организациях, размещаемых на первых и (или) вторых этажах многоквартирных жилых зданий, в частных домовладениях, во встроенно-пристроенных помещениях вместимость обучающихся следует принимать не более 300."
+    },
+    {
+      "id": "small-school-capacity",
+      "level": "warning",
+      "when": { "and": [{ "eq": ["kind", "small"] }, { "gt": ["places_total", 300] }] },
+      "title": "Малокомплектная школа при вместимости более 300",
+      "detail": "СП РК 3.02-111-2012*, п. 4.4.2.17: требования приложения Л распространяются на малокомплектные школы до 300 обучающихся."
+    },
+    {
+      "id": "small-school-floors",
+      "level": "error",
+      "when": {
+        "and": [
+          { "eq": ["kind", "small"] },
+          { "or": [{ "gt": ["floors", 4] }, { "and": [{ "gte": ["seismicity", 7] }, { "gt": ["floors", 3] }] }] }
+        ]
+      },
+      "title": "Этажность малокомплектной школы превышена",
+      "detail": "СП РК 3.02-111-2012*, приложение Л, п. Л.3: здания малокомплектных школ должны проектироваться не более 4 этажей, а в сейсмических районах — не более 3 этажей."
+    },
+    {
+      "id": "five-floors",
+      "level": "info",
+      "when": { "gte": ["floors", 5] },
+      "title": "Пятиэтажное здание",
+      "detail": "СП РК 3.02-111-2012*, п. 4.3.22: при проектировании 5-этажных зданий ширина марша эвакуационной лестницы должна быть не менее 1,8 м."
+    },
+    {
+      "id": "basement-classes",
+      "level": "warning",
+      "when": { "or": [{ "eq": ["hasBasement", true] }, { "eq": ["hasGroundFloor", true] }] },
+      "title": "Есть подвал или цокольный этаж",
+      "detail": "Санитарные правила (приказ МЗ РК от 05.08.2021 № ҚР ДСМ-76), п. 21: эксплуатация помещений для пребывания обучающихся и помещений медицинского назначения не допускается в подвальных и цокольных этажах. Из групп помещений в подвале и цоколе необходимо не менее двух эвакуационных выходов наружу (СП РК 3.02-111-2012*, п. 4.3.4)."
+    },
+    {
+      "id": "primary-section-size",
+      "level": "warning",
+      "when": { "gt": ["classMatrix_tag_grade1_count", 3] },
+      "title": "Более трёх первых классов",
+      "detail": "СП РК 3.02-111-2012*, п. 4.4.1.7 а): в учебных секциях 1-х классов следует предусматривать не более трёх классных помещений с санитарными узлами. При большем числе классов потребуется несколько секций."
+    },
+    {
+      "id": "primary-block-size",
+      "level": "warning",
+      "when": { "gt": ["classMatrix_tag_primary_count", 9] },
+      "title": "Блок начальных классов требует нескольких секций",
+      "detail": "СП РК 3.02-111-2012*, п. 4.4.1.7: в секциях 1-х классов не более трёх классных помещений, 2–4 классов — не более шести. Секции 1 и 2–4 классов должны быть обособленными и непроходными для обучающихся других возрастных групп."
+    },
+    {
+      "id": "assembly-share-conflict",
+      "level": "warning",
+      "when": { "and": [{ "eq": ["assemblyHall", true] }, { "lt": ["assemblySeatsShare", 30] }] },
+      "title": "Зрительный зал: расхождение внутри норматива",
+      "detail": "Таблица Б.9 требует посадку не менее 20 % от количества обучающихся, а приложение М для той же группы помещений (О-ЗЗ) называет 30 %. Принято заданное значение — при выпуске документации согласуйте долю с заказчиком."
+    },
+    {
+      "id": "dining-hall-floor",
+      "level": "info",
+      "when": { "gt": ["floors", 2] },
+      "title": "Пищеблок размещают не выше 2 этажа",
+      "detail": "СП РК 3.02-111-2012*, п. 4.4.1.11: пищеблок размещают не выше 2 этажа. При размещении на 2-ом этаже оборудуется грузоподъёмный лифт для транспортировки продукции."
+    },
+    {
+      "id": "coefk-large-school",
+      "level": "info",
+      "when": { "gte": ["classMatrix_units", 36] },
+      "title": "Для школ на 36 и 48 классов коэффициент K = 1,25",
+      "detail": "СП РК 3.02-111-2012*, приложение Ж, примечание 2: эмпирический коэффициент отношения общей площади к расчётной принят для школы на 12 и 24 класса — 1,32; для школы на 36 и 48 классов — 1,25. Поправьте коэффициент в параметрах."
+    },
+    {
+      "id": "two-shifts",
+      "level": "warning",
+      "when": { "eq": ["shifts", "two"] },
+      "title": "Двухсменный режим обучения",
+      "detail": "Санитарные правила (приказ МЗ РК от 05.08.2021 № ҚР ДСМ-76), п. 13: двухсменный режим допускается при условии соблюдения в каждой смене нормы площади на 1 обучающегося. Проверьте, что расчёт состава помещений выполнен на максимальную смену."
+    },
+    {
+      "id": "science-combined",
+      "level": "info",
+      "when": { "not": { "gt": ["places_total", 300] } },
+      "title": "Школа до 300 обучающихся: допускается объединение кабинетов",
+      "detail": "СП РК 3.02-111-2012*, п. 4.4.2.1: для школ на 300 обучающихся допускается объединять кабинет физики и химии, а кабинет биологии принять по 2,5 м² на обучающегося. По физике, химии и биологии допускается общий кабинет общей площадью не более 84–87,5 м²."
+    },
+    {
+      "id": "no-sport-hall",
+      "level": "warning",
+      "when": { "eq": ["sportHalls", 0] },
+      "title": "Спортивный зал не задан",
+      "detail": "Приложение М относит спортивный зал к обязательным функциональным группам (О-СЗ) для всех видов общеобразовательных организаций."
+    },
+    {
+      "id": "boarding-scope",
+      "level": "info",
+      "when": { "eq": ["boarding", true] },
+      "title": "Интернат при школе",
+      "detail": "В базу заведена только норма площади спальной комнаты (4 м² на место, приложение Л, п. Л.4). Полный состав помещений интерната принимать по СП РК 3.02-112-2013 «Здания интернатных организаций»."
+    }
+  ],
+  "adjacency": [
+    {
+      "from": "sch.primary.class",
+      "to": "sch.classes.basic",
+      "type": "separated",
+      "strength": 5,
+      "reason": "Учебные секции-блоки 1, 2–4 и 5–8 (9) классов обособлены и непроходны для обучающихся других возрастных групп",
+      "basis": "norm",
+      "flow": "children",
+      "norm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "п. 4.4.1.7 г)",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Учебные секции-блоки 1, 2–4 классов, а также 5–8 (9) классов, должны быть обособленными и непроходными для обучающихся других возрастных групп.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "from": "sch.primary.class",
+      "to": "sch.primary.sleep",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Спальня-игровая при классе первых классов",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "sch.primary.class",
+      "to": "sch.common.recreation",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Рекреация при учебной секции — место отдыха между уроками",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "sch.classes.basic",
+      "to": "sch.common.recreation",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Рекреация при учебной секции",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "sch.classes.senior",
+      "to": "sch.common.recreation",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Рекреация при учебной секции",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "sch.primary.class",
+      "to": "sch.common.wc",
+      "type": "near",
+      "strength": 5,
+      "reason": "Санитарные узлы входят в состав учебной секции начальных классов",
+      "basis": "norm",
+      "flow": "children",
+      "norm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "п. 4.4.1.7 а), б)",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Для 1-х классов в учебных секциях следует предусматривать не более трёх классных помещений с санитарными узлами; для 2–4 классов — не более шести классных помещений с санитарными узлами.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "from": "sch.classes.basic",
+      "to": "sch.common.wc",
+      "type": "via-corridor",
+      "strength": 3,
+      "reason": "Санузлы для 5–11 классов допускается размещать вне учебных секций",
+      "basis": "norm",
+      "flow": "children",
+      "norm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "п. 4.4.1.9",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Допускается санитарные узлы для 5–11 классов размещать вне учебных секций, а в двухэтажных зданиях размещать на одном из этажей сосредоточенно.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "from": "sch.classes.basic",
+      "to": "sch.special.physics",
+      "type": "near",
+      "strength": 4,
+      "reason": "Специализированные кабинеты группируются в учебные секции по признакам родственных дисциплин",
+      "basis": "norm",
+      "flow": "children",
+      "norm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "п. 4.4.1.8",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Специализированные учебные кабинеты и мастерские следует группировать в учебные секции по признакам родственных дисциплин и технологий.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "from": "sch.special.physics",
+      "to": "sch.special.physics-lat",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Лаборантская смежно с кабинетом-лабораторией",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "sch.special.physics",
+      "to": "sch.special.physics-lab",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Лаборатория и кабинет по одной дисциплине образуют единый блок",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "sch.special.chemistry",
+      "to": "sch.special.chemistry-lat",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Лаборантская смежно с кабинетом-лабораторией",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "sch.special.chemistry",
+      "to": "sch.special.chemistry-lab",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Лаборатория и кабинет по одной дисциплине образуют единый блок",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "sch.special.biology",
+      "to": "sch.special.biology-lat",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Лаборантская смежно с кабинетом-лабораторией",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "sch.special.biology",
+      "to": "sch.special.biology-lab",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Лаборатория и кабинет по одной дисциплине образуют единый блок",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "sch.special.informatics",
+      "to": "sch.special.it-lat",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Одна лаборантская на два кабинета информатики",
+      "basis": "norm",
+      "flow": "staff",
+      "norm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "приложение Б, таблица Б.4, сноска",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Из расчета одна лаборантская на 2 кабинета информатики, мультимедийных кабинетов.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "from": "sch.special.workshop-combined",
+      "to": "sch.special.workshop-tools",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Инструментальная при мастерской",
+      "basis": "technology",
+      "flow": "goods"
+    },
+    {
+      "from": "sch.special.workshop-combined",
+      "to": "sch.classes.basic",
+      "type": "separated",
+      "strength": 3,
+      "reason": "Шум и вибрация мастерских отделяются от учебных кабинетов",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "sch.special.workshop-cooking",
+      "to": "sch.special.workshop-textile",
+      "type": "near",
+      "strength": 3,
+      "reason": "Блок обслуживающего труда группируется по признаку родственных технологий",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "sch.library.main",
+      "to": "sch.common.recreation",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Центр информации доступен всем учебным секциям через рекреации",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "sch.library.main",
+      "to": "sch.classes.senior",
+      "type": "near",
+      "strength": 3,
+      "reason": "Библиотека-медиатека наиболее востребована старшими классами",
+      "basis": "ergonomics",
+      "flow": "children"
+    },
+    {
+      "from": "sch.sport.hall",
+      "to": "sch.sport.locker",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Проход в зал только через раздевальные с душевыми",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "sch.sport.hall",
+      "to": "sch.sport.equipment",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Снарядная примыкает к залу",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "sch.sport.hall",
+      "to": "sch.common.lobby",
+      "type": "near",
+      "strength": 4,
+      "reason": "Спортивный блок с возможностью автономной работы во внеучебное время",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "sch.sport.hall",
+      "to": "sch.classes.basic",
+      "type": "separated",
+      "strength": 4,
+      "reason": "Шумное помещение отделяется от учебных кабинетов",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "sch.assembly.hall",
+      "to": "sch.assembly.stage",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Эстрада — часть зрительного зала",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "sch.assembly.stage",
+      "to": "sch.assembly.artist",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Артистическая при эстраде",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "sch.assembly.stage",
+      "to": "sch.assembly.store",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Кладовая инвентаря и декораций при эстраде",
+      "basis": "technology",
+      "flow": "goods"
+    },
+    {
+      "from": "sch.assembly.hall",
+      "to": "sch.assembly.wc",
+      "type": "near",
+      "strength": 4,
+      "reason": "Санузлы при зрительном зале в блоке общешкольных помещений",
+      "basis": "norm",
+      "flow": "visitors",
+      "norm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "приложение Е, таблица Е.1",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Уборные и умывальные при актовом зале — лекционной аудитории в блоке общешкольных помещений: 2 санузла (женский и мужской).",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "from": "sch.assembly.hall",
+      "to": "sch.common.lobby",
+      "type": "near",
+      "strength": 4,
+      "reason": "Зрительный зал доступен от вестибюля, самостоятельный эвакуационный выход",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "sch.dining.loading",
+      "to": "sch.dining.dry",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Приём продуктов и передача в кладовые — начало технологической цепочки",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "sch.dining.loading",
+      "to": "sch.dining.veg-store",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Овощи с загрузочной поступают в овощную кладовую",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "sch.dining.loading",
+      "to": "sch.dining.cold-meat",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Скоропортящиеся продукты передаются в охлаждаемые камеры сразу с загрузочной",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "sch.dining.veg-store",
+      "to": "sch.dining.veg-prep",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Овощи поступают из кладовой в цех первичной обработки",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "sch.dining.veg-prep",
+      "to": "sch.dining.veg-semi",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Технологическая цепочка обработки овощей без встречных потоков",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "sch.dining.veg-semi",
+      "to": "sch.dining.hot",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Овощные полуфабрикаты поступают в горячий цех",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "sch.dining.meat",
+      "to": "sch.dining.hot",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Мясные и рыбные полуфабрикаты поступают в горячий цех",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "sch.dining.veg-prep",
+      "to": "sch.dining.meat",
+      "type": "separated",
+      "strength": 4,
+      "reason": "Разделение потоков сырья растительного и животного происхождения",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "sch.dining.hot",
+      "to": "sch.dining.cold",
+      "type": "near",
+      "strength": 3,
+      "reason": "Совместная работа цехов при комплектации блюд",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "sch.dining.hot",
+      "to": "sch.dining.serving",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Готовая продукция передаётся на раздачу без промежуточных помещений",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "sch.dining.serving",
+      "to": "sch.dining.hall",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Раздаточная примыкает к обеденному залу",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "sch.dining.hall",
+      "to": "sch.dining.washbasins",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Умывальные перед входом в обеденный зал",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "sch.dining.hall",
+      "to": "sch.dining.wash-tableware",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Моечная столовой посуды примыкает к обеденному залу",
+      "basis": "technology",
+      "flow": "waste"
+    },
+    {
+      "from": "sch.dining.hot",
+      "to": "sch.dining.wash-kitchen",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Моечная кухонной посуды примыкает к горячему цеху",
+      "basis": "technology",
+      "flow": "waste"
+    },
+    {
+      "from": "sch.dining.waste",
+      "to": "sch.dining.loading",
+      "type": "near",
+      "strength": 3,
+      "reason": "Вывоз пищевых отходов по обратному маршруту, без пересечения с приёмом продуктов",
+      "basis": "technology",
+      "flow": "waste"
+    },
+    {
+      "from": "sch.dining.waste",
+      "to": "sch.dining.hot",
+      "type": "separated",
+      "strength": 5,
+      "reason": "Камера пищевых отходов не должна соседствовать с производственными цехами",
+      "basis": "technology",
+      "flow": "waste"
+    },
+    {
+      "from": "sch.dining.hall",
+      "to": "sch.common.recreation",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Столовая доступна всем учебным секциям через рекреации",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "sch.common.lobby",
+      "to": "sch.common.wardrobe",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Вестибюль-гардероб — единая функциональная группа",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "sch.common.lobby",
+      "to": "sch.common.security",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Помещение охраны с системой видеонаблюдения при основном входе",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "sch.common.lobby",
+      "to": "sch.common.recreation",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Вестибюль — узел распределения потоков в учебные секции",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "sch.common.doctor",
+      "to": "sch.common.procedure",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Медицинские помещения проектируются в едином блоке",
+      "basis": "norm",
+      "flow": "medical",
+      "norm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "приложение Б, таблица Б.8, примечание 2",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Медицинские помещения следует проектировать в едином блоке.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "from": "sch.common.doctor",
+      "to": "sch.common.isolation",
+      "type": "visual",
+      "strength": 5,
+      "reason": "Палата изолятора смежно с медицинским кабинетом, между ними остеклённая перегородка на высоте 1,2 м",
+      "basis": "norm",
+      "flow": "medical",
+      "norm": {
+        "doc": "СП РК 3.02-111-2012*",
+        "clause": "п. 4.4.2.14",
+        "edition": "с изм. по 02.02.2024 №24-НҚ",
+        "quote": "Палаты изолятора должны быть непроходными, размещаться смежно с медицинским кабинетом с устройством между ними остекленной перегородки на высоте 1,2 м.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "from": "sch.common.doctor",
+      "to": "sch.common.wc-med",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Уборная для персонала в составе медицинского блока",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "sch.common.doctor",
+      "to": "sch.common.lobby",
+      "type": "near",
+      "strength": 3,
+      "reason": "Медицинский блок доступен от входа без прохода через учебные секции",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "sch.common.director",
+      "to": "sch.common.reception",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Приёмная перед кабинетом директора",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "sch.common.reception",
+      "to": "sch.common.lobby",
+      "type": "near",
+      "strength": 4,
+      "reason": "Административная группа доступна посетителям от входа",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "sch.common.method",
+      "to": "sch.common.deputy",
+      "type": "near",
+      "strength": 4,
+      "reason": "Единая административно-методическая группа",
+      "basis": "ergonomics",
+      "flow": "staff"
+    },
+    {
+      "from": "sch.common.method",
+      "to": "sch.common.recreation",
+      "type": "near",
+      "strength": 3,
+      "reason": "Учительская в пешеходной доступности от учебных секций",
+      "basis": "ergonomics",
+      "flow": "staff"
+    },
+    {
+      "from": "sch.common.boarding",
+      "to": "sch.classes.basic",
+      "type": "separated",
+      "strength": 4,
+      "reason": "Спальный корпус интерната обособляется от учебных помещений",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "sch.common.itp",
+      "to": "sch.common.recreation",
+      "type": "separated",
+      "strength": 3,
+      "reason": "Технические помещения с самостоятельным входом, вне маршрутов обучающихся",
+      "basis": "technology",
+      "flow": "staff"
+    }
+  ]
+}

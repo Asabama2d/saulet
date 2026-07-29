@@ -1,0 +1,3133 @@
+{
+  "id": "kindergarten",
+  "name": "Дошкольная организация (ОДВО)",
+  "normBase": [
+    {
+      "doc": "СП РК 3.02-110-2012*",
+      "clause": "приложения В, Д, Е, Ж, К; пп. 4.1, 4.4.1–4.4.4",
+      "edition": "с изм. по приказу КДСиЖКХ от 23.11.2018 г. №240-НҚ",
+      "source": "norm",
+      "verified": true
+    },
+    {
+      "doc": "СН РК 3.02-10-2011",
+      "clause": "весь документ",
+      "edition": "с изм. и доп. от 15.11.2018",
+      "source": "norm",
+      "verified": false
+    },
+    {
+      "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам образования» (приказ МЗ РК от 05.08.2021 № ҚР ДСМ-76)",
+      "clause": "п. 21",
+      "edition": "с изм. по 18.10.2022",
+      "source": "sanpin",
+      "verified": true
+    }
+  ],
+  "unitCounts": {
+    "group": "groups_total",
+    "place": "places_total",
+    "floor": "floors",
+    "building": "1",
+    "section": "1"
+  },
+  "sections": [
+    { "id": "general", "label": "Общие" },
+    { "id": "capacity", "label": "Вместимость и режим" },
+    { "id": "blocks", "label": "Функциональные блоки" },
+    { "id": "extra", "label": "Дополнительно" }
+  ],
+  "parameters": [
+    {
+      "id": "odvoType",
+      "label": "Архитектурный тип ОДВО",
+      "control": "select",
+      "section": "general",
+      "default": "general",
+      "options": [
+        { "value": "walking", "label": "Прогулочные группы" },
+        { "value": "small", "label": "Малые ОДВО" },
+        {
+          "value": "general",
+          "label": "ОДВО общего типа",
+          "hint": "Также ПДВ, групповые отделения, КДВ"
+        },
+        { "value": "uvk", "label": "УВК (дошкольные отделения)" }
+      ],
+      "helpNorm": {
+        "doc": "СП РК 3.02-110-2012*",
+        "clause": "приложение Е, таблица Е.1",
+        "edition": "с изм. по 23.11.2018 №240-НҚ",
+        "quote": "Площади основных помещений групповых ячеек в ОДВО различных типов",
+        "source": "norm",
+        "verified": true
+      },
+      "help": "Определяет площади помещений групповой ячейки по таблице Е.1. Номенклатура типов — приложения А, Б, Г."
+    },
+    {
+      "id": "fireResistance",
+      "label": "Степень огнестойкости",
+      "control": "select",
+      "section": "general",
+      "default": "II",
+      "options": [
+        { "value": "I", "label": "I" },
+        { "value": "II", "label": "II" },
+        { "value": "III", "label": "III" },
+        { "value": "IIIa", "label": "IIIа" },
+        { "value": "IIIb", "label": "IIIб" },
+        { "value": "IV", "label": "IV" },
+        { "value": "IVa", "label": "IVа" },
+        { "value": "V", "label": "V" }
+      ],
+      "help": "Принимается по СН РК 2.02-01-2023 и СП РК 2.02-101-2022 в увязке с этажностью и площадью пожарного отсека. На состав помещений не влияет, участвует в проверках."
+    },
+    {
+      "id": "fireClass",
+      "label": "Класс функциональной пожарной опасности",
+      "control": "select",
+      "section": "general",
+      "default": "Ф1.1",
+      "options": [
+        { "value": "Ф1.1", "label": "Ф1.1", "hint": "Здания дошкольных организаций, спальные корпуса" },
+        { "value": "Ф4.1", "label": "Ф4.1", "hint": "Здания общеобразовательных организаций" }
+      ],
+      "help": "Для дошкольной организации подставляется Ф1.1. Значение оставлено редактируемым для встроенных и смешанных объектов — класс уточнить по СН РК 2.02-01-2023."
+    },
+    {
+      "id": "floors",
+      "label": "Этажность",
+      "control": "number",
+      "section": "general",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "unit": "эт.",
+      "default": 2,
+      "helpNorm": {
+        "doc": "СП РК 3.02-110-2012*",
+        "clause": "п. 4.1.1",
+        "edition": "с изм. по 23.11.2018 №240-НҚ",
+        "quote": "Объекты организаций дошкольного воспитания и образования проектируют не более 3-х этажей. На третьем этаже здания ОДВО располагают групповые ячейки старших возрастных групп детей (от 4 лет), залы и иные специализированные помещения для работы, служебно-бытовые и рекреационные помещения.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "id": "hasBasement",
+      "label": "Подвал",
+      "control": "toggle",
+      "section": "general",
+      "default": false,
+      "helpNorm": {
+        "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам образования» (приказ МЗ РК от 05.08.2021 № ҚР ДСМ-76)",
+        "clause": "п. 21",
+        "edition": "с изм. по 18.10.2022",
+        "quote": "Эксплуатация помещений для пребывания обучающихся и воспитанников, медицинского назначения не допускается в подвальных и цокольных этажах зданий.",
+        "source": "sanpin",
+        "verified": true
+      }
+    },
+    {
+      "id": "hasGroundFloor",
+      "label": "Цокольный этаж",
+      "control": "toggle",
+      "section": "general",
+      "default": false
+    },
+    {
+      "id": "placement",
+      "label": "Тип размещения",
+      "control": "select",
+      "section": "general",
+      "default": "detached",
+      "options": [
+        { "value": "detached", "label": "Отдельно стоящее" },
+        { "value": "built-in", "label": "Встроенное" },
+        { "value": "built-attached", "label": "Встроенно-пристроенное" },
+        { "value": "blocked", "label": "Блокированное" }
+      ],
+      "helpNorm": {
+        "doc": "СП РК 3.02-110-2012*",
+        "clause": "п. 4.1.1",
+        "edition": "с изм. по 23.11.2018 №240-НҚ",
+        "quote": "Объекты, размещаемые на первом этаже многоквартирного жилого дома, должны иметь отдельный вход, не совмещенный с подъездом жилого дома.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "id": "climateArea",
+      "label": "Климатический район",
+      "control": "select",
+      "section": "general",
+      "default": "III",
+      "options": [
+        { "value": "I", "label": "I" },
+        { "value": "II", "label": "II" },
+        { "value": "III", "label": "III" },
+        { "value": "IV", "label": "IV" }
+      ],
+      "help": "Подрайон уточнить по СП РК 2.04-01-2017 «Строительная климатология». В IV районе отапливаемые переходы между зданиями не требуются (СП РК 3.02-110-2012*, п. 4.1.3)."
+    },
+    {
+      "id": "seismicity",
+      "label": "Расчётная сейсмичность",
+      "control": "number",
+      "section": "general",
+      "min": 0,
+      "max": 9,
+      "step": 1,
+      "unit": "баллов",
+      "default": 6,
+      "help": "0 — площадка вне сейсмического района. На состав помещений не влияет."
+    },
+    {
+      "id": "mgn",
+      "label": "Требования МГН",
+      "control": "select",
+      "section": "general",
+      "default": "basic",
+      "options": [
+        { "value": "basic", "label": "Базовые" },
+        { "value": "extended", "label": "Расширенные", "hint": "Наличие коррекционных групп, инклюзивная среда" }
+      ],
+      "help": "Состав и параметры доступности — СП РК 3.06-101-2012."
+    },
+    {
+      "id": "floorHeight",
+      "label": "Высота этажа",
+      "control": "number",
+      "section": "general",
+      "min": 2.7,
+      "max": 6,
+      "step": 0.1,
+      "unit": "м",
+      "default": 3.3,
+      "help": "Для ориентировочного подсчёта строительного объёма. Проектное допущение, не норматив."
+    },
+    {
+      "id": "coefK",
+      "label": "Коэффициент перехода к общей площади K",
+      "control": "number",
+      "section": "general",
+      "min": 1,
+      "max": 1.6,
+      "step": 0.01,
+      "default": 1.2,
+      "help": "Общая площадь = рабочая × K. Значение 1.20 — проектное допущение по умолчанию, не норматив."
+    },
+    {
+      "id": "kind",
+      "label": "Вид организации",
+      "control": "select",
+      "section": "capacity",
+      "default": "nursery-garden",
+      "options": [
+        { "value": "nursery", "label": "Ясли" },
+        { "value": "nursery-garden", "label": "Ясли-сад" },
+        { "value": "garden", "label": "Детский сад" },
+        { "value": "short-stay", "label": "ДО с кратковременным пребыванием" }
+      ]
+    },
+    {
+      "id": "groupMatrix",
+      "label": "Матрица групп",
+      "control": "group-matrix",
+      "section": "capacity",
+      "default": [],
+      "helpNorm": {
+        "doc": "СП РК 3.02-110-2012*",
+        "clause": "пп. 4.4.1.3, 4.4.1.4",
+        "edition": "с изм. по 23.11.2018 №240-НҚ",
+        "quote": "4.4.1.3 Расчетную наполняемость детских групп ОДВО следует принимать: для детей до двух лет не более 10 мест; для детей до 3 лет — не более 20 мест; для детей от 3 до 7 лет — не более 25 мест. 4.4.1.4 групповая ячейка для детей до 3 лет должна иметь необходимые площади и комплекты санитарно-технического оборудования для размещения 15 детей, групповая ячейка для детей от 3 лет — для размещения 20 детей.",
+        "source": "norm",
+        "verified": true
+      },
+      "help": "По умолчанию подставлена расчётная наполняемость по п. 4.4.1.4 (15 и 20 мест). Предельные значения — п. 4.4.1.3. Оптимальная вместимость объекта: 50, 95, 140, 190 и 280 мест (п. 4.4.1.5).",
+      "matrix": {
+        "rowLabel": "Возрастная группа",
+        "countLabel": "Групп",
+        "capacityLabel": "Мест в группе",
+        "rows": [
+          {
+            "id": "nursery-0-1",
+            "label": "Ясельная, до 2 лет",
+            "defaultCount": 0,
+            "defaultCapacity": 10,
+            "tags": ["nursery"],
+            "hint": "Не более 10 мест — п. 4.4.1.3",
+            "capacityNorm": {
+              "doc": "СП РК 3.02-110-2012*",
+              "clause": "п. 4.4.1.3",
+              "edition": "с изм. по 23.11.2018 №240-НҚ",
+              "quote": "для детей до двух лет не более 10 мест",
+              "source": "norm",
+              "verified": true
+            }
+          },
+          {
+            "id": "nursery-1-2",
+            "label": "Ясельная, 2–3 года",
+            "defaultCount": 1,
+            "defaultCapacity": 15,
+            "tags": ["nursery"],
+            "hint": "Расчётная 15 мест (п. 4.4.1.4), предельная 20 (п. 4.4.1.3)",
+            "capacityNorm": {
+              "doc": "СП РК 3.02-110-2012*",
+              "clause": "п. 4.4.1.4",
+              "edition": "с изм. по 23.11.2018 №240-НҚ",
+              "quote": "групповая ячейка для детей до 3 лет должна иметь необходимые площади и комплекты санитарно-технического оборудования для размещения 15 детей",
+              "source": "norm",
+              "verified": true
+            }
+          },
+          {
+            "id": "nursery-2-3",
+            "label": "Ясельная, разновозрастная 1–3 года",
+            "defaultCount": 1,
+            "defaultCapacity": 15,
+            "tags": ["nursery"],
+            "hint": "Расчётная 15 мест (п. 4.4.1.4), предельная 20 (п. 4.4.1.3)",
+            "capacityNorm": {
+              "doc": "СП РК 3.02-110-2012*",
+              "clause": "п. 4.4.1.4",
+              "edition": "с изм. по 23.11.2018 №240-НҚ",
+              "quote": "групповая ячейка для детей до 3 лет должна иметь необходимые площади и комплекты санитарно-технического оборудования для размещения 15 детей",
+              "source": "norm",
+              "verified": true
+            }
+          },
+          {
+            "id": "preschool-3-4",
+            "label": "Дошкольная, 3–4 года",
+            "defaultCount": 3,
+            "defaultCapacity": 20,
+            "tags": ["preschool"],
+            "hint": "Расчётная 20 мест (п. 4.4.1.4), предельная 25 (п. 4.4.1.3)",
+            "capacityNorm": {
+              "doc": "СП РК 3.02-110-2012*",
+              "clause": "п. 4.4.1.4",
+              "edition": "с изм. по 23.11.2018 №240-НҚ",
+              "quote": "групповая ячейка для детей от 3 лет — для размещения 20 детей",
+              "source": "norm",
+              "verified": true
+            }
+          },
+          {
+            "id": "preschool-4-5",
+            "label": "Дошкольная, 4–5 лет",
+            "defaultCount": 3,
+            "defaultCapacity": 20,
+            "tags": ["preschool", "senior"],
+            "hint": "Расчётная 20 мест (п. 4.4.1.4), предельная 25 (п. 4.4.1.3)",
+            "capacityNorm": {
+              "doc": "СП РК 3.02-110-2012*",
+              "clause": "п. 4.4.1.4",
+              "edition": "с изм. по 23.11.2018 №240-НҚ",
+              "quote": "групповая ячейка для детей от 3 лет — для размещения 20 детей",
+              "source": "norm",
+              "verified": true
+            }
+          },
+          {
+            "id": "preschool-5-7",
+            "label": "Дошкольная, 5–6 (7) лет",
+            "defaultCount": 2,
+            "defaultCapacity": 20,
+            "tags": ["preschool", "senior"],
+            "hint": "Расчётная 20 мест (п. 4.4.1.4), предельная 25 (п. 4.4.1.3)",
+            "capacityNorm": {
+              "doc": "СП РК 3.02-110-2012*",
+              "clause": "п. 4.4.1.4",
+              "edition": "с изм. по 23.11.2018 №240-НҚ",
+              "quote": "групповая ячейка для детей от 3 лет — для размещения 20 детей",
+              "source": "norm",
+              "verified": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "regime",
+      "label": "Режим работы",
+      "control": "select",
+      "section": "capacity",
+      "default": "full-day",
+      "options": [
+        { "value": "full-day", "label": "Полного дня" },
+        { "value": "short-stay", "label": "Кратковременного пребывания" },
+        { "value": "round-clock", "label": "Круглосуточный" }
+      ]
+    },
+    {
+      "id": "cellType",
+      "label": "Групповая ячейка",
+      "control": "select",
+      "section": "blocks",
+      "default": "separate-bedroom",
+      "options": [
+        {
+          "value": "universal",
+          "label": "Универсальная",
+          "hint": "Спальная зона в составе групповой, трансформируемые кровати"
+        },
+        { "value": "separate-bedroom", "label": "С отдельной спальней" }
+      ],
+      "helpNorm": {
+        "doc": "СП РК 3.02-110-2012*",
+        "clause": "приложение Е, таблица Е.1, примечание 1",
+        "edition": "с изм. по 23.11.2018 №240-НҚ",
+        "quote": "Площадь спальной зоны, указанная в скобках, означает дополнительное увеличение групповой, если спальня, как отдельное помещение, не предусматривается (при использовании трансформируемых кроваток).",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "id": "commonDining",
+      "label": "Общий обеденный зал",
+      "control": "toggle",
+      "section": "blocks",
+      "default": false,
+      "helpNorm": {
+        "doc": "СП РК 3.02-110-2012*",
+        "clause": "п. 4.4.2.13",
+        "edition": "с изм. по 23.11.2018 №240-НҚ",
+        "quote": "общими на 2–4 детские группы могут предусматриваться комната коррекции минимальной площадью 12 м2 и обеденный зал площадью из расчета не менее 20 м2 на одну группу в одну посадку. В случае, если в здании ОДВО предусматриваются общие обеденные залы, в групповых ячейках на случай карантина в детских группах, следует сохранять буфетные.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "id": "pool",
+      "label": "Бассейн",
+      "control": "select",
+      "section": "blocks",
+      "default": "none",
+      "options": [
+        { "value": "none", "label": "Нет" },
+        { "value": "yes", "label": "Есть", "hint": "По заданию на проектирование" }
+      ],
+      "helpNorm": {
+        "doc": "СП РК 3.02-110-2012*",
+        "clause": "приложение Д, таблица Д.1, примечание 3",
+        "edition": "с изм. по 23.11.2018 №240-НҚ",
+        "quote": "Бассейн следует предусматривать по заданию на проектирование.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "id": "halls",
+      "label": "Залы",
+      "control": "select",
+      "section": "blocks",
+      "default": "combined",
+      "options": [
+        {
+          "value": "combined",
+          "label": "Универсальный зал",
+          "hint": "Музыкальные и гимнастические занятия в одном зале — таблица Д.1"
+        },
+        {
+          "value": "separate",
+          "label": "Зал-арена и физкультурный зал",
+          "hint": "По таблице Д.1 состав центров дошкольного воспитания"
+        }
+      ]
+    },
+    {
+      "id": "laundry",
+      "label": "Прачечная",
+      "control": "select",
+      "section": "blocks",
+      "default": "own",
+      "options": [
+        { "value": "own", "label": "Своя" },
+        { "value": "central", "label": "Централизованная", "hint": "Стирка вне объекта, кладовая белья сохраняется" }
+      ]
+    },
+    {
+      "id": "hasCorrection",
+      "label": "Коррекционные группы",
+      "control": "toggle",
+      "section": "extra",
+      "default": false
+    },
+    {
+      "id": "correctionTypes",
+      "label": "Тип нарушения",
+      "control": "multiselect",
+      "section": "extra",
+      "default": [],
+      "visibleIf": { "eq": ["hasCorrection", true] },
+      "options": [
+        { "value": "hearing", "label": "Нарушение слуха (глухие, слабослышащие)" },
+        { "value": "vision", "label": "Нарушение зрения (слепые, слабовидящие)" },
+        { "value": "speech", "label": "Тяжёлые нарушения речи" },
+        { "value": "motor", "label": "Нарушение опорно-двигательного аппарата" },
+        { "value": "intellect", "label": "Нарушение интеллекта" },
+        { "value": "delay", "label": "Задержка психического развития" },
+        { "value": "complex", "label": "Сложные дефекты (2 и более)" }
+      ],
+      "helpNorm": {
+        "doc": "СП РК 3.02-110-2012*",
+        "clause": "приложения Л, М",
+        "edition": "с изм. по 23.11.2018 №240-НҚ",
+        "quote": "Таблица Л.1 — наполняемость детских групп коррекционного типа; таблица М.1 — состав и площади групповых ячеек организаций коррекционного типа",
+        "source": "norm",
+        "verified": true
+      },
+      "help": "Наполняемость и площади ячеек коррекционного типа задаются приложениями Л и М — правила в базу пока не заведены, наполняемость правьте вручную в матрице."
+    },
+    {
+      "id": "extras",
+      "label": "Дополнительные помещения",
+      "control": "multiselect",
+      "section": "extra",
+      "default": ["subgroup-room"],
+      "options": [
+        {
+          "value": "subgroup-room",
+          "label": "Помещение для занятий (игр) по подгруппам",
+          "hint": "Обязательно для разновозрастных групп при новом строительстве"
+        },
+        { "value": "drying-room", "label": "Комната сушки одежды" },
+        { "value": "club-room", "label": "Универсальное кружковое помещение" },
+        { "value": "physio", "label": "Физиотерапевтический кабинет" }
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "id": "kg.cell",
+      "name": "Групповая ячейка",
+      "color": "#0072B2",
+      "order": 1,
+      "isCell": true,
+      "cellSource": "groupMatrix"
+    },
+    { "id": "kg.special", "name": "Специализированные", "color": "#CC79A7", "order": 2 },
+    { "id": "kg.med", "name": "Медицинские", "color": "#D55E00", "order": 3 },
+    { "id": "kg.food", "name": "Пищеблок", "color": "#E69F00", "order": 4 },
+    { "id": "kg.admin", "name": "Служебно-бытовые и прачечная", "color": "#009E73", "order": 5 },
+    { "id": "kg.tech", "name": "Технические", "color": "#999999", "order": 6 },
+    { "id": "kg.comm", "name": "Рекреационно-коммуникационные", "color": "#56B4E9", "order": 7 }
+  ],
+  "rooms": [
+    {
+      "id": "kg.cell.locker",
+      "code": "1.01",
+      "name": "Раздевальная (приёмная)",
+      "nameKz": "Шешінетін бөлме",
+      "group": "kg.cell",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "max(0.7 * row_places, 18)",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение Е, таблица Е.1; п. 4.4.2.6 а)",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Таблица Е.1: Раздевальная — по расчету (0,7 м2 на 1 ребенка). П. 4.4.2.6 а): раздевальная (приемная) — для всех типов ОДВО общего типа площадью не менее 18 м2, для малых ОДВО площадью не менее 15 м2.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Минимум 18 м² принят для ОДВО общего типа. Для малых ОДВО норма — не менее 15 м²: при выборе типа «Малые ОДВО» значение поправьте вручную."
+      },
+      "constraints": { "daylight": "desirable", "floorsForbidden": [-1, 0] },
+      "flows": ["children", "visitors"],
+      "zone": "neutral",
+      "notes": "Шкафы с подсушкой для верхней одежды и обуви, скамьи для переодевания (п. 4.4.2.3). При наличии комнаты сушки одежды шкафы проектируются без подсушки.",
+      "norms": [
+        {
+          "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам образования» (приказ МЗ РК от 05.08.2021 № ҚР ДСМ-76)",
+          "clause": "п. 21",
+          "quote": "Эксплуатация помещений для пребывания обучающихся и воспитанников, медицинского назначения не допускается в подвальных и цокольных этажах зданий.",
+          "source": "sanpin",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "kg.cell.play",
+      "code": "1.02",
+      "name": "Групповая (игровая)",
+      "nameKz": "Топтық (ойын) бөлме",
+      "group": "kg.cell",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "match",
+          "cases": [
+            { "when": { "eq": ["odvoType", "walking"] }, "value": 36, "label": "прогулочные группы" },
+            { "when": { "eq": ["odvoType", "small"] }, "value": 40, "label": "малые ОДВО" },
+            { "when": { "eq": ["odvoType", "general"] }, "value": 50, "label": "ОДВО общего типа" },
+            { "when": { "eq": ["odvoType", "uvk"] }, "value": 60, "label": "УВК" }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение Е, таблица Е.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Групповая (со спальной зоной): прогулочные группы — 36; малые ОДВО — 40 (35); ОДВО общего типа, ПДВ, групповые отделения, КДВ — 50 (35); УВК (дошкольные отделения) — 60 (35).",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": {
+        "daylight": "required",
+        "floorsForbidden": [-1, 0],
+        "notAbove": ["kg.food.kitchen"]
+      },
+      "flows": ["children"],
+      "zone": "clean",
+      "notes": "П. 4.4.2.4: место для кормления и занятий (для группы 20 детей не менее 4,65 × 5,75 м), место тихих игр из 2–3 полузамкнутых площадок не менее 2 × 2 м. П. 4.4.2.11: соотношение длины к ширине — идеально 3 : 2. П. 4.4.2.5: низ оконных проёмов не выше 0,75 м от пола. КЕО не менее 1,5 % (п. 4.4.4.18).",
+      "norms": [
+        {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "п. 4.4.2.6 б)",
+          "quote": "групповая (игровая) — для ОДВО общего типа площадью не менее 50 м2, для центров дошкольного воспитания — для ясельных групп из расчета не менее 2,5 м2 на 1 ребенка, в дошкольных группах — не менее 2,0 м2",
+          "source": "norm",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "kg.cell.sleep-zone",
+      "code": "1.03",
+      "name": "Спальная зона в составе групповой",
+      "group": "kg.cell",
+      "status": "conditional",
+      "condition": {
+        "and": [{ "eq": ["cellType", "universal"] }, { "neq": ["odvoType", "walking"] }]
+      },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "match",
+          "cases": [
+            { "when": { "neq": ["odvoType", "walking"] }, "value": 35, "label": "увеличение групповой" }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение Е, таблица Е.1, примечание 1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Площадь спальной зоны, указанная в скобках, означает дополнительное увеличение групповой, если спальня, как отдельное помещение, не предусматривается (при использовании трансформируемых кроваток).",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
+      "flows": ["children"],
+      "zone": "clean",
+      "notes": "Не самостоятельное помещение: 35 м² добавляются к площади групповой. Выделено отдельной строкой, чтобы прибавка была видна в расчёте.",
+      "norms": []
+    },
+    {
+      "id": "kg.cell.sleep",
+      "code": "1.04",
+      "name": "Спальня",
+      "nameKz": "Жатын бөлме",
+      "group": "kg.cell",
+      "status": "conditional",
+      "condition": {
+        "and": [{ "neq": ["cellType", "universal"] }, { "neq": ["odvoType", "walking"] }]
+      },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "match",
+          "cases": [
+            {
+              "when": { "and": [{ "eq": ["odvoType", "uvk"] }, { "in": ["row_tags", ["nursery"]] }] },
+              "value": 36,
+              "label": "УВК, ясельная группа"
+            },
+            { "when": { "eq": ["odvoType", "uvk"] }, "value": 50, "label": "УВК, дошкольная группа" },
+            { "when": { "eq": ["odvoType", "small"] }, "value": 50, "label": "малые ОДВО" },
+            { "when": { "eq": ["odvoType", "general"] }, "value": 50, "label": "ОДВО общего типа" }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение Е, таблица Е.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Спальня: малые ОДВО — 50 для ясельных и 50 для дошкольных групп; ОДВО общего типа, ПДВ, групповые отделения, КДВ — 50 и 50; УВК (дошкольные отделения) — 36 для ясельных и 50 для дошкольных групп. Отдельные спальни предусматриваются по заданию на проектирование.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
+      "flows": ["children"],
+      "zone": "clean",
+      "notes": "П. 4.4.2.6 г) задаёт минимумы для ОДВО общего типа: дошкольные — не менее 50 м², ясельные — не менее 36 м². Значение по таблице Е.1 (50 м²) минимум перекрывает. КЕО в спальне — 1 % (п. 4.4.4.18). Расстояние между рядами кроватей 0,5 м, между изголовьями 0,2 м (п. 4.4.2.8).",
+      "norms": []
+    },
+    {
+      "id": "kg.cell.subgroup",
+      "code": "1.05",
+      "name": "Помещение для занятий (игр) по подгруппам",
+      "group": "kg.cell",
+      "status": "recommended",
+      "condition": { "in": ["extras", ["subgroup-room"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 12,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение Ж, таблица Ж.1, п. 1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Помещение для игр и занятий детей по подгруппам — площадь помещения не менее 12 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
+      "flows": ["children"],
+      "zone": "clean",
+      "notes": "Приложение В: для разновозрастных групп при новом строительстве предусматривается обязательно. Может использоваться как комната коррекции (примечание к таблице Ж.1).",
+      "norms": []
+    },
+    {
+      "id": "kg.cell.pantry",
+      "code": "1.06",
+      "name": "Буфетная",
+      "nameKz": "Буфет бөлмесі",
+      "group": "kg.cell",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 3.8,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение Е, таблица Е.1; п. 4.4.2.6 в)",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Буфетная — 3,8 м2 для всех типов ОДВО.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["food", "staff"],
+      "zone": "clean",
+      "notes": "Оборудуется двухкамерной мойкой, столом и навесными шкафами. Не допускается загрузка буфетной через помещения групповой ячейки (п. 4.4.2.12). При наличии общего обеденного зала буфетные сохраняются на случай карантина (п. 4.4.2.13).",
+      "norms": []
+    },
+    {
+      "id": "kg.cell.wc",
+      "code": "1.07",
+      "name": "Туалетная",
+      "nameKz": "Дәретхана",
+      "group": "kg.cell",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "match",
+          "cases": [
+            { "when": { "eq": ["odvoType", "walking"] }, "value": 6, "label": "прогулочные группы" },
+            { "when": { "eq": ["odvoType", "small"] }, "value": 12, "label": "малые ОДВО, не менее" },
+            { "when": { "eq": ["odvoType", "general"] }, "value": 16, "label": "ОДВО общего типа" },
+            { "when": { "eq": ["odvoType", "uvk"] }, "value": 16, "label": "УВК" }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение Е, таблица Е.1; п. 4.4.2.6 д)",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Туалетная: прогулочные группы — 6; малые ОДВО — не менее 12; ОДВО общего типа — 16; УВК — 16. П. 4.4.2.6 д): для всех типов ОДВО не менее 16 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": {
+        "daylight": "desirable",
+        "wetZone": true,
+        "floorsForbidden": [-1, 0],
+        "notAbove": ["kg.food.kitchen"]
+      },
+      "flows": ["children", "waste"],
+      "zone": "dirty",
+      "notes": "Количество санитарных приборов — приложение Н. Детская кабина не менее 1,0 × 0,75 м, ограждения 1,2 м, не доходящие до пола на 0,15 м (п. 4.4.2.15). Ширина прохода между входом в кабины и противопожарной стеной не менее 1,0 м (п. 4.4.2.18).",
+      "norms": []
+    },
+    {
+      "id": "kg.cell.drying",
+      "code": "1.08",
+      "name": "Комната сушки одежды",
+      "group": "kg.cell",
+      "status": "optional",
+      "condition": { "in": ["extras", ["drying-room"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 4,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение Ж, таблица Ж.1, п. 5",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Комната сушки одежды — площадь помещения не менее 4 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["children"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "kg.spec.hall",
+      "code": "2.01",
+      "name": "Зал для музыкальных и гимнастических занятий",
+      "group": "kg.special",
+      "status": "required",
+      "condition": { "eq": ["halls", "combined"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "groups_total",
+          "points": [
+            { "at": 4, "value": 80 },
+            { "at": 10, "value": 80 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение Д, таблица Д.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Универсальный зал для музыкальных и гимнастических занятий: 4–6 групп — 80; 8–10 групп — 80.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Столбцы «12–16 групп» и «18–20 групп» в таблице Д.1 не заполнены. По примечанию 1 при большем числе групп предусматриваются два универсальных зала по 80 м² с раздельным использованием — задайте вручную."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1] },
+      "flows": ["children"],
+      "zone": "clean",
+      "notes": "Один из размеров зала не менее 9 м; в остальных случаях одна сторона не превышает вторую более чем в 2 раза (п. 4.4.3.2). В малых ДОО зал принимается не менее 50 м² (примечание 4 к таблице Д.1). При определении площади ясельные группы не учитываются (примечание к таблице Д.1).",
+      "norms": []
+    },
+    {
+      "id": "kg.spec.hall-store",
+      "code": "2.02",
+      "name": "Кладовая при зале",
+      "group": "kg.special",
+      "status": "required",
+      "condition": { "eq": ["halls", "combined"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "groups_total",
+          "points": [
+            { "at": 6, "value": 6 },
+            { "at": 10, "value": 12 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение Д, таблица Д.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Кладовая при зале: 4–6 групп — 6; 8–10 групп — 12.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "kg.spec.arena",
+      "code": "2.03",
+      "name": "Зал-арена для музыкальных занятий, утренников и спектаклей",
+      "group": "kg.special",
+      "status": "conditional",
+      "condition": { "eq": ["halls", "separate"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 120,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение Д, таблица Д.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Зал-арена для музыкальных занятий, детских утренников и спектаклей: центры дошкольного воспитания 6 групп — 120; 8–10 групп — 120.",
+          "source": "norm",
+          "verified": false
+        },
+        "sourceHint": "Таблица Д.1 приводит зал-арену только для центров дошкольного воспитания; для столбцов ОДВО общего типа стоит прочерк. Проверьте применимость к вашему типу объекта."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1] },
+      "flows": ["children", "visitors"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "kg.spec.arena-artist",
+      "code": "2.04",
+      "name": "Артистическая при зале-арене",
+      "group": "kg.special",
+      "status": "conditional",
+      "condition": { "eq": ["halls", "separate"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 12,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение Д, таблица Д.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "- артистическая: центры дошкольного воспитания 6 групп — 12; 8–10 групп — 12.",
+          "source": "norm",
+          "verified": false
+        },
+        "sourceHint": "Как и зал-арена, приведена только для центров дошкольного воспитания."
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "kg.spec.arena-store",
+      "code": "2.05",
+      "name": "Кладовая при зале-арене",
+      "group": "kg.special",
+      "status": "conditional",
+      "condition": { "eq": ["halls", "separate"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 6,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение Д, таблица Д.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "- кладовая: центры дошкольного воспитания 6 групп — 6; 8–10 групп — 6.",
+          "source": "norm",
+          "verified": false
+        },
+        "sourceHint": "Приведена только для центров дошкольного воспитания."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "kg.spec.sport",
+      "code": "2.06",
+      "name": "Физкультурный зал",
+      "group": "kg.special",
+      "status": "conditional",
+      "condition": { "eq": ["halls", "separate"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "groups_total",
+          "points": [
+            { "at": 6, "value": 100 },
+            { "at": 10, "value": 120 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение Д, таблица Д.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Физкультурный зал: центры дошкольного воспитания 6 групп — 100; 8–10 групп — 120.",
+          "source": "norm",
+          "verified": false
+        },
+        "sourceHint": "Приведён только для центров дошкольного воспитания; для ОДВО общего типа таблица Д.1 даёт универсальный зал."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1] },
+      "flows": ["children"],
+      "zone": "clean",
+      "notes": "Один из размеров зала не менее 9 м (п. 4.4.3.2).",
+      "norms": []
+    },
+    {
+      "id": "kg.spec.sport-equip",
+      "code": "2.07",
+      "name": "Снарядная",
+      "group": "kg.special",
+      "status": "conditional",
+      "condition": { "eq": ["halls", "separate"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 8,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение Д, таблица Д.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "- снарядная: центры дошкольного воспитания 6 групп — 8; 8–10 групп — 8.",
+          "source": "norm",
+          "verified": false
+        },
+        "sourceHint": "Приведена только для центров дошкольного воспитания."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "kg.spec.sport-locker",
+      "code": "2.08",
+      "name": "Раздевальные, душевые и туалет при физкультурном зале",
+      "group": "kg.special",
+      "status": "conditional",
+      "condition": { "eq": ["halls", "separate"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "В таблице Д.1 строка присутствует, но площадь не приведена. Количество санитарно-технического оборудования — приложение Н (душевая при физкультурном зале — 2 прибора). Площадь принять по расстановке оборудования."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["children", "waste"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "kg.spec.club",
+      "code": "2.09",
+      "name": "Универсальное кружковое помещение",
+      "group": "kg.special",
+      "status": "recommended",
+      "condition": { "in": ["extras", ["club-room"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "groups_total",
+          "points": [
+            { "at": 6, "value": 36 },
+            { "at": 10, "value": 54 },
+            { "at": 16, "value": 54 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение Д, таблица Д.1; п. 4.4.3.3",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Таблица Д.1: Универсальные кружковые помещения — 4–6 групп 36; 8–10 групп 54; 12–16 групп 54. П. 4.4.3.3: в ОДВО общего типа целесообразно предусматривать универсальное кружковое помещение площадью от 35 до 55 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required" },
+      "flows": ["children"],
+      "zone": "clean",
+      "notes": "При использовании двух кружковых комнат предусматривать раздельное использование для хореографии и для рисования и скульптуры (примечание 2 к таблице Д.1).",
+      "norms": []
+    },
+    {
+      "id": "kg.spec.club-store",
+      "code": "2.10",
+      "name": "Кладовая при кружковых помещениях",
+      "group": "kg.special",
+      "status": "recommended",
+      "condition": { "in": ["extras", ["club-room"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 6,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение Д, таблица Д.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "- кладовые: 4–6 групп — 6; 8–10 групп — 6; 12–16 групп — 6.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "kg.spec.teachers",
+      "code": "2.11",
+      "name": "Комната преподавателей",
+      "group": "kg.special",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "groups_total",
+          "points": [
+            { "at": 6, "value": 6 },
+            { "at": 10, "value": 6 },
+            { "at": 16, "value": 6 },
+            { "at": 20, "value": 9 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение Д, таблица Д.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "- комнаты преподавателей: 4–6 групп — 6; 8–10 групп — 6; 12–16 групп — 6; 18–20 групп — 9.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Значения таблицы Д.1 (информационное приложение) расходятся с п. 4.4.3.14, который требует учительское помещение не менее 8 м² при норме 2–3 м² на 1 учителя. Расхождение вынесено в «Проверки»."
+      },
+      "constraints": { "daylight": "required" },
+      "flows": ["staff"],
+      "zone": "clean",
+      "notes": "П. 4.4.3.14: в составе служебно-бытовых помещений предусматривается учительское помещение не менее 8 м² (при норме от 2 до 3 м² на 1 учителя).",
+      "norms": []
+    },
+    {
+      "id": "kg.spec.pool",
+      "code": "2.12",
+      "name": "Бассейн",
+      "group": "kg.special",
+      "status": "optional",
+      "condition": { "eq": ["pool", "yes"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Примечание 3 к таблице Д.1: бассейн следует предусматривать по заданию на проектирование. Площади в СП РК 3.02-110-2012* не нормированы — принимать по СП РК 3.02-144-2022 «Здания и сооружения плавательных бассейнов» и технологическому заданию."
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true },
+      "flows": ["children"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "kg.med.office",
+      "code": "3.01",
+      "name": "Медицинский кабинет",
+      "group": "kg.med",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 50, "value": 6 },
+            { "at": 95, "value": 8 },
+            { "at": 140, "value": 8 },
+            { "at": 190, "value": 8 },
+            { "at": 280, "value": 10 },
+            { "at": 360, "value": 12 },
+            { "at": 400, "value": 15 },
+            { "at": 450, "value": 15 },
+            { "at": 500, "value": 15 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Медицинский кабинет при проектной мощности 50/95/140/190/280/360/400/450/500 мест: 6 / 8 / 8 / 8 / 10 / 12 / 15 / 15 / 15 м2. Примечание 1: площади помещений для другой мощности ДОС принимать по интерполяции.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
+      "flows": ["medical", "children"],
+      "zone": "clean",
+      "notes": "Между медицинской комнатой и палатой предусматривается остеклённый проём для наблюдения за ребёнком на высоте не более 1,2 м от пола (п. 4.4.3.7).",
+      "norms": []
+    },
+    {
+      "id": "kg.med.procedure",
+      "code": "3.02",
+      "name": "Процедурный кабинет",
+      "group": "kg.med",
+      "status": "conditional",
+      "condition": { "gte": ["places_total", 190] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 190, "value": 8 },
+            { "at": 280, "value": 8 },
+            { "at": 360, "value": 10 },
+            { "at": 400, "value": 12 },
+            { "at": 450, "value": 12 },
+            { "at": 500, "value": 12 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Процедурный кабинет при проектной мощности 50/95/140 мест — прочерк; 190/280/360/400/450/500 мест: 8 / 8 / 10 / 12 / 12 / 12 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "wetZone": true, "floorsForbidden": [-1, 0] },
+      "flows": ["medical"],
+      "zone": "clean",
+      "notes": "Физиотерапевтическое оборудование допускается разместить в процедурном кабинете (примечание 2 к таблице К.1).",
+      "norms": []
+    },
+    {
+      "id": "kg.med.isolation-reception",
+      "code": "3.03",
+      "name": "Изолятор: приёмная",
+      "group": "kg.med",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 50, "value": 2 },
+            { "at": 95, "value": 2 },
+            { "at": 140, "value": 2 },
+            { "at": 190, "value": 4 },
+            { "at": 280, "value": 6 },
+            { "at": 360, "value": 8 },
+            { "at": 400, "value": 8 },
+            { "at": 450, "value": 10 },
+            { "at": 500, "value": 12 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Изолятор: приемная при проектной мощности 50/95/140/190/280/360/400/450/500 мест: 2 / 2 / 2 / 4 / 6 / 8 / 8 / 10 / 12 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable", "floorsForbidden": [-1, 0] },
+      "flows": ["medical"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "kg.med.isolation-ward",
+      "code": "3.04",
+      "name": "Изолятор: палата",
+      "group": "kg.med",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 50, "value": 6 },
+            { "at": 95, "value": 6 },
+            { "at": 140, "value": 6 },
+            { "at": 190, "value": 6 },
+            { "at": 280, "value": 12 },
+            { "at": 360, "value": 18 },
+            { "at": 400, "value": 18 },
+            { "at": 450, "value": 18 },
+            { "at": 500, "value": 18 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1; п. 4.4.3.8",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "П. 4.4.3.8: палаты изолятора следует проектировать одно- или двухместными минимальной площадью 6 м2. Таблица К.1: изолятор, палата при 50/95/140/190 мест — 6 м2.",
+          "source": "norm",
+          "verified": false
+        },
+        "sourceHint": "Значения для 50–190 мест (6 м²) прочитаны однозначно. Столбцы 280–500 мест в таблице объединены и приведены в виде суммы нескольких палат (12 и 18 м²) — сверьте по печатному тексту таблицы К.1."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
+      "flows": ["medical"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "kg.med.isolation-wc",
+      "code": "3.05",
+      "name": "Изолятор: туалетная",
+      "group": "kg.med",
+      "status": "conditional",
+      "condition": { "gte": ["places_total", 95] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 95, "value": 2 },
+            { "at": 140, "value": 2 },
+            { "at": 190, "value": 2 },
+            { "at": 280, "value": 4 },
+            { "at": 360, "value": 4 },
+            { "at": 400, "value": 4 },
+            { "at": 450, "value": 4 },
+            { "at": 500, "value": 4 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Изолятор: туалетная при 50 мест — прочерк; 95/140/190 мест — 2 м2.",
+          "source": "norm",
+          "verified": false
+        },
+        "sourceHint": "Столбцы 280–500 мест объединены и приведены суммой двух туалетных (4 м²) — сверьте по печатному тексту таблицы К.1."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true, "floorsForbidden": [-1, 0] },
+      "flows": ["medical", "waste"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "kg.med.disinfect",
+      "code": "3.06",
+      "name": "Помещение для приготовления дезинфицирующих средств",
+      "group": "kg.med",
+      "status": "conditional",
+      "condition": { "gte": ["places_total", 95] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 2,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Помещение для приготовления дезинфицирующих средств при 50 мест — прочерк; при 95–500 мест — 2 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["medical", "waste"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "kg.med.physio",
+      "code": "3.07",
+      "name": "Физиотерапевтический кабинет",
+      "group": "kg.med",
+      "status": "recommended",
+      "condition": {
+        "and": [{ "in": ["extras", ["physio"]] }, { "gte": ["places_total", 140] }]
+      },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 140, "value": 12 },
+            { "at": 190, "value": 12 },
+            { "at": 280, "value": 12 },
+            { "at": 360, "value": 24 },
+            { "at": 400, "value": 24 },
+            { "at": 450, "value": 24 },
+            { "at": 500, "value": 24 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Физиотерапевтический кабинет при 50/95 мест — прочерк; 140/190/280 мест — 12 м2.",
+          "source": "norm",
+          "verified": false
+        },
+        "sourceHint": "Столбцы 360–500 мест объединены и приведены суммой двух кабинетов (24 м²) — сверьте по печатному тексту таблицы К.1."
+      },
+      "constraints": { "daylight": "desirable", "floorsForbidden": [-1, 0] },
+      "flows": ["medical"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "kg.food.kitchen",
+      "code": "4.01",
+      "name": "Кухня с раздаточной",
+      "group": "kg.food",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 50, "value": 15 },
+            { "at": 95, "value": 23 },
+            { "at": 140, "value": 23 },
+            { "at": 190, "value": 28 },
+            { "at": 280, "value": 30 },
+            { "at": 360, "value": 43 },
+            { "at": 400, "value": 45 },
+            { "at": 450, "value": 57 },
+            { "at": 500, "value": 57 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1; п. 4.4.3.9",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Кухня с раздаточной при проектной мощности 50/95/140/190/280/360/400/450/500 мест: 15 / 23 / 23 / 28 / 30 / 43 / 45 / 45 + 12 / 45 + 12 м2. П. 4.4.3.9: площадь кухни принимается не менее 15 м2.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Для 450 и 500 мест в таблице стоит «45 + 12» — принята суммарная площадь 57 м². Если разделение на два помещения принципиально, задайте вручную."
+      },
+      "constraints": { "daylight": "required", "wetZone": true, "floorsAllowed": [1] },
+      "flows": ["food", "staff"],
+      "zone": "clean",
+      "notes": "Приготовление пищи в малых ОДВО на первых этажах жилых домов допускается на площадях существующих кухонь (п. 4.4.3.9).",
+      "norms": []
+    },
+    {
+      "id": "kg.food.serving",
+      "code": "4.02",
+      "name": "Раздаточная (отдельным помещением)",
+      "group": "kg.food",
+      "status": "conditional",
+      "condition": {
+        "and": [{ "gte": ["groups_total", 7] }, { "eq": ["odvoType", "general"] }]
+      },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "п. 4.4.3.10",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Раздаточная пищеблока ОДВО общего типа на 7 и более групп должна предусматриваться отдельным помещением.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Площадь отдельной раздаточной в таблице К.1 не выделена — она учтена в строке «Кухня с раздаточной». Задайте площадь по расстановке оборудования и уменьшите площадь кухни."
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1] },
+      "flows": ["food"],
+      "zone": "clean",
+      "notes": "Путь из раздаточной в помещение приёма пищи детей не должен проходить через раздевальные и игровые (п. 4.4.3.12).",
+      "norms": []
+    },
+    {
+      "id": "kg.food.prep",
+      "code": "4.03",
+      "name": "Заготовочный цех",
+      "group": "kg.food",
+      "status": "conditional",
+      "condition": { "lt": ["places_total", 190] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 50, "value": 6 },
+            { "at": 95, "value": 8 },
+            { "at": 140, "value": 8 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Заготовочный цех при 50/95/140 мест: 6 / 8 / 8 м2; при 190 мест и более — прочерк (заменяется мясо-рыбным и овощным цехами).",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true, "floorsAllowed": [1] },
+      "flows": ["food"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "kg.food.meat",
+      "code": "4.04",
+      "name": "Мясо-рыбный цех",
+      "group": "kg.food",
+      "status": "conditional",
+      "condition": { "gte": ["places_total", 190] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 190, "value": 14 },
+            { "at": 280, "value": 16 },
+            { "at": 360, "value": 18 },
+            { "at": 400, "value": 18 },
+            { "at": 450, "value": 20 },
+            { "at": 500, "value": 20 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Мясо-рыбный цех при 50/95/140 мест — прочерк; при 190/280/360/400/450/500 мест: 14 / 16 / 18 / 18 / 20 / 20 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true, "floorsAllowed": [1] },
+      "flows": ["food"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "kg.food.veg",
+      "code": "4.05",
+      "name": "Овощной цех с предварительной обработкой",
+      "group": "kg.food",
+      "status": "conditional",
+      "condition": { "gte": ["places_total", 190] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 190, "value": 16 },
+            { "at": 280, "value": 18 },
+            { "at": 360, "value": 20 },
+            { "at": 400, "value": 22 },
+            { "at": 450, "value": 24 },
+            { "at": 500, "value": 26 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Овощной цех с предварительной обработкой при 50/95/140 мест — прочерк; далее по таблице суммарно 16 / 18 / 20 / 22 / 24 / 26 м2.",
+          "source": "norm",
+          "verified": false
+        },
+        "sourceHint": "Ячейки этой строки объединены: цех разделён на две части, в таблице приведены слагаемые и сумма. Приняты суммы. Сверьте по печатному тексту таблицы К.1."
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true, "floorsAllowed": [1] },
+      "flows": ["food"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "kg.food.wash",
+      "code": "4.06",
+      "name": "Моечная кухонной посуды",
+      "group": "kg.food",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 50, "value": 4 },
+            { "at": 95, "value": 4 },
+            { "at": 140, "value": 4 },
+            { "at": 190, "value": 5 },
+            { "at": 280, "value": 6 },
+            { "at": 360, "value": 8 },
+            { "at": 400, "value": 8 },
+            { "at": 450, "value": 8 },
+            { "at": 500, "value": 8 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Моечная кухонной посуды при проектной мощности 50/95/140/190/280/360/400/450/500 мест: 4 / 4 / 4 / 5 / 6 / 8 / 8 / 8 / 8 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true, "floorsAllowed": [1] },
+      "flows": ["food", "waste"],
+      "zone": "dirty",
+      "notes": "Полы оборудуются сливными трапами с уклоном к отверстиям (п. 4.4.4.15).",
+      "norms": []
+    },
+    {
+      "id": "kg.food.cold",
+      "code": "4.07",
+      "name": "Охлаждаемая камера",
+      "group": "kg.food",
+      "status": "conditional",
+      "condition": { "gte": ["places_total", 95] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 95, "value": 6 },
+            { "at": 140, "value": 8 },
+            { "at": 190, "value": 9 },
+            { "at": 280, "value": 12 },
+            { "at": 360, "value": 14 },
+            { "at": 400, "value": 15 },
+            { "at": 450, "value": 18 },
+            { "at": 500, "value": 22 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Охлаждаемая камера при 50 мест — прочерк; при 95/140/190/280/360/400/450/500 мест: 6 / 8 / 9 / 12 / 14 / 6 + 9 / 6 + 12 / 6 + 6 + 10 м2.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Для 400, 450 и 500 мест таблица задаёт несколько камер («6 + 9», «6 + 12», «6 + 6 + 10») — приняты суммарные площади 15, 18 и 22 м². Число камер учтите отдельно."
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1] },
+      "flows": ["food"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "kg.food.dry",
+      "code": "4.08",
+      "name": "Кладовая сухих продуктов",
+      "group": "kg.food",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 50, "value": 7 },
+            { "at": 95, "value": 8 },
+            { "at": 140, "value": 8 },
+            { "at": 190, "value": 8 },
+            { "at": 280, "value": 8 },
+            { "at": 360, "value": 8 },
+            { "at": 400, "value": 8 },
+            { "at": 450, "value": 10 },
+            { "at": 500, "value": 12 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Кладовая сухих продуктов при проектной мощности 50/95/140/190/280/360/400/450/500 мест: 7 / 8 / 8 / 8 / 8 / 8 / 8 / 10 / 12 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1] },
+      "flows": ["food", "goods"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "kg.food.vegstore",
+      "code": "4.09",
+      "name": "Кладовая овощей",
+      "group": "kg.food",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 50, "value": 4 },
+            { "at": 95, "value": 4 },
+            { "at": 140, "value": 4 },
+            { "at": 190, "value": 5 },
+            { "at": 280, "value": 8 },
+            { "at": 360, "value": 10 },
+            { "at": 400, "value": 10 },
+            { "at": 450, "value": 12 },
+            { "at": 500, "value": 12 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Кладовая овощей при проектной мощности 50/95/140/190/280/360/400/450/500 мест: 4 / 4 / 4 / 5 / 8 / 10 / 10 / 12 / 12 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1] },
+      "flows": ["food", "goods"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "kg.food.loading",
+      "code": "4.10",
+      "name": "Загрузочная",
+      "group": "kg.food",
+      "status": "conditional",
+      "condition": { "gte": ["places_total", 95] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 95, "value": 4 },
+            { "at": 140, "value": 4 },
+            { "at": 190, "value": 5 },
+            { "at": 280, "value": 6 },
+            { "at": 360, "value": 6 },
+            { "at": 400, "value": 8 },
+            { "at": 450, "value": 10 },
+            { "at": 500, "value": 10 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Загрузочная при 50 мест — прочерк; при 95/140/190/280/360/400/450/500 мест: 4 / 4 / 5 / 6 / 6 / 8 / 10 / 10 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1], "separateEntrance": true },
+      "flows": ["goods", "food"],
+      "zone": "dirty",
+      "notes": "Начало технологической цепочки: приём продуктов без встречных потоков с готовой продукцией и отходами.",
+      "norms": []
+    },
+    {
+      "id": "kg.adm.laundry-wash",
+      "code": "5.01",
+      "name": "Стиральная",
+      "group": "kg.admin",
+      "status": "conditional",
+      "condition": { "eq": ["laundry", "own"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 50, "value": 12 },
+            { "at": 95, "value": 14 },
+            { "at": 140, "value": 14 },
+            { "at": 190, "value": 16 },
+            { "at": 280, "value": 16 },
+            { "at": 360, "value": 18 },
+            { "at": 400, "value": 26 },
+            { "at": 450, "value": 30 },
+            { "at": 500, "value": 36 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Стиральная при проектной мощности 50/95/140/190/280/360/400/450/500 мест: 12 / 14 / 14 / 16 / 16 / 18 / 20 + 6 сортировка / 22 + 8 сортировка / 26 + 10 сортировка м2.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "С 400 мест таблица добавляет помещение сортировки (6, 8 и 10 м²) — приняты суммарные площади 26, 30 и 36 м². Сортировку грязного белья выделите отдельным помещением."
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true },
+      "flows": ["linen"],
+      "zone": "dirty",
+      "notes": "Полы оборудуются сливными трапами с уклоном к отверстиям (п. 4.4.4.15).",
+      "norms": []
+    },
+    {
+      "id": "kg.adm.laundry-iron",
+      "code": "5.02",
+      "name": "Гладильная",
+      "group": "kg.admin",
+      "status": "conditional",
+      "condition": {
+        "and": [{ "eq": ["laundry", "own"] }, { "gte": ["places_total", 140] }]
+      },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 140, "value": 10 },
+            { "at": 190, "value": 12 },
+            { "at": 280, "value": 12 },
+            { "at": 360, "value": 12 },
+            { "at": 400, "value": 14 },
+            { "at": 450, "value": 16 },
+            { "at": 500, "value": 18 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Гладильная при 50/95 мест — прочерк; при 140/190/280/360/400/450/500 мест: 10 / 12 / 12 / 12 / 14 / 16 / 18 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["linen"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "kg.adm.linen-clean",
+      "code": "5.03",
+      "name": "Кладовая чистого белья",
+      "group": "kg.admin",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 50, "value": 4 },
+            { "at": 95, "value": 6 },
+            { "at": 140, "value": 6 },
+            { "at": 190, "value": 8 },
+            { "at": 280, "value": 10 },
+            { "at": 360, "value": 14 },
+            { "at": 400, "value": 14 },
+            { "at": 450, "value": 16 },
+            { "at": 500, "value": 18 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Кладовая чистого белья при проектной мощности 50/95/140/190/280/360/400/450/500 мест: 4 / 6 / 6 / 8 / 10 / 14 / 14 / 16 / 18 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["linen"],
+      "zone": "clean",
+      "notes": "Потоки чистого и грязного белья не должны пересекаться.",
+      "norms": []
+    },
+    {
+      "id": "kg.adm.castellan",
+      "code": "5.04",
+      "name": "Комната кастелянши",
+      "group": "kg.admin",
+      "status": "conditional",
+      "condition": { "gte": ["places_total", 280] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 6,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Комната кастелянши при 50/95/140/190 мест — прочерк; при 280–500 мест — 6 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["linen", "staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "kg.adm.head",
+      "code": "5.05",
+      "name": "Кабинет заведующего",
+      "group": "kg.admin",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 50, "value": 10 },
+            { "at": 95, "value": 10 },
+            { "at": 140, "value": 10 },
+            { "at": 190, "value": 9 },
+            { "at": 280, "value": 9 },
+            { "at": 360, "value": 15 },
+            { "at": 400, "value": 18 },
+            { "at": 450, "value": 22 },
+            { "at": 500, "value": 22 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Кабинет заведующего при проектной мощности 50/95/140/190/280/360/400/450/500 мест: 10 / 10 / 10 / 9 / 9 / 15 / 18 / 16 + 6 / 16 + 6 м2.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Для 450 и 500 мест таблица даёт «16 + 6» (кабинет и приёмная) — принята суммарная площадь 22 м²."
+      },
+      "constraints": { "daylight": "required" },
+      "flows": ["staff", "visitors"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "kg.adm.method",
+      "code": "5.06",
+      "name": "Методический кабинет",
+      "group": "kg.admin",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 50, "value": 8 },
+            { "at": 95, "value": 10 },
+            { "at": 140, "value": 10 },
+            { "at": 190, "value": 15 },
+            { "at": 280, "value": 15 },
+            { "at": 360, "value": 15 },
+            { "at": 400, "value": 18 },
+            { "at": 450, "value": 20 },
+            { "at": 500, "value": 24 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Методический кабинет при проектной мощности 50/95/140/190/280/360/400/450/500 мест: 8 / 10 / 10 / 15 / 15 / 15 / 18 / 20 / 24 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required" },
+      "flows": ["staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "kg.adm.psych",
+      "code": "5.07",
+      "name": "Кабинет психолога, логопеда",
+      "group": "kg.admin",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 50, "value": 6 },
+            { "at": 95, "value": 8 },
+            { "at": 140, "value": 8 },
+            { "at": 190, "value": 8 },
+            { "at": 280, "value": 10 },
+            { "at": 360, "value": 12 },
+            { "at": 400, "value": 15 },
+            { "at": 450, "value": 15 },
+            { "at": 500, "value": 30 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Кабинет психолога, логопеда при проектной мощности 50/95/140/190/280/360/400/450 мест: 6 / 8 / 8 / 8 / 10 / 12 / 15 / 15 м2.",
+          "source": "norm",
+          "verified": false
+        },
+        "sourceHint": "Столбец 500 мест объединён и приведён суммой двух кабинетов (2 × 15 = 30 м²) — сверьте по печатному тексту таблицы К.1."
+      },
+      "constraints": { "daylight": "required" },
+      "flows": ["children", "staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "kg.adm.supply",
+      "code": "5.08",
+      "name": "Кабинет завхоза",
+      "group": "kg.admin",
+      "status": "conditional",
+      "condition": { "gte": ["places_total", 190] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 190, "value": 6 },
+            { "at": 280, "value": 6 },
+            { "at": 360, "value": 6 },
+            { "at": 400, "value": 8 },
+            { "at": 450, "value": 8 },
+            { "at": 500, "value": 10 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Кабинет завхоза при 50/95/140 мест — прочерк; при 190/280/360/400/450/500 мест: 6 / 6 / 6 / 8 / 8 / 10 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "kg.adm.staff",
+      "code": "5.09",
+      "name": "Комната персонала",
+      "group": "kg.admin",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 50, "value": 8 },
+            { "at": 95, "value": 8 },
+            { "at": 140, "value": 8 },
+            { "at": 190, "value": 10 },
+            { "at": 280, "value": 12 },
+            { "at": 360, "value": 12 },
+            { "at": 400, "value": 12 },
+            { "at": 450, "value": 12 },
+            { "at": 500, "value": 12 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Комната персонала при проектной мощности 50/95/140/190/280/360/400/450/500 мест: 8 / 8 / 8 / 10 / 12 / 12 / 12 / 12 / 12 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "kg.adm.household",
+      "code": "5.10",
+      "name": "Хозяйственная кладовая",
+      "group": "kg.admin",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "interpolate",
+          "by": "places_total",
+          "points": [
+            { "at": 50, "value": 4 },
+            { "at": 95, "value": 5 },
+            { "at": 140, "value": 5 },
+            { "at": 190, "value": 8 },
+            { "at": 280, "value": 12 },
+            { "at": 360, "value": 20 },
+            { "at": 400, "value": 20 },
+            { "at": 450, "value": 24 },
+            { "at": 500, "value": 26 }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Хозяйственная кладовая при 50/95/140/190/280 мест: 4 / 5 / 5 / 8 / 12 м2.",
+          "source": "norm",
+          "verified": false
+        },
+        "sourceHint": "Столбцы 360–500 мест объединены и приведены суммой двух кладовых (20, 20, 24 и 26 м²) — сверьте по печатному тексту таблицы К.1."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["goods", "staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "kg.adm.shower",
+      "code": "5.11",
+      "name": "Душевая персонала",
+      "group": "kg.admin",
+      "status": "conditional",
+      "condition": { "gte": ["places_total", 95] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 2,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Душевая при 50 мест — прочерк; при 95–500 мест — 2 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "notes": "Полы оборудуются сливными трапами с уклоном к отверстиям (п. 4.4.4.15).",
+      "norms": []
+    },
+    {
+      "id": "kg.adm.wc-staff",
+      "code": "5.12",
+      "name": "Уборная для персонала",
+      "group": "kg.admin",
+      "status": "required",
+      "count": { "kind": "perUnit", "per": "floor", "divisor": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 3,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "приложение К, таблица К.1",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "Уборная для персонала (на каждом этаже) при проектной мощности от 50 до 500 мест — 3 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["staff", "waste"],
+      "zone": "dirty",
+      "notes": "В существующих организациях допускается оборудование санузла для персонала в детской туалетной в виде отдельной закрытой кабины (п. 4.4.3.11).",
+      "norms": []
+    },
+    {
+      "id": "kg.adm.cleaning",
+      "code": "5.13",
+      "name": "Помещение для хранения и обработки уборочного инвентаря",
+      "group": "kg.admin",
+      "status": "required",
+      "count": { "kind": "perUnit", "per": "floor", "divisor": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "п. 4.4.4.16",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "На каждом этаже ОДВО предусматривают помещения (места) для хранения, обработки уборочного инвентаря.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Норматив задаёт количество (на каждом этаже), но не площадь. Площадь принять по расстановке оборудования — обычно 2–4 м²."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["waste", "staff"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "kg.adm.security",
+      "code": "5.14",
+      "name": "Помещение охраны",
+      "group": "kg.admin",
+      "status": "conditional",
+      "condition": { "eq": ["odvoType", "general"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 5,
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "п. 4.4.3.13",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "В ОДВО общего типа, зданиях ЦРР со стороны основного входа в здание следует предусматривать помещение охраны с оборудованным местом для дежурства и местом для отдыха площадью не менее 5 м2.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "required", "floorsAllowed": [1] },
+      "flows": ["staff", "visitors"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "kg.tech.vent",
+      "code": "6.01",
+      "name": "Венткамера",
+      "group": "kg.tech",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "СП РК 3.02-110-2012* площадь технических помещений не нормирует. Принимается по расчёту раздела ОВ (СП РК 4.02-101-2012) и составу оборудования. Расчётная температура и кратность воздухообмена — приложение П."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "kg.tech.itp",
+      "code": "6.02",
+      "name": "Индивидуальный тепловой пункт",
+      "group": "kg.tech",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Площадь по расчёту раздела ОВ/ТС (СП РК 4.02-108-2014 «Проектирование тепловых пунктов») и техническим условиям теплоснабжающей организации."
+      },
+      "constraints": { "daylight": "not-required", "separateEntrance": true },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "kg.tech.electric",
+      "code": "6.03",
+      "name": "Электрощитовая",
+      "group": "kg.tech",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Площадь по расчёту раздела ЭО (СП РК 4.04-106-2013) и техническим условиям электроснабжения."
+      },
+      "constraints": { "daylight": "not-required", "separateEntrance": true },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "kg.tech.water",
+      "code": "6.04",
+      "name": "Водомерный узел",
+      "group": "kg.tech",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Площадь по расчёту раздела ВК (СП РК 4.01-101-2012) и техническим условиям водоснабжения."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "kg.comm.lobby",
+      "code": "7.01",
+      "name": "Вестибюль-холл",
+      "group": "kg.comm",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "В таблице Д.1 вестибюль-холл приведён только для центров дошкольного воспитания (54 и 80 м²); для столбцов ОДВО общего типа стоит прочерк. Удельную площадь вестибюля принимать по СП РК 3.02-107-2014. Для малых ОДВО раздевальная может служить вестибюлем-холлом (таблица Е.1, примечание 2: не менее 20 м² на 1 группу и 36 м² на 2 группы)."
+      },
+      "constraints": { "daylight": "desirable", "floorsAllowed": [1] },
+      "flows": ["visitors", "children", "staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "kg.comm.corridor",
+      "code": "7.02",
+      "name": "Коридоры и рекреации",
+      "group": "kg.comm",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "percentOfNet",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Доля коммуникаций от рабочей площади в СП РК 3.02-110-2012* не нормирована — принимается по планировочному решению. Ширина коридоров на путях эвакуации — СН РК 2.02-01-2023. Запрещается проектировать коридоры так, чтобы путь из раздаточной в помещение приёма пищи проходил через раздевальные и игровые (п. 4.4.3.12)."
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["children", "staff", "visitors"],
+      "zone": "neutral",
+      "notes": "Введите процент от рабочей площади вручную в поле площади.",
+      "norms": []
+    },
+    {
+      "id": "kg.comm.stairs",
+      "code": "7.03",
+      "name": "Лестнично-лифтовые узлы",
+      "group": "kg.comm",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Площадь по планировочному решению. Количество и параметры эвакуационных лестниц — расчёт по СН РК 2.02-01-2023. Высота ограждений лестниц не менее 1,2 м, поручни для взрослых на 0,85 м и для детей на 0,5 м (СП РК 3.02-110-2012*, п. 4.4.4.4)."
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["children", "staff", "visitors"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "kg.comm.dining",
+      "code": "7.04",
+      "name": "Общий обеденный зал",
+      "group": "kg.comm",
+      "status": "conditional",
+      "condition": { "eq": ["commonDining", true] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "20 * groups_total",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-110-2012*",
+          "clause": "п. 4.4.2.13",
+          "edition": "с изм. по 23.11.2018 №240-НҚ",
+          "quote": "обеденный зал площадью из расчета не менее 20 м2 на одну группу в одну посадку",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Расчёт дан на одну посадку всех групп. При организации питания в две очереди площадь уменьшается — задайте вручную."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
+      "flows": ["children", "food"],
+      "zone": "clean",
+      "notes": "Буфетные в групповых ячейках сохраняются на случай карантина (п. 4.4.2.13).",
+      "norms": []
+    }
+  ],
+  "validations": [
+    {
+      "id": "places-over-500",
+      "level": "error",
+      "when": { "gt": ["places_total", 500] },
+      "title": "Вместимость превышает 500 мест",
+      "detail": "СП РК 3.02-110-2012*, п. 4.4.1.2: общее расчётное число мест здания ОДВО не должно превышать 500. Таблицы приложения К за 500 мест не продолжаются — площади сопутствующих помещений взяты по последнему столбцу."
+    },
+    {
+      "id": "nursery-share",
+      "level": "warning",
+      "when": { "gt": ["groupMatrix_tag_nursery_share", 25] },
+      "title": "Ясельных мест больше 25 % вместимости",
+      "detail": "СП РК 3.02-110-2012*, п. 4.4.1.2: количество групп для детей до 3 лет должно быть не более 25 % от общей вместимости."
+    },
+    {
+      "id": "floors-over-three",
+      "level": "error",
+      "when": { "gt": ["floors", 3] },
+      "title": "Этажность более трёх",
+      "detail": "СП РК 3.02-110-2012*, п. 4.1.1: объекты ОДВО проектируют не более 3-х этажей."
+    },
+    {
+      "id": "third-floor-restriction",
+      "level": "info",
+      "when": { "eq": ["floors", 3] },
+      "title": "Ограничение состава третьего этажа",
+      "detail": "СП РК 3.02-110-2012*, п. 4.1.1: на третьем этаже располагают групповые ячейки старших возрастных групп (от 4 лет), залы и иные специализированные помещения, служебно-бытовые и рекреационные помещения. Ясельные ячейки на третьем этаже не размещаются."
+    },
+    {
+      "id": "basement-children",
+      "level": "warning",
+      "when": { "or": [{ "eq": ["hasBasement", true] }, { "eq": ["hasGroundFloor", true] }] },
+      "title": "Есть подвал или цокольный этаж",
+      "detail": "Санитарные правила (приказ МЗ РК от 05.08.2021 № ҚР ДСМ-76), п. 21: эксплуатация помещений для пребывания воспитанников и помещений медицинского назначения не допускается в подвальных и цокольных этажах. Помещения с этим ограничением помечены в экспликации."
+    },
+    {
+      "id": "capacity-off-grid",
+      "level": "info",
+      "when": {
+        "and": [
+          { "gt": ["places_total", 0] },
+          { "not": { "in": ["places_total", [50, 95, 140, 190, 280, 360, 400, 450, 500]] } }
+        ]
+      },
+      "title": "Вместимость вне столбцов таблиц норматива",
+      "detail": "СП РК 3.02-110-2012*, п. 4.4.1.5: оптимальная вместимость ОДВО составляет 50, 95, 140, 190 и 280 мест. Площади по приложению К посчитаны интерполяцией — примечание 1 к таблице К.1 это прямо допускает."
+    },
+    {
+      "id": "correction-without-type",
+      "level": "warning",
+      "when": {
+        "and": [
+          { "eq": ["hasCorrection", true] },
+          {
+            "not": {
+              "in": [
+                "correctionTypes",
+                ["hearing", "vision", "speech", "motor", "intellect", "delay", "complex"]
+              ]
+            }
+          }
+        ]
+      },
+      "title": "Коррекционные группы без указания типа нарушения",
+      "detail": "Наполняемость групп коррекционного типа — приложение Л, состав и площади ячеек — приложение М СП РК 3.02-110-2012*. Правила по этим приложениям в базу не заведены: наполняемость и площади задайте вручную."
+    },
+    {
+      "id": "correction-floors",
+      "level": "warning",
+      "when": {
+        "and": [
+          { "eq": ["hasCorrection", true] },
+          { "in": ["correctionTypes", ["motor", "vision"]] },
+          { "gt": ["floors", 2] }
+        ]
+      },
+      "title": "Этажность превышает допустимую для коррекционных групп",
+      "detail": "СП РК 3.02-110-2012*, п. 4.1.2: здания специальных коррекционных образовательных организаций для детей с нарушениями опорно-двигательной системы и слепых детей предусматриваются не более двух этажей."
+    },
+    {
+      "id": "correction-basic-mgn",
+      "level": "warning",
+      "when": { "and": [{ "eq": ["hasCorrection", true] }, { "eq": ["mgn", "basic"] }] },
+      "title": "Коррекционные группы при базовых требованиях МГН",
+      "detail": "При наличии коррекционных групп требования доступности обычно расширенные. Проверьте по СП РК 3.06-101-2012."
+    },
+    {
+      "id": "teachers-room-conflict",
+      "level": "warning",
+      "when": { "lt": ["groups_total", 18] },
+      "title": "Комната преподавателей: расхождение внутри норматива",
+      "detail": "Таблица Д.1 (информационное приложение) даёт 6 м² при числе групп до 16, а п. 4.4.3.14 требует учительское помещение не менее 8 м² при норме 2–3 м² на 1 учителя. Принято значение таблицы Д.1 — при выпуске документации примите большее."
+    },
+    {
+      "id": "halls-separate-scope",
+      "level": "warning",
+      "when": { "eq": ["halls", "separate"] },
+      "title": "Раздельные залы приведены только для центров дошкольного воспитания",
+      "detail": "В таблице Д.1 зал-арена и физкультурный зал заполнены только в столбцах центров дошкольного воспитания; для ОДВО общего типа предусмотрен универсальный зал. Площади этих помещений помечены как требующие проверки."
+    },
+    {
+      "id": "hall-many-groups",
+      "level": "warning",
+      "when": { "and": [{ "eq": ["halls", "combined"] }, { "gt": ["groups_total", 10] }] },
+      "title": "Более 10 групп: таблица Д.1 площадь зала не задаёт",
+      "detail": "Столбцы «12–16 групп» и «18–20 групп» в строке универсального зала не заполнены. По примечанию 1 при использовании двух универсальных залов на 80 мест следует предусматривать раздельное использование для музыкальных и физкультурных занятий по заданию на проектирование."
+    },
+    {
+      "id": "fire-class-mismatch",
+      "level": "info",
+      "when": { "neq": ["fireClass", "Ф1.1"] },
+      "title": "Класс функциональной пожарной опасности отличается от Ф1.1",
+      "detail": "Для дошкольной организации по умолчанию принимается Ф1.1. Убедитесь, что отличие обосновано типом размещения."
+    },
+    {
+      "id": "central-laundry",
+      "level": "info",
+      "when": { "eq": ["laundry", "central"] },
+      "title": "Прачечная централизованная",
+      "detail": "Стиральная и гладильная исключены из состава. Кладовая чистого белья сохранена."
+    },
+    {
+      "id": "kind-garden-with-nursery",
+      "level": "warning",
+      "when": {
+        "and": [{ "eq": ["kind", "garden"] }, { "gt": ["groupMatrix_tag_nursery_count", 0] }]
+      },
+      "title": "Вид «Детский сад», но заданы ясельные группы",
+      "detail": "Для смешанного состава корректнее вид «Ясли-сад»."
+    },
+    {
+      "id": "kind-nursery-with-preschool",
+      "level": "warning",
+      "when": {
+        "and": [{ "eq": ["kind", "nursery"] }, { "gt": ["groupMatrix_tag_preschool_count", 0] }]
+      },
+      "title": "Вид «Ясли», но заданы дошкольные группы",
+      "detail": "Проверьте вид организации либо матрицу групп."
+    }
+  ],
+  "adjacency": [
+    {
+      "from": "kg.cell.locker",
+      "to": "kg.cell.play",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Вход в групповую ячейку организуется через раздевальную",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "kg.cell.play",
+      "to": "kg.cell.sleep",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Перевод детей ко сну без выхода в общие коммуникации",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "kg.cell.play",
+      "to": "kg.cell.subgroup",
+      "type": "visual",
+      "strength": 5,
+      "reason": "Между групповой, помещением занятий по подгруппам и «домашним уголком» предусматривается визуальная связь",
+      "basis": "norm",
+      "flow": "children",
+      "norm": {
+        "doc": "СП РК 3.02-110-2012*",
+        "clause": "п. 4.4.2.1",
+        "edition": "с изм. по 23.11.2018 №240-НҚ",
+        "quote": "Между помещениями групповой, игр и занятий по подгруппам, «домашним уголком» должна предусматриваться визуальная связь.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "from": "kg.cell.play",
+      "to": "kg.cell.pantry",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Раздача пищи в групповой из буфетной",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "kg.cell.play",
+      "to": "kg.cell.wc",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Туалетная при групповой без выхода в коридор",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "kg.cell.pantry",
+      "to": "kg.comm.corridor",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Загрузка буфетной идёт из коммуникаций: через помещения групповой ячейки она не допускается",
+      "basis": "norm",
+      "flow": "food",
+      "norm": {
+        "doc": "СП РК 3.02-110-2012*",
+        "clause": "п. 4.4.2.12",
+        "edition": "с изм. по 23.11.2018 №240-НҚ",
+        "quote": "Не допускается загрузка буфетной через помещения групповой ячейки.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "from": "kg.cell.locker",
+      "to": "kg.comm.corridor",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Ячейка подключается к общим коммуникациям через раздевальную",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "kg.cell.locker",
+      "to": "kg.cell.drying",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Сушка верхней одежды рядом с раздевальной",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "kg.food.kitchen",
+      "to": "kg.cell.pantry",
+      "type": "via-corridor",
+      "strength": 5,
+      "reason": "Путь из раздаточной в помещение приёма пищи не должен проходить через раздевальные и игровые",
+      "basis": "norm",
+      "flow": "food",
+      "norm": {
+        "doc": "СП РК 3.02-110-2012*",
+        "clause": "п. 4.4.3.12",
+        "edition": "с изм. по 23.11.2018 №240-НҚ",
+        "quote": "В ОДВО коридоры запрещается проектировать так, чтобы путь из раздаточной в комнату приема пищи детей проходил через общие комнаты (раздевальные, игровые и т.д.).",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "from": "kg.food.loading",
+      "to": "kg.food.dry",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Приём продуктов и передача в кладовые — первое звено технологической цепочки",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "kg.food.loading",
+      "to": "kg.food.vegstore",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Овощи с загрузочной поступают в кладовую овощей",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "kg.food.loading",
+      "to": "kg.food.cold",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Скоропортящиеся продукты передаются в охлаждаемую камеру сразу с загрузочной",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "kg.food.vegstore",
+      "to": "kg.food.veg",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Овощи поступают из кладовой в цех предварительной обработки",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "kg.food.cold",
+      "to": "kg.food.meat",
+      "type": "near",
+      "strength": 4,
+      "reason": "Сырьё из охлаждаемой камеры поступает в мясо-рыбный цех",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "kg.food.veg",
+      "to": "kg.food.meat",
+      "type": "separated",
+      "strength": 4,
+      "reason": "Разделение потоков сырья растительного и животного происхождения",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "kg.food.veg",
+      "to": "kg.food.kitchen",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Обработанные овощи поступают на кухню",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "kg.food.meat",
+      "to": "kg.food.kitchen",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Полуфабрикаты поступают на кухню",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "kg.food.prep",
+      "to": "kg.food.kitchen",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Заготовочный цех работает непосредственно на кухню",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "kg.food.dry",
+      "to": "kg.food.kitchen",
+      "type": "near",
+      "strength": 4,
+      "reason": "Подача сухих продуктов на кухню",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "kg.food.kitchen",
+      "to": "kg.food.wash",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Моечная кухонной посуды примыкает к кухне",
+      "basis": "technology",
+      "flow": "waste"
+    },
+    {
+      "from": "kg.food.kitchen",
+      "to": "kg.food.serving",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Готовая продукция передаётся на раздачу без промежуточных помещений",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "kg.food.loading",
+      "to": "kg.cell.play",
+      "type": "separated",
+      "strength": 4,
+      "reason": "Разгрузка продуктов не пересекается с зоной пребывания детей",
+      "basis": "technology",
+      "flow": "goods"
+    },
+    {
+      "from": "kg.med.office",
+      "to": "kg.med.isolation-ward",
+      "type": "visual",
+      "strength": 5,
+      "reason": "Остеклённый проём для наблюдения за ребёнком на высоте не более 1,2 м от пола",
+      "basis": "norm",
+      "flow": "medical",
+      "norm": {
+        "doc": "СП РК 3.02-110-2012*",
+        "clause": "п. 4.4.3.7",
+        "edition": "с изм. по 23.11.2018 №240-НҚ",
+        "quote": "Между медицинской комнатой и палатой следует предусматривать остекленный проем для наблюдения за ребенком на высоте не более 1,2 м от уровня пола.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "from": "kg.med.office",
+      "to": "kg.med.procedure",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Процедурная смежно с кабинетом врача",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "kg.med.isolation-reception",
+      "to": "kg.med.isolation-ward",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Приёмная изолятора — шлюз перед палатой",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "kg.med.isolation-ward",
+      "to": "kg.med.isolation-wc",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Собственный санузел при палате изолятора",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "kg.med.isolation-ward",
+      "to": "kg.cell.play",
+      "type": "separated",
+      "strength": 5,
+      "reason": "Изолятор отделяется от групповых ячеек",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "kg.med.isolation-reception",
+      "to": "kg.comm.lobby",
+      "type": "near",
+      "strength": 4,
+      "reason": "Доступ в изолятор от входа минуя групповые ячейки",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "kg.med.disinfect",
+      "to": "kg.med.procedure",
+      "type": "near",
+      "strength": 3,
+      "reason": "Приготовление дезинфицирующих средств при медицинском блоке",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "kg.med.office",
+      "to": "kg.comm.lobby",
+      "type": "near",
+      "strength": 3,
+      "reason": "Медицинский блок в зоне вестибюля для утреннего фильтра и доступа родителей",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "kg.adm.laundry-wash",
+      "to": "kg.adm.laundry-iron",
+      "type": "via-airlock",
+      "strength": 5,
+      "reason": "Переход из грязной зоны стирки в чистую зону глажения через шлюз",
+      "basis": "technology",
+      "flow": "linen"
+    },
+    {
+      "from": "kg.adm.laundry-iron",
+      "to": "kg.adm.linen-clean",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Обработанное бельё поступает в кладовую чистого белья",
+      "basis": "technology",
+      "flow": "linen"
+    },
+    {
+      "from": "kg.adm.linen-clean",
+      "to": "kg.adm.laundry-wash",
+      "type": "separated",
+      "strength": 5,
+      "reason": "Потоки чистого и грязного белья не пересекаются",
+      "basis": "technology",
+      "flow": "linen"
+    },
+    {
+      "from": "kg.adm.castellan",
+      "to": "kg.adm.linen-clean",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Кастелянша работает при кладовой чистого белья",
+      "basis": "technology",
+      "flow": "linen"
+    },
+    {
+      "from": "kg.adm.linen-clean",
+      "to": "kg.cell.sleep",
+      "type": "via-corridor",
+      "strength": 3,
+      "reason": "Выдача чистого белья в спальни по коммуникациям",
+      "basis": "technology",
+      "flow": "linen"
+    },
+    {
+      "from": "kg.adm.security",
+      "to": "kg.comm.lobby",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Помещение охраны располагается со стороны основного входа в здание",
+      "basis": "norm",
+      "flow": "visitors",
+      "norm": {
+        "doc": "СП РК 3.02-110-2012*",
+        "clause": "п. 4.4.3.13",
+        "edition": "с изм. по 23.11.2018 №240-НҚ",
+        "quote": "В ОДВО общего типа, зданиях ЦРР со стороны основного входа в здание следует предусматривать помещение охраны с оборудованным местом для дежурства и местом для отдыха площадью не менее 5 м2.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "from": "kg.adm.head",
+      "to": "kg.comm.lobby",
+      "type": "near",
+      "strength": 3,
+      "reason": "Административная зона доступна посетителям от входа минуя ячейки",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "kg.adm.head",
+      "to": "kg.adm.method",
+      "type": "near",
+      "strength": 3,
+      "reason": "Единый административно-методический блок",
+      "basis": "ergonomics",
+      "flow": "staff"
+    },
+    {
+      "from": "kg.adm.staff",
+      "to": "kg.adm.shower",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Бытовая группа персонала: комната отдыха, душевая, уборная",
+      "basis": "ergonomics",
+      "flow": "staff"
+    },
+    {
+      "from": "kg.adm.psych",
+      "to": "kg.comm.corridor",
+      "type": "direct",
+      "strength": 3,
+      "reason": "Кабинет специалистов доступен всем группам через коммуникации",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "kg.spec.hall",
+      "to": "kg.comm.corridor",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Зал доступен всем ячейкам через общие коммуникации",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "kg.spec.hall",
+      "to": "kg.spec.hall-store",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Кладовая инвентаря при зале",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "kg.spec.hall",
+      "to": "kg.cell.sleep",
+      "type": "separated",
+      "strength": 4,
+      "reason": "Шумное помещение отделяется от спален",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "kg.spec.arena",
+      "to": "kg.spec.arena-artist",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Артистическая при сцене зала-арены",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "kg.spec.arena",
+      "to": "kg.spec.arena-store",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Кладовая декораций при зале-арене",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "kg.spec.arena",
+      "to": "kg.comm.lobby",
+      "type": "near",
+      "strength": 4,
+      "reason": "Зал-арена доступен родителям от вестибюля во время утренников",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "kg.spec.sport",
+      "to": "kg.spec.sport-equip",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Снарядная при физкультурном зале",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "kg.spec.sport",
+      "to": "kg.spec.sport-locker",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Раздевальные с душевыми при физкультурном зале",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "kg.spec.club",
+      "to": "kg.spec.club-store",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Кладовая при кружковом помещении",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "kg.spec.teachers",
+      "to": "kg.spec.club",
+      "type": "near",
+      "strength": 3,
+      "reason": "Комната преподавателей при блоке занятий",
+      "basis": "ergonomics",
+      "flow": "staff"
+    },
+    {
+      "from": "kg.spec.pool",
+      "to": "kg.comm.corridor",
+      "type": "near",
+      "strength": 3,
+      "reason": "Бассейн доступен группам по коммуникациям",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "kg.comm.lobby",
+      "to": "kg.comm.corridor",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Вестибюль — узел распределения потоков",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "kg.comm.corridor",
+      "to": "kg.comm.stairs",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Коммуникации связаны с вертикальными узлами",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "kg.comm.dining",
+      "to": "kg.food.kitchen",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Обеденный зал примыкает к раздаточной пищеблока",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "kg.comm.dining",
+      "to": "kg.comm.corridor",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Дети попадают в обеденный зал по коммуникациям",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "kg.tech.itp",
+      "to": "kg.comm.corridor",
+      "type": "separated",
+      "strength": 3,
+      "reason": "Технические помещения с самостоятельным входом, вне маршрутов детей",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "kg.tech.vent",
+      "to": "kg.cell.sleep",
+      "type": "separated",
+      "strength": 4,
+      "reason": "Источник шума и вибрации отделяется от спален",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "kg.adm.cleaning",
+      "to": "kg.cell.wc",
+      "type": "near",
+      "strength": 2,
+      "reason": "Кладовая уборочного инвентаря в зоне обслуживаемых санузлов",
+      "basis": "ergonomics",
+      "flow": "waste"
+    }
+  ]
+}

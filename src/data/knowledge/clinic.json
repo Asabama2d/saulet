@@ -1,0 +1,2973 @@
+{
+  "id": "clinic",
+  "name": "Лечебно-профилактическая организация",
+  "normBase": [
+    {
+      "doc": "СП РК 3.02-107-2014",
+      "clause": "весь документ",
+      "edition": "с изм. по 29.05.2025",
+      "source": "norm",
+      "verified": false
+    },
+    {
+      "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам здравоохранения» (приказ Министра здравоохранения РК от 11.08.2020 № ҚР ДСМ-96/2020)",
+      "clause": "главы 1–2; пп. 6–18, 74, 94, 162, 164, 167",
+      "source": "sanpin",
+      "verified": true
+    },
+    {
+      "doc": "Нормативный документ по проектированию объектов здравоохранения РК — реквизиты уточнить",
+      "clause": "состав и площади помещений",
+      "source": "norm",
+      "verified": false
+    },
+    {
+      "doc": "СН РК 2.02-01-2023",
+      "clause": "весь документ",
+      "source": "norm",
+      "verified": false
+    },
+    {
+      "doc": "СП РК 3.06-02-2012",
+      "clause": "весь документ",
+      "source": "norm",
+      "verified": false
+    }
+  ],
+  "unitCounts": {
+    "section": "structure_units",
+    "place": "structure_tag_beds_places",
+    "floor": "floors",
+    "building": "1"
+  },
+  "sections": [
+    { "id": "general", "label": "Общие" },
+    { "id": "capacity", "label": "Структура и мощность" },
+    { "id": "poly", "label": "Поликлиническая часть" },
+    { "id": "inpatient", "label": "Стационар" },
+    { "id": "support", "label": "Обеспечивающие службы" },
+    { "id": "extra", "label": "Дополнительно" }
+  ],
+  "parameters": [
+    {
+      "id": "form",
+      "label": "Форма организации",
+      "control": "select",
+      "section": "general",
+      "default": "poly",
+      "options": [
+        { "value": "poly", "label": "Поликлиника (амбулаторно-поликлиническая)" },
+        { "value": "inpatient", "label": "Стационар" },
+        { "value": "both", "label": "Стационар с поликлиникой" }
+      ],
+      "help": "Определяет, какие блоки помещений попадают в состав. Мощность задаётся ниже матрицей подразделений."
+    },
+    {
+      "id": "floors",
+      "label": "Этажность",
+      "control": "number",
+      "section": "general",
+      "min": 1,
+      "max": 9,
+      "step": 1,
+      "unit": "эт.",
+      "default": 3
+    },
+    {
+      "id": "hasBasement",
+      "label": "Подвал",
+      "control": "toggle",
+      "section": "general",
+      "default": false,
+      "help": "Размещение помещений с постоянным пребыванием пациентов в подвале и цоколе ограничивается санитарными правилами — проверьте по первоисточнику."
+    },
+    {
+      "id": "placement",
+      "label": "Тип размещения",
+      "control": "select",
+      "section": "general",
+      "default": "detached",
+      "options": [
+        { "value": "detached", "label": "Отдельно стоящее" },
+        { "value": "built-in", "label": "Встроенное" },
+        { "value": "built-attached", "label": "Встроенно-пристроенное" },
+        { "value": "blocked", "label": "Блокированное (корпуса)" }
+      ]
+    },
+    {
+      "id": "fireResistance",
+      "label": "Степень огнестойкости",
+      "control": "select",
+      "section": "general",
+      "default": "II",
+      "options": [
+        { "value": "I", "label": "I" },
+        { "value": "II", "label": "II" },
+        { "value": "III", "label": "III" },
+        { "value": "IV", "label": "IV" }
+      ],
+      "help": "Принимается по СН РК 2.02-01-2023 и СП РК 2.02-101-2022. На состав помещений не влияет."
+    },
+    {
+      "id": "fireClass",
+      "label": "Класс функциональной пожарной опасности",
+      "control": "select",
+      "section": "general",
+      "default": "Ф3.4",
+      "options": [
+        { "value": "Ф3.4", "label": "Ф3.4", "hint": "Поликлиники и амбулатории" },
+        { "value": "Ф1.1", "label": "Ф1.1", "hint": "Стационары с круглосуточным пребыванием" }
+      ],
+      "help": "Класс уточнить по СН РК 2.02-01-2023. При наличии круглосуточных палат применяется более строгий класс."
+    },
+    {
+      "id": "seismicity",
+      "label": "Расчётная сейсмичность",
+      "control": "number",
+      "section": "general",
+      "min": 0,
+      "max": 9,
+      "step": 1,
+      "unit": "баллов",
+      "default": 6,
+      "help": "0 — площадка вне сейсмического района."
+    },
+    {
+      "id": "structure",
+      "label": "Структура подразделений",
+      "control": "group-matrix",
+      "section": "capacity",
+      "default": null,
+      "help": "Строки со стационарными отделениями задают коечный фонд, строки поликлиники — посещения в смену. Незадействованные строки оставьте с количеством 0.",
+      "matrix": {
+        "rowLabel": "Подразделение",
+        "countLabel": "Кол-во",
+        "capacityLabel": "Коек / посещ.",
+        "rows": [
+          {
+            "id": "poly_adult",
+            "label": "Взрослое поликлиническое отделение",
+            "hint": "Мощность в посещениях в смену",
+            "defaultCount": 1,
+            "defaultCapacity": 250,
+            "capacityNorm": null,
+            "tags": ["poly", "visits"]
+          },
+          {
+            "id": "poly_child",
+            "label": "Детское поликлиническое отделение",
+            "hint": "Требует изолированного входа и фильтра",
+            "defaultCount": 0,
+            "defaultCapacity": 150,
+            "capacityNorm": null,
+            "tags": ["poly", "visits", "children"]
+          },
+          {
+            "id": "poly_women",
+            "label": "Женская консультация",
+            "defaultCount": 0,
+            "defaultCapacity": 80,
+            "capacityNorm": null,
+            "tags": ["poly", "visits", "women"]
+          },
+          {
+            "id": "poly_dental",
+            "label": "Стоматологическое отделение",
+            "defaultCount": 0,
+            "defaultCapacity": 60,
+            "capacityNorm": null,
+            "tags": ["poly", "visits", "dental"]
+          },
+          {
+            "id": "ward_therapy",
+            "label": "Терапевтическое отделение",
+            "hint": "Мощность в койках",
+            "defaultCount": 0,
+            "defaultCapacity": 30,
+            "capacityNorm": null,
+            "tags": ["beds", "inpatient"]
+          },
+          {
+            "id": "ward_surgery",
+            "label": "Хирургическое отделение",
+            "defaultCount": 0,
+            "defaultCapacity": 30,
+            "capacityNorm": null,
+            "tags": ["beds", "inpatient", "surgery"]
+          },
+          {
+            "id": "ward_pediatric",
+            "label": "Детское отделение",
+            "defaultCount": 0,
+            "defaultCapacity": 25,
+            "capacityNorm": null,
+            "tags": ["beds", "inpatient", "children"]
+          },
+          {
+            "id": "ward_maternity",
+            "label": "Акушерское отделение",
+            "defaultCount": 0,
+            "defaultCapacity": 25,
+            "capacityNorm": null,
+            "tags": ["beds", "inpatient", "maternity"]
+          },
+          {
+            "id": "ward_icu",
+            "label": "Отделение реанимации и интенсивной терапии",
+            "defaultCount": 0,
+            "defaultCapacity": 6,
+            "capacityNorm": null,
+            "tags": ["beds", "inpatient", "icu"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "visitsPerOffice",
+      "label": "Посещений на кабинет в смену",
+      "control": "number",
+      "section": "poly",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "посещ.",
+      "default": 25,
+      "help": "Расчётный показатель для определения числа кабинетов приёма. Принимается по заданию на проектирование и штатному расписанию — нормой не установлен."
+    },
+    {
+      "id": "dayHospital",
+      "label": "Дневной стационар",
+      "control": "toggle",
+      "section": "poly",
+      "default": false
+    },
+    {
+      "id": "rehab",
+      "label": "Отделение восстановительного лечения",
+      "control": "multiselect",
+      "section": "poly",
+      "default": ["physio"],
+      "options": [
+        { "value": "physio", "label": "Физиотерапия" },
+        { "value": "exercise", "label": "Зал лечебной физкультуры" },
+        { "value": "massage", "label": "Массаж" }
+      ]
+    },
+    {
+      "id": "emergency",
+      "label": "Приёмное отделение",
+      "control": "toggle",
+      "section": "inpatient",
+      "default": false,
+      "help": "Включает санитарный пропускник и подъезд для машин скорой помощи."
+    },
+    {
+      "id": "operatingRooms",
+      "label": "Операционных",
+      "control": "number",
+      "section": "inpatient",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "unit": "шт.",
+      "default": 0
+    },
+    {
+      "id": "bedsPerRoom",
+      "label": "Коек в палате",
+      "control": "number",
+      "section": "inpatient",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "unit": "коек",
+      "default": 3,
+      "help": "Расчётная средняя вместимость палаты для определения их количества. Предельную вместимость и площадь на койку проверьте по санитарным правилам."
+    },
+    {
+      "id": "diagnostics",
+      "label": "Диагностика",
+      "control": "multiselect",
+      "section": "support",
+      "default": ["us", "func"],
+      "options": [
+        { "value": "xray", "label": "Рентгенодиагностика" },
+        { "value": "ct", "label": "Компьютерная томография" },
+        { "value": "mri", "label": "Магнитно-резонансная томография" },
+        { "value": "us", "label": "Ультразвуковая диагностика" },
+        { "value": "endo", "label": "Эндоскопия" },
+        { "value": "func", "label": "Функциональная диагностика" }
+      ],
+      "help": "Кабинеты с источниками ионизирующего излучения требуют расчёта радиационной защиты — состав и площади принимаются по технологическому заданию поставщика оборудования."
+    },
+    {
+      "id": "lab",
+      "label": "Лаборатория",
+      "control": "select",
+      "section": "support",
+      "default": "own",
+      "options": [
+        { "value": "own", "label": "Собственная клинико-диагностическая" },
+        { "value": "express", "label": "Только экспресс-лаборатория" },
+        { "value": "outsource", "label": "Сторонняя (аутсорсинг)" }
+      ]
+    },
+    {
+      "id": "sterilization",
+      "label": "Стерилизация",
+      "control": "select",
+      "section": "support",
+      "default": "outsource",
+      "options": [
+        { "value": "own", "label": "Собственное ЦСО" },
+        { "value": "outsource", "label": "Централизованная сторонняя" }
+      ]
+    },
+    {
+      "id": "catering",
+      "label": "Питание",
+      "control": "select",
+      "section": "support",
+      "default": "delivered",
+      "options": [
+        { "value": "own", "label": "Пищеблок полного цикла" },
+        { "value": "finishing", "label": "Доготовочная" },
+        { "value": "delivered", "label": "Привозное питание" }
+      ]
+    },
+    {
+      "id": "laundry",
+      "label": "Прачечная",
+      "control": "select",
+      "section": "support",
+      "default": "outsource",
+      "options": [
+        { "value": "own", "label": "Собственная" },
+        { "value": "outsource", "label": "Сторонняя" }
+      ]
+    },
+    {
+      "id": "morgue",
+      "label": "Патологоанатомическое отделение",
+      "control": "toggle",
+      "section": "support",
+      "default": false
+    },
+    {
+      "id": "pharmacy",
+      "label": "Аптечный пункт",
+      "control": "toggle",
+      "section": "extra",
+      "default": true
+    },
+    {
+      "id": "extras",
+      "label": "Дополнительные помещения",
+      "control": "multiselect",
+      "section": "extra",
+      "default": [],
+      "options": [
+        { "value": "conference", "label": "Конференц-зал" },
+        { "value": "cafe", "label": "Буфет для посетителей" },
+        { "value": "oxygen", "label": "Помещение медицинских газов" }
+      ]
+    }
+  ],
+  "groups": [
+    { "id": "clinic.entrance", "name": "Входная группа", "color": "#0072B2", "order": 1 },
+    {
+      "id": "clinic.poly",
+      "name": "Поликлиническое отделение",
+      "color": "#56B4E9",
+      "order": 2,
+      "isCell": true,
+      "cellSource": "structure"
+    },
+    {
+      "id": "clinic.ward",
+      "name": "Палатное отделение",
+      "color": "#009E73",
+      "order": 3,
+      "isCell": true,
+      "cellSource": "structure"
+    },
+    { "id": "clinic.emergency", "name": "Приёмное отделение", "color": "#D55E00", "order": 4 },
+    { "id": "clinic.operating", "name": "Операционный блок", "color": "#CC79A7", "order": 5 },
+    { "id": "clinic.diagnostic", "name": "Диагностика", "color": "#8C6BB1", "order": 6 },
+    { "id": "clinic.lab", "name": "Лаборатория", "color": "#4C9F70", "order": 7 },
+    { "id": "clinic.rehab", "name": "Восстановительное лечение", "color": "#E69F00", "order": 8 },
+    { "id": "clinic.sterile", "name": "Стерилизационное отделение", "color": "#6699CC", "order": 9 },
+    { "id": "clinic.catering", "name": "Пищеблок", "color": "#B08800", "order": 10 },
+    { "id": "clinic.laundry", "name": "Прачечная", "color": "#A65628", "order": 11 },
+    { "id": "clinic.morgue", "name": "Патологоанатомическое отделение", "color": "#58508D", "order": 12 },
+    { "id": "clinic.admin", "name": "Административно-бытовые", "color": "#7A828C", "order": 13 },
+    { "id": "clinic.tech", "name": "Технические", "color": "#5A7D7C", "order": 14 },
+    { "id": "clinic.circulation", "name": "Коммуникации", "color": "#9E9E9E", "order": 15 }
+  ],
+  "rooms": [
+    {
+      "id": "clinic.entrance.vestibule",
+      "code": "1.01",
+      "name": "Вестибюль с зоной ожидания",
+      "nameKz": "Вестибюль",
+      "group": "clinic.entrance",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 120,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь вестибюля принимается по расчёту потока посетителей в час пик — взять из таблицы состава и площадей помещений нормативного документа по объектам здравоохранения РК."
+      },
+      "constraints": { "daylight": "desirable", "floorsAllowed": [1] },
+      "flows": ["visitors"],
+      "zone": "neutral",
+      "notes": "Входная группа для пациентов отделяется от служебного и хозяйственного входов.",
+      "norms": []
+    },
+    {
+      "id": "clinic.entrance.registry",
+      "code": "1.02",
+      "name": "Регистратура",
+      "group": "clinic.entrance",
+      "status": "required",
+      "condition": { "in": ["form", ["poly", "both"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 36,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь зависит от числа рабочих мест регистраторов и объёма картохранилища — уточнить по нормативной таблице и заданию на проектирование."
+      },
+      "constraints": { "daylight": "desirable", "floorsAllowed": [1] },
+      "flows": ["visitors", "staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "clinic.entrance.wardrobe",
+      "code": "1.03",
+      "name": "Гардероб для посетителей",
+      "group": "clinic.entrance",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 24,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Принимается по числу мест хранения на расчётное количество посетителей — уточнить по первоисточнику."
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1] },
+      "flows": ["visitors"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "clinic.entrance.wc",
+      "code": "1.04",
+      "name": "Санитарные узлы для посетителей",
+      "group": "clinic.entrance",
+      "status": "required",
+      "count": { "kind": "perUnit", "per": "floor", "divisor": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Количество приборов определяется расчётом по числу посетителей, одна кабина оборудуется для МГН — взять из санитарных правил и СП РК 3.06-02-2012."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["visitors"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "clinic.entrance.pharmacy",
+      "code": "1.05",
+      "name": "Аптечный пункт",
+      "group": "clinic.entrance",
+      "status": "optional",
+      "condition": { "eq": ["pharmacy", true] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 30,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Состав и площади помещений аптечной организации регулируются отдельными требованиями — уточнить по профильному документу."
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1] },
+      "flows": ["visitors", "goods"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.entrance.cafe",
+      "code": "1.06",
+      "name": "Буфет для посетителей",
+      "group": "clinic.entrance",
+      "status": "optional",
+      "condition": { "in": ["extras", ["cafe"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 40,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Принимается по числу посадочных мест и заданию на проектирование."
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["visitors", "food"],
+      "zone": "neutral",
+      "norms": []
+    },
+
+    {
+      "id": "clinic.poly.office",
+      "code": "2.01",
+      "name": "Кабинет врачебного приёма",
+      "nameKz": "Дәрігерлік қабылдау кабинеті",
+      "group": "clinic.poly",
+      "status": "required",
+      "condition": { "in": ["row_tags", ["poly"]] },
+      "count": { "kind": "formula", "expr": "row_places / visitsPerOffice", "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь кабинета врачебного приёма взять из таблицы состава и площадей помещений амбулаторно-поликлинических организаций. Число кабинетов рассчитано делением мощности отделения на показатель «посещений на кабинет»."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1], "minHeight": 3 },
+      "flows": ["visitors", "staff", "medical"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.poly.waiting",
+      "code": "2.02",
+      "name": "Ожидальная при кабинетах",
+      "group": "clinic.poly",
+      "status": "required",
+      "condition": { "in": ["row_tags", ["poly"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "row_places / visitsPerOffice * 6",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер: 6 м² на кабинет как ориентир. Норму площади ожидальной на одно посещение взять из первоисточника."
+      },
+      "constraints": { "daylight": "desirable", "floorsForbidden": [-1] },
+      "flows": ["visitors"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "clinic.poly.manipulation",
+      "code": "2.03",
+      "name": "Процедурный кабинет отделения",
+      "group": "clinic.poly",
+      "status": "required",
+      "condition": { "in": ["row_tags", ["poly"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Площадь — плейсхолдер, взять из нормативной таблицы. Запрет размещения ниже первого этажа подтверждён п. 18 Санитарных правил."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "wetZone": true },
+      "flows": ["medical", "staff"],
+      "zone": "clean",
+      "norms": [
+        {
+          "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам здравоохранения» (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020)",
+          "clause": "п. 18",
+          "quote": "Не размещаются в цокольных и подвальных этажах зданий операционные, перевязочные, процедурные, манипуляционные, родовые, стоматологические кабинеты, приемные и палатные отделения для больных.",
+          "source": "sanpin",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "clinic.poly.dental",
+      "code": "2.04",
+      "name": "Стоматологический кабинет",
+      "group": "clinic.poly",
+      "status": "conditional",
+      "condition": { "in": ["row_tags", ["dental"]] },
+      "count": { "kind": "formula", "expr": "row_places / visitsPerOffice", "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 21,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Площадь — плейсхолдер: норму на основную стоматологическую установку и на каждую дополнительную взять из первоисточника."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "wetZone": true },
+      "flows": ["visitors", "medical"],
+      "zone": "clean",
+      "norms": [
+        {
+          "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам здравоохранения» (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020)",
+          "clause": "п. 18",
+          "quote": "Не размещаются в цокольных и подвальных этажах зданий операционные, перевязочные, процедурные, манипуляционные, родовые, стоматологические кабинеты, приемные и палатные отделения для больных.",
+          "source": "sanpin",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "clinic.poly.exam",
+      "code": "2.05",
+      "name": "Смотровой кабинет",
+      "group": "clinic.poly",
+      "status": "conditional",
+      "condition": { "in": ["row_tags", ["women"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь смотрового кабинета женской консультации взять из нормативной таблицы."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1], "wetZone": true },
+      "flows": ["visitors", "medical"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.poly.filter",
+      "code": "2.06",
+      "name": "Фильтр-бокс с отдельным входом",
+      "group": "clinic.poly",
+      "status": "required",
+      "condition": {
+        "and": [{ "in": ["row_tags", ["poly"]] }, { "in": ["row_tags", ["children"]] }]
+      },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 16,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Требование изолированного входа с фильтром для детских поликлинических отделений — подтвердить по санитарным правилам, площадь взять из нормативной таблицы."
+      },
+      "constraints": {
+        "daylight": "desirable",
+        "floorsAllowed": [1],
+        "separateEntrance": true
+      },
+      "flows": ["visitors", "medical"],
+      "zone": "dirty",
+      "notes": "Отделяет поток пациентов с признаками инфекционного заболевания от общего потока.",
+      "norms": []
+    },
+    {
+      "id": "clinic.poly.head",
+      "code": "2.07",
+      "name": "Кабинет заведующего отделением",
+      "group": "clinic.poly",
+      "status": "required",
+      "condition": { "in": ["row_tags", ["poly"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 12,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь служебных кабинетов взять из нормативной таблицы."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1] },
+      "flows": ["staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.poly.staff",
+      "code": "2.08",
+      "name": "Комната персонала отделения",
+      "group": "clinic.poly",
+      "status": "recommended",
+      "condition": { "in": ["row_tags", ["poly"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 14,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь принимается по штатной численности смены — уточнить по первоисточнику."
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["staff"],
+      "zone": "clean",
+      "norms": []
+    },
+
+    {
+      "id": "clinic.ward.room",
+      "code": "3.01",
+      "name": "Палата",
+      "nameKz": "Палата",
+      "group": "clinic.ward",
+      "status": "required",
+      "condition": { "in": ["row_tags", ["beds"]] },
+      "count": { "kind": "formula", "expr": "row_places / bedsPerRoom", "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 21,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер для палаты на 3 койки. Норму площади на одну койку и предельную вместимость палаты взять из санитарных правил к объектам здравоохранения — значение прямо зависит от профиля отделения."
+      },
+      "constraints": {
+        "daylight": "required",
+        "floorsForbidden": [-1, 0],
+        "minHeight": 3,
+        "wetZone": true
+      },
+      "flows": ["medical", "staff"],
+      "zone": "clean",
+      "notes": "Количество палат рассчитано делением коечного фонда отделения на среднюю вместимость палаты. Состав палат по вместимости уточняется заданием на проектирование. Койки устанавливаются строго в соответствии с площадью, установленной строительными нормативами.",
+      "norms": [
+        {
+          "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам здравоохранения» (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020)",
+          "clause": "п. 18",
+          "quote": "Не размещаются в цокольных и подвальных этажах зданий операционные, перевязочные, процедурные, манипуляционные, родовые, стоматологические кабинеты, приемные и палатные отделения для больных.",
+          "source": "sanpin",
+          "verified": true
+        },
+        {
+          "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам здравоохранения» (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020)",
+          "clause": "п. 167",
+          "quote": "В палатах койки устанавливаются в строгом соответствии с площадью, установленной в соответствии с действующими государственными нормативами в области архитектуры, градостроительства и строительства.",
+          "source": "sanpin",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "clinic.ward.icu",
+      "code": "3.02",
+      "name": "Палата интенсивной терапии",
+      "group": "clinic.ward",
+      "status": "conditional",
+      "condition": { "in": ["row_tags", ["icu"]] },
+      "count": { "kind": "formula", "expr": "row_places", "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Норма площади на койку интенсивной терапии выше палатной и задаётся отдельно — взять из санитарных правил."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "minHeight": 3 },
+      "flows": ["medical", "staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.ward.nurse",
+      "code": "3.03",
+      "name": "Пост дежурной медицинской сестры",
+      "group": "clinic.ward",
+      "status": "required",
+      "condition": { "in": ["row_tags", ["beds"]] },
+      "count": { "kind": "formula", "expr": "row_places / 30", "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 12,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Число коек, обслуживаемых одним постом, и площадь поста взять из первоисточника."
+      },
+      "constraints": { "daylight": "desirable", "floorsForbidden": [-1, 0] },
+      "flows": ["staff", "medical"],
+      "zone": "clean",
+      "notes": "Пост размещается так, чтобы обеспечивался зрительный контроль подходов к палатам.",
+      "norms": []
+    },
+    {
+      "id": "clinic.ward.treatment",
+      "code": "3.04",
+      "name": "Процедурная отделения",
+      "group": "clinic.ward",
+      "status": "required",
+      "condition": { "in": ["row_tags", ["beds"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь взять из нормативной таблицы состава помещений палатного отделения."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "wetZone": true },
+      "flows": ["medical", "staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.ward.dressing",
+      "code": "3.05",
+      "name": "Перевязочная",
+      "group": "clinic.ward",
+      "status": "conditional",
+      "condition": { "in": ["row_tags", ["surgery"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 22,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. При наличии гнойных и чистых перевязок предусматриваются раздельные перевязочные — проверить требование по санитарным правилам."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "wetZone": true },
+      "flows": ["medical"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.ward.doctor",
+      "code": "3.06",
+      "name": "Кабинет врача (ординаторская)",
+      "group": "clinic.ward",
+      "status": "required",
+      "condition": { "in": ["row_tags", ["beds"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь принимается по числу врачебных рабочих мест — уточнить по первоисточнику."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
+      "flows": ["staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.ward.head",
+      "code": "3.07",
+      "name": "Кабинет заведующего отделением",
+      "group": "clinic.ward",
+      "status": "required",
+      "condition": { "in": ["row_tags", ["beds"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 12,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь служебных кабинетов взять из нормативной таблицы."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
+      "flows": ["staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.ward.dining",
+      "code": "3.08",
+      "name": "Буфетная со столовой отделения",
+      "group": "clinic.ward",
+      "status": "required",
+      "condition": { "in": ["row_tags", ["beds"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 30,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь буфетной и столовой отделения принимается по доле ходячих больных — взять из первоисточника."
+      },
+      "constraints": { "daylight": "desirable", "floorsForbidden": [-1, 0], "wetZone": true },
+      "flows": ["food", "medical"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.ward.day",
+      "code": "3.09",
+      "name": "Помещение дневного пребывания больных",
+      "group": "clinic.ward",
+      "status": "recommended",
+      "condition": { "in": ["row_tags", ["beds"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 25,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Норму площади на койку для помещения дневного пребывания взять из первоисточника."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
+      "flows": ["medical"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.ward.play",
+      "code": "3.10",
+      "name": "Игровая для детей",
+      "group": "clinic.ward",
+      "status": "conditional",
+      "condition": {
+        "and": [{ "in": ["row_tags", ["beds"]] }, { "in": ["row_tags", ["children"]] }]
+      },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 30,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь игровой в детском отделении взять из первоисточника."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
+      "flows": ["children"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.ward.bath",
+      "code": "3.11",
+      "name": "Ванная комната с душевой",
+      "group": "clinic.ward",
+      "status": "required",
+      "condition": { "in": ["row_tags", ["beds"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 12,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Количество санитарных приборов на койку взять из санитарных правил."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true, "floorsForbidden": [-1, 0] },
+      "flows": ["medical"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "clinic.ward.sanitary",
+      "code": "3.12",
+      "name": "Санитарная комната (мойка и дезинфекция суден)",
+      "group": "clinic.ward",
+      "status": "required",
+      "condition": { "in": ["row_tags", ["beds"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 10,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Состав оборудования санитарной комнаты взять из санитарных правил."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true, "floorsForbidden": [-1, 0] },
+      "flows": ["waste"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "clinic.ward.dirtyLinen",
+      "code": "3.13",
+      "name": "Кладовая грязного белья",
+      "group": "clinic.ward",
+      "status": "required",
+      "condition": { "in": ["row_tags", ["beds"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 8,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь принимается по объёму суточного оборота белья — уточнить по первоисточнику."
+      },
+      "constraints": { "daylight": "not-required", "floorsForbidden": [-1, 0] },
+      "flows": ["linen"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "clinic.ward.cleanLinen",
+      "code": "3.14",
+      "name": "Кладовая чистого белья",
+      "group": "clinic.ward",
+      "status": "required",
+      "condition": { "in": ["row_tags", ["beds"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 8,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь принимается по объёму суточного оборота белья — уточнить по первоисточнику."
+      },
+      "constraints": { "daylight": "not-required", "floorsForbidden": [-1, 0] },
+      "flows": ["linen"],
+      "zone": "clean",
+      "norms": []
+    },
+
+    {
+      "id": "clinic.emergency.reception",
+      "code": "4.01",
+      "name": "Смотровая приёмного отделения",
+      "group": "clinic.emergency",
+      "status": "required",
+      "condition": { "eq": ["emergency", true] },
+      "count": { "kind": "fixed", "value": 2, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Число смотровых зависит от коечной мощности стационара — взять из нормативной таблицы приёмного отделения."
+      },
+      "constraints": { "daylight": "required", "floorsAllowed": [1], "wetZone": true },
+      "flows": ["medical", "visitors"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "clinic.emergency.sanitary",
+      "code": "4.02",
+      "name": "Санитарный пропускник",
+      "group": "clinic.emergency",
+      "status": "required",
+      "condition": { "eq": ["emergency", true] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 20,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Санпропускник проектируется по принципу поточности «грязная — чистая зона»; площади взять из первоисточника."
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1], "wetZone": true },
+      "flows": ["medical"],
+      "zone": "dirty",
+      "notes": "Обеспечивает односторонний поток: приём — раздевание — санитарная обработка — выход в чистую зону стационара. В приёмных гинекологического, родильного и детского отделений дополнительно оборудуются санитарные пропускники для персонала с гардеробной и душевыми.",
+      "norms": [
+        {
+          "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам здравоохранения» (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020)",
+          "clause": "п. 94",
+          "quote": "Санитарная обработка больного проводится в приемном отделении. В случаях поступления больного в бокс или полубокс санитарная обработка проводятся непосредственно в этих помещениях.",
+          "source": "sanpin",
+          "verified": true
+        },
+        {
+          "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам здравоохранения» (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020)",
+          "clause": "п. 74",
+          "quote": "В приемных гинекологического, родильного отделений и приемном отделении детского стационара оборудуются санитарные пропускники для персонала с гардеробной и душевыми.",
+          "source": "sanpin",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "clinic.emergency.resus",
+      "code": "4.03",
+      "name": "Противошоковая (реанимационная)",
+      "group": "clinic.emergency",
+      "status": "required",
+      "condition": { "eq": ["emergency", true] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 30,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь взять из нормативной таблицы приёмного отделения."
+      },
+      "constraints": { "daylight": "desirable", "floorsAllowed": [1] },
+      "flows": ["medical"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.emergency.isolation",
+      "code": "4.04",
+      "name": "Диагностический бокс (изолятор)",
+      "group": "clinic.emergency",
+      "status": "required",
+      "condition": { "eq": ["emergency", true] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 22,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Площадь — плейсхолдер. Состав бокса подтверждён: палата, санитарный узел, ванна и шлюз (п. 3 Санитарных правил); площади взять из строительного норматива."
+      },
+      "constraints": {
+        "daylight": "required",
+        "floorsAllowed": [1],
+        "separateEntrance": true,
+        "wetZone": true
+      },
+      "flows": ["medical"],
+      "zone": "dirty",
+      "notes": "Бокс — помещение с отдельным входом для поступления больного извне; в состав входят палата, санитарный узел, ванна и шлюз.",
+      "norms": [
+        {
+          "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам здравоохранения» (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020)",
+          "clause": "п. 164",
+          "quote": "В случае подозрения на инфекционное заболевание пациента изолируют в диагностическую палату при приемном отделении (бокс) до перевода в инфекционное отделение (больницу).",
+          "source": "sanpin",
+          "verified": true
+        },
+        {
+          "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам здравоохранения» (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020)",
+          "clause": "п. 3, подпункт 6)",
+          "quote": "бокс – помещение, имеющее отдельный вход для поступления больного извне. В его состав входят: палата, санитарный узел, ванна и шлюз.",
+          "source": "sanpin",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "clinic.emergency.ambulance",
+      "code": "4.05",
+      "name": "Тамбур-подъезд для санитарного транспорта",
+      "group": "clinic.emergency",
+      "status": "required",
+      "condition": { "eq": ["emergency", true] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 36,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Габариты определяются расчётным санитарным транспортом и требованием защиты от осадков."
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1], "separateEntrance": true },
+      "flows": ["medical"],
+      "zone": "dirty",
+      "norms": []
+    },
+
+    {
+      "id": "clinic.operating.airlock",
+      "code": "5.01",
+      "name": "Шлюз при входе в операционный блок",
+      "group": "clinic.operating",
+      "status": "required",
+      "condition": { "gt": ["operatingRooms", 0] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 12,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Площадь — плейсхолдер, взять из первоисточника. Само требование шлюза подтверждено: п. 10 Санитарных правил."
+      },
+      "constraints": { "daylight": "not-required", "floorsForbidden": [-1, 0] },
+      "flows": ["medical", "staff"],
+      "zone": "clean",
+      "notes": "Больные поступают в операционный блок через шлюз, персонал — через санитарный пропускник из трёх смежных помещений (душ с санузлом, надевание чистого хирургического костюма, выход в операционную зону).",
+      "norms": [
+        {
+          "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам здравоохранения» (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020)",
+          "clause": "п. 10",
+          "quote": "Вход для медицинского персонала предусматриваются через санитарные пропускники, для больных через шлюзы.",
+          "source": "sanpin",
+          "verified": true
+        },
+        {
+          "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам здравоохранения» (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020)",
+          "clause": "п. 12",
+          "quote": "Санитарные пропускники для персонала проектируются в составе трех смежных помещений. Первое помещение оборудуется душем, санитарным узлом. Второе помещение используется для надевания чистых хирургических костюмов, обуви, бахил.",
+          "source": "sanpin",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "clinic.operating.room",
+      "code": "5.02",
+      "name": "Операционная",
+      "nameKz": "Операция бөлмесі",
+      "group": "clinic.operating",
+      "status": "required",
+      "condition": { "gt": ["operatingRooms", 0] },
+      "count": { "kind": "formula", "expr": "operatingRooms", "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 36,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь общепрофильной и специализированной операционной различается — взять из санитарных правил к объектам здравоохранения."
+      },
+      "constraints": {
+        "daylight": "not-required",
+        "floorsForbidden": [-1, 0],
+        "minHeight": 3.5
+      },
+      "flows": ["medical"],
+      "zone": "clean",
+      "notes": "Операционный блок проектируется непроходным, с разделением потоков на стерильный и «грязный». При расположении операционных друг над другом септические размещаются выше асептических.",
+      "norms": [
+        {
+          "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам здравоохранения» (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020)",
+          "clause": "п. 10",
+          "quote": "При расположении операционных друг над другом септические операционные размещаются выше асептических. Операционные блоки (отделения) предусматриваются непроходными. Вход для медицинского персонала предусматриваются через санитарные пропускники, для больных через шлюзы.",
+          "source": "sanpin",
+          "verified": true
+        },
+        {
+          "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам здравоохранения» (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020)",
+          "clause": "п. 18",
+          "quote": "Не размещаются в цокольных и подвальных этажах зданий операционные, перевязочные, процедурные, манипуляционные, родовые, стоматологические кабинеты, приемные и палатные отделения для больных.",
+          "source": "sanpin",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "clinic.operating.preop",
+      "code": "5.03",
+      "name": "Предоперационная",
+      "group": "clinic.operating",
+      "status": "required",
+      "condition": { "gt": ["operatingRooms", 0] },
+      "count": { "kind": "formula", "expr": "operatingRooms", "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 12,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь предоперационной на одну операционную взять из первоисточника."
+      },
+      "constraints": { "daylight": "not-required", "floorsForbidden": [-1], "wetZone": true },
+      "flows": ["medical", "staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.operating.sterileStore",
+      "code": "5.04",
+      "name": "Стерильная кладовая при операционном блоке",
+      "group": "clinic.operating",
+      "status": "required",
+      "condition": { "gt": ["operatingRooms", 0] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 14,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь принимается по номенклатуре стерильных материалов — уточнить по первоисточнику."
+      },
+      "constraints": { "daylight": "not-required", "floorsForbidden": [-1] },
+      "flows": ["medical", "goods"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.operating.recovery",
+      "code": "5.05",
+      "name": "Палата пробуждения",
+      "group": "clinic.operating",
+      "status": "required",
+      "condition": { "gt": ["operatingRooms", 0] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 24,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Число мест пробуждения на одну операционную и норму площади взять из первоисточника."
+      },
+      "constraints": { "daylight": "desirable", "floorsForbidden": [-1] },
+      "flows": ["medical"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.operating.dirty",
+      "code": "5.06",
+      "name": "Помещение для использованного материала",
+      "group": "clinic.operating",
+      "status": "required",
+      "condition": { "gt": ["operatingRooms", 0] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 10,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Помещение обслуживает «грязный» контур операционного блока — площадь уточнить по первоисточнику."
+      },
+      "constraints": { "daylight": "not-required", "floorsForbidden": [-1], "wetZone": true },
+      "flows": ["waste"],
+      "zone": "dirty",
+      "norms": []
+    },
+
+    {
+      "id": "clinic.diagnostic.xray",
+      "code": "6.01",
+      "name": "Рентгенодиагностический кабинет",
+      "group": "clinic.diagnostic",
+      "status": "conditional",
+      "condition": { "in": ["diagnostics", ["xray"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 34,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь процедурной рентгенкабинета зависит от типа аппарата и определяется санитарными правилами по обеспечению радиационной безопасности плюс технологическим заданием поставщика."
+      },
+      "constraints": {
+        "daylight": "not-required",
+        "minHeight": 3,
+        "notAbove": ["clinic.ward.room"],
+        "notBelow": ["clinic.ward.room"]
+      },
+      "flows": ["medical", "visitors"],
+      "zone": "neutral",
+      "notes": "Требует расчёта стационарной радиационной защиты ограждающих конструкций.",
+      "norms": []
+    },
+    {
+      "id": "clinic.diagnostic.ct",
+      "code": "6.02",
+      "name": "Кабинет компьютерной томографии",
+      "group": "clinic.diagnostic",
+      "status": "conditional",
+      "condition": { "in": ["diagnostics", ["ct"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 40,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь и нагрузки на перекрытие принимаются по технологическому заданию поставщика томографа."
+      },
+      "constraints": {
+        "daylight": "not-required",
+        "minHeight": 3,
+        "notAbove": ["clinic.ward.room"],
+        "notBelow": ["clinic.ward.room"]
+      },
+      "flows": ["medical", "visitors"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "clinic.diagnostic.mri",
+      "code": "6.03",
+      "name": "Кабинет магнитно-резонансной томографии",
+      "group": "clinic.diagnostic",
+      "status": "conditional",
+      "condition": { "in": ["diagnostics", ["mri"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 45,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Требуется зона безопасности по магнитному полю и клетка Фарадея — габариты принимаются по технологическому заданию поставщика."
+      },
+      "constraints": { "daylight": "not-required", "minHeight": 3 },
+      "flows": ["medical", "visitors"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "clinic.diagnostic.control",
+      "code": "6.04",
+      "name": "Комната управления (пультовая)",
+      "group": "clinic.diagnostic",
+      "status": "conditional",
+      "condition": { "in": ["diagnostics", ["xray", "ct", "mri"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 12,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь пультовой взять из санитарных правил по радиационной безопасности."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.diagnostic.us",
+      "code": "6.05",
+      "name": "Кабинет ультразвуковой диагностики",
+      "group": "clinic.diagnostic",
+      "status": "conditional",
+      "condition": { "in": ["diagnostics", ["us"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь кабинета УЗИ взять из нормативной таблицы."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["medical", "visitors"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.diagnostic.endo",
+      "code": "6.06",
+      "name": "Эндоскопический кабинет с моечной",
+      "group": "clinic.diagnostic",
+      "status": "conditional",
+      "condition": { "in": ["diagnostics", ["endo"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 26,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Обработка эндоскопов выделяется в отдельное помещение — состав и площади взять из санитарных правил."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["medical"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "clinic.diagnostic.func",
+      "code": "6.07",
+      "name": "Кабинет функциональной диагностики",
+      "group": "clinic.diagnostic",
+      "status": "conditional",
+      "condition": { "in": ["diagnostics", ["func"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь взять из нормативной таблицы."
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["medical", "visitors"],
+      "zone": "clean",
+      "norms": []
+    },
+
+    {
+      "id": "clinic.lab.main",
+      "code": "7.01",
+      "name": "Клинико-диагностическая лаборатория",
+      "group": "clinic.lab",
+      "status": "conditional",
+      "condition": { "in": ["lab", ["own", "express"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 45,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Состав и площади лабораторных помещений зависят от перечня исследований и класса биологической безопасности — взять из санитарных правил."
+      },
+      "constraints": { "daylight": "required", "wetZone": true },
+      "flows": ["medical", "staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "clinic.lab.sampling",
+      "code": "7.02",
+      "name": "Процедурная забора биоматериала",
+      "group": "clinic.lab",
+      "status": "conditional",
+      "condition": { "in": ["lab", ["own", "express"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 14,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь взять из нормативной таблицы."
+      },
+      "constraints": { "daylight": "required", "wetZone": true },
+      "flows": ["visitors", "medical"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.lab.wash",
+      "code": "7.03",
+      "name": "Моечная лабораторной посуды",
+      "group": "clinic.lab",
+      "status": "conditional",
+      "condition": { "eq": ["lab", "own"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 12,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь взять из первоисточника."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["waste"],
+      "zone": "dirty",
+      "norms": []
+    },
+
+    {
+      "id": "clinic.rehab.physio",
+      "code": "8.01",
+      "name": "Кабинет физиотерапии",
+      "group": "clinic.rehab",
+      "status": "conditional",
+      "condition": { "in": ["rehab", ["physio"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 30,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Площадь — плейсхолдер: норму на одну кушетку и требования к кабинам взять из первоисточника."
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true },
+      "flows": ["visitors", "medical"],
+      "zone": "clean",
+      "notes": "Одно из немногих лечебных помещений, которое допускается опускать в цокольный и подвальный этаж.",
+      "norms": [
+        {
+          "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам здравоохранения» (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020)",
+          "clause": "п. 18",
+          "quote": "Допускается размещение в цокольных и подвальных этажах зданий помещения и кабинеты восстановительного лечения (залы лечебной физической культуры, лечебные бассейны, помещения водолечения, массажные кабинеты), а также кабинеты электро-светолечения.",
+          "source": "sanpin",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "clinic.rehab.exercise",
+      "code": "8.02",
+      "name": "Зал лечебной физкультуры",
+      "group": "clinic.rehab",
+      "status": "conditional",
+      "condition": { "in": ["rehab", ["exercise"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 60,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Площадь — плейсхолдер: норму на одного занимающегося взять из первоисточника."
+      },
+      "constraints": { "daylight": "desirable", "minHeight": 3 },
+      "flows": ["visitors"],
+      "zone": "clean",
+      "norms": [
+        {
+          "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам здравоохранения» (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020)",
+          "clause": "п. 18",
+          "quote": "Допускается размещение в цокольных и подвальных этажах зданий помещения и кабинеты восстановительного лечения (залы лечебной физической культуры, лечебные бассейны, помещения водолечения, массажные кабинеты).",
+          "source": "sanpin",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "clinic.rehab.massage",
+      "code": "8.03",
+      "name": "Кабинет массажа",
+      "group": "clinic.rehab",
+      "status": "conditional",
+      "condition": { "in": ["rehab", ["massage"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь на одно рабочее место массажиста взять из первоисточника."
+      },
+      "constraints": { "daylight": "required", "wetZone": true },
+      "flows": ["visitors"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.rehab.dayWard",
+      "code": "8.04",
+      "name": "Палата дневного стационара",
+      "group": "clinic.rehab",
+      "status": "conditional",
+      "condition": { "eq": ["dayHospital", true] },
+      "count": { "kind": "fixed", "value": 2, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 21,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Мощность дневного стационара и норму площади на место взять из задания на проектирование и первоисточника."
+      },
+      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
+      "flows": ["medical"],
+      "zone": "clean",
+      "norms": []
+    },
+
+    {
+      "id": "clinic.sterile.receive",
+      "code": "9.01",
+      "name": "Приёмная нестерильных материалов",
+      "group": "clinic.sterile",
+      "status": "conditional",
+      "condition": { "eq": ["sterilization", "own"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 14,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. ЦСО проектируется по принципу поточности от грязной зоны к стерильной — площади взять из первоисточника."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["medical", "waste"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "clinic.sterile.wash",
+      "code": "9.02",
+      "name": "Моечная (дезинфекционная)",
+      "group": "clinic.sterile",
+      "status": "conditional",
+      "condition": { "eq": ["sterilization", "own"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь взять из первоисточника."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["medical"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "clinic.sterile.packing",
+      "code": "9.03",
+      "name": "Упаковочная и стерилизационная",
+      "group": "clinic.sterile",
+      "status": "conditional",
+      "condition": { "eq": ["sterilization", "own"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 24,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь зависит от производительности стерилизаторов — принимается по технологическому заданию."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["medical"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "clinic.sterile.store",
+      "code": "9.04",
+      "name": "Склад стерильных материалов",
+      "group": "clinic.sterile",
+      "status": "conditional",
+      "condition": { "eq": ["sterilization", "own"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 16,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь взять из первоисточника."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["medical", "goods"],
+      "zone": "clean",
+      "norms": []
+    },
+
+    {
+      "id": "clinic.catering.kitchen",
+      "code": "10.01",
+      "name": "Кухня (горячий цех)",
+      "group": "clinic.catering",
+      "status": "conditional",
+      "condition": { "in": ["catering", ["own", "finishing"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 60,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площади цехов пищеблока принимаются по числу довольствующихся и технологическому проекту — взять из санитарных правил и технологического задания."
+      },
+      "constraints": {
+        "daylight": "desirable",
+        "wetZone": true,
+        "notAbove": ["clinic.ward.room"]
+      },
+      "flows": ["food", "staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.catering.prep",
+      "code": "10.02",
+      "name": "Заготовочные цеха",
+      "group": "clinic.catering",
+      "status": "conditional",
+      "condition": { "eq": ["catering", "own"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 45,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Раздельные цеха для сырой и готовой продукции обязательны — состав и площади взять из санитарных правил."
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true },
+      "flows": ["food"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "clinic.catering.store",
+      "code": "10.03",
+      "name": "Складские помещения продуктов",
+      "group": "clinic.catering",
+      "status": "conditional",
+      "condition": { "in": ["catering", ["own", "finishing"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 30,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь зависит от нормативного запаса продуктов в сутках — взять из технологического задания."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["food", "goods"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "clinic.catering.wash",
+      "code": "10.04",
+      "name": "Моечная кухонной посуды",
+      "group": "clinic.catering",
+      "status": "conditional",
+      "condition": { "in": ["catering", ["own", "finishing"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 14,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь взять из первоисточника."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["food", "waste"],
+      "zone": "dirty",
+      "norms": []
+    },
+
+    {
+      "id": "clinic.laundry.dirty",
+      "code": "11.01",
+      "name": "Приём и сортировка грязного белья",
+      "group": "clinic.laundry",
+      "status": "conditional",
+      "condition": { "eq": ["laundry", "own"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 16,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Прачечная проектируется поточно, без встречных потоков чистого и грязного белья — площади взять из первоисточника."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["linen"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "clinic.laundry.wash",
+      "code": "11.02",
+      "name": "Стиральное отделение",
+      "group": "clinic.laundry",
+      "status": "conditional",
+      "condition": { "eq": ["laundry", "own"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 30,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь зависит от производительности оборудования — принимается по технологическому заданию."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["linen"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "clinic.laundry.clean",
+      "code": "11.03",
+      "name": "Гладильно-складское отделение чистого белья",
+      "group": "clinic.laundry",
+      "status": "conditional",
+      "condition": { "eq": ["laundry", "own"] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 24,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь взять из первоисточника."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["linen"],
+      "zone": "clean",
+      "norms": []
+    },
+
+    {
+      "id": "clinic.morgue.autopsy",
+      "code": "12.01",
+      "name": "Секционная",
+      "group": "clinic.morgue",
+      "status": "conditional",
+      "condition": { "eq": ["morgue", true] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 30,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Состав и площади патологоанатомического отделения взять из санитарных правил."
+      },
+      "constraints": {
+        "daylight": "desirable",
+        "wetZone": true,
+        "separateEntrance": true
+      },
+      "flows": ["medical", "waste"],
+      "zone": "dirty",
+      "notes": "Отделение размещается изолированно, с самостоятельным въездом, вне зоны видимости палат и входа для посетителей.",
+      "norms": []
+    },
+    {
+      "id": "clinic.morgue.cooler",
+      "code": "12.02",
+      "name": "Помещение хранения тел",
+      "group": "clinic.morgue",
+      "status": "conditional",
+      "condition": { "eq": ["morgue", true] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 20,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Вместимость холодильных камер принимается по коечной мощности — взять из первоисточника."
+      },
+      "constraints": { "daylight": "not-required", "separateEntrance": true },
+      "flows": ["medical"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "clinic.morgue.farewell",
+      "code": "12.03",
+      "name": "Помещение прощания",
+      "group": "clinic.morgue",
+      "status": "conditional",
+      "condition": { "eq": ["morgue", true] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 30,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь взять из первоисточника."
+      },
+      "constraints": { "daylight": "desirable", "separateEntrance": true },
+      "flows": ["visitors"],
+      "zone": "neutral",
+      "norms": []
+    },
+
+    {
+      "id": "clinic.admin.chief",
+      "code": "13.01",
+      "name": "Кабинет главного врача",
+      "group": "clinic.admin",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь административных кабинетов взять из нормативной таблицы."
+      },
+      "constraints": { "daylight": "required" },
+      "flows": ["staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.admin.office",
+      "code": "13.02",
+      "name": "Административные кабинеты",
+      "group": "clinic.admin",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 3, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 14,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Число и площадь кабинетов принимаются по штатному расписанию."
+      },
+      "constraints": { "daylight": "required" },
+      "flows": ["staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "clinic.admin.archive",
+      "code": "13.03",
+      "name": "Архив медицинской документации",
+      "group": "clinic.admin",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 20,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь принимается по объёму хранения и сроку хранения документации."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "clinic.admin.staffRooms",
+      "code": "13.04",
+      "name": "Санитарно-бытовые помещения персонала",
+      "group": "clinic.admin",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 2, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 24,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Гардеробные персонала проектируются раздельными для домашней и рабочей одежды — состав и площади взять из санитарных правил."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "clinic.admin.conference",
+      "code": "13.05",
+      "name": "Конференц-зал",
+      "group": "clinic.admin",
+      "status": "optional",
+      "condition": { "in": ["extras", ["conference"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 60,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь принимается по числу мест и заданию на проектирование."
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["staff"],
+      "zone": "clean",
+      "norms": []
+    },
+
+    {
+      "id": "clinic.tech.waste",
+      "code": "14.01",
+      "name": "Помещение сбора медицинских отходов",
+      "group": "clinic.tech",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 14,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Требования к сбору, временному хранению и удалению медицинских отходов по классам опасности взять из санитарных правил."
+      },
+      "constraints": { "daylight": "not-required", "separateEntrance": true, "wetZone": true },
+      "flows": ["waste"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "clinic.tech.cleaning",
+      "code": "14.02",
+      "name": "Кладовая уборочного инвентаря",
+      "group": "clinic.tech",
+      "status": "required",
+      "count": { "kind": "perUnit", "per": "floor", "divisor": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 4,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Инвентарь маркируется и хранится раздельно по зонам — требование уточнить по санитарным правилам."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["waste"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "clinic.tech.vent",
+      "code": "14.03",
+      "name": "Венткамеры",
+      "group": "clinic.tech",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 2, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 40,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь определяется расчётом воздухообмена; для операционных и палат интенсивной терапии требуются автономные установки — уточнить в смежном разделе ОВ."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "clinic.tech.electro",
+      "code": "14.04",
+      "name": "Электрощитовая",
+      "group": "clinic.tech",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Категория надёжности электроснабжения для операционных и реанимации — по смежному разделу ЭОМ."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "clinic.tech.oxygen",
+      "code": "14.05",
+      "name": "Помещение медицинских газов",
+      "group": "clinic.tech",
+      "status": "conditional",
+      "condition": { "in": ["extras", ["oxygen"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 16,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Размещение и площадь помещения газификаторов и баллонов регулируются требованиями промышленной безопасности — уточнить по профильному документу."
+      },
+      "constraints": { "daylight": "not-required", "separateEntrance": true },
+      "flows": ["medical", "goods"],
+      "zone": "neutral",
+      "norms": []
+    },
+
+    {
+      "id": "clinic.circulation.corridor",
+      "code": "15.01",
+      "name": "Коридоры и холлы",
+      "group": "clinic.circulation",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 400,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Ширина коридоров в отделениях определяется требованием разворота и транспортировки каталки, а также эвакуационным расчётом — взять из первоисточника."
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["visitors", "staff", "medical"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "clinic.circulation.stairs",
+      "code": "15.02",
+      "name": "Лестнично-лифтовые узлы",
+      "group": "clinic.circulation",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 2, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 45,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Число и параметры эвакуационных путей — по расчёту согласно СН РК 2.02-01-2023."
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["visitors", "staff", "medical"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "clinic.circulation.lifts",
+      "code": "15.03",
+      "name": "Лифты для чистых и грязных потоков",
+      "group": "clinic.circulation",
+      "status": "conditional",
+      "condition": { "gt": ["floors", 1] },
+      "count": { "kind": "fixed", "value": 2, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 12,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Разделение лифтов на чистый и грязный потоки, а также требование больничного лифта под каталку — уточнить по санитарным правилам."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["medical", "linen", "waste", "food"],
+      "zone": "neutral",
+      "norms": []
+    }
+  ],
+  "validations": [
+    {
+      "id": "clinic-no-capacity",
+      "level": "error",
+      "when": { "and": [{ "lt": ["structure_units", 1] }] },
+      "title": "Структура подразделений не задана",
+      "detail": "В матрице «Структура подразделений» все строки имеют нулевое количество. Задайте хотя бы одно отделение, иначе состав помещений рассчитать не по чему."
+    },
+    {
+      "id": "clinic-poly-without-visits",
+      "level": "error",
+      "when": {
+        "and": [{ "in": ["form", ["poly", "both"]] }, { "lt": ["structure_tag_visits_places", 1] }]
+      },
+      "title": "Поликлиника без заданной мощности",
+      "detail": "Выбрана форма с поликлинической частью, но ни одно поликлиническое отделение не имеет мощности в посещениях в смену. Заполните строки поликлиники в матрице подразделений."
+    },
+    {
+      "id": "clinic-inpatient-without-beds",
+      "level": "error",
+      "when": {
+        "and": [
+          { "in": ["form", ["inpatient", "both"]] },
+          { "lt": ["structure_tag_beds_places", 1] }
+        ]
+      },
+      "title": "Стационар без коечного фонда",
+      "detail": "Выбрана форма со стационаром, но коечный фонд не задан. Заполните строки палатных отделений в матрице подразделений."
+    },
+    {
+      "id": "clinic-beds-without-form",
+      "level": "warning",
+      "when": { "and": [{ "eq": ["form", "poly"] }, { "gt": ["structure_tag_beds_places", 0] }] },
+      "title": "Койки заданы при форме «поликлиника»",
+      "detail": "В матрице заданы палатные отделения, хотя форма организации — амбулаторно-поликлиническая. Либо смените форму на «стационар с поликлиникой», либо обнулите койки."
+    },
+    {
+      "id": "clinic-operating-without-sterile",
+      "level": "warning",
+      "when": { "and": [{ "gt": ["operatingRooms", 0] }, { "eq": ["sterilization", "outsource"] }] },
+      "title": "Операционный блок при сторонней стерилизации",
+      "detail": "При наличии операционных обеспечение стерильными материалами через стороннюю организацию требует обоснования и договорной схемы. Проверьте допустимость по санитарным правилам и заданию на проектирование."
+    },
+    {
+      "id": "clinic-beds-without-catering",
+      "level": "warning",
+      "when": {
+        "and": [{ "gt": ["structure_tag_beds_places", 0] }, { "eq": ["catering", "delivered"] }]
+      },
+      "title": "Круглосуточный стационар на привозном питании",
+      "detail": "При круглосуточном пребывании пациентов организация питания привозным способом требует как минимум буфетных с доготовкой в отделениях. Проверьте требование по санитарным правилам."
+    },
+    {
+      "id": "clinic-beds-without-laundry",
+      "level": "info",
+      "when": { "and": [{ "gt": ["structure_tag_beds_places", 0] }, { "eq": ["laundry", "outsource"] }] },
+      "title": "Стационар без собственной прачечной",
+      "detail": "При сторонней прачечной в отделениях всё равно необходимы раздельные кладовые чистого и грязного белья и помещение временного хранения. Они в составе учтены."
+    },
+    {
+      "id": "clinic-emergency-missing",
+      "level": "warning",
+      "when": {
+        "and": [{ "gt": ["structure_tag_beds_places", 0] }, { "eq": ["emergency", false] }]
+      },
+      "title": "Стационар без приёмного отделения",
+      "detail": "Для стационара с круглосуточным пребыванием приёмное отделение с санитарным пропускником — обязательный элемент структуры. Включите его в параметрах."
+    },
+    {
+      "id": "clinic-morgue-adjacency",
+      "level": "info",
+      "when": { "eq": ["morgue", true] },
+      "title": "Патологоанатомическое отделение в составе",
+      "detail": "Отделение размещается изолированно, с самостоятельным въездом, вне зоны видимости окон палат и входа для посетителей. В диаграмме заданы связи типа «соседство недопустимо» с пищеблоком и палатными отделениями."
+    },
+    {
+      "id": "clinic-basement",
+      "level": "warning",
+      "when": { "eq": ["hasBasement", true] },
+      "title": "Задан подвальный этаж",
+      "detail": "Санитарные правила (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020), п. 18: не размещаются в цокольных и подвальных этажах операционные, перевязочные, процедурные, манипуляционные, родовые, стоматологические кабинеты, приёмные и палатные отделения. Допускаются кабинеты восстановительного лечения — залы ЛФК, лечебные бассейны, водолечение, массаж, электро-светолечение."
+    },
+    {
+      "id": "clinic-built-in-visits",
+      "level": "error",
+      "when": {
+        "and": [
+          { "in": ["placement", ["built-in", "built-attached"]] },
+          { "gt": ["structure_tag_visits_places", 100] }
+        ]
+      },
+      "title": "Встроенная поликлиника мощнее 100 посещений в смену",
+      "detail": "Санитарные правила (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020), п. 16: в жилых зданиях допускается размещение объектов здравоохранения, оказывающих амбулаторно-поликлиническую помощь, мощностью не более 100 посещений в смену, в том числе с дневными стационарами. Уменьшите мощность или смените тип размещения на отдельно стоящее."
+    },
+    {
+      "id": "clinic-built-in-beds",
+      "level": "error",
+      "when": {
+        "and": [
+          { "in": ["placement", ["built-in", "built-attached"]] },
+          { "gt": ["structure_tag_beds_places", 0] }
+        ]
+      },
+      "title": "Круглосуточный стационар во встроенном помещении",
+      "detail": "Санитарные правила (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020), п. 17: не допускается размещение в жилом здании стационаров с круглосуточным пребыванием пациентов. Для коечного отделения требуется отдельно стоящее здание."
+    },
+    {
+      "id": "clinic-operating-stacked",
+      "level": "info",
+      "when": { "gt": ["operatingRooms", 1] },
+      "title": "Несколько операционных: проверьте вертикальную компоновку",
+      "detail": "Санитарные правила (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020), п. 10: при расположении операционных друг над другом септические операционные размещаются выше асептических. Операционные блоки проектируются непроходными."
+    },
+    {
+      "id": "clinic-radiation",
+      "level": "info",
+      "when": { "in": ["diagnostics", ["xray", "ct"]] },
+      "title": "Помещения с источниками ионизирующего излучения",
+      "detail": "Для рентгеновских кабинетов и КТ требуется расчёт стационарной радиационной защиты и санитарно-эпидемиологическое заключение. Площади принимаются по технологическому заданию поставщика оборудования, а не по типовой таблице."
+    },
+    {
+      "id": "clinic-fire-class",
+      "level": "warning",
+      "when": { "and": [{ "gt": ["structure_tag_beds_places", 0] }, { "eq": ["fireClass", "Ф3.4"] }] },
+      "title": "Класс пожарной опасности при круглосуточных палатах",
+      "detail": "При наличии палат с круглосуточным пребыванием класс функциональной пожарной опасности Ф3.4 (поликлиника), как правило, неприменим. Уточните класс по СН РК 2.02-01-2023."
+    }
+  ],
+  "adjacency": [
+    {
+      "from": "clinic.entrance.vestibule",
+      "to": "clinic.entrance.registry",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Регистратура — первая точка контакта пациента, размещается в зоне прямой видимости от входа",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "clinic.entrance.vestibule",
+      "to": "clinic.entrance.wardrobe",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Гардероб на пути следования от входа до регистратуры",
+      "basis": "ergonomics",
+      "flow": "visitors"
+    },
+    {
+      "from": "clinic.entrance.vestibule",
+      "to": "clinic.entrance.wc",
+      "type": "near",
+      "strength": 4,
+      "reason": "Санузлы доступны из зоны ожидания без прохода через лечебные помещения",
+      "basis": "ergonomics",
+      "flow": "visitors"
+    },
+    {
+      "from": "clinic.entrance.registry",
+      "to": "clinic.admin.archive",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Картохранилище и архив медицинской документации при регистратуре",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "clinic.entrance.vestibule",
+      "to": "clinic.poly.waiting",
+      "type": "via-corridor",
+      "strength": 5,
+      "reason": "Поток пациентов из вестибюля в зоны ожидания поликлинических отделений",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "clinic.entrance.vestibule",
+      "to": "clinic.entrance.pharmacy",
+      "type": "near",
+      "strength": 3,
+      "reason": "Аптечный пункт доступен посетителям из входной зоны",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "clinic.poly.waiting",
+      "to": "clinic.poly.office",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Ожидальная непосредственно при кабинетах приёма",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "clinic.poly.office",
+      "to": "clinic.poly.manipulation",
+      "type": "near",
+      "strength": 4,
+      "reason": "Процедурный кабинет в пределах отделения, куда пациент направляется с приёма",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.poly.office",
+      "to": "clinic.poly.head",
+      "type": "near",
+      "strength": 3,
+      "reason": "Кабинет заведующего в составе отделения",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "clinic.poly.office",
+      "to": "clinic.poly.staff",
+      "type": "near",
+      "strength": 3,
+      "reason": "Комната персонала в служебной части отделения",
+      "basis": "ergonomics",
+      "flow": "staff"
+    },
+    {
+      "from": "clinic.poly.filter",
+      "to": "clinic.poly.waiting",
+      "type": "separated",
+      "strength": 5,
+      "reason": "Фильтр-бокс изолирует поток пациентов с признаками инфекции от общей ожидальной",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "clinic.poly.office",
+      "to": "clinic.diagnostic.us",
+      "type": "via-corridor",
+      "strength": 4,
+      "reason": "Направление пациента с приёма на инструментальную диагностику",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "clinic.poly.office",
+      "to": "clinic.lab.sampling",
+      "type": "via-corridor",
+      "strength": 4,
+      "reason": "Забор биоматериала по направлению с врачебного приёма",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "clinic.poly.office",
+      "to": "clinic.rehab.physio",
+      "type": "via-corridor",
+      "strength": 3,
+      "reason": "Направление на восстановительное лечение",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "clinic.lab.sampling",
+      "to": "clinic.lab.main",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Передача биоматериала из процедурной в лабораторию без выноса в общие коммуникации",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.lab.main",
+      "to": "clinic.lab.wash",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Моечная лабораторной посуды при лаборатории",
+      "basis": "technology",
+      "flow": "waste"
+    },
+    {
+      "from": "clinic.diagnostic.xray",
+      "to": "clinic.diagnostic.control",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Пультовая примыкает к процедурной с защитным смотровым окном",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "clinic.diagnostic.ct",
+      "to": "clinic.diagnostic.control",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Комната управления при кабинете томографии",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "clinic.diagnostic.xray",
+      "to": "clinic.ward.room",
+      "type": "forbidden",
+      "strength": 5,
+      "reason": "Помещения с источниками ионизирующего излучения не размещают смежно с палатами по вертикали и горизонтали",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.emergency.ambulance",
+      "to": "clinic.emergency.reception",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Подъезд санитарного транспорта непосредственно к приёмному отделению",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.emergency.reception",
+      "to": "clinic.emergency.resus",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Противошоковая в прямой доступности от смотровой без промежуточных коммуникаций",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.emergency.reception",
+      "to": "clinic.emergency.sanitary",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Санитарная обработка пациента перед переводом в палатное отделение",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.emergency.reception",
+      "to": "clinic.emergency.isolation",
+      "type": "via-airlock",
+      "strength": 5,
+      "reason": "Диагностический бокс сообщается с приёмным отделением через шлюз",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.emergency.sanitary",
+      "to": "clinic.ward.room",
+      "type": "via-corridor",
+      "strength": 5,
+      "reason": "Поточность движения пациентов от приёмного отделения к отделению по профилю госпитализации",
+      "basis": "norm",
+      "flow": "medical",
+      "norm": {
+        "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам здравоохранения» (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020)",
+        "clause": "п. 162",
+        "quote": "Поточность движения пациентов, поступающих на стационарное лечение, предусматривается в плановом и экстренном порядке от приемного отделения к отделению по профилю госпитализации.",
+        "source": "sanpin",
+        "verified": true
+      }
+    },
+    {
+      "from": "clinic.emergency.resus",
+      "to": "clinic.operating.room",
+      "type": "near",
+      "strength": 5,
+      "reason": "Кратчайший путь от противошоковой до операционного блока для экстренных операций",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.emergency.reception",
+      "to": "clinic.diagnostic.xray",
+      "type": "near",
+      "strength": 4,
+      "reason": "Экстренная лучевая диагностика в доступности от приёмного отделения",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.ward.nurse",
+      "to": "clinic.ward.room",
+      "type": "visual",
+      "strength": 5,
+      "reason": "Пост дежурной медсестры обеспечивает зрительный контроль подходов к палатам",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.ward.nurse",
+      "to": "clinic.ward.treatment",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Процедурная при посту медсестры",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.ward.room",
+      "to": "clinic.ward.bath",
+      "type": "near",
+      "strength": 4,
+      "reason": "Ванная и душевая в пределах палатной секции",
+      "basis": "ergonomics",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.ward.room",
+      "to": "clinic.ward.dining",
+      "type": "via-corridor",
+      "strength": 4,
+      "reason": "Столовая отделения для ходячих больных",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "clinic.ward.room",
+      "to": "clinic.ward.day",
+      "type": "near",
+      "strength": 3,
+      "reason": "Помещение дневного пребывания в составе палатной секции",
+      "basis": "ergonomics",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.ward.sanitary",
+      "to": "clinic.ward.dining",
+      "type": "forbidden",
+      "strength": 5,
+      "reason": "Санитарная комната не может примыкать к помещениям приёма и раздачи пищи",
+      "basis": "technology",
+      "flow": "waste"
+    },
+    {
+      "from": "clinic.ward.sanitary",
+      "to": "clinic.ward.dirtyLinen",
+      "type": "near",
+      "strength": 4,
+      "reason": "Помещения «грязного» контура отделения группируются вместе, у служебного выхода",
+      "basis": "technology",
+      "flow": "waste"
+    },
+    {
+      "from": "clinic.ward.dirtyLinen",
+      "to": "clinic.ward.cleanLinen",
+      "type": "separated",
+      "strength": 5,
+      "reason": "Потоки чистого и грязного белья не должны пересекаться",
+      "basis": "technology",
+      "flow": "linen"
+    },
+    {
+      "from": "clinic.ward.head",
+      "to": "clinic.ward.doctor",
+      "type": "near",
+      "strength": 3,
+      "reason": "Служебная часть палатного отделения группируется у входа в отделение",
+      "basis": "ergonomics",
+      "flow": "staff"
+    },
+    {
+      "from": "clinic.ward.room",
+      "to": "clinic.ward.dressing",
+      "type": "near",
+      "strength": 4,
+      "reason": "Перевязочная в пределах хирургического отделения",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.ward.room",
+      "to": "clinic.ward.play",
+      "type": "near",
+      "strength": 3,
+      "reason": "Игровая в составе детского палатного отделения",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "clinic.ward.icu",
+      "to": "clinic.operating.room",
+      "type": "near",
+      "strength": 5,
+      "reason": "Реанимация в непосредственной связи с операционным блоком",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.operating.airlock",
+      "to": "clinic.operating.room",
+      "type": "via-airlock",
+      "strength": 5,
+      "reason": "Операционный блок непроходной: персонал входит через санитарный пропускник, больные — через шлюз",
+      "basis": "norm",
+      "flow": "staff",
+      "norm": {
+        "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам здравоохранения» (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020)",
+        "clause": "п. 10",
+        "quote": "Операционные блоки (отделения) предусматриваются непроходными. Вход для медицинского персонала предусматриваются через санитарные пропускники, для больных через шлюзы.",
+        "source": "sanpin",
+        "verified": true
+      }
+    },
+    {
+      "from": "clinic.operating.preop",
+      "to": "clinic.operating.room",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Предоперационная непосредственно при операционной",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "clinic.operating.room",
+      "to": "clinic.operating.recovery",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Палата пробуждения при операционной",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.operating.sterileStore",
+      "to": "clinic.operating.room",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Подача стерильного материала в операционную по чистому контуру",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.operating.room",
+      "to": "clinic.operating.dirty",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Удаление использованного материала по «грязному» контуру, минуя чистые помещения",
+      "basis": "technology",
+      "flow": "waste"
+    },
+    {
+      "from": "clinic.operating.dirty",
+      "to": "clinic.operating.sterileStore",
+      "type": "separated",
+      "strength": 5,
+      "reason": "Чистый и грязный контуры операционного блока не пересекаются",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.sterile.receive",
+      "to": "clinic.sterile.wash",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Поточность ЦСО: приём нестерильных материалов — мойка",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.sterile.wash",
+      "to": "clinic.sterile.packing",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Поточность ЦСО: мойка — упаковка и стерилизация",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.sterile.packing",
+      "to": "clinic.sterile.store",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Поточность ЦСО: стерилизация — склад стерильных материалов, без возврата назад",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.sterile.receive",
+      "to": "clinic.sterile.store",
+      "type": "separated",
+      "strength": 5,
+      "reason": "Начало и конец технологической цепочки ЦСО разнесены, встречные потоки не допускаются",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.sterile.store",
+      "to": "clinic.operating.sterileStore",
+      "type": "via-corridor",
+      "strength": 5,
+      "reason": "Доставка стерильных материалов из ЦСО в операционный блок по чистому маршруту",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.operating.dirty",
+      "to": "clinic.sterile.receive",
+      "type": "via-corridor",
+      "strength": 4,
+      "reason": "Возврат использованного инструментария в грязную зону ЦСО",
+      "basis": "technology",
+      "flow": "waste"
+    },
+    {
+      "from": "clinic.catering.store",
+      "to": "clinic.catering.prep",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Поточность пищеблока: склад — заготовочные цеха",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "clinic.catering.prep",
+      "to": "clinic.catering.kitchen",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Поточность пищеблока: заготовка — горячий цех, без встречных потоков сырья и готовой продукции",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "clinic.catering.kitchen",
+      "to": "clinic.catering.wash",
+      "type": "near",
+      "strength": 4,
+      "reason": "Моечная кухонной посуды при горячем цехе",
+      "basis": "technology",
+      "flow": "waste"
+    },
+    {
+      "from": "clinic.catering.kitchen",
+      "to": "clinic.ward.dining",
+      "type": "via-corridor",
+      "strength": 5,
+      "reason": "Доставка готовой пищи в буфетные палатных отделений выделенным маршрутом",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "clinic.catering.kitchen",
+      "to": "clinic.tech.waste",
+      "type": "separated",
+      "strength": 5,
+      "reason": "Пищеблок и помещение сбора медицинских отходов разнесены, маршруты не пересекаются",
+      "basis": "technology",
+      "flow": "waste"
+    },
+    {
+      "from": "clinic.laundry.dirty",
+      "to": "clinic.laundry.wash",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Поточность прачечной: приём и сортировка — стирка",
+      "basis": "technology",
+      "flow": "linen"
+    },
+    {
+      "from": "clinic.laundry.wash",
+      "to": "clinic.laundry.clean",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Поточность прачечной: стирка — глажение и хранение чистого белья",
+      "basis": "technology",
+      "flow": "linen"
+    },
+    {
+      "from": "clinic.laundry.dirty",
+      "to": "clinic.laundry.clean",
+      "type": "separated",
+      "strength": 5,
+      "reason": "Грязная и чистая зоны прачечной разделены, встречных потоков нет",
+      "basis": "technology",
+      "flow": "linen"
+    },
+    {
+      "from": "clinic.ward.dirtyLinen",
+      "to": "clinic.laundry.dirty",
+      "type": "via-corridor",
+      "strength": 4,
+      "reason": "Вывоз грязного белья из отделений в прачечную по грязному маршруту",
+      "basis": "technology",
+      "flow": "linen"
+    },
+    {
+      "from": "clinic.laundry.clean",
+      "to": "clinic.ward.cleanLinen",
+      "type": "via-corridor",
+      "strength": 4,
+      "reason": "Доставка чистого белья в отделения по чистому маршруту",
+      "basis": "technology",
+      "flow": "linen"
+    },
+    {
+      "from": "clinic.morgue.autopsy",
+      "to": "clinic.catering.kitchen",
+      "type": "forbidden",
+      "strength": 5,
+      "reason": "Патологоанатомическое отделение и пищеблок несовместимы по санитарному режиму",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.morgue.autopsy",
+      "to": "clinic.ward.room",
+      "type": "forbidden",
+      "strength": 5,
+      "reason": "Отделение размещается вне зоны видимости из окон палат",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.morgue.autopsy",
+      "to": "clinic.morgue.cooler",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Помещение хранения тел непосредственно при секционной",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.morgue.cooler",
+      "to": "clinic.morgue.farewell",
+      "type": "near",
+      "strength": 4,
+      "reason": "Помещение прощания с самостоятельным входом для посетителей",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "clinic.morgue.farewell",
+      "to": "clinic.entrance.vestibule",
+      "type": "separated",
+      "strength": 5,
+      "reason": "Вход в помещение прощания отделён от главного входа для пациентов",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "clinic.tech.waste",
+      "to": "clinic.ward.sanitary",
+      "type": "via-corridor",
+      "strength": 4,
+      "reason": "Вывоз медицинских отходов из отделений в помещение временного хранения",
+      "basis": "technology",
+      "flow": "waste"
+    },
+    {
+      "from": "clinic.tech.waste",
+      "to": "clinic.entrance.vestibule",
+      "type": "separated",
+      "strength": 5,
+      "reason": "Удаление отходов через хозяйственный выход, вне потока посетителей",
+      "basis": "technology",
+      "flow": "waste"
+    },
+    {
+      "from": "clinic.circulation.lifts",
+      "to": "clinic.ward.room",
+      "type": "via-corridor",
+      "strength": 5,
+      "reason": "Транспортировка пациентов на каталке между этажами больничным лифтом",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "clinic.circulation.corridor",
+      "to": "clinic.circulation.stairs",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Эвакуационные пути от коридоров отделений к лестничным узлам",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "clinic.admin.chief",
+      "to": "clinic.admin.office",
+      "type": "near",
+      "strength": 3,
+      "reason": "Административная группа компонуется единым блоком",
+      "basis": "ergonomics",
+      "flow": "staff"
+    },
+    {
+      "from": "clinic.admin.staffRooms",
+      "to": "clinic.ward.room",
+      "type": "separated",
+      "strength": 3,
+      "reason": "Гардеробные персонала размещаются на входе в лечебную зону, а не внутри палатной секции",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "clinic.rehab.dayWard",
+      "to": "clinic.rehab.physio",
+      "type": "near",
+      "strength": 4,
+      "reason": "Дневной стационар и физиотерапия обслуживают один поток пациентов",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "clinic.tech.vent",
+      "to": "clinic.operating.room",
+      "type": "near",
+      "strength": 4,
+      "reason": "Автономные приточные установки операционного блока размещаются в доступности от обслуживаемых помещений",
+      "basis": "technology",
+      "flow": "staff"
+    }
+  ]
+}

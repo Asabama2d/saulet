@@ -1,0 +1,2049 @@
+{
+  "id": "mall",
+  "name": "Торгово-развлекательный центр",
+  "normBase": [
+    {
+      "doc": "СП РК 3.02-122-2012",
+      "clause": "раздел 4.4; приложения Д, Е, Ж, К",
+      "edition": "с изм. от 07.08.2018 № 175-НҚ",
+      "source": "norm",
+      "verified": true
+    },
+    {
+      "doc": "СН РК 3.02-22-2011",
+      "clause": "весь документ",
+      "edition": "с изм. от 15.11.2018 № 235-НҚ",
+      "source": "norm",
+      "verified": false
+    },
+    {
+      "doc": "СП РК 3.02-121-2012",
+      "clause": "весь документ",
+      "source": "norm",
+      "verified": false
+    },
+    {
+      "doc": "СП РК 3.02-107-2014",
+      "clause": "весь документ",
+      "edition": "с изм. по 29.05.2025",
+      "source": "norm",
+      "verified": false
+    },
+    {
+      "doc": "СН РК 2.02-01-2023",
+      "clause": "весь документ",
+      "source": "norm",
+      "verified": false
+    },
+    {
+      "doc": "СП РК 2.02-101-2022",
+      "clause": "весь документ",
+      "source": "norm",
+      "verified": false
+    },
+    {
+      "doc": "СП РК 3.06-02-2012",
+      "clause": "весь документ",
+      "source": "norm",
+      "verified": false
+    },
+    {
+      "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам общественного питания» — реквизиты приказа уточнить",
+      "clause": "весь документ",
+      "source": "sanpin",
+      "verified": false
+    }
+  ],
+  "unitCounts": {
+    "place": "places_total",
+    "section": "retailUnits",
+    "floor": "floors",
+    "building": "1"
+  },
+  "sections": [
+    { "id": "general", "label": "Общие" },
+    { "id": "capacity", "label": "Состав и мощность" },
+    { "id": "retail", "label": "Торговая часть" },
+    { "id": "entertainment", "label": "Развлечения и питание" },
+    { "id": "support", "label": "Обеспечение и логистика" },
+    { "id": "extra", "label": "Дополнительно" }
+  ],
+  "parameters": [
+    {
+      "id": "format",
+      "label": "Формат комплекса",
+      "control": "select",
+      "section": "general",
+      "default": "regional",
+      "options": [
+        { "value": "district", "label": "Районный", "hint": "Ориентировочно до 15 000 м² GLA" },
+        { "value": "regional", "label": "Окружной", "hint": "Ориентировочно 15 000–50 000 м² GLA" },
+        { "value": "super", "label": "Суперрегиональный", "hint": "Свыше 50 000 м² GLA" },
+        { "value": "outlet", "label": "Аутлет" }
+      ],
+      "help": "Границы форматов — классификация торговой недвижимости, а не норматив. Служат ориентиром при проверке состава."
+    },
+    {
+      "id": "floors",
+      "label": "Надземных этажей",
+      "control": "number",
+      "section": "general",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "unit": "эт.",
+      "default": 3
+    },
+    {
+      "id": "undergroundFloors",
+      "label": "Подземных этажей",
+      "control": "number",
+      "section": "general",
+      "min": 0,
+      "max": 3,
+      "step": 1,
+      "unit": "эт.",
+      "default": 1
+    },
+    {
+      "id": "fireResistance",
+      "label": "Степень огнестойкости",
+      "control": "select",
+      "section": "general",
+      "default": "I",
+      "options": [
+        { "value": "I", "label": "I" },
+        { "value": "II", "label": "II" },
+        { "value": "III", "label": "III" }
+      ],
+      "help": "Принимается по СН РК 2.02-01-2023 и СП РК 2.02-101-2022 с учётом площади пожарного отсека."
+    },
+    {
+      "id": "fireClass",
+      "label": "Класс функциональной пожарной опасности",
+      "control": "select",
+      "section": "general",
+      "default": "Ф3.1",
+      "options": [
+        { "value": "Ф3.1", "label": "Ф3.1", "hint": "Предприятия торговли" },
+        { "value": "Ф3.2", "label": "Ф3.2", "hint": "Предприятия общественного питания" },
+        { "value": "Ф2.1", "label": "Ф2.1", "hint": "Зрелищные с расчётным числом мест" }
+      ],
+      "help": "Многофункциональный комплекс включает помещения разных классов — деление на пожарные отсеки и класс каждой части уточнить по СН РК 2.02-01-2023."
+    },
+    {
+      "id": "seismicity",
+      "label": "Расчётная сейсмичность",
+      "control": "number",
+      "section": "general",
+      "min": 0,
+      "max": 9,
+      "step": 1,
+      "unit": "баллов",
+      "default": 6,
+      "help": "0 — площадка вне сейсмического района."
+    },
+    {
+      "id": "gla",
+      "label": "Арендопригодная площадь (GLA)",
+      "control": "number",
+      "section": "capacity",
+      "min": 2000,
+      "max": 200000,
+      "step": 500,
+      "unit": "м²",
+      "default": 30000,
+      "help": "Задаётся заданием на проектирование и концепцией брокериджа. Используется для расчёта складов, санузлов и служебных помещений."
+    },
+    {
+      "id": "retailUnits",
+      "label": "Торговых единиц в галерее",
+      "control": "number",
+      "section": "retail",
+      "min": 0,
+      "max": 400,
+      "step": 5,
+      "unit": "шт.",
+      "default": 80,
+      "help": "Количество арендных блоков малого и среднего формата без учёта якорей."
+    },
+    {
+      "id": "anchors",
+      "label": "Якорные арендаторы",
+      "control": "multiselect",
+      "section": "retail",
+      "default": ["hypermarket"],
+      "options": [
+        { "value": "hypermarket", "label": "Продовольственный гипермаркет" },
+        { "value": "dept", "label": "Универмаг / департмент-стор" },
+        { "value": "electronics", "label": "Бытовая техника и электроника" },
+        { "value": "sport", "label": "Спортивные товары" },
+        { "value": "diy", "label": "Товары для дома и ремонта (DIY)" }
+      ]
+    },
+    {
+      "id": "programMatrix",
+      "label": "Развлекательная и общественная составляющая",
+      "control": "group-matrix",
+      "section": "entertainment",
+      "default": null,
+      "help": "Вместимость задаётся в местах — она определяет расчёт эвакуации и санитарных приборов. Незадействованные строки оставьте с количеством 0.",
+      "matrix": {
+        "rowLabel": "Составляющая",
+        "countLabel": "Кол-во",
+        "capacityLabel": "Мест",
+        "rows": [
+          {
+            "id": "cinema_hall",
+            "label": "Зал кинотеатра",
+            "hint": "Зрительских мест в одном зале",
+            "defaultCount": 6,
+            "defaultCapacity": 150,
+            "capacityNorm": null,
+            "tags": ["cinema", "seats"]
+          },
+          {
+            "id": "foodcourt",
+            "label": "Фудкорт — общая посадочная зона",
+            "defaultCount": 1,
+            "defaultCapacity": 500,
+            "capacityNorm": null,
+            "tags": ["foodcourt", "food", "seats"]
+          },
+          {
+            "id": "restaurant",
+            "label": "Ресторан или кафе с обслуживанием",
+            "defaultCount": 6,
+            "defaultCapacity": 60,
+            "capacityNorm": null,
+            "tags": ["restaurant", "food", "seats"]
+          },
+          {
+            "id": "kids",
+            "label": "Детский развлекательный центр",
+            "defaultCount": 1,
+            "defaultCapacity": 100,
+            "capacityNorm": null,
+            "tags": ["kids", "entertainment"]
+          },
+          {
+            "id": "fitness",
+            "label": "Фитнес-центр",
+            "defaultCount": 0,
+            "defaultCapacity": 120,
+            "capacityNorm": null,
+            "tags": ["fitness", "entertainment"]
+          },
+          {
+            "id": "event",
+            "label": "Многофункциональный зал",
+            "defaultCount": 0,
+            "defaultCapacity": 200,
+            "capacityNorm": null,
+            "tags": ["event", "seats"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "parkingType",
+      "label": "Тип паркинга",
+      "control": "select",
+      "section": "support",
+      "default": "underground",
+      "options": [
+        { "value": "surface", "label": "Наземный открытый" },
+        { "value": "underground", "label": "Подземный" },
+        { "value": "multilevel", "label": "Многоуровневый встроенный" },
+        { "value": "mixed", "label": "Комбинированный" }
+      ]
+    },
+    {
+      "id": "parkingSpaces",
+      "label": "Машино-мест",
+      "control": "number",
+      "section": "support",
+      "min": 0,
+      "max": 5000,
+      "step": 10,
+      "unit": "м/м",
+      "default": 800,
+      "help": "Расчётное количество машино-мест на единицу торговой площади принимается по нормам градостроительного проектирования — уточнить по первоисточнику."
+    },
+    {
+      "id": "loadingDocks",
+      "label": "Разгрузочных доков",
+      "control": "number",
+      "section": "support",
+      "min": 1,
+      "max": 30,
+      "step": 1,
+      "unit": "шт.",
+      "default": 6
+    },
+    {
+      "id": "wasteHandling",
+      "label": "Обращение с отходами",
+      "control": "select",
+      "section": "support",
+      "default": "compactor",
+      "options": [
+        { "value": "compactor", "label": "Прессовальная с компакторами" },
+        { "value": "room", "label": "Помещение временного хранения" },
+        { "value": "external", "label": "Наружная площадка контейнеров" }
+      ]
+    },
+    {
+      "id": "extras",
+      "label": "Дополнительные функции",
+      "control": "multiselect",
+      "section": "extra",
+      "default": ["atm"],
+      "options": [
+        { "value": "atm", "label": "Зона банковских услуг и банкоматов" },
+        { "value": "coworking", "label": "Коворкинг / офисный блок" },
+        { "value": "clinic", "label": "Медицинский кабинет для посетителей" },
+        { "value": "prayer", "label": "Молельная комната" }
+      ]
+    }
+  ],
+  "groups": [
+    { "id": "mall.entrance", "name": "Входные группы и атриум", "color": "#0072B2", "order": 1 },
+    { "id": "mall.retail", "name": "Торговая галерея", "color": "#56B4E9", "order": 2 },
+    { "id": "mall.anchor", "name": "Якорные арендаторы", "color": "#009E73", "order": 3 },
+    { "id": "mall.food", "name": "Общественное питание", "color": "#D55E00", "order": 4 },
+    { "id": "mall.cinema", "name": "Кинотеатр", "color": "#CC79A7", "order": 5 },
+    { "id": "mall.leisure", "name": "Развлечения и досуг", "color": "#E69F00", "order": 6 },
+    { "id": "mall.services", "name": "Сервис для посетителей", "color": "#8C6BB1", "order": 7 },
+    { "id": "mall.loading", "name": "Разгрузочная зона", "color": "#A65628", "order": 8 },
+    { "id": "mall.storage", "name": "Складские помещения", "color": "#B08800", "order": 9 },
+    { "id": "mall.admin", "name": "Управление комплексом", "color": "#7A828C", "order": 10 },
+    { "id": "mall.staff", "name": "Помещения персонала", "color": "#4C9F70", "order": 11 },
+    { "id": "mall.security", "name": "Безопасность и мониторинг", "color": "#58508D", "order": 12 },
+    { "id": "mall.tech", "name": "Технические помещения", "color": "#5A7D7C", "order": 13 },
+    { "id": "mall.parking", "name": "Паркинг", "color": "#6699CC", "order": 14 },
+    { "id": "mall.circulation", "name": "Коммуникации и эвакуация", "color": "#9E9E9E", "order": 15 }
+  ],
+  "rooms": [
+    {
+      "id": "mall.entrance.vestibule",
+      "code": "1.01",
+      "name": "Входной тамбур-вестибюль",
+      "group": "mall.entrance",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 3, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 60,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Число входных групп определяется расчётом эвакуации и схемой подходов; глубина тамбура зависит от климатического района — взять из СП РК 3.02-107-2014 и теплотехнического расчёта."
+      },
+      "constraints": { "daylight": "desirable", "floorsAllowed": [1] },
+      "flows": ["visitors"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "mall.entrance.atrium",
+      "code": "1.02",
+      "name": "Атриум",
+      "group": "mall.entrance",
+      "status": "recommended",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 600,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Площадь — плейсхолдер: атриум определяется планировочным решением, а не нормой площади. Обязательные требования к его проектированию — приложение Ж СП РК 3.02-122-2012."
+      },
+      "constraints": { "daylight": "desirable", "floorsAllowed": [1], "minHeight": 6 },
+      "flows": ["visitors"],
+      "zone": "neutral",
+      "notes": "Устройство атриума допускается в здании торгового центра или его части, выделенной в пожарный отсек с системой противопожарной защиты. Проектирование — по обязательному приложению Ж.",
+      "norms": [
+        {
+          "doc": "СП РК 3.02-122-2012",
+          "clause": "п. 4.2.37; приложение Ж (обязательное)",
+          "edition": "с изм. от 07.08.2018 № 175-НҚ",
+          "quote": "Устройство атриумов (пассажей) допускается в здании торгового центра или его части, выделенной в пожарный отсек, оборудованный системой противопожарной защиты (СПЗ). Проектирование атриумов следует осуществлять в соответствии с требованиями, изложенными в Приложении Ж.",
+          "source": "norm",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "mall.entrance.info",
+      "code": "1.03",
+      "name": "Стойка информации",
+      "group": "mall.entrance",
+      "status": "recommended",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 12,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь принимается по заданию на проектирование и концепции оператора."
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1] },
+      "flows": ["visitors", "staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+
+    {
+      "id": "mall.retail.unit",
+      "code": "2.01",
+      "name": "Торговый блок галереи",
+      "group": "mall.retail",
+      "status": "required",
+      "condition": { "gt": ["retailUnits", 0] },
+      "count": { "kind": "formula", "expr": "retailUnits", "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "gla * 0.45 / retailUnits",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер: принято, что галерея занимает 45 % GLA. Реальная нарезка блоков задаётся концепцией брокериджа и заданием на проектирование, нормой не установлена."
+      },
+      "constraints": { "daylight": "not-required", "minHeight": 3.6 },
+      "flows": ["visitors", "goods"],
+      "zone": "clean",
+      "notes": "Глубина блока и шаг витрин определяются планировочной сеткой и требованиями арендаторов.",
+      "norms": []
+    },
+    {
+      "id": "mall.retail.storage",
+      "code": "2.02",
+      "name": "Подсобная кладовая при торговом блоке",
+      "group": "mall.retail",
+      "status": "required",
+      "condition": { "gt": ["retailUnits", 0] },
+      "count": { "kind": "formula", "expr": "retailUnits", "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 12,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Доля подсобной площади к торговой принимается по технологическому заданию арендатора — уточнить по первоисточнику для предприятий торговли."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["goods"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "mall.anchor.hypermarket",
+      "code": "3.01",
+      "name": "Продовольственный гипермаркет",
+      "group": "mall.anchor",
+      "status": "conditional",
+      "condition": { "in": ["anchors", ["hypermarket"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 5000,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь якоря задаётся договором аренды и технологическим заданием оператора. Состав подсобных, холодильных и разгрузочных помещений — по санитарным правилам к предприятиям торговли."
+      },
+      "constraints": { "daylight": "not-required", "minHeight": 4.5, "floorsAllowed": [-1, 1] },
+      "flows": ["visitors", "goods", "food"],
+      "zone": "clean",
+      "notes": "Требует собственной зоны разгрузки и, как правило, отдельного входа для покупателей.",
+      "norms": []
+    },
+    {
+      "id": "mall.anchor.dept",
+      "code": "3.02",
+      "name": "Универмаг",
+      "group": "mall.anchor",
+      "status": "conditional",
+      "condition": { "in": ["anchors", ["dept"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 4000,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь и планировочные требования — по техническому заданию оператора."
+      },
+      "constraints": { "daylight": "not-required", "minHeight": 3.6 },
+      "flows": ["visitors", "goods"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "mall.anchor.electronics",
+      "code": "3.03",
+      "name": "Магазин бытовой техники и электроники",
+      "group": "mall.anchor",
+      "status": "conditional",
+      "condition": { "in": ["anchors", ["electronics"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 2500,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь — по техническому заданию оператора."
+      },
+      "constraints": { "daylight": "not-required", "minHeight": 3.6 },
+      "flows": ["visitors", "goods"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "mall.anchor.sport",
+      "code": "3.04",
+      "name": "Магазин спортивных товаров",
+      "group": "mall.anchor",
+      "status": "conditional",
+      "condition": { "in": ["anchors", ["sport"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 2000,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь — по техническому заданию оператора."
+      },
+      "constraints": { "daylight": "not-required", "minHeight": 3.6 },
+      "flows": ["visitors", "goods"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "mall.anchor.diy",
+      "code": "3.05",
+      "name": "Магазин товаров для дома и ремонта",
+      "group": "mall.anchor",
+      "status": "conditional",
+      "condition": { "in": ["anchors", ["diy"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 4500,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Требует повышенной нагрузки на пол и увеличенной высоты стеллажного хранения — уточнить по техническому заданию оператора."
+      },
+      "constraints": { "daylight": "not-required", "minHeight": 5, "floorsAllowed": [1] },
+      "flows": ["visitors", "goods"],
+      "zone": "clean",
+      "norms": []
+    },
+
+    {
+      "id": "mall.food.court",
+      "code": "4.01",
+      "name": "Посадочная зона фудкорта",
+      "group": "mall.food",
+      "status": "conditional",
+      "condition": { "gt": ["programMatrix_tag_foodcourt_places", 0] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "programMatrix_tag_foodcourt_places * 1.6",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер: 1,6 м² на посадочное место как ориентир. Норму площади зала на одно место в предприятиях общественного питания взять из СП РК 3.02-107-2014."
+      },
+      "constraints": { "daylight": "desirable", "minHeight": 3.6 },
+      "flows": ["visitors", "food"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "mall.food.kitchen",
+      "code": "4.02",
+      "name": "Кухонный блок оператора фудкорта",
+      "group": "mall.food",
+      "status": "conditional",
+      "condition": { "gt": ["programMatrix_tag_foodcourt_places", 0] },
+      "count": { "kind": "fixed", "value": 8, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 35,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Число операторов и площадь кухонного блока задаются концепцией; состав производственных помещений и требование поточности — по санитарным правилам к объектам общественного питания."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["food", "staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "mall.food.wash",
+      "code": "4.03",
+      "name": "Моечная и посудосборник фудкорта",
+      "group": "mall.food",
+      "status": "conditional",
+      "condition": { "gt": ["programMatrix_tag_foodcourt_places", 0] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 45,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Централизованная моечная фудкорта — площадь по технологическому проекту и санитарным правилам."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["food", "waste"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "mall.food.restaurant",
+      "code": "4.04",
+      "name": "Ресторан с полным обслуживанием",
+      "group": "mall.food",
+      "status": "conditional",
+      "condition": { "gt": ["programMatrix_tag_restaurant_places", 0] },
+      "count": { "kind": "formula", "expr": "programMatrix_tag_restaurant_count", "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "programMatrix_tag_restaurant_places / programMatrix_tag_restaurant_count * 9.2",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-121-2012",
+          "clause": "приложение Г (обязательное), таблица Г.1",
+          "edition": "с изм. от 24.10.2023 № 156-НҚ",
+          "quote": "Таблица Г.1 — Минимальные удельные показатели расчетной и общей площади объектов питания (на одно место в зале), в квадратных метрах. Рестораны: 50 мест — расчетная 7,41 (полуфабрикаты высокой степени готовности) / 7,15 (сырье), общая 9,2 / 9,5.",
+          "source": "norm",
+          "verified": true
+        },
+        "sourceHint": "Взят показатель общей площади для ресторана на 50 мест при работе на полуфабрикатах высокой степени готовности — 9,2 м² на место. Показатель включает зал, производственные, складские и служебно-бытовые помещения. При вместимости свыше 50 мест он по таблице снижается (100 мест — 7,6; 200 — 6,1), промежуточные значения уточните интерполяцией; при работе на сырье применяется бо́льший показатель."
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true, "minHeight": 3.6 },
+      "flows": ["visitors", "food"],
+      "zone": "clean",
+      "norms": []
+    },
+
+    {
+      "id": "mall.cinema.hall",
+      "code": "5.01",
+      "name": "Зрительный зал кинотеатра",
+      "group": "mall.cinema",
+      "status": "conditional",
+      "condition": { "gt": ["programMatrix_tag_cinema_places", 0] },
+      "count": { "kind": "formula", "expr": "programMatrix_tag_cinema_count", "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 220,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь зала определяется расчётом зрительских мест, углов видимости и уклона пола. Норму площади на место и параметры эвакуации из зрительных залов взять из СП РК 3.02-107-2014 и СН РК 2.02-01-2023."
+      },
+      "constraints": { "daylight": "not-required", "minHeight": 6 },
+      "flows": ["visitors"],
+      "zone": "clean",
+      "notes": "Зальные помещения с расчётным числом мест требуют самостоятельного эвакуационного расчёта и, как правило, рассредоточенных выходов.",
+      "norms": []
+    },
+    {
+      "id": "mall.cinema.foyer",
+      "code": "5.02",
+      "name": "Фойе кинотеатра с кассами",
+      "group": "mall.cinema",
+      "status": "conditional",
+      "condition": { "gt": ["programMatrix_tag_cinema_places", 0] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "programMatrix_tag_cinema_places * 0.5",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер: 0,5 м² на зрителя как ориентир. Норму площади фойе и кулуаров на одно место взять из первоисточника."
+      },
+      "constraints": { "daylight": "not-required", "minHeight": 3.6 },
+      "flows": ["visitors"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "mall.cinema.projection",
+      "code": "5.03",
+      "name": "Аппаратная (проекционная)",
+      "group": "mall.cinema",
+      "status": "conditional",
+      "condition": { "gt": ["programMatrix_tag_cinema_places", 0] },
+      "count": { "kind": "formula", "expr": "programMatrix_tag_cinema_count", "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Габариты принимаются по технологическому заданию поставщика проекционного оборудования."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+
+    {
+      "id": "mall.leisure.kids",
+      "code": "6.01",
+      "name": "Детский развлекательный центр",
+      "group": "mall.leisure",
+      "status": "conditional",
+      "condition": { "gt": ["programMatrix_tag_kids_places", 0] },
+      "count": { "kind": "formula", "expr": "programMatrix_tag_kids_count", "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 500,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь и высота зависят от состава аттракционов. Требования к пребыванию детей, эвакуации и размещению по этажам уточнить по СН РК 2.02-01-2023 и санитарным правилам."
+      },
+      "constraints": { "daylight": "desirable", "minHeight": 4.5 },
+      "flows": ["visitors", "children"],
+      "zone": "clean",
+      "notes": "Размещение детских зон на верхних и подземных этажах ограничивается требованиями пожарной безопасности — проверьте по первоисточнику.",
+      "norms": []
+    },
+    {
+      "id": "mall.leisure.fitness",
+      "code": "6.02",
+      "name": "Фитнес-центр",
+      "group": "mall.leisure",
+      "status": "conditional",
+      "condition": { "gt": ["programMatrix_tag_fitness_places", 0] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 1200,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Состав залов, раздевальных и душевых, а также нормы площади на занимающегося взять из первоисточника по физкультурно-оздоровительным объектам."
+      },
+      "constraints": { "daylight": "desirable", "minHeight": 4, "wetZone": true },
+      "flows": ["visitors"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "mall.leisure.event",
+      "code": "6.03",
+      "name": "Многофункциональный зал",
+      "group": "mall.leisure",
+      "status": "conditional",
+      "condition": { "gt": ["programMatrix_tag_event_places", 0] },
+      "count": { "kind": "formula", "expr": "programMatrix_tag_event_count", "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "programMatrix_tag_event_places * 1.2",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер: 1,2 м² на место как ориентир. Норму площади зала и требования к эвакуации взять из первоисточника."
+      },
+      "constraints": { "daylight": "not-required", "minHeight": 5 },
+      "flows": ["visitors"],
+      "zone": "clean",
+      "norms": []
+    },
+
+    {
+      "id": "mall.services.wc",
+      "code": "7.01",
+      "name": "Санитарные узлы для посетителей",
+      "group": "mall.services",
+      "status": "required",
+      "count": { "kind": "perUnit", "per": "floor", "divisor": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 55,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Площадь — плейсхолдер. Расчётное число приборов подтверждено: один санитарный прибор на 600 м² торговой площади для непродовольственных групп и на 400 м² для продовольственных, но не менее двух (СП РК 3.02-122-2012, п. 4.4.1.4.1). Площадь помещения принять по числу приборов и габаритам кабины 0,8 × 1,2 м; кабина для МГН — по СП РК 3.06-02-2012."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["visitors"],
+      "zone": "dirty",
+      "notes": "Вход в общественные туалеты предусматривается через шлюз, не смежно с прилавками для отпуска продовольственных товаров. Туалеты проектируются раздельными, ширина кабины не менее 0,8 м, глубина не менее 1,2 м. Допускается поэтажное размещение.",
+      "norms": [
+        {
+          "doc": "СП РК 3.02-122-2012",
+          "clause": "п. 4.4.1.4.1",
+          "edition": "с изм. от 07.08.2018 № 175-НҚ",
+          "quote": "Общественные туалеты для посетителей следует проектировать: а) в торговых центрах (1ТЦ-11ТРЦ) из расчета их суммарной торговой площади магазинов; б) в магазинах I П классификационной группы из расчета один санитарный прибор на 400 м2 торговой площади, но не менее двух санитарных приборов; в) в магазинах I H - IV H классификационных групп из расчета один санитарный прибор на 600 м2 торговой площади, но не менее двух санитарных приборов.",
+          "source": "norm",
+          "verified": true
+        },
+        {
+          "doc": "СП РК 3.02-122-2012",
+          "clause": "пп. 4.4.1.4.4, 4.4.1.4.5",
+          "edition": "с изм. от 07.08.2018 № 175-НҚ",
+          "quote": "Вход в помещения общественных туалетов следует предусматривать через шлюз. При этом его следует располагать не смежно с прилавками для отпуска продовольственных товаров. Туалеты следует проектировать раздельные. Ширину кабины следует предусматривать не менее 0,8 м, глубину не менее 1,2 м.",
+          "source": "norm",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "mall.services.motherRoom",
+      "code": "7.02",
+      "name": "Помещение «матери и ребёнка»",
+      "group": "mall.services",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Площадь — плейсхолдер. Норма задаёт не площадь, а оснащение и количество мест: одно место на каждую тысячу покупателей, оборудованное пеленальным столом, душевым поддоном, унитазом и умывальником (СП РК 3.02-122-2012, п. 4.4.1.2.23). Площадь принять по расстановке этого оборудования."
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true },
+      "flows": ["visitors", "children"],
+      "zone": "clean",
+      "notes": "Оснащение: пеленальный стол, душевой поддон, унитаз, умывальник.",
+      "norms": [
+        {
+          "doc": "СП РК 3.02-122-2012",
+          "clause": "п. 4.4.1.2.23",
+          "edition": "с изм. от 07.08.2018 № 175-НҚ",
+          "quote": "Помещение «матери и ребенка» следует предусматривать из расчета одно место на каждую тысячу покупателей (посетителей), оборудованное пеленальным столом, душевым поддоном, унитазом и умывальником.",
+          "source": "norm",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "mall.services.atm",
+      "code": "7.03",
+      "name": "Зона банковских услуг и банкоматов",
+      "group": "mall.services",
+      "status": "optional",
+      "condition": { "in": ["extras", ["atm"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 20,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь по заданию на проектирование; требования к охране и видеонаблюдению — по требованиям банка-арендатора."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["visitors"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "mall.services.medical",
+      "code": "7.04",
+      "name": "Медицинский кабинет для посетителей",
+      "group": "mall.services",
+      "status": "optional",
+      "condition": { "in": ["extras", ["clinic"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 18,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Состав помещения медицинского пункта взять из первоисточника по общественным зданиям."
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true },
+      "flows": ["visitors", "medical"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "mall.services.prayer",
+      "code": "7.05",
+      "name": "Молельная комната",
+      "group": "mall.services",
+      "status": "optional",
+      "condition": { "in": ["extras", ["prayer"]] },
+      "count": { "kind": "fixed", "value": 2, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 20,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь и наличие помещения для омовения принимаются по заданию на проектирование."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["visitors"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "mall.services.coworking",
+      "code": "7.06",
+      "name": "Коворкинг или офисный блок",
+      "group": "mall.services",
+      "status": "optional",
+      "condition": { "in": ["extras", ["coworking"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 400,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Норму площади на рабочее место взять из первоисточника по административным зданиям."
+      },
+      "constraints": { "daylight": "required" },
+      "flows": ["visitors", "staff"],
+      "zone": "clean",
+      "norms": []
+    },
+
+    {
+      "id": "mall.loading.dock",
+      "code": "8.01",
+      "name": "Разгрузочный док",
+      "group": "mall.loading",
+      "status": "required",
+      "count": { "kind": "formula", "expr": "loadingDocks", "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 45,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Габариты дока и радиусы разворота определяются расчётным транспортным средством. Требование разделения потоков товара и посетителей — по первоисточнику для предприятий торговли."
+      },
+      "constraints": {
+        "daylight": "not-required",
+        "floorsAllowed": [-1, 1],
+        "separateEntrance": true,
+        "minHeight": 4.5
+      },
+      "flows": ["goods"],
+      "zone": "dirty",
+      "notes": "Зона разгрузки изолируется от путей движения посетителей и имеет самостоятельный въезд с внутриплощадочных проездов.",
+      "norms": []
+    },
+    {
+      "id": "mall.loading.receiving",
+      "code": "8.02",
+      "name": "Приёмная экспедиция с зоной контроля",
+      "group": "mall.loading",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "loadingDocks * 12",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-122-2012",
+          "clause": "п. 4.4.1.3.23",
+          "edition": "с изм. от 07.08.2018 № 175-НҚ",
+          "quote": "В магазинах, в которых разгрузка товаров производится под навесом, следует предусматривать помещения приемочных из расчета не менее 12 м2 на одно разгрузочное место.",
+          "source": "norm",
+          "verified": true
+        }
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [-1, 1] },
+      "flows": ["goods", "staff"],
+      "zone": "dirty",
+      "notes": "Расчёт по числу разгрузочных мест. Минимум по норме — увеличивается при большом суточном товарообороте.",
+      "norms": []
+    },
+    {
+      "id": "mall.loading.waste",
+      "code": "8.03",
+      "name": "Прессовальная и помещение отходов",
+      "group": "mall.loading",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 60,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь зависит от объёма отходов, наличия компакторов и требований к раздельному сбору — уточнить по санитарным правилам."
+      },
+      "constraints": {
+        "daylight": "not-required",
+        "floorsAllowed": [-1, 1],
+        "separateEntrance": true,
+        "wetZone": true
+      },
+      "flows": ["waste"],
+      "zone": "dirty",
+      "norms": []
+    },
+    {
+      "id": "mall.storage.tenant",
+      "code": "9.01",
+      "name": "Складские помещения арендаторов",
+      "group": "mall.storage",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "gla * 0.08",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер: 8 % от GLA как ориентир. Долю складских площадей задаёт концепция комплекса и договоры аренды, нормой она не установлена."
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [-1, 1] },
+      "flows": ["goods"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "mall.storage.cold",
+      "code": "9.02",
+      "name": "Холодильные камеры продовольственной группы",
+      "group": "mall.storage",
+      "status": "conditional",
+      "condition": { "in": ["anchors", ["hypermarket"]] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 120,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Состав камер по температурным режимам и их площадь — по технологическому заданию оператора и санитарным правилам."
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [-1, 1], "wetZone": true },
+      "flows": ["food", "goods"],
+      "zone": "neutral",
+      "norms": []
+    },
+
+    {
+      "id": "mall.admin.office",
+      "code": "10.01",
+      "name": "Кабинеты управляющей компании",
+      "group": "mall.admin",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 5, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 16,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Число и площадь кабинетов принимаются по штатному расписанию управляющей компании."
+      },
+      "constraints": { "daylight": "required" },
+      "flows": ["staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "mall.admin.meeting",
+      "code": "10.02",
+      "name": "Переговорная",
+      "group": "mall.admin",
+      "status": "recommended",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 25,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь по заданию на проектирование."
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["staff"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "mall.staff.locker",
+      "code": "11.01",
+      "name": "Гардеробные персонала с душевыми",
+      "group": "mall.staff",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 2, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 60,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Состав санитарно-бытовых помещений определяется группой производственных процессов и численностью персонала — взять из первоисточника по бытовым помещениям."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "mall.staff.dining",
+      "code": "11.02",
+      "name": "Столовая для персонала",
+      "group": "mall.staff",
+      "status": "recommended",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 80,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь по числу работающих в максимальную смену — уточнить по первоисточнику."
+      },
+      "constraints": { "daylight": "desirable", "wetZone": true },
+      "flows": ["staff", "food"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "mall.staff.wc",
+      "code": "11.03",
+      "name": "Санитарные узлы персонала",
+      "group": "mall.staff",
+      "status": "required",
+      "count": { "kind": "perUnit", "per": "floor", "divisor": 2, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 12,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Санузлы персонала отделяются от посетительских — количество приборов взять из первоисточника."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["staff"],
+      "zone": "dirty",
+      "norms": []
+    },
+
+    {
+      "id": "mall.security.control",
+      "code": "12.01",
+      "name": "Помещение охраны и видеонаблюдения",
+      "group": "mall.security",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 30,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Требования к размещению поста охраны и мониторинга взять из первоисточника по антитеррористической защищённости объектов с массовым пребыванием людей."
+      },
+      "constraints": { "daylight": "not-required", "floorsAllowed": [1] },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "mall.security.fireControl",
+      "code": "12.02",
+      "name": "Помещение пожарного поста",
+      "group": "mall.security",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 20,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Требование круглосуточного дежурства, размещение на первом этаже и самостоятельный выход наружу — уточнить по СН РК 2.02-01-2023 и СП РК 2.02-101-2022."
+      },
+      "constraints": { "daylight": "desirable", "floorsAllowed": [1], "separateEntrance": true },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "notes": "Пожарный пост с круглосуточным пребыванием дежурного персонала — обязательный элемент для объектов с массовым пребыванием людей.",
+      "norms": []
+    },
+
+    {
+      "id": "mall.tech.vent",
+      "code": "13.01",
+      "name": "Венткамеры и помещения дымоудаления",
+      "group": "mall.tech",
+      "status": "required",
+      "count": { "kind": "perUnit", "per": "floor", "divisor": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 90,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь определяется расчётом воздухообмена и дымоудаления — по смежным разделам ОВ и противопожарной защиты."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "mall.tech.electro",
+      "code": "13.02",
+      "name": "Трансформаторная и электрощитовые",
+      "group": "mall.tech",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 2, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 70,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Категория надёжности электроснабжения и площади электропомещений — по смежному разделу ЭОМ и правилам устройства электроустановок."
+      },
+      "constraints": { "daylight": "not-required", "separateEntrance": true },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "mall.tech.pump",
+      "code": "13.03",
+      "name": "Насосная станция пожаротушения",
+      "group": "mall.tech",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 60,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Объём резервуаров и состав насосной определяются расчётом систем автоматического пожаротушения — по смежному разделу."
+      },
+      "constraints": { "daylight": "not-required", "separateEntrance": true, "wetZone": true },
+      "flows": ["staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "mall.tech.cleaning",
+      "code": "13.04",
+      "name": "Помещения уборочного инвентаря",
+      "group": "mall.tech",
+      "status": "required",
+      "count": { "kind": "perUnit", "per": "floor", "divisor": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 8,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Площадь и оснащение принимаются по санитарным правилам."
+      },
+      "constraints": { "daylight": "not-required", "wetZone": true },
+      "flows": ["waste", "staff"],
+      "zone": "dirty",
+      "norms": []
+    },
+
+    {
+      "id": "mall.parking.spaces",
+      "code": "14.01",
+      "name": "Паркинг",
+      "group": "mall.parking",
+      "status": "required",
+      "condition": { "gt": ["parkingSpaces", 0] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "parkingSpaces * 30",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Множитель 30 м² на машино-место — ориентир, включающий проезды и рампы, нормой он не установлен. Само место хранения нормировано: 5,0 × 2,3 м = 11,5 м² (МСН 2.02-05-2000, п. 5.25). Итоговую площадь уточните по схеме расстановки и ширине проездов."
+      },
+      "constraints": { "daylight": "not-required", "minHeight": 2.4 },
+      "flows": ["visitors"],
+      "zone": "dirty",
+      "notes": "Надземные автостоянки — не более 9 этажей, подземные — не более 5 подземных этажей. Подземный паркинг выделяется в самостоятельный пожарный отсек с собственными системами дымоудаления и пожаротушения.",
+      "norms": [
+        {
+          "doc": "МСН 2.02-05-2000",
+          "clause": "п. 5.25",
+          "quote": "Минимальные размеры мест хранения следует принимать: длина места стоянки - 5,0 м, ширина - 2,3 м (для инвалидов, пользующихся креслами-колясками - 3,5 м).",
+          "source": "norm",
+          "verified": true
+        },
+        {
+          "doc": "МСН 2.02-05-2000",
+          "clause": "п. 5.1",
+          "quote": "Надземные автостоянки могут предусматриваться высотой не более 9 этажей, подземные - не более 5 подземных этажей.",
+          "source": "norm",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "id": "mall.parking.mgn",
+      "code": "14.02",
+      "name": "Машино-места для МГН у входов",
+      "group": "mall.parking",
+      "status": "required",
+      "condition": { "gt": ["parkingSpaces", 0] },
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 120,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Площадь — плейсхолдер. Ширина места для инвалидов, пользующихся креслами-колясками, нормирована — 3,5 м при длине 5,0 м (МСН 2.02-05-2000, п. 5.25). Долю таких мест от общего числа и предельное расстояние до доступного входа взять из СП РК 3.06-02-2012."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["visitors"],
+      "zone": "neutral",
+      "norms": [
+        {
+          "doc": "МСН 2.02-05-2000",
+          "clause": "п. 5.25",
+          "quote": "Минимальные размеры мест хранения следует принимать: длина места стоянки - 5,0 м, ширина - 2,3 м (для инвалидов, пользующихся креслами-колясками - 3,5 м).",
+          "source": "norm",
+          "verified": true
+        }
+      ]
+    },
+
+    {
+      "id": "mall.circulation.mallway",
+      "code": "15.01",
+      "name": "Пассажи и торговые коридоры",
+      "group": "mall.circulation",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "gla * 0.3",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер: 30 % от GLA как ориентир соотношения GLA к GBA. Ширина пассажей определяется расчётом эвакуации по СН РК 2.02-01-2023, а не долей площади."
+      },
+      "constraints": { "daylight": "desirable", "minHeight": 3.6 },
+      "flows": ["visitors"],
+      "zone": "clean",
+      "norms": []
+    },
+    {
+      "id": "mall.circulation.escalators",
+      "code": "15.02",
+      "name": "Эскалаторные и лифтовые узлы",
+      "group": "mall.circulation",
+      "status": "conditional",
+      "condition": { "gt": ["floors", 1] },
+      "count": { "kind": "perUnit", "per": "floor", "divisor": 1, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 80,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Эскалаторы не учитываются как эвакуационные пути — потребное число лестниц считается отдельно. Уточнить по СН РК 2.02-01-2023."
+      },
+      "constraints": { "daylight": "not-required" },
+      "flows": ["visitors"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "mall.circulation.stairs",
+      "code": "15.03",
+      "name": "Эвакуационные лестничные клетки",
+      "group": "mall.circulation",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 6, "round": "up" },
+      "area": {
+        "kind": "fixed",
+        "value": 25,
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер. Число, тип и ширина эвакуационных лестничных клеток определяются расчётом по числу людей в пожарном отсеке — обязательный расчёт по СН РК 2.02-01-2023."
+      },
+      "constraints": { "daylight": "desirable" },
+      "flows": ["visitors", "staff"],
+      "zone": "neutral",
+      "norms": []
+    },
+    {
+      "id": "mall.circulation.serviceCorridor",
+      "code": "15.04",
+      "name": "Служебные коридоры товарных путей",
+      "group": "mall.circulation",
+      "status": "required",
+      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "area": {
+        "kind": "formula",
+        "expr": "gla * 0.05",
+        "unit": "м²",
+        "norm": null,
+        "sourceHint": "Плейсхолдер: 5 % от GLA как ориентир. Ширина служебных коридоров определяется габаритами перемещаемого товара и требованиями эвакуации персонала."
+      },
+      "constraints": { "daylight": "not-required", "minHeight": 3 },
+      "flows": ["goods", "staff", "waste"],
+      "zone": "dirty",
+      "notes": "Товарные пути прокладываются в контуре, не пересекающемся с маршрутами посетителей.",
+      "norms": []
+    }
+  ],
+  "validations": [
+    {
+      "id": "mall-no-gla",
+      "level": "error",
+      "when": { "lt": ["gla", 2000] },
+      "title": "Арендопригодная площадь не задана",
+      "detail": "GLA меньше минимального значения. Задайте арендопригодную площадь — от неё считаются склады, коридоры и служебные помещения."
+    },
+    {
+      "id": "mall-no-retail",
+      "level": "error",
+      "when": { "and": [{ "lt": ["retailUnits", 1] }, { "lt": ["places_total", 1] }] },
+      "title": "Состав комплекса пуст",
+      "detail": "Не задано ни торговых блоков галереи, ни развлекательной составляющей. Заполните параметры торговой части или матрицу развлекательных функций."
+    },
+    {
+      "id": "mall-foodcourt-without-wash",
+      "level": "warning",
+      "when": {
+        "and": [
+          { "gt": ["programMatrix_tag_foodcourt_places", 0] },
+          { "lt": ["loadingDocks", 2] }
+        ]
+      },
+      "title": "Фудкорт при одном разгрузочном доке",
+      "detail": "Фудкорт формирует самостоятельный поток продовольствия и отходов. Проверьте достаточность разгрузочного фронта и наличие изолированного маршрута доставки продуктов, не пересекающегося с выносом отходов."
+    },
+    {
+      "id": "mall-cinema-noise",
+      "level": "info",
+      "when": { "gt": ["programMatrix_tag_cinema_places", 0] },
+      "title": "Кинотеатр: изоляция от источников ударного шума",
+      "detail": "СП РК 3.02-122-2012, п. 4.4.1.2.22: кинотеатры в торговом центре рекомендуется располагать вдали от таких помещений, как бильярдные и боулинг, имеющие в своём спектре шумов ударные составляющие. П. 4.4.1.2.21: при проектировании кинотеатров в торгово-развлекательных центрах рекомендуется руководствоваться СП РК 3.02-120."
+    },
+    {
+      "id": "mall-sprinklers",
+      "level": "warning",
+      "when": { "gt": ["floors", 2] },
+      "title": "Требуется автоматическое пожаротушение",
+      "detail": "СП РК 3.02-122-2012, п. 4.2.38 б): торговые залы, помещения приёма, хранения и подготовки товаров к продаже, хранения тары и инвентаря оборудуются установками автоматического пожаротушения при любой торговой площади, если они размещены в трёх и более надземных этажах либо в двух надземных и цокольном (подземном) с торговыми залами в цокольном (подземном) этаже."
+    },
+    {
+      "id": "mall-wc-count",
+      "level": "info",
+      "when": { "gt": ["gla", 0] },
+      "title": "Проверьте расчёт санитарных приборов",
+      "detail": "СП РК 3.02-122-2012, п. 4.4.1.4.1: в торговых центрах общественные туалеты проектируются из расчёта суммарной торговой площади магазинов — один прибор на 400 м² для продовольственной группы и на 600 м² для непродовольственной, но не менее двух приборов. В базе задана площадь помещения, а не число приборов: сверьте её с расчётом по вашей нарезке арендаторов."
+    },
+    {
+      "id": "mall-cinema-evacuation",
+      "level": "info",
+      "when": { "gt": ["programMatrix_tag_cinema_places", 0] },
+      "title": "Зрительные залы в составе комплекса",
+      "detail": "Зальные помещения с расчётным числом мест требуют самостоятельного расчёта эвакуации, рассредоточенных выходов и, как правило, выделения в отдельный пожарный отсек. Расчёт выполняется по СН РК 2.02-01-2023."
+    },
+    {
+      "id": "mall-kids-upper-floor",
+      "level": "warning",
+      "when": { "and": [{ "gt": ["programMatrix_tag_kids_places", 0] }, { "gt": ["floors", 3] }] },
+      "title": "Детская зона в многоэтажном комплексе",
+      "detail": "Размещение помещений для пребывания детей на верхних этажах ограничивается требованиями пожарной безопасности и условиями эвакуации. Проверьте допустимый этаж размещения по СН РК 2.02-01-2023."
+    },
+    {
+      "id": "mall-underground-parking",
+      "level": "info",
+      "when": {
+        "and": [{ "in": ["parkingType", ["underground", "mixed"]] }, { "gt": ["undergroundFloors", 0] }]
+      },
+      "title": "Подземный паркинг",
+      "detail": "Подземная автостоянка выделяется в самостоятельный пожарный отсек, отделяется от надземной части противопожарными преградами и оборудуется собственными системами дымоудаления и пожаротушения. Требования — по СН РК 2.02-01-2023 и СП РК 2.02-101-2022."
+    },
+    {
+      "id": "mall-parking-floors",
+      "level": "error",
+      "when": { "gt": ["undergroundFloors", 5] },
+      "title": "Превышена предельная этажность подземной автостоянки",
+      "detail": "МСН 2.02-05-2000, п. 5.1: надземные автостоянки могут предусматриваться высотой не более 9 этажей, подземные — не более 5 подземных этажей."
+    },
+    {
+      "id": "mall-parking-ratio",
+      "level": "info",
+      "when": { "gt": ["gla", 0] },
+      "title": "Проверьте расчёт машино-мест",
+      "detail": "Потребное число машино-мест определяется нормами градостроительного проектирования по площади торговых залов и числу мест в зальных помещениях. Значение в параметрах задано вручную и нормой не подтверждено."
+    },
+    {
+      "id": "mall-waste-external",
+      "level": "warning",
+      "when": {
+        "and": [
+          { "eq": ["wasteHandling", "external"] },
+          { "gt": ["programMatrix_tag_food_places", 0] }
+        ]
+      },
+      "title": "Наружная площадка отходов при наличии питания",
+      "detail": "При объектах общественного питания хранение пищевых отходов на открытой контейнерной площадке ограничивается санитарными правилами. Рассмотрите охлаждаемое помещение отходов."
+    },
+    {
+      "id": "mall-no-fire-post",
+      "level": "info",
+      "when": { "gt": ["places_total", 0] },
+      "title": "Объект с массовым пребыванием людей",
+      "detail": "Комплекс относится к объектам с массовым пребыванием людей: требуются пожарный пост с круглосуточным дежурством, система оповещения и управления эвакуацией, а также мероприятия по антитеррористической защищённости."
+    },
+    {
+      "id": "mall-diy-upper",
+      "level": "warning",
+      "when": { "and": [{ "in": ["anchors", ["diy"]] }, { "gt": ["floors", 2] }] },
+      "title": "DIY-якорь в многоэтажном комплексе",
+      "detail": "Магазин товаров для дома и ремонта требует повышенных нагрузок на перекрытие, увеличенной высоты и прямого доступа к разгрузочному фронту. Как правило, размещается на первом этаже."
+    }
+  ],
+  "adjacency": [
+    {
+      "from": "mall.entrance.vestibule",
+      "to": "mall.entrance.atrium",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Вход раскрывается в атриум — узел ориентации посетителя",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.entrance.atrium",
+      "to": "mall.circulation.mallway",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Атриум распределяет потоки в пассажи торговой галереи",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.entrance.vestibule",
+      "to": "mall.entrance.info",
+      "type": "near",
+      "strength": 3,
+      "reason": "Стойка информации в зоне первого контакта посетителя",
+      "basis": "ergonomics",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.circulation.mallway",
+      "to": "mall.retail.unit",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Витрины торговых блоков раскрыты в пассаж",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.circulation.mallway",
+      "to": "mall.anchor.hypermarket",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Якорь замыкает пассаж и формирует основной маршрут посетителя",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.circulation.mallway",
+      "to": "mall.anchor.dept",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Вход в универмаг из пассажа",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.circulation.mallway",
+      "to": "mall.anchor.electronics",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Вход в магазин электроники из пассажа",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.entrance.atrium",
+      "to": "mall.circulation.escalators",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Эскалаторный узел в атриуме обеспечивает вертикальное распределение посетителей",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.circulation.escalators",
+      "to": "mall.circulation.mallway",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Выход с эскалаторов в пассаж каждого уровня",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.circulation.mallway",
+      "to": "mall.circulation.stairs",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Эвакуационные выходы из пассажей в лестничные клетки — расчётные пути эвакуации",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.circulation.mallway",
+      "to": "mall.services.wc",
+      "type": "via-airlock",
+      "strength": 5,
+      "reason": "Вход в общественные туалеты — через шлюз, не смежно с прилавками отпуска продовольственных товаров",
+      "basis": "norm",
+      "flow": "visitors",
+      "norm": {
+        "doc": "СП РК 3.02-122-2012",
+        "clause": "п. 4.4.1.4.4",
+        "edition": "с изм. от 07.08.2018 № 175-НҚ",
+        "quote": "Вход в помещения общественных туалетов следует предусматривать через шлюз. При этом его следует располагать не смежно с прилавками для отпуска продовольственных товаров.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "from": "mall.services.wc",
+      "to": "mall.anchor.hypermarket",
+      "type": "separated",
+      "strength": 4,
+      "reason": "Туалеты не размещаются смежно с прилавками для отпуска продовольственных товаров",
+      "basis": "norm",
+      "flow": "visitors",
+      "norm": {
+        "doc": "СП РК 3.02-122-2012",
+        "clause": "п. 4.4.1.4.4",
+        "edition": "с изм. от 07.08.2018 № 175-НҚ",
+        "quote": "Вход в помещения общественных туалетов следует предусматривать через шлюз. При этом его следует располагать не смежно с прилавками для отпуска продовольственных товаров.",
+        "source": "norm",
+        "verified": true
+      }
+    },
+    {
+      "from": "mall.services.wc",
+      "to": "mall.food.court",
+      "type": "near",
+      "strength": 4,
+      "reason": "Санузлы в доступности от зоны питания, но вне прямой видимости от посадочных мест",
+      "basis": "ergonomics",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.food.court",
+      "to": "mall.food.kitchen",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Раздача операторов фудкорта выходит непосредственно в посадочную зону",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "mall.food.court",
+      "to": "mall.food.wash",
+      "type": "near",
+      "strength": 5,
+      "reason": "Централизованная моечная принимает посуду с посадочной зоны",
+      "basis": "technology",
+      "flow": "waste"
+    },
+    {
+      "from": "mall.food.kitchen",
+      "to": "mall.food.wash",
+      "type": "separated",
+      "strength": 4,
+      "reason": "Поток чистой продукции и поток грязной посуды не пересекаются",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "mall.food.kitchen",
+      "to": "mall.circulation.serviceCorridor",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Снабжение кухонных блоков продуктами по служебному контуру, минуя пассажи",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "mall.food.court",
+      "to": "mall.cinema.foyer",
+      "type": "near",
+      "strength": 4,
+      "reason": "Зона питания и кинотеатр взаимно поддерживают посещаемость и обычно размещаются на одном уровне",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.cinema.foyer",
+      "to": "mall.cinema.hall",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Вход в зрительные залы из фойе после контроля билетов",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.cinema.hall",
+      "to": "mall.cinema.projection",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Аппаратная примыкает к залу по оси проекции",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "mall.cinema.hall",
+      "to": "mall.circulation.stairs",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Эвакуация из зрительных залов рассредоточенными выходами на лестничные клетки",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.cinema.foyer",
+      "to": "mall.circulation.mallway",
+      "type": "via-corridor",
+      "strength": 4,
+      "reason": "Фойе связано с пассажем комплекса",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.leisure.kids",
+      "to": "mall.food.court",
+      "type": "near",
+      "strength": 4,
+      "reason": "Детская зона рядом с фудкортом — родители остаются в зоне видимости",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.leisure.kids",
+      "to": "mall.services.motherRoom",
+      "type": "near",
+      "strength": 4,
+      "reason": "Комната матери и ребёнка в доступности от детской зоны",
+      "basis": "ergonomics",
+      "flow": "children"
+    },
+    {
+      "from": "mall.leisure.kids",
+      "to": "mall.circulation.stairs",
+      "type": "near",
+      "strength": 5,
+      "reason": "Сокращённый путь эвакуации от зоны пребывания детей",
+      "basis": "technology",
+      "flow": "children"
+    },
+    {
+      "from": "mall.leisure.fitness",
+      "to": "mall.circulation.escalators",
+      "type": "via-corridor",
+      "strength": 3,
+      "reason": "Фитнес-центр обслуживается общим вертикальным узлом, часто с отдельным входом с улицы",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.leisure.event",
+      "to": "mall.entrance.atrium",
+      "type": "near",
+      "strength": 3,
+      "reason": "Многофункциональный зал тяготеет к атриуму для проведения событий",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.loading.dock",
+      "to": "mall.loading.receiving",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Приёмная экспедиция непосредственно за разгрузочным фронтом",
+      "basis": "technology",
+      "flow": "goods"
+    },
+    {
+      "from": "mall.loading.receiving",
+      "to": "mall.storage.tenant",
+      "type": "via-corridor",
+      "strength": 5,
+      "reason": "Товар поступает из экспедиции на склады арендаторов по служебному контуру",
+      "basis": "technology",
+      "flow": "goods"
+    },
+    {
+      "from": "mall.storage.tenant",
+      "to": "mall.circulation.serviceCorridor",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Склады обслуживаются служебными коридорами товарных путей",
+      "basis": "technology",
+      "flow": "goods"
+    },
+    {
+      "from": "mall.circulation.serviceCorridor",
+      "to": "mall.retail.storage",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Подсобные помещения торговых блоков имеют выход в служебный коридор",
+      "basis": "technology",
+      "flow": "goods"
+    },
+    {
+      "from": "mall.retail.storage",
+      "to": "mall.retail.unit",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Кладовая примыкает к торговому блоку и обслуживает его напрямую",
+      "basis": "technology",
+      "flow": "goods"
+    },
+    {
+      "from": "mall.circulation.serviceCorridor",
+      "to": "mall.circulation.mallway",
+      "type": "separated",
+      "strength": 5,
+      "reason": "Товарные пути и маршруты посетителей разделены и не пересекаются",
+      "basis": "technology",
+      "flow": "goods"
+    },
+    {
+      "from": "mall.loading.dock",
+      "to": "mall.entrance.vestibule",
+      "type": "separated",
+      "strength": 5,
+      "reason": "Разгрузочный фронт изолирован от входных групп для посетителей",
+      "basis": "technology",
+      "flow": "goods"
+    },
+    {
+      "from": "mall.loading.waste",
+      "to": "mall.loading.dock",
+      "type": "near",
+      "strength": 4,
+      "reason": "Вывоз отходов организуется с того же хозяйственного двора",
+      "basis": "technology",
+      "flow": "waste"
+    },
+    {
+      "from": "mall.loading.waste",
+      "to": "mall.food.court",
+      "type": "separated",
+      "strength": 5,
+      "reason": "Помещение отходов разнесено с зонами питания посетителей",
+      "basis": "technology",
+      "flow": "waste"
+    },
+    {
+      "from": "mall.food.wash",
+      "to": "mall.circulation.serviceCorridor",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Вынос отходов из моечной по служебному контуру, минуя посадочную зону",
+      "basis": "technology",
+      "flow": "waste"
+    },
+    {
+      "from": "mall.circulation.serviceCorridor",
+      "to": "mall.loading.waste",
+      "type": "via-corridor",
+      "strength": 5,
+      "reason": "Сбор отходов со всех арендаторов в прессовальную по служебным путям",
+      "basis": "technology",
+      "flow": "waste"
+    },
+    {
+      "from": "mall.storage.cold",
+      "to": "mall.anchor.hypermarket",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Холодильные камеры непосредственно при продовольственном якоре",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "mall.loading.receiving",
+      "to": "mall.storage.cold",
+      "type": "via-corridor",
+      "strength": 5,
+      "reason": "Холодовая цепь от приёмки до камер хранения без разрыва",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "mall.parking.spaces",
+      "to": "mall.circulation.escalators",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Выход из паркинга к вертикальным коммуникациям комплекса",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.parking.mgn",
+      "to": "mall.entrance.vestibule",
+      "type": "near",
+      "strength": 5,
+      "reason": "Машино-места для МГН размещаются на минимальном расстоянии от доступного входа",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.parking.spaces",
+      "to": "mall.anchor.hypermarket",
+      "type": "via-corridor",
+      "strength": 4,
+      "reason": "Прямая связь паркинга с продовольственным якорем для покупателей с тележками",
+      "basis": "ergonomics",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.security.control",
+      "to": "mall.entrance.vestibule",
+      "type": "visual",
+      "strength": 4,
+      "reason": "Пост охраны контролирует входные группы",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "mall.security.fireControl",
+      "to": "mall.circulation.stairs",
+      "type": "near",
+      "strength": 4,
+      "reason": "Пожарный пост с самостоятельным выходом наружу у эвакуационного узла",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "mall.staff.locker",
+      "to": "mall.circulation.serviceCorridor",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Персонал попадает на рабочие места по служебному контуру, минуя торговые залы",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "mall.staff.locker",
+      "to": "mall.staff.dining",
+      "type": "near",
+      "strength": 3,
+      "reason": "Бытовая группа персонала компонуется единым блоком",
+      "basis": "ergonomics",
+      "flow": "staff"
+    },
+    {
+      "from": "mall.staff.dining",
+      "to": "mall.circulation.mallway",
+      "type": "separated",
+      "strength": 3,
+      "reason": "Помещения персонала выведены из зоны обслуживания посетителей",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "mall.admin.office",
+      "to": "mall.security.control",
+      "type": "near",
+      "strength": 3,
+      "reason": "Управляющая компания и служба безопасности размещаются в общем служебном блоке",
+      "basis": "ergonomics",
+      "flow": "staff"
+    },
+    {
+      "from": "mall.tech.pump",
+      "to": "mall.parking.spaces",
+      "type": "near",
+      "strength": 3,
+      "reason": "Насосная пожаротушения размещается в подземной части с самостоятельным выходом",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "mall.tech.electro",
+      "to": "mall.circulation.serviceCorridor",
+      "type": "via-corridor",
+      "strength": 3,
+      "reason": "Обслуживание электропомещений по служебному контуру",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "mall.tech.vent",
+      "to": "mall.circulation.mallway",
+      "type": "separated",
+      "strength": 3,
+      "reason": "Венткамеры выносятся из зон пребывания посетителей по условиям шума",
+      "basis": "technology",
+      "flow": "staff"
+    },
+    {
+      "from": "mall.tech.cleaning",
+      "to": "mall.services.wc",
+      "type": "near",
+      "strength": 3,
+      "reason": "Инвентарные при санитарных узлах на каждом уровне",
+      "basis": "ergonomics",
+      "flow": "waste"
+    },
+    {
+      "from": "mall.services.atm",
+      "to": "mall.circulation.mallway",
+      "type": "near",
+      "strength": 3,
+      "reason": "Банковская зона на основном маршруте посетителя",
+      "basis": "ergonomics",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.services.medical",
+      "to": "mall.security.control",
+      "type": "near",
+      "strength": 3,
+      "reason": "Медицинский кабинет рядом с постом охраны для быстрого реагирования",
+      "basis": "technology",
+      "flow": "medical"
+    },
+    {
+      "from": "mall.services.prayer",
+      "to": "mall.circulation.mallway",
+      "type": "via-corridor",
+      "strength": 2,
+      "reason": "Молельные комнаты выносятся из основного потока в тихую зону",
+      "basis": "ergonomics",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.services.coworking",
+      "to": "mall.circulation.escalators",
+      "type": "via-corridor",
+      "strength": 3,
+      "reason": "Офисный блок обслуживается отдельным вертикальным узлом с самостоятельным режимом доступа",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.anchor.diy",
+      "to": "mall.loading.dock",
+      "type": "near",
+      "strength": 5,
+      "reason": "DIY-якорь требует прямого доступа к разгрузочному фронту для крупногабаритного товара",
+      "basis": "technology",
+      "flow": "goods"
+    },
+    {
+      "from": "mall.anchor.sport",
+      "to": "mall.circulation.mallway",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Вход в спортивный магазин из пассажа",
+      "basis": "technology",
+      "flow": "visitors"
+    },
+    {
+      "from": "mall.food.restaurant",
+      "to": "mall.circulation.serviceCorridor",
+      "type": "direct",
+      "strength": 5,
+      "reason": "Снабжение ресторанов и вынос отходов по служебному контуру",
+      "basis": "technology",
+      "flow": "food"
+    },
+    {
+      "from": "mall.food.restaurant",
+      "to": "mall.circulation.mallway",
+      "type": "direct",
+      "strength": 4,
+      "reason": "Вход в ресторан из пассажа",
+      "basis": "technology",
+      "flow": "visitors"
+    }
+  ]
+}
