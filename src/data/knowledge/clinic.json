@@ -3,33 +3,61 @@
   "name": "Лечебно-профилактическая организация",
   "normBase": [
     {
-      "doc": "СП РК 3.02-107-2014",
-      "clause": "весь документ",
-      "edition": "с изм. по 29.05.2025",
+      "doc": "СП РК 3.02-113-2014*",
+      "clause": "разделы 4.3.2, 4.3.5, 4.3.6, 4.3.9, 4.3.11, 4.3.12; приложения Б, В, Г, Д, Е, Ж, К, Л, М, Р, С, Т, У",
+      "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ",
       "source": "norm",
-      "verified": false
+      "verified": true
+    },
+    {
+      "doc": "СН РК 3.02-13-2014",
+      "clause": "весь документ",
+      "edition": "с изм. по 15.11.2018",
+      "source": "norm",
+      "verified": true
     },
     {
       "doc": "Санитарные правила «Санитарно-эпидемиологические требования к объектам здравоохранения» (приказ Министра здравоохранения РК от 11.08.2020 № ҚР ДСМ-96/2020)",
-      "clause": "главы 1–2; пп. 6–18, 74, 94, 162, 164, 167",
+      "clause": "разделы 2, 3, 5, 9",
+      "edition": "с изм. по 2023",
       "source": "sanpin",
       "verified": true
     },
     {
-      "doc": "Нормативный документ по проектированию объектов здравоохранения РК — реквизиты уточнить",
-      "clause": "состав и площади помещений",
+      "doc": "СП РК 3.02-107-2014",
+      "clause": "п. 4.2.19; п. 4.3.2.3–4.3.2.5; раздел 4.6",
+      "edition": "с изм. по 09.07.2021 №98-НҚ",
       "source": "norm",
-      "verified": false
+      "verified": true
+    },
+    {
+      "doc": "СП РК 3.02-121-2012",
+      "clause": "таблица 1; приложение Г, таблицы Г.3, Г.6, Г.7",
+      "edition": "приказ КДСиЖКХ от 29.12.2014 г. №156-НҚ",
+      "source": "norm",
+      "verified": true
     },
     {
       "doc": "СН РК 2.02-01-2023",
-      "clause": "весь документ",
+      "clause": "разделы по эвакуации и противопожарным преградам",
       "source": "norm",
       "verified": false
     },
     {
-      "doc": "СП РК 3.06-02-2012",
-      "clause": "весь документ",
+      "doc": "СП РК 3.06-101-2012",
+      "clause": "требования доступности для МГН",
+      "source": "norm",
+      "verified": false
+    },
+    {
+      "doc": "СП РК 4.02-101-2012",
+      "clause": "отопление, вентиляция и кондиционирование",
+      "source": "norm",
+      "verified": false
+    },
+    {
+      "doc": "СП РК 4.04-106-2013",
+      "clause": "электроснабжение жилых и общественных зданий",
       "source": "norm",
       "verified": false
     }
@@ -41,12 +69,30 @@
     "building": "1"
   },
   "sections": [
-    { "id": "general", "label": "Общие" },
-    { "id": "capacity", "label": "Структура и мощность" },
-    { "id": "poly", "label": "Поликлиническая часть" },
-    { "id": "inpatient", "label": "Стационар" },
-    { "id": "support", "label": "Обеспечивающие службы" },
-    { "id": "extra", "label": "Дополнительно" }
+    {
+      "id": "general",
+      "label": "Общие"
+    },
+    {
+      "id": "capacity",
+      "label": "Структура и мощность"
+    },
+    {
+      "id": "poly",
+      "label": "Поликлиническая часть"
+    },
+    {
+      "id": "inpatient",
+      "label": "Стационар"
+    },
+    {
+      "id": "support",
+      "label": "Обеспечивающие службы"
+    },
+    {
+      "id": "extra",
+      "label": "Дополнительно"
+    }
   ],
   "parameters": [
     {
@@ -56,9 +102,18 @@
       "section": "general",
       "default": "poly",
       "options": [
-        { "value": "poly", "label": "Поликлиника (амбулаторно-поликлиническая)" },
-        { "value": "inpatient", "label": "Стационар" },
-        { "value": "both", "label": "Стационар с поликлиникой" }
+        {
+          "value": "poly",
+          "label": "Поликлиника (амбулаторно-поликлиническая)"
+        },
+        {
+          "value": "inpatient",
+          "label": "Стационар"
+        },
+        {
+          "value": "both",
+          "label": "Стационар с поликлиникой"
+        }
       ],
       "help": "Определяет, какие блоки помещений попадают в состав. Мощность задаётся ниже матрицей подразделений."
     },
@@ -88,10 +143,22 @@
       "section": "general",
       "default": "detached",
       "options": [
-        { "value": "detached", "label": "Отдельно стоящее" },
-        { "value": "built-in", "label": "Встроенное" },
-        { "value": "built-attached", "label": "Встроенно-пристроенное" },
-        { "value": "blocked", "label": "Блокированное (корпуса)" }
+        {
+          "value": "detached",
+          "label": "Отдельно стоящее"
+        },
+        {
+          "value": "built-in",
+          "label": "Встроенное"
+        },
+        {
+          "value": "built-attached",
+          "label": "Встроенно-пристроенное"
+        },
+        {
+          "value": "blocked",
+          "label": "Блокированное (корпуса)"
+        }
       ]
     },
     {
@@ -101,10 +168,22 @@
       "section": "general",
       "default": "II",
       "options": [
-        { "value": "I", "label": "I" },
-        { "value": "II", "label": "II" },
-        { "value": "III", "label": "III" },
-        { "value": "IV", "label": "IV" }
+        {
+          "value": "I",
+          "label": "I"
+        },
+        {
+          "value": "II",
+          "label": "II"
+        },
+        {
+          "value": "III",
+          "label": "III"
+        },
+        {
+          "value": "IV",
+          "label": "IV"
+        }
       ],
       "help": "Принимается по СН РК 2.02-01-2023 и СП РК 2.02-101-2022. На состав помещений не влияет."
     },
@@ -115,8 +194,16 @@
       "section": "general",
       "default": "Ф3.4",
       "options": [
-        { "value": "Ф3.4", "label": "Ф3.4", "hint": "Поликлиники и амбулатории" },
-        { "value": "Ф1.1", "label": "Ф1.1", "hint": "Стационары с круглосуточным пребыванием" }
+        {
+          "value": "Ф3.4",
+          "label": "Ф3.4",
+          "hint": "Поликлиники и амбулатории"
+        },
+        {
+          "value": "Ф1.1",
+          "label": "Ф1.1",
+          "hint": "Стационары с круглосуточным пребыванием"
+        }
       ],
       "help": "Класс уточнить по СН РК 2.02-01-2023. При наличии круглосуточных палат применяется более строгий класс."
     },
@@ -151,7 +238,10 @@
             "defaultCount": 1,
             "defaultCapacity": 250,
             "capacityNorm": null,
-            "tags": ["poly", "visits"]
+            "tags": [
+              "poly",
+              "visits"
+            ]
           },
           {
             "id": "poly_child",
@@ -160,7 +250,11 @@
             "defaultCount": 0,
             "defaultCapacity": 150,
             "capacityNorm": null,
-            "tags": ["poly", "visits", "children"]
+            "tags": [
+              "poly",
+              "visits",
+              "children"
+            ]
           },
           {
             "id": "poly_women",
@@ -168,7 +262,11 @@
             "defaultCount": 0,
             "defaultCapacity": 80,
             "capacityNorm": null,
-            "tags": ["poly", "visits", "women"]
+            "tags": [
+              "poly",
+              "visits",
+              "women"
+            ]
           },
           {
             "id": "poly_dental",
@@ -176,7 +274,11 @@
             "defaultCount": 0,
             "defaultCapacity": 60,
             "capacityNorm": null,
-            "tags": ["poly", "visits", "dental"]
+            "tags": [
+              "poly",
+              "visits",
+              "dental"
+            ]
           },
           {
             "id": "ward_therapy",
@@ -185,7 +287,10 @@
             "defaultCount": 0,
             "defaultCapacity": 30,
             "capacityNorm": null,
-            "tags": ["beds", "inpatient"]
+            "tags": [
+              "beds",
+              "inpatient"
+            ]
           },
           {
             "id": "ward_surgery",
@@ -193,7 +298,11 @@
             "defaultCount": 0,
             "defaultCapacity": 30,
             "capacityNorm": null,
-            "tags": ["beds", "inpatient", "surgery"]
+            "tags": [
+              "beds",
+              "inpatient",
+              "surgery"
+            ]
           },
           {
             "id": "ward_pediatric",
@@ -201,7 +310,11 @@
             "defaultCount": 0,
             "defaultCapacity": 25,
             "capacityNorm": null,
-            "tags": ["beds", "inpatient", "children"]
+            "tags": [
+              "beds",
+              "inpatient",
+              "children"
+            ]
           },
           {
             "id": "ward_maternity",
@@ -209,7 +322,11 @@
             "defaultCount": 0,
             "defaultCapacity": 25,
             "capacityNorm": null,
-            "tags": ["beds", "inpatient", "maternity"]
+            "tags": [
+              "beds",
+              "inpatient",
+              "maternity"
+            ]
           },
           {
             "id": "ward_icu",
@@ -217,7 +334,11 @@
             "defaultCount": 0,
             "defaultCapacity": 6,
             "capacityNorm": null,
-            "tags": ["beds", "inpatient", "icu"]
+            "tags": [
+              "beds",
+              "inpatient",
+              "icu"
+            ]
           }
         ]
       }
@@ -246,11 +367,22 @@
       "label": "Отделение восстановительного лечения",
       "control": "multiselect",
       "section": "poly",
-      "default": ["physio"],
+      "default": [
+        "physio"
+      ],
       "options": [
-        { "value": "physio", "label": "Физиотерапия" },
-        { "value": "exercise", "label": "Зал лечебной физкультуры" },
-        { "value": "massage", "label": "Массаж" }
+        {
+          "value": "physio",
+          "label": "Физиотерапия"
+        },
+        {
+          "value": "exercise",
+          "label": "Зал лечебной физкультуры"
+        },
+        {
+          "value": "massage",
+          "label": "Массаж"
+        }
       ]
     },
     {
@@ -289,14 +421,35 @@
       "label": "Диагностика",
       "control": "multiselect",
       "section": "support",
-      "default": ["us", "func"],
+      "default": [
+        "us",
+        "func"
+      ],
       "options": [
-        { "value": "xray", "label": "Рентгенодиагностика" },
-        { "value": "ct", "label": "Компьютерная томография" },
-        { "value": "mri", "label": "Магнитно-резонансная томография" },
-        { "value": "us", "label": "Ультразвуковая диагностика" },
-        { "value": "endo", "label": "Эндоскопия" },
-        { "value": "func", "label": "Функциональная диагностика" }
+        {
+          "value": "xray",
+          "label": "Рентгенодиагностика"
+        },
+        {
+          "value": "ct",
+          "label": "Компьютерная томография"
+        },
+        {
+          "value": "mri",
+          "label": "Магнитно-резонансная томография"
+        },
+        {
+          "value": "us",
+          "label": "Ультразвуковая диагностика"
+        },
+        {
+          "value": "endo",
+          "label": "Эндоскопия"
+        },
+        {
+          "value": "func",
+          "label": "Функциональная диагностика"
+        }
       ],
       "help": "Кабинеты с источниками ионизирующего излучения требуют расчёта радиационной защиты — состав и площади принимаются по технологическому заданию поставщика оборудования."
     },
@@ -307,9 +460,18 @@
       "section": "support",
       "default": "own",
       "options": [
-        { "value": "own", "label": "Собственная клинико-диагностическая" },
-        { "value": "express", "label": "Только экспресс-лаборатория" },
-        { "value": "outsource", "label": "Сторонняя (аутсорсинг)" }
+        {
+          "value": "own",
+          "label": "Собственная клинико-диагностическая"
+        },
+        {
+          "value": "express",
+          "label": "Только экспресс-лаборатория"
+        },
+        {
+          "value": "outsource",
+          "label": "Сторонняя (аутсорсинг)"
+        }
       ]
     },
     {
@@ -319,8 +481,14 @@
       "section": "support",
       "default": "outsource",
       "options": [
-        { "value": "own", "label": "Собственное ЦСО" },
-        { "value": "outsource", "label": "Централизованная сторонняя" }
+        {
+          "value": "own",
+          "label": "Собственное ЦСО"
+        },
+        {
+          "value": "outsource",
+          "label": "Централизованная сторонняя"
+        }
       ]
     },
     {
@@ -330,9 +498,18 @@
       "section": "support",
       "default": "delivered",
       "options": [
-        { "value": "own", "label": "Пищеблок полного цикла" },
-        { "value": "finishing", "label": "Доготовочная" },
-        { "value": "delivered", "label": "Привозное питание" }
+        {
+          "value": "own",
+          "label": "Пищеблок полного цикла"
+        },
+        {
+          "value": "finishing",
+          "label": "Доготовочная"
+        },
+        {
+          "value": "delivered",
+          "label": "Привозное питание"
+        }
       ]
     },
     {
@@ -342,8 +519,14 @@
       "section": "support",
       "default": "outsource",
       "options": [
-        { "value": "own", "label": "Собственная" },
-        { "value": "outsource", "label": "Сторонняя" }
+        {
+          "value": "own",
+          "label": "Собственная"
+        },
+        {
+          "value": "outsource",
+          "label": "Сторонняя"
+        }
       ]
     },
     {
@@ -367,14 +550,28 @@
       "section": "extra",
       "default": [],
       "options": [
-        { "value": "conference", "label": "Конференц-зал" },
-        { "value": "cafe", "label": "Буфет для посетителей" },
-        { "value": "oxygen", "label": "Помещение медицинских газов" }
+        {
+          "value": "conference",
+          "label": "Конференц-зал"
+        },
+        {
+          "value": "cafe",
+          "label": "Буфет для посетителей"
+        },
+        {
+          "value": "oxygen",
+          "label": "Помещение медицинских газов"
+        }
       ]
     }
   ],
   "groups": [
-    { "id": "clinic.entrance", "name": "Входная группа", "color": "#0072B2", "order": 1 },
+    {
+      "id": "clinic.entrance",
+      "name": "Входная группа",
+      "color": "#0072B2",
+      "order": 1
+    },
     {
       "id": "clinic.poly",
       "name": "Поликлиническое отделение",
@@ -391,18 +588,78 @@
       "isCell": true,
       "cellSource": "structure"
     },
-    { "id": "clinic.emergency", "name": "Приёмное отделение", "color": "#D55E00", "order": 4 },
-    { "id": "clinic.operating", "name": "Операционный блок", "color": "#CC79A7", "order": 5 },
-    { "id": "clinic.diagnostic", "name": "Диагностика", "color": "#8C6BB1", "order": 6 },
-    { "id": "clinic.lab", "name": "Лаборатория", "color": "#4C9F70", "order": 7 },
-    { "id": "clinic.rehab", "name": "Восстановительное лечение", "color": "#E69F00", "order": 8 },
-    { "id": "clinic.sterile", "name": "Стерилизационное отделение", "color": "#6699CC", "order": 9 },
-    { "id": "clinic.catering", "name": "Пищеблок", "color": "#B08800", "order": 10 },
-    { "id": "clinic.laundry", "name": "Прачечная", "color": "#A65628", "order": 11 },
-    { "id": "clinic.morgue", "name": "Патологоанатомическое отделение", "color": "#58508D", "order": 12 },
-    { "id": "clinic.admin", "name": "Административно-бытовые", "color": "#7A828C", "order": 13 },
-    { "id": "clinic.tech", "name": "Технические", "color": "#5A7D7C", "order": 14 },
-    { "id": "clinic.circulation", "name": "Коммуникации", "color": "#9E9E9E", "order": 15 }
+    {
+      "id": "clinic.emergency",
+      "name": "Приёмное отделение",
+      "color": "#D55E00",
+      "order": 4
+    },
+    {
+      "id": "clinic.operating",
+      "name": "Операционный блок",
+      "color": "#CC79A7",
+      "order": 5
+    },
+    {
+      "id": "clinic.diagnostic",
+      "name": "Диагностика",
+      "color": "#8C6BB1",
+      "order": 6
+    },
+    {
+      "id": "clinic.lab",
+      "name": "Лаборатория",
+      "color": "#4C9F70",
+      "order": 7
+    },
+    {
+      "id": "clinic.rehab",
+      "name": "Восстановительное лечение",
+      "color": "#E69F00",
+      "order": 8
+    },
+    {
+      "id": "clinic.sterile",
+      "name": "Стерилизационное отделение",
+      "color": "#6699CC",
+      "order": 9
+    },
+    {
+      "id": "clinic.catering",
+      "name": "Пищеблок",
+      "color": "#B08800",
+      "order": 10
+    },
+    {
+      "id": "clinic.laundry",
+      "name": "Прачечная",
+      "color": "#A65628",
+      "order": 11
+    },
+    {
+      "id": "clinic.morgue",
+      "name": "Патологоанатомическое отделение",
+      "color": "#58508D",
+      "order": 12
+    },
+    {
+      "id": "clinic.admin",
+      "name": "Административно-бытовые",
+      "color": "#7A828C",
+      "order": 13
+    },
+    {
+      "id": "clinic.tech",
+      "name": "Технические",
+      "color": "#5A7D7C",
+      "order": 14
+    },
+    {
+      "id": "clinic.circulation",
+      "name": "Коммуникации",
+      "color": "#9E9E9E",
+      "order": 15
+    }
   ],
   "rooms": [
     {
@@ -412,16 +669,34 @@
       "nameKz": "Вестибюль",
       "group": "clinic.entrance",
       "status": "required",
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
-      "area": {
+      "count": {
         "kind": "fixed",
-        "value": 120,
-        "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь вестибюля принимается по расчёту потока посетителей в час пик — взять из таблицы состава и площадей помещений нормативного документа по объектам здравоохранения РК."
+        "value": 1,
+        "round": "up"
       },
-      "constraints": { "daylight": "desirable", "floorsAllowed": [1] },
-      "flows": ["visitors"],
+      "area": {
+        "kind": "formula",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Б, таблица Б.1*, поз. 1",
+          "quote": "Вестибюль — 0,05 на 1 посетителя, но не менее 12 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. таблицы — приказ КДСиЖКХ от 14.06.2019 г. №98-НҚ"
+        },
+        "sourceHint": "Для стационара вестибюль-зона ожидания приёмного отделения принимается по таблице Л.1*, поз. 1: 24 м² до 200 коек, 36 м² до 400, 42–54 м² до 600.",
+        "expr": "max(0.05 * structure_tag_visits_places, 12)"
+      },
+      "constraints": {
+        "daylight": "desirable",
+        "floorsAllowed": [
+          1
+        ]
+      },
+      "flows": [
+        "visitors"
+      ],
       "zone": "neutral",
       "notes": "Входная группа для пациентов отделяется от служебного и хозяйственного входов.",
       "norms": []
@@ -432,17 +707,44 @@
       "name": "Регистратура",
       "group": "clinic.entrance",
       "status": "required",
-      "condition": { "in": ["form", ["poly", "both"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "form",
+          [
+            "poly",
+            "both"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 36,
+        "value": 15,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь зависит от числа рабочих мест регистраторов и объёма картохранилища — уточнить по нормативной таблице и заданию на проектирование."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Б, таблица Б.1*, поз. 3.1",
+          "quote": "Помещение для регистратора с картохранилищем — 15 м2 (при 1,1 должности регистратора на 5 врачей, ведущих прием).",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. таблицы — приказ КДСиЖКХ от 14.06.2019 г. №98-НҚ"
+        },
+        "sourceHint": "Площадь дана на 1,1 должности регистратора (5 врачей приёма). При большем числе рабочих мест увеличивается пропорционально. Регистратура приёмного отделения стационара — таблица Л.1*, поз. 2: 10–18 м² по вместимости."
       },
-      "constraints": { "daylight": "desirable", "floorsAllowed": [1] },
-      "flows": ["visitors", "staff"],
+      "constraints": {
+        "daylight": "desirable",
+        "floorsAllowed": [
+          1
+        ]
+      },
+      "flows": [
+        "visitors",
+        "staff"
+      ],
       "zone": "neutral",
       "norms": []
     },
@@ -452,16 +754,34 @@
       "name": "Гардероб для посетителей",
       "group": "clinic.entrance",
       "status": "required",
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
-      "area": {
+      "count": {
         "kind": "fixed",
-        "value": 24,
-        "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Принимается по числу мест хранения на расчётное количество посетителей — уточнить по первоисточнику."
+        "value": 1,
+        "round": "up"
       },
-      "constraints": { "daylight": "not-required", "floorsAllowed": [1] },
-      "flows": ["visitors"],
+      "area": {
+        "kind": "formula",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Б, таблица Б.1*, поз. 2",
+          "quote": "Гардероб посетителей — 0,1 на одно место, но не менее 8 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. таблицы — приказ КДСиЖКХ от 14.06.2019 г. №98-НҚ"
+        },
+        "sourceHint": "Расчётная единица — одно место на вешалке. По СП РК 3.02-107-2014, п. 4.3.2.4 площадь гардеробной за барьером — не менее 0,08 м² на место при консольных вешалках и 0,1 м² при обычных и подвесных.",
+        "expr": "max(0.1 * structure_tag_visits_places, 8)"
+      },
+      "constraints": {
+        "daylight": "not-required",
+        "floorsAllowed": [
+          1
+        ]
+      },
+      "flows": [
+        "visitors"
+      ],
       "zone": "neutral",
       "norms": []
     },
@@ -471,16 +791,33 @@
       "name": "Санитарные узлы для посетителей",
       "group": "clinic.entrance",
       "status": "required",
-      "count": { "kind": "perUnit", "per": "floor", "divisor": 1, "round": "up" },
+      "count": {
+        "kind": "perUnit",
+        "per": "floor",
+        "divisor": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 18,
+        "value": 9,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Количество приборов определяется расчётом по числу посетителей, одна кабина оборудуется для МГН — взять из санитарных правил и СП РК 3.06-02-2012."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение К, таблица К.1*, поз. 11; п. 4.3.2.18, 4.3.2.21",
+          "quote": "Туалет для больных (со шлюзом и умывальником) — 3 м2 на один унитаз. П. 4.3.2.18: количество санитарных приборов для больных принимается из расчета один прибор на 15 чел. в мужских туалетах и на 10 чел. — в женских.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "Принято 3 санитарных прибора на этаж (3 × 3 м²). Точное число приборов определяется расчётом по п. 4.3.2.18 и по требованиям СН РК 3.02-07-2014 и СП РК 3.02-107-2014 (таблица Б.1* поз. 7)."
       },
-      "constraints": { "daylight": "not-required", "wetZone": true },
-      "flows": ["visitors"],
+      "constraints": {
+        "daylight": "not-required",
+        "wetZone": true
+      },
+      "flows": [
+        "visitors"
+      ],
       "zone": "dirty",
       "norms": []
     },
@@ -490,17 +827,41 @@
       "name": "Аптечный пункт",
       "group": "clinic.entrance",
       "status": "optional",
-      "condition": { "eq": ["pharmacy", true] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "eq": [
+          "pharmacy",
+          true
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 30,
+        "value": 20,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Состав и площади помещений аптечной организации регулируются отдельными требованиями — уточнить по профильному документу."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "п. 4.3.9, таблица 8",
+          "quote": "Состав и площади помещений аптечных распределительных пунктов: распаковочная — 8 м2; комната хранения и выдачи лекарственных средств — 12 м2 (для организаций до 300 коек).",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Для организаций от 300 до 500 коек площади те же (8 + 12). Аптека полного цикла с асептическим блоком проектируется по нормам обращения лекарственных средств и требует отдельного расчёта."
       },
-      "constraints": { "daylight": "not-required", "floorsAllowed": [1] },
-      "flows": ["visitors", "goods"],
+      "constraints": {
+        "daylight": "not-required",
+        "floorsAllowed": [
+          1
+        ]
+      },
+      "flows": [
+        "visitors",
+        "goods"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -510,21 +871,43 @@
       "name": "Буфет для посетителей",
       "group": "clinic.entrance",
       "status": "optional",
-      "condition": { "in": ["extras", ["cafe"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "extras",
+          [
+            "cafe"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
         "value": 40,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Принимается по числу посадочных мест и заданию на проектирование."
+        "norm": {
+          "doc": "СП РК 3.02-121-2012",
+          "clause": "таблица Г.6; таблица 1",
+          "quote": "Таблица Г.6: удельная минимальная площадь зала кафе, закусочной — 1,6 м2 на одно место. Таблица 1: вместимость буфета — от 10 до 50 мест.",
+          "source": "norm",
+          "verified": true,
+          "edition": "приказ КДСиЖКХ от 29.12.2014 г. №156-НҚ"
+        },
+        "sourceHint": "Принято 25 мест × 1,6 м². Подсобные помещения буфета — дополнительно по таблице Г.3 и Г.7 СП РК 3.02-121-2012."
       },
-      "constraints": { "daylight": "desirable" },
-      "flows": ["visitors", "food"],
+      "constraints": {
+        "daylight": "desirable"
+      },
+      "flows": [
+        "visitors",
+        "food"
+      ],
       "zone": "neutral",
       "norms": []
     },
-
     {
       "id": "clinic.poly.office",
       "code": "2.01",
@@ -532,17 +915,45 @@
       "nameKz": "Дәрігерлік қабылдау кабинеті",
       "group": "clinic.poly",
       "status": "required",
-      "condition": { "in": ["row_tags", ["poly"]] },
-      "count": { "kind": "formula", "expr": "row_places / visitsPerOffice", "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "poly"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "formula",
+        "expr": "row_places / visitsPerOffice",
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 18,
+        "value": 12,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь кабинета врачебного приёма взять из таблицы состава и площадей помещений амбулаторно-поликлинических организаций. Число кабинетов рассчитано делением мощности отделения на показатель «посещений на кабинет»."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Б, таблица Б.1*, поз. 10.3 и 11.2",
+          "quote": "Кабинет участкового (цехового) врача-терапевта — 12 м2. Кабинет врача общей практики — 12 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. таблицы — приказ КДСиЖКХ от 14.06.2019 г. №98-НҚ"
+        },
+        "sourceHint": "Площади узкопрофильных кабинетов по таблице Б.1*: кардиолог, эндокринолог, хирург, оториноларинголог, уролог — 10 м²; невропатолог — 9–15 м²; фтизиатр — 18 м². Для детской поликлиники — таблица Б.2*."
       },
-      "constraints": { "daylight": "required", "floorsForbidden": [-1], "minHeight": 3 },
-      "flows": ["visitors", "staff", "medical"],
+      "constraints": {
+        "daylight": "required",
+        "floorsForbidden": [
+          -1
+        ],
+        "minHeight": 3
+      },
+      "flows": [
+        "visitors",
+        "staff",
+        "medical"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -552,17 +963,42 @@
       "name": "Ожидальная при кабинетах",
       "group": "clinic.poly",
       "status": "required",
-      "condition": { "in": ["row_tags", ["poly"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "poly"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "formula",
-        "expr": "row_places / visitsPerOffice * 6",
+        "expr": "max(4.8 * row_places / visitsPerOffice, 10)",
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер: 6 м² на кабинет как ориентир. Норму площади ожидальной на одно посещение взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Б, таблица Б.1*, поз. 8.1; приложение Ж, таблицы Ж.8 поз. 15, Ж.10* поз. 13, Ж.15 поз. 15",
+          "quote": "Таблица Б.1*, поз. 8.1: зона ожидания — 1,2 м2 на каждого посетителя, одновременно находящихся в отделении, но не менее 10 м2. Таблицы Ж.8, Ж.10*, Ж.15: ожидальные — 4,8 м2 на один диагностический кабинет.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. таблицы — приказ КДСиЖКХ от 14.06.2019 г. №98-НҚ"
+        },
+        "sourceHint": "4,8 м² на кабинет соответствует четырём одновременно ожидающим посетителям (4 × 1,2 м²). При расчёте по фактическому числу одновременно находящихся посетителей применяется показатель 1,2 м² на посетителя."
       },
-      "constraints": { "daylight": "desirable", "floorsForbidden": [-1] },
-      "flows": ["visitors"],
+      "constraints": {
+        "daylight": "desirable",
+        "floorsForbidden": [
+          -1
+        ]
+      },
+      "flows": [
+        "visitors"
+      ],
       "zone": "neutral",
       "norms": []
     },
@@ -572,17 +1008,45 @@
       "name": "Процедурный кабинет отделения",
       "group": "clinic.poly",
       "status": "required",
-      "condition": { "in": ["row_tags", ["poly"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "poly"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 18,
+        "value": 12,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Площадь — плейсхолдер, взять из нормативной таблицы. Запрет размещения ниже первого этажа подтверждён п. 18 Санитарных правил."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение К, таблица К.1*, поз. 8; приложение Д, таблица Д.1*",
+          "quote": "Таблица К.1*, поз. 8: процедурная без гинекологического кресла (одна на отделение) — 12 м2. Таблица Д.1*: процедурный кабинет — 12 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "Процедурная с гинекологическим креслом (со сливом) и шлюзом — 18 м² для взрослых, 12 м² для детских и инфекционных отделений (таблица К.1*, поз. 8)."
       },
-      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "wetZone": true },
-      "flows": ["medical", "staff"],
+      "constraints": {
+        "daylight": "required",
+        "floorsForbidden": [
+          -1,
+          0
+        ],
+        "wetZone": true
+      },
+      "flows": [
+        "medical",
+        "staff"
+      ],
       "zone": "clean",
       "norms": [
         {
@@ -600,17 +1064,45 @@
       "name": "Стоматологический кабинет",
       "group": "clinic.poly",
       "status": "conditional",
-      "condition": { "in": ["row_tags", ["dental"]] },
-      "count": { "kind": "formula", "expr": "row_places / visitsPerOffice", "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "dental"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "formula",
+        "expr": "row_places / visitsPerOffice",
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 21,
+        "value": 14,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Площадь — плейсхолдер: норму на основную стоматологическую установку и на каждую дополнительную взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Б, таблица Б.1*, поз. 13.3",
+          "quote": "Отделение терапевтической стоматологии, кабинет врача — 14 м2 на одно стоматологическое кресло (10 м2 — на каждое последующее).",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. таблицы — приказ КДСиЖКХ от 14.06.2019 г. №98-НҚ"
+        },
+        "sourceHint": "Кабинет хирургической стоматологии — 10 м² на кресло; ортопедической — 14 м² на кресло. Помещение для стерилизации (12 м²) предусматривается при количестве кресел 4 и более."
       },
-      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "wetZone": true },
-      "flows": ["visitors", "medical"],
+      "constraints": {
+        "daylight": "required",
+        "floorsForbidden": [
+          -1,
+          0
+        ],
+        "wetZone": true
+      },
+      "flows": [
+        "visitors",
+        "medical"
+      ],
       "zone": "clean",
       "norms": [
         {
@@ -628,17 +1120,44 @@
       "name": "Смотровой кабинет",
       "group": "clinic.poly",
       "status": "conditional",
-      "condition": { "in": ["row_tags", ["women"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "women"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 18,
+        "value": 12,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь смотрового кабинета женской консультации взять из нормативной таблицы."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Л, таблица Л.1*, поз. 5",
+          "quote": "Смотровая: а) без гинекологического кресла — 12 м2; б) с гинекологическим креслом — 18 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "При установке гинекологического кресла площадь принимается 18 м²."
       },
-      "constraints": { "daylight": "required", "floorsForbidden": [-1], "wetZone": true },
-      "flows": ["visitors", "medical"],
+      "constraints": {
+        "daylight": "required",
+        "floorsForbidden": [
+          -1
+        ],
+        "wetZone": true
+      },
+      "flows": [
+        "visitors",
+        "medical"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -649,22 +1168,55 @@
       "group": "clinic.poly",
       "status": "required",
       "condition": {
-        "and": [{ "in": ["row_tags", ["poly"]] }, { "in": ["row_tags", ["children"]] }]
+        "and": [
+          {
+            "in": [
+              "row_tags",
+              [
+                "poly"
+              ]
+            ]
+          },
+          {
+            "in": [
+              "row_tags",
+              [
+                "children"
+              ]
+            ]
+          }
+        ]
       },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
         "value": 16,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Требование изолированного входа с фильтром для детских поликлинических отделений — подтвердить по санитарным правилам, площадь взять из нормативной таблицы."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Л, таблица Л.1*, поз. 25а и поз. 30",
+          "quote": "Приемно-смотровой бокс в инфекционных больницах — 16 м2 (предусматривается независимо от мощности). Фильтр для приема рожениц и беременных — 16–18 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "Приёмно-смотровой бокс в детских неинфекционных больницах — 22 м², то же с санобработкой — 27 м² (таблица Л.1*, поз. 25б, 25в)."
       },
       "constraints": {
         "daylight": "desirable",
-        "floorsAllowed": [1],
+        "floorsAllowed": [
+          1
+        ],
         "separateEntrance": true
       },
-      "flows": ["visitors", "medical"],
+      "flows": [
+        "visitors",
+        "medical"
+      ],
       "zone": "dirty",
       "notes": "Отделяет поток пациентов с признаками инфекционного заболевания от общего потока.",
       "norms": []
@@ -675,17 +1227,41 @@
       "name": "Кабинет заведующего отделением",
       "group": "clinic.poly",
       "status": "required",
-      "condition": { "in": ["row_tags", ["poly"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "poly"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 12,
+        "value": 10,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь служебных кабинетов взять из нормативной таблицы."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Б, таблица Б.1*, поз. 10.1",
+          "quote": "Кабинет заведующего отделением — 10 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. таблицы — приказ КДСиЖКХ от 14.06.2019 г. №98-НҚ"
+        }
       },
-      "constraints": { "daylight": "required", "floorsForbidden": [-1] },
-      "flows": ["staff"],
+      "constraints": {
+        "daylight": "required",
+        "floorsForbidden": [
+          -1
+        ]
+      },
+      "flows": [
+        "staff"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -695,21 +1271,42 @@
       "name": "Комната персонала отделения",
       "group": "clinic.poly",
       "status": "recommended",
-      "condition": { "in": ["row_tags", ["poly"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "poly"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 14,
+        "value": 12,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь принимается по штатной численности смены — уточнить по первоисточнику."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение К, таблица К.1*, поз. 43; приложение Ж, таблица Ж.6, поз. 42",
+          "quote": "Таблица К.1*, поз. 43: комната персонала — 12 м2 (для неинфекционных и детских отделений), 14 м2 (для инфекционных и боксированных). Таблица Ж.6, поз. 42: комната персонала принимается из расчета 1 м2 на 1 человека для 60 % от списочного состава персонала.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "При расчёте по штатной численности площадь принимается 1 м² на человека для 60 % списочного состава (таблица Ж.6, поз. 42)."
       },
-      "constraints": { "daylight": "desirable" },
-      "flows": ["staff"],
+      "constraints": {
+        "daylight": "desirable"
+      },
+      "flows": [
+        "staff"
+      ],
       "zone": "clean",
       "norms": []
     },
-
     {
       "id": "clinic.ward.room",
       "code": "3.01",
@@ -717,22 +1314,46 @@
       "nameKz": "Палата",
       "group": "clinic.ward",
       "status": "required",
-      "condition": { "in": ["row_tags", ["beds"]] },
-      "count": { "kind": "formula", "expr": "row_places / bedsPerRoom", "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "beds"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "formula",
+        "expr": "row_places / bedsPerRoom",
+        "round": "up"
+      },
       "area": {
-        "kind": "fixed",
-        "value": 21,
+        "kind": "formula",
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер для палаты на 3 койки. Норму площади на одну койку и предельную вместимость палаты взять из санитарных правил к объектам здравоохранения — значение прямо зависит от профиля отделения."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Р, таблица Р.1; приложение К, таблица К.1*, поз. 1, 2",
+          "quote": "Таблица Р.1: прочие палаты — 7,0 м2 на 1 койку, не менее. Таблица К.1*, поз. 2: площадь шлюза с туалетом на одну или две палаты — 5 м2 (3 + 2); со шлюзом, туалетом и душевой — 7 м2 (3 + 2 + 2).",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "Площадь шлюза и санузла в площадь палаты не входит (таблица К.1*, поз. 2). Другие профили по таблице Р.1: инфекционные и туберкулёзные для взрослых — 7,5; детские неинфекционные без мест матерей — 6,0; ортопедотравматологические, ожоговые, радиологические — 10; интенсивной терапии и послеоперационные — 13.",
+        "expr": "7 * bedsPerRoom"
       },
       "constraints": {
         "daylight": "required",
-        "floorsForbidden": [-1, 0],
+        "floorsForbidden": [
+          -1,
+          0
+        ],
         "minHeight": 3,
         "wetZone": true
       },
-      "flows": ["medical", "staff"],
+      "flows": [
+        "medical",
+        "staff"
+      ],
       "zone": "clean",
       "notes": "Количество палат рассчитано делением коечного фонда отделения на среднюю вместимость палаты. Состав палат по вместимости уточняется заданием на проектирование. Койки устанавливаются строго в соответствии с площадью, установленной строительными нормативами.",
       "norms": [
@@ -758,17 +1379,45 @@
       "name": "Палата интенсивной терапии",
       "group": "clinic.ward",
       "status": "conditional",
-      "condition": { "in": ["row_tags", ["icu"]] },
-      "count": { "kind": "formula", "expr": "row_places", "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "icu"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "formula",
+        "expr": "row_places",
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 18,
+        "value": 13,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Норма площади на койку интенсивной терапии выше палатной и задаётся отдельно — взять из санитарных правил."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Р, таблица Р.1; приложение У, таблица У.1*, поз. 3а",
+          "quote": "Таблица Р.1: палаты интенсивной терапии, послеоперационные — 13 м2 на 1 койку. Таблица У.1*, поз. 3а: палата интенсивной терапии общего назначения — 13 м2 на одну койку, с помещением слива 2 м2 и шлюзом 2 м2 для каждой палаты.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "Дополнительно к площади палаты предусматриваются помещение слива 2 м² и шлюз 2 м² на каждую палату. Для ожоговых больных — 24 м² на койку."
       },
-      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "minHeight": 3 },
-      "flows": ["medical", "staff"],
+      "constraints": {
+        "daylight": "required",
+        "floorsForbidden": [
+          -1,
+          0
+        ],
+        "minHeight": 3
+      },
+      "flows": [
+        "medical",
+        "staff"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -778,17 +1427,43 @@
       "name": "Пост дежурной медицинской сестры",
       "group": "clinic.ward",
       "status": "required",
-      "condition": { "in": ["row_tags", ["beds"]] },
-      "count": { "kind": "formula", "expr": "row_places / 30", "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "beds"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "formula",
+        "expr": "row_places / 30",
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 12,
+        "value": 6,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Число коек, обслуживаемых одним постом, и площадь поста взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение К, таблица К.1*, поз. 7; приложение У, таблица У.1*, поз. 4",
+          "quote": "Таблица К.1*, поз. 7: помещение (пост) дежурной медицинской сестры — 6 м2. Таблица У.1*, поз. 4: пост дежурной медицинской сестры — 6 м2, один на три койки интенсивной терапии.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        }
       },
-      "constraints": { "daylight": "desirable", "floorsForbidden": [-1, 0] },
-      "flows": ["staff", "medical"],
+      "constraints": {
+        "daylight": "desirable",
+        "floorsForbidden": [
+          -1,
+          0
+        ]
+      },
+      "flows": [
+        "staff",
+        "medical"
+      ],
       "zone": "clean",
       "notes": "Пост размещается так, чтобы обеспечивался зрительный контроль подходов к палатам.",
       "norms": []
@@ -799,17 +1474,44 @@
       "name": "Процедурная отделения",
       "group": "clinic.ward",
       "status": "required",
-      "condition": { "in": ["row_tags", ["beds"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "beds"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 18,
+        "value": 12,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь взять из нормативной таблицы состава помещений палатного отделения."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение К, таблица К.1*, поз. 8",
+          "quote": "Процедурные: без гинекологического кресла (одна на отделение) — 12 м2 для взрослых, 10 м2 для детских и инфекционных отделений; с гинекологическим креслом (со сливом) и шлюзом — 18 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        }
       },
-      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "wetZone": true },
-      "flows": ["medical", "staff"],
+      "constraints": {
+        "daylight": "required",
+        "floorsForbidden": [
+          -1,
+          0
+        ],
+        "wetZone": true
+      },
+      "flows": [
+        "medical",
+        "staff"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -819,17 +1521,43 @@
       "name": "Перевязочная",
       "group": "clinic.ward",
       "status": "conditional",
-      "condition": { "in": ["row_tags", ["surgery"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "surgery"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
         "value": 22,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. При наличии гнойных и чистых перевязок предусматриваются раздельные перевязочные — проверить требование по санитарным правилам."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение К, таблица К.1*, поз. 26",
+          "quote": "Перевязочная (для отделений хирургического профиля) — 22 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        }
       },
-      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0], "wetZone": true },
-      "flows": ["medical"],
+      "constraints": {
+        "daylight": "required",
+        "floorsForbidden": [
+          -1,
+          0
+        ],
+        "wetZone": true
+      },
+      "flows": [
+        "medical"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -839,17 +1567,43 @@
       "name": "Кабинет врача (ординаторская)",
       "group": "clinic.ward",
       "status": "required",
-      "condition": { "in": ["row_tags", ["beds"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "beds"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 18,
+        "value": 10,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь принимается по числу врачебных рабочих мест — уточнить по первоисточнику."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение К, таблица К.1*, поз. 6",
+          "quote": "Кабинет врача — 10 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "При размещении в ординаторской более двух врачей площадь увеличивается на 3,25 м² на каждого врача сверх двух (по аналогии с таблицей Ж.8, примечание ****)."
       },
-      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
-      "flows": ["staff"],
+      "constraints": {
+        "daylight": "required",
+        "floorsForbidden": [
+          -1,
+          0
+        ]
+      },
+      "flows": [
+        "staff"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -859,17 +1613,42 @@
       "name": "Кабинет заведующего отделением",
       "group": "clinic.ward",
       "status": "required",
-      "condition": { "in": ["row_tags", ["beds"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "beds"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
         "value": 12,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь служебных кабинетов взять из нормативной таблицы."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение К, таблица К.1*, поз. 25",
+          "quote": "Кабинет заведующего — 12 м2. Допускается предусматривать вне отделения в составе общей группы помещений кабинетов на этаже, при условии непосредственной близости данного помещения к соответствующему отделению.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        }
       },
-      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
-      "flows": ["staff"],
+      "constraints": {
+        "daylight": "required",
+        "floorsForbidden": [
+          -1,
+          0
+        ]
+      },
+      "flows": [
+        "staff"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -879,17 +1658,45 @@
       "name": "Буфетная со столовой отделения",
       "group": "clinic.ward",
       "status": "required",
-      "condition": { "in": ["row_tags", ["beds"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "beds"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 30,
+        "value": 12,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь буфетной и столовой отделения принимается по доле ходячих больных — взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение К, таблица К.1*, поз. 36",
+          "quote": "Буфетная (для одной или двух секций) — 12 м2 для неинфекционных и детских отделений, 14 м2 для инфекционных и боксированных. При размещении оборудования для стерилизации посуды площадь следует увеличить до 25 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "Столовая отделения предусматривается дополнительно по заданию на проектирование. Помещение для мытья и стерилизации столовой посуды — 10 м² (таблица К.1*, поз. 37)."
       },
-      "constraints": { "daylight": "desirable", "floorsForbidden": [-1, 0], "wetZone": true },
-      "flows": ["food", "medical"],
+      "constraints": {
+        "daylight": "desirable",
+        "floorsForbidden": [
+          -1,
+          0
+        ],
+        "wetZone": true
+      },
+      "flows": [
+        "food",
+        "medical"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -899,17 +1706,43 @@
       "name": "Помещение дневного пребывания больных",
       "group": "clinic.ward",
       "status": "recommended",
-      "condition": { "in": ["row_tags", ["beds"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "beds"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 25,
+        "value": 12,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Норму площади на койку для помещения дневного пребывания взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение К, таблица К.1*, поз. 46; приложение Ж, таблица Ж.11, поз. 59",
+          "quote": "Таблица К.1*, поз. 46: бытовая комната для пациентов — 12 м2 для неинфекционных и детских, 14 м2 для инфекционных. Таблица Ж.11, поз. 59: комната отдыха больных — 3,2 м2 на одно место.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "При расчёте по числу мест применяется 3,2 м² на одно место; количество мест — 20 % процедурных мест для стационара и 40 % для поликлиники."
       },
-      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
-      "flows": ["medical"],
+      "constraints": {
+        "daylight": "required",
+        "floorsForbidden": [
+          -1,
+          0
+        ]
+      },
+      "flows": [
+        "medical"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -920,18 +1753,54 @@
       "group": "clinic.ward",
       "status": "conditional",
       "condition": {
-        "and": [{ "in": ["row_tags", ["beds"]] }, { "in": ["row_tags", ["children"]] }]
+        "and": [
+          {
+            "in": [
+              "row_tags",
+              [
+                "beds"
+              ]
+            ]
+          },
+          {
+            "in": [
+              "row_tags",
+              [
+                "children"
+              ]
+            ]
+          }
+        ]
       },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
-      "area": {
+      "count": {
         "kind": "fixed",
-        "value": 30,
-        "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь игровой в детском отделении взять из первоисточника."
+        "value": 1,
+        "round": "up"
       },
-      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
-      "flows": ["children"],
+      "area": {
+        "kind": "formula",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение К, таблица К.1*, поз. 20",
+          "quote": "Комната для игр детей в возрасте от 1 года до 7 лет — 0,8 м2 на одну койку отделения.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "Нижний предел 12 м² принят по минимальной площади комнаты кварцевого облучения и бытовой комнаты детских отделений; норма минимума для игровой не установлена.",
+        "expr": "max(0.8 * row_places, 12)"
+      },
+      "constraints": {
+        "daylight": "required",
+        "floorsForbidden": [
+          -1,
+          0
+        ]
+      },
+      "flows": [
+        "children"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -941,17 +1810,44 @@
       "name": "Ванная комната с душевой",
       "group": "clinic.ward",
       "status": "required",
-      "condition": { "in": ["row_tags", ["beds"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "beds"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
         "value": 12,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Количество санитарных приборов на койку взять из санитарных правил."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение К, таблица К.1*, поз. 15",
+          "quote": "Ванная: без подъемника — 10 м2; с подъемником — 12 м2; без подъемника с душем — 12 м2; с подъемником с душем — 14 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "Принят вариант «без подъёмника с душем». При установке подъёмника и душа — 14 м²."
       },
-      "constraints": { "daylight": "not-required", "wetZone": true, "floorsForbidden": [-1, 0] },
-      "flows": ["medical"],
+      "constraints": {
+        "daylight": "not-required",
+        "wetZone": true,
+        "floorsForbidden": [
+          -1,
+          0
+        ]
+      },
+      "flows": [
+        "medical"
+      ],
       "zone": "neutral",
       "norms": []
     },
@@ -961,17 +1857,43 @@
       "name": "Санитарная комната (мойка и дезинфекция суден)",
       "group": "clinic.ward",
       "status": "required",
-      "condition": { "in": ["row_tags", ["beds"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "beds"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 10,
+        "value": 8,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Состав оборудования санитарной комнаты взять из санитарных правил."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение К, таблица К.1*, поз. 17",
+          "quote": "Помещение для мытья и стерилизации суден, горшков, мытья и сушки клеенок — 8 м2. Помещения следует отделять друг от друга перегородками высотой 1,6 м; в инфекционных отделениях — на высоту помещения.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        }
       },
-      "constraints": { "daylight": "not-required", "wetZone": true, "floorsForbidden": [-1, 0] },
-      "flows": ["waste"],
+      "constraints": {
+        "daylight": "not-required",
+        "wetZone": true,
+        "floorsForbidden": [
+          -1,
+          0
+        ]
+      },
+      "flows": [
+        "waste"
+      ],
       "zone": "dirty",
       "norms": []
     },
@@ -981,17 +1903,43 @@
       "name": "Кладовая грязного белья",
       "group": "clinic.ward",
       "status": "required",
-      "condition": { "in": ["row_tags", ["beds"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "beds"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 8,
+        "value": 4,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь принимается по объёму суточного оборота белья — уточнить по первоисточнику."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение К, таблица К.1*, поз. 17",
+          "quote": "Помещение для временного хранения грязного белья — 4 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "Помещение сортировки и временного хранения грязного белья на отделение — 10 м² (8 м² для детских), таблица К.1*, поз. 39."
       },
-      "constraints": { "daylight": "not-required", "floorsForbidden": [-1, 0] },
-      "flows": ["linen"],
+      "constraints": {
+        "daylight": "not-required",
+        "floorsForbidden": [
+          -1,
+          0
+        ]
+      },
+      "flows": [
+        "linen"
+      ],
       "zone": "dirty",
       "norms": []
     },
@@ -1001,38 +1949,87 @@
       "name": "Кладовая чистого белья",
       "group": "clinic.ward",
       "status": "required",
-      "condition": { "in": ["row_tags", ["beds"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "row_tags",
+          [
+            "beds"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 8,
+        "value": 4,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь принимается по объёму суточного оборота белья — уточнить по первоисточнику."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение К, таблица К.1*, поз. 40",
+          "quote": "Кладовые: чистого белья — 4 м2; хранения мягкого инвентаря — 10 м2; временного хранения списанного инвентаря — 4 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        }
       },
-      "constraints": { "daylight": "not-required", "floorsForbidden": [-1, 0] },
-      "flows": ["linen"],
+      "constraints": {
+        "daylight": "not-required",
+        "floorsForbidden": [
+          -1,
+          0
+        ]
+      },
+      "flows": [
+        "linen"
+      ],
       "zone": "clean",
       "norms": []
     },
-
     {
       "id": "clinic.emergency.reception",
       "code": "4.01",
       "name": "Смотровая приёмного отделения",
       "group": "clinic.emergency",
       "status": "required",
-      "condition": { "eq": ["emergency", true] },
-      "count": { "kind": "fixed", "value": 2, "round": "up" },
+      "condition": {
+        "eq": [
+          "emergency",
+          true
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 2,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 18,
+        "value": 12,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Число смотровых зависит от коечной мощности стационара — взять из нормативной таблицы приёмного отделения."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Л, таблица Л.1*, поз. 5",
+          "quote": "Смотровая: а) без гинекологического кресла — 12 м2; б) с гинекологическим креслом — 18 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "Количество приёмно-смотровых боксов определяется по п. 4.3.5.2.5: терапия — 2 %, хирургия — 4 % от количества коек соответствующего профиля."
       },
-      "constraints": { "daylight": "required", "floorsAllowed": [1], "wetZone": true },
-      "flows": ["medical", "visitors"],
+      "constraints": {
+        "daylight": "required",
+        "floorsAllowed": [
+          1
+        ],
+        "wetZone": true
+      },
+      "flows": [
+        "medical",
+        "visitors"
+      ],
       "zone": "neutral",
       "norms": []
     },
@@ -1042,17 +2039,40 @@
       "name": "Санитарный пропускник",
       "group": "clinic.emergency",
       "status": "required",
-      "condition": { "eq": ["emergency", true] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "eq": [
+          "emergency",
+          true
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 20,
+        "value": 24,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Санпропускник проектируется по принципу поточности «грязная — чистая зона»; площади взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Л, таблица Л.1*, поз. 6",
+          "quote": "Санитарный пропускник: а) раздевальная — 6 м2; б) ванная с душем — 12 м2; в) одевальная — 6 м2. Предусматривается независимо от мощности.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        }
       },
-      "constraints": { "daylight": "not-required", "floorsAllowed": [1], "wetZone": true },
-      "flows": ["medical"],
+      "constraints": {
+        "daylight": "not-required",
+        "floorsAllowed": [
+          1
+        ],
+        "wetZone": true
+      },
+      "flows": [
+        "medical"
+      ],
       "zone": "dirty",
       "notes": "Обеспечивает односторонний поток: приём — раздевание — санитарная обработка — выход в чистую зону стационара. В приёмных гинекологического, родильного и детского отделений дополнительно оборудуются санитарные пропускники для персонала с гардеробной и душевыми.",
       "norms": [
@@ -1078,17 +2098,40 @@
       "name": "Противошоковая (реанимационная)",
       "group": "clinic.emergency",
       "status": "required",
-      "condition": { "eq": ["emergency", true] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "eq": [
+          "emergency",
+          true
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 30,
+        "value": 36,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь взять из нормативной таблицы приёмного отделения."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Л, таблица Л.1*, поз. 13; приложение У, таблица У.1*, поз. 1",
+          "quote": "Таблица Л.1*, поз. 13: операционная для срочных операций — 36 м2, предоперационная — 10 м2, стерилизационная — 10 м2 (для стационаров от 301 койки). Таблица У.1*, поз. 1: реанимационный зал для общепрофильных больниц — 36 м2, для больниц скорой медицинской помощи и клинических — 48 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "Для больниц скорой медицинской помощи и клинических площадь реанимационного зала — 48 м²."
       },
-      "constraints": { "daylight": "desirable", "floorsAllowed": [1] },
-      "flows": ["medical"],
+      "constraints": {
+        "daylight": "desirable",
+        "floorsAllowed": [
+          1
+        ]
+      },
+      "flows": [
+        "medical"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -1098,22 +2141,42 @@
       "name": "Диагностический бокс (изолятор)",
       "group": "clinic.emergency",
       "status": "required",
-      "condition": { "eq": ["emergency", true] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "eq": [
+          "emergency",
+          true
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
         "value": 22,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Площадь — плейсхолдер. Состав бокса подтверждён: палата, санитарный узел, ванна и шлюз (п. 3 Санитарных правил); площади взять из строительного норматива."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Л, таблица Л.1*, поз. 4",
+          "quote": "Бокс на одну койку (изоляционно-диагностический) — 22 м2 × 2, предусматривается независимо от мощности стационара.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "Количество изоляционно-диагностических боксов — 5 % от количества детских коек (п. 4.3.5.2.5в); в инфекционных отделениях количество приёмно-смотровых боксов — по п. 4.3.5.2.3."
       },
       "constraints": {
         "daylight": "required",
-        "floorsAllowed": [1],
+        "floorsAllowed": [
+          1
+        ],
         "separateEntrance": true,
         "wetZone": true
       },
-      "flows": ["medical"],
+      "flows": [
+        "medical"
+      ],
       "zone": "dirty",
       "notes": "Бокс — помещение с отдельным входом для поступления больного извне; в состав входят палата, санитарный узел, ванна и шлюз.",
       "norms": [
@@ -1139,38 +2202,85 @@
       "name": "Тамбур-подъезд для санитарного транспорта",
       "group": "clinic.emergency",
       "status": "required",
-      "condition": { "eq": ["emergency", true] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "eq": [
+          "emergency",
+          true
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
         "value": 36,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Габариты определяются расчётным санитарным транспортом и требованием защиты от осадков."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "п. 4.3.5.2.4; приложение М, таблица М.1*, поз. 1",
+          "quote": "П. 4.3.5.2.4: для палатных отделений инфекционных стационаров следует предусматривать изолированный вход непосредственно с улицы и лестнично-лифтовые узлы раздельно для «грязных» и «чистых» маршрутов. Таблица М.1*, поз. 1: наружный тамбур при входе в бокс — 4 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "Площадь крытого подъезда (тамбур-въезда) для санитарного транспорта нормой не задана — определяется габаритом машины скорой помощи и схемой подъезда. 36 м² соответствует одному месту 6 × 6 м. Уточняется заданием на проектирование и генпланом."
       },
-      "constraints": { "daylight": "not-required", "floorsAllowed": [1], "separateEntrance": true },
-      "flows": ["medical"],
+      "constraints": {
+        "daylight": "not-required",
+        "floorsAllowed": [
+          1
+        ],
+        "separateEntrance": true
+      },
+      "flows": [
+        "medical"
+      ],
       "zone": "dirty",
       "norms": []
     },
-
     {
       "id": "clinic.operating.airlock",
       "code": "5.01",
       "name": "Шлюз при входе в операционный блок",
       "group": "clinic.operating",
       "status": "required",
-      "condition": { "gt": ["operatingRooms", 0] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "gt": [
+          "operatingRooms",
+          0
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 12,
+        "value": 6,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Площадь — плейсхолдер, взять из первоисточника. Само требование шлюза подтверждено: п. 10 Санитарных правил."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Т, таблица Т.1*, поз. 19",
+          "quote": "Шлюз при входе: а) в септическое отделение — 6 м2; б) в асептическое отделение — 6 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        }
       },
-      "constraints": { "daylight": "not-required", "floorsForbidden": [-1, 0] },
-      "flows": ["medical", "staff"],
+      "constraints": {
+        "daylight": "not-required",
+        "floorsForbidden": [
+          -1,
+          0
+        ]
+      },
+      "flows": [
+        "medical",
+        "staff"
+      ],
       "zone": "clean",
       "notes": "Больные поступают в операционный блок через шлюз, персонал — через санитарный пропускник из трёх смежных помещений (душ с санузлом, надевание чистого хирургического костюма, выход в операционную зону).",
       "norms": [
@@ -1197,21 +2307,42 @@
       "nameKz": "Операция бөлмесі",
       "group": "clinic.operating",
       "status": "required",
-      "condition": { "gt": ["operatingRooms", 0] },
-      "count": { "kind": "formula", "expr": "operatingRooms", "round": "up" },
+      "condition": {
+        "gt": [
+          "operatingRooms",
+          0
+        ]
+      },
+      "count": {
+        "kind": "formula",
+        "expr": "operatingRooms",
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
         "value": 36,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь общепрофильной и специализированной операционной различается — взять из санитарных правил к объектам здравоохранения."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Т, таблица Т.1*, поз. 1",
+          "quote": "Операционная общехирургического профиля — 36 м2 (42 м2). Окна следует оборудовать устройствами, предотвращающими попадание прямых солнечных лучей.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "Для ортопедотравматологических, нейрохирургических операций и операций с лазерной аппаратурой — 42–50 м²; для операций на сердце и сосудах — 48–55 м² (таблица Т.1*, поз. 2, 3)."
       },
       "constraints": {
         "daylight": "not-required",
-        "floorsForbidden": [-1, 0],
+        "floorsForbidden": [
+          -1,
+          0
+        ],
         "minHeight": 3.5
       },
-      "flows": ["medical"],
+      "flows": [
+        "medical"
+      ],
       "zone": "clean",
       "notes": "Операционный блок проектируется непроходным, с разделением потоков на стерильный и «грязный». При расположении операционных друг над другом септические размещаются выше асептических.",
       "norms": [
@@ -1237,17 +2368,41 @@
       "name": "Предоперационная",
       "group": "clinic.operating",
       "status": "required",
-      "condition": { "gt": ["operatingRooms", 0] },
-      "count": { "kind": "formula", "expr": "operatingRooms", "round": "up" },
+      "condition": {
+        "gt": [
+          "operatingRooms",
+          0
+        ]
+      },
+      "count": {
+        "kind": "formula",
+        "expr": "operatingRooms",
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 12,
+        "value": 15,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь предоперационной на одну операционную взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Т, таблица Т.1*, поз. 4",
+          "quote": "Предоперационные: а) для одной общепрофильной операционной — 15 м2; б) для двух общепрофильных операционных — 24 м2; в) для одной специализированной операционной — 24 м2. Непосредственно сблокированы с операционной.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        }
       },
-      "constraints": { "daylight": "not-required", "floorsForbidden": [-1], "wetZone": true },
-      "flows": ["medical", "staff"],
+      "constraints": {
+        "daylight": "not-required",
+        "floorsForbidden": [
+          -1
+        ],
+        "wetZone": true
+      },
+      "flows": [
+        "medical",
+        "staff"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -1257,17 +2412,40 @@
       "name": "Стерильная кладовая при операционном блоке",
       "group": "clinic.operating",
       "status": "required",
-      "condition": { "gt": ["operatingRooms", 0] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
-      "area": {
-        "kind": "fixed",
-        "value": 14,
-        "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь принимается по номенклатуре стерильных материалов — уточнить по первоисточнику."
+      "condition": {
+        "gt": [
+          "operatingRooms",
+          0
+        ]
       },
-      "constraints": { "daylight": "not-required", "floorsForbidden": [-1] },
-      "flows": ["medical", "goods"],
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
+      "area": {
+        "kind": "formula",
+        "unit": "м²",
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Т, таблица Т.1*, поз. 12",
+          "quote": "Инструментально-материальная — 4 м2 на каждую операционную, но не менее 10 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "expr": "max(4 * operatingRooms, 10)"
+      },
+      "constraints": {
+        "daylight": "not-required",
+        "floorsForbidden": [
+          -1
+        ]
+      },
+      "flows": [
+        "medical",
+        "goods"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -1277,17 +2455,40 @@
       "name": "Палата пробуждения",
       "group": "clinic.operating",
       "status": "required",
-      "condition": { "gt": ["operatingRooms", 0] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "gt": [
+          "operatingRooms",
+          0
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 24,
+        "value": 26,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Число мест пробуждения на одну операционную и норму площади взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Р, таблица Р.1; приложение У, таблица У.1*, поз. 3а",
+          "quote": "Таблица Р.1: палаты интенсивной терапии, послеоперационные — 13 м2 на 1 койку. Таблица У.1*, поз. 3а: палата интенсивной терапии общего назначения — 13 м2 на одну койку, с помещением слива 2 м2 и шлюзом 2 м2 для каждой палаты.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "Принято 2 койки × 13 м². Помещение слива (2 м²) и шлюз (2 м²) учитываются дополнительно."
       },
-      "constraints": { "daylight": "desirable", "floorsForbidden": [-1] },
-      "flows": ["medical"],
+      "constraints": {
+        "daylight": "desirable",
+        "floorsForbidden": [
+          -1
+        ]
+      },
+      "flows": [
+        "medical"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -1297,43 +2498,91 @@
       "name": "Помещение для использованного материала",
       "group": "clinic.operating",
       "status": "required",
-      "condition": { "gt": ["operatingRooms", 0] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "gt": [
+          "operatingRooms",
+          0
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
         "value": 10,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Помещение обслуживает «грязный» контур операционного блока — площадь уточнить по первоисточнику."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Т, таблица Т.1*, поз. 13",
+          "quote": "Помещение разборки и мытья инструментов: до четырех операционных — 10 м2; свыше четырех операционных — 10 + 10 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "При числе операционных свыше четырёх — два помещения по 10 м²."
       },
-      "constraints": { "daylight": "not-required", "floorsForbidden": [-1], "wetZone": true },
-      "flows": ["waste"],
+      "constraints": {
+        "daylight": "not-required",
+        "floorsForbidden": [
+          -1
+        ],
+        "wetZone": true
+      },
+      "flows": [
+        "waste"
+      ],
       "zone": "dirty",
       "norms": []
     },
-
     {
       "id": "clinic.diagnostic.xray",
       "code": "6.01",
       "name": "Рентгенодиагностический кабинет",
       "group": "clinic.diagnostic",
       "status": "conditional",
-      "condition": { "in": ["diagnostics", ["xray"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "diagnostics",
+          [
+            "xray"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
         "value": 34,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь процедурной рентгенкабинета зависит от типа аппарата и определяется санитарными правилами по обеспечению радиационной безопасности плюс технологическим заданием поставщика."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.15, поз. 1",
+          "quote": "Рентгенодиагностические кабинеты для общих исследований: процедурная с поворотным столом-штативом и стойкой снимков, телеуправляемым штативом — 34 м2; процедурная с поворотным столом-штативом, столом, стойкой и штативом снимков — 45 м2; процедурная с усилителем рентгеновского изображения — 48 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Площадь процедурных рентгеновских кабинетов может быть изменена в зависимости от состава и габаритных размеров оборудования в соответствии с паспортными данными (примечание к таблице Ж.15). Требуется расчёт радиационной защиты."
       },
       "constraints": {
         "daylight": "not-required",
         "minHeight": 3,
-        "notAbove": ["clinic.ward.room"],
-        "notBelow": ["clinic.ward.room"]
+        "notAbove": [
+          "clinic.ward.room"
+        ],
+        "notBelow": [
+          "clinic.ward.room"
+        ]
       },
-      "flows": ["medical", "visitors"],
+      "flows": [
+        "medical",
+        "visitors"
+      ],
       "zone": "neutral",
       "notes": "Требует расчёта стационарной радиационной защиты ограждающих конструкций.",
       "norms": []
@@ -1344,22 +2593,47 @@
       "name": "Кабинет компьютерной томографии",
       "group": "clinic.diagnostic",
       "status": "conditional",
-      "condition": { "in": ["diagnostics", ["ct"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "diagnostics",
+          [
+            "ct"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 40,
+        "value": 34,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь и нагрузки на перекрытие принимаются по технологическому заданию поставщика томографа."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.15, поз. 9",
+          "quote": "Кабинет вычислительной (компьютерной) томографии: процедурная — 34 м2; комната управления — 20 м2; генераторная — 15 м2; просмотровая — 10 м2; компьютерная — 18 м2; подготовительная (инъекционная) — 12 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Помимо процедурной блок КТ включает генераторную (15 м²), просмотровую (10 м²), компьютерную (18 м²) и подготовительную-инъекционную (12 м²)."
       },
       "constraints": {
         "daylight": "not-required",
         "minHeight": 3,
-        "notAbove": ["clinic.ward.room"],
-        "notBelow": ["clinic.ward.room"]
+        "notAbove": [
+          "clinic.ward.room"
+        ],
+        "notBelow": [
+          "clinic.ward.room"
+        ]
       },
-      "flows": ["medical", "visitors"],
+      "flows": [
+        "medical",
+        "visitors"
+      ],
       "zone": "neutral",
       "norms": []
     },
@@ -1369,17 +2643,41 @@
       "name": "Кабинет магнитно-резонансной томографии",
       "group": "clinic.diagnostic",
       "status": "conditional",
-      "condition": { "in": ["diagnostics", ["mri"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "diagnostics",
+          [
+            "mri"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
         "value": 45,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Требуется зона безопасности по магнитному полю и клетка Фарадея — габариты принимаются по технологическому заданию поставщика."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.15-1",
+          "quote": "Блок магнитно-резонансного томографа (МРТ): процедурная МРТ — уточняется техническими требованиями завода-изготовителя; комната управления МРТ — 10 м2; техническая комната — 15 м2; помещение подготовки пациента — 7 м2; пост контроля доступа в блок МРТ — 6 м2; место для хранения каталок — 6 м2; помещение для передвижного медицинского оборудования — 12 м2. Блок МРТ предусматривают непроходным.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Дополнена — приказ КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Площадь процедурной МРТ нормой не устанавливается — принимается по техническим требованиям завода-изготовителя. 45 м² — ориентир для томографа 1,5 Т. По п. 4.3.2.24–4.3.2.25 отделение МРТ не допускается в жилых зданиях и смежно с палатами для беременных, детей и кардиологических больных."
       },
-      "constraints": { "daylight": "not-required", "minHeight": 3 },
-      "flows": ["medical", "visitors"],
+      "constraints": {
+        "daylight": "not-required",
+        "minHeight": 3
+      },
+      "flows": [
+        "medical",
+        "visitors"
+      ],
       "zone": "neutral",
       "norms": []
     },
@@ -1389,17 +2687,41 @@
       "name": "Комната управления (пультовая)",
       "group": "clinic.diagnostic",
       "status": "conditional",
-      "condition": { "in": ["diagnostics", ["xray", "ct", "mri"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "diagnostics",
+          [
+            "xray",
+            "ct",
+            "mri"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 12,
+        "value": 10,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь пультовой взять из санитарных правил по радиационной безопасности."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.15, поз. 1, 3",
+          "quote": "Комната управления — 10 м2. При размещении дополнительных функциональных, программирующих и вычислительных устройств и приборов площадь следует увеличивать в зависимости от габаритных размеров оборудования.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Для кабинета компьютерной томографии комната управления — 20 м², для рентгеноангиографического кабинета — 25 м² (таблица Ж.15, поз. 9, 10)."
       },
-      "constraints": { "daylight": "not-required" },
-      "flows": ["staff"],
+      "constraints": {
+        "daylight": "not-required"
+      },
+      "flows": [
+        "staff"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -1409,17 +2731,41 @@
       "name": "Кабинет ультразвуковой диагностики",
       "group": "clinic.diagnostic",
       "status": "conditional",
-      "condition": { "in": ["diagnostics", ["us"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "diagnostics",
+          [
+            "us"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
         "value": 18,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь кабинета УЗИ взять из нормативной таблицы."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.8, поз. 6",
+          "quote": "Кабинет ультразвуковых исследований (эхокардиографии, абдоминальных исследований и т.д.): диагностический кабинет — 18 м2; кабина для переодевания — 4 м2 (2 × 2).",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Кабина для переодевания (4 м²) предусматривается дополнительно для амбулаторно-поликлинической сети."
       },
-      "constraints": { "daylight": "not-required", "wetZone": true },
-      "flows": ["medical", "visitors"],
+      "constraints": {
+        "daylight": "not-required",
+        "wetZone": true
+      },
+      "flows": [
+        "medical",
+        "visitors"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -1429,17 +2775,40 @@
       "name": "Эндоскопический кабинет с моечной",
       "group": "clinic.diagnostic",
       "status": "conditional",
-      "condition": { "in": ["diagnostics", ["endo"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "diagnostics",
+          [
+            "endo"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 26,
+        "value": 22,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Обработка эндоскопов выделяется в отдельное помещение — состав и площади взять из санитарных правил."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.10*, поз. 1, 6",
+          "quote": "Кабинеты гастроскопии, эзофагоскопии, дуоденоскопии: кабинет врача — 10 м2, процедурная — 12 м2. Моечная-дезинфекционная эндоскопической аппаратуры — 10 м2. Общая площадь помещения моечной-дезинфекционной и помещения для хранения должна составлять не менее 10 кв.м.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 17.02.2020 г. №38-НҚ"
+        },
+        "sourceHint": "22 м² = процедурная 12 м² + моечная-дезинфекционная 10 м². Кабинет врача (10 м²), помещение хранения (6 м²) и кабина для раздевания (4 м²) предусматриваются дополнительно."
       },
-      "constraints": { "daylight": "not-required", "wetZone": true },
-      "flows": ["medical"],
+      "constraints": {
+        "daylight": "not-required",
+        "wetZone": true
+      },
+      "flows": [
+        "medical"
+      ],
       "zone": "neutral",
       "norms": []
     },
@@ -1449,38 +2818,85 @@
       "name": "Кабинет функциональной диагностики",
       "group": "clinic.diagnostic",
       "status": "conditional",
-      "condition": { "in": ["diagnostics", ["func"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "diagnostics",
+          [
+            "func"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 18,
+        "value": 15,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь взять из нормативной таблицы."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.8, поз. 1",
+          "quote": "Кабинет функциональной диагностики: кабинет врача — 10 м2; диагностический кабинет — 15 м2; кабина для переодевания — 4 м2 (2 × 2).",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "При мощности поликлиники свыше 200 посещений в смену состав расширяется: кабинет поликардиографии и электроэнцефалографии — 18 м² с экранированной кабиной 8 м²; кабинет исследований внешнего дыхания — 24 м²."
       },
-      "constraints": { "daylight": "desirable" },
-      "flows": ["medical", "visitors"],
+      "constraints": {
+        "daylight": "desirable"
+      },
+      "flows": [
+        "medical",
+        "visitors"
+      ],
       "zone": "clean",
       "norms": []
     },
-
     {
       "id": "clinic.lab.main",
       "code": "7.01",
       "name": "Клинико-диагностическая лаборатория",
       "group": "clinic.lab",
       "status": "conditional",
-      "condition": { "in": ["lab", ["own", "express"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "lab",
+          [
+            "own",
+            "express"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 45,
+        "value": 48,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Состав и площади лабораторных помещений зависят от перечня исследований и класса биологической безопасности — взять из санитарных правил."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.6, поз. 5, 6, 8, 11, 29",
+          "quote": "Для поликлиники до 250 посещений в смену (стационара до 100 коек): общеклиническая лаборантская — 16 м2; гематологическая лаборантская — 10 м2; микроскопическая — 10 м2; биохимическая лаборантская — 10 м2; центрифужная — 12 м2. Лаборантские площадью более 36 м2 следует проектировать из нескольких помещений.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "48 м² — сумма основных лаборантских клинико-гематологической и биохимической групп для поликлиники до 250 посещений в смену. Полный состав (микробиологическая и иммунологическая группы, весовая, дистилляционная, помещения хранения реактивов и ядовитых веществ) принимается по таблице Ж.6 в зависимости от мощности и перечня исследований."
       },
-      "constraints": { "daylight": "required", "wetZone": true },
-      "flows": ["medical", "staff"],
+      "constraints": {
+        "daylight": "required",
+        "wetZone": true
+      },
+      "flows": [
+        "medical",
+        "staff"
+      ],
       "zone": "neutral",
       "norms": []
     },
@@ -1490,17 +2906,42 @@
       "name": "Процедурная забора биоматериала",
       "group": "clinic.lab",
       "status": "conditional",
-      "condition": { "in": ["lab", ["own", "express"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "lab",
+          [
+            "own",
+            "express"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 14,
+        "value": 9,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь взять из нормативной таблицы."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.6, поз. 1, 3",
+          "quote": "Помещение для взятия проб крови — 9 м2 (для поликлиники до 250 посещений в смену; 12–16 м2 при большей мощности). Помещение приема, регистрации, сортировки проб — 4–6 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Помещение приёма, регистрации и сортировки проб (6 м²) и зона ожидания для посетителей (8–10 м²) предусматриваются дополнительно."
       },
-      "constraints": { "daylight": "required", "wetZone": true },
-      "flows": ["visitors", "medical"],
+      "constraints": {
+        "daylight": "required",
+        "wetZone": true
+      },
+      "flows": [
+        "visitors",
+        "medical"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -1510,38 +2951,82 @@
       "name": "Моечная лабораторной посуды",
       "group": "clinic.lab",
       "status": "conditional",
-      "condition": { "eq": ["lab", "own"] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "eq": [
+          "lab",
+          "own"
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 12,
+        "value": 14,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.6, поз. 30",
+          "quote": "Моечная — 14 + 8 м2 (для сельской амбулатории, поликлиник до 250 и до 500 посещений в смену).",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Норма записана как «14 + 8»: собственно моечная 14 м² и смежное помещение (автоклавная/сушильная) 8 м². Для поликлиник свыше 750 посещений моечные предусматриваются раздельно по группам исследований (поз. 10, 16, 25)."
       },
-      "constraints": { "daylight": "not-required", "wetZone": true },
-      "flows": ["waste"],
+      "constraints": {
+        "daylight": "not-required",
+        "wetZone": true
+      },
+      "flows": [
+        "waste"
+      ],
       "zone": "dirty",
       "norms": []
     },
-
     {
       "id": "clinic.rehab.physio",
       "code": "8.01",
       "name": "Кабинет физиотерапии",
       "group": "clinic.rehab",
       "status": "conditional",
-      "condition": { "in": ["rehab", ["physio"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "rehab",
+          [
+            "physio"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 30,
+        "value": 20,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Площадь — плейсхолдер: норму на одну кушетку и требования к кабинам взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.11, поз. 1",
+          "quote": "Кабинет электро- и светолечения — 6 м2 на одну кровать, но не менее 12 м2 + 8 м2 (помещение для обработки прокладок).",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "20 м² = кабинет 12 м² + помещение обработки прокладок 8 м². При числе кушеток более двух площадь кабинета — 6 м² на кровать. Кабинеты УВЧ- и ультразвуковой терапии нормируются так же."
       },
-      "constraints": { "daylight": "desirable", "wetZone": true },
-      "flows": ["visitors", "medical"],
+      "constraints": {
+        "daylight": "desirable",
+        "wetZone": true
+      },
+      "flows": [
+        "visitors",
+        "medical"
+      ],
       "zone": "clean",
       "notes": "Одно из немногих лечебных помещений, которое допускается опускать в цокольный и подвальный этаж.",
       "norms": [
@@ -1560,17 +3045,40 @@
       "name": "Зал лечебной физкультуры",
       "group": "clinic.rehab",
       "status": "conditional",
-      "condition": { "in": ["rehab", ["exercise"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "rehab",
+          [
+            "exercise"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 60,
+        "value": 50,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Площадь — плейсхолдер: норму на одного занимающегося взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.11, поз. 37",
+          "quote": "Зал лечебной физкультуры для групповых занятий (не менее 10 чел.): зал — 5 м2 на одно место, но не менее 50 м2; душевые кабины — 2–3 м2; раздевальная — 1,3 м2 на одно место; кладовая инвентаря — 6 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Зал для занятий малых групп (до четырёх человек) — 20 м²; кабинет ЛФК для индивидуальных занятий — 12 м²; зал для обучения ходьбе — 36 м²."
       },
-      "constraints": { "daylight": "desirable", "minHeight": 3 },
-      "flows": ["visitors"],
+      "constraints": {
+        "daylight": "desirable",
+        "minHeight": 3
+      },
+      "flows": [
+        "visitors"
+      ],
       "zone": "clean",
       "norms": [
         {
@@ -1588,17 +3096,40 @@
       "name": "Кабинет массажа",
       "group": "clinic.rehab",
       "status": "conditional",
-      "condition": { "in": ["rehab", ["massage"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "rehab",
+          [
+            "massage"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 18,
+        "value": 12,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь на одно рабочее место массажиста взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.11, поз. 42",
+          "quote": "Кабинет массажа — 8 м2 на одну кровать, но не менее 12 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Душевая персонала (3 м²) предусматривается при количестве массажных кушеток четыре и более (таблица Ж.11, поз. 43)."
       },
-      "constraints": { "daylight": "required", "wetZone": true },
-      "flows": ["visitors"],
+      "constraints": {
+        "daylight": "required",
+        "wetZone": true
+      },
+      "flows": [
+        "visitors"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -1608,38 +3139,116 @@
       "name": "Палата дневного стационара",
       "group": "clinic.rehab",
       "status": "conditional",
-      "condition": { "eq": ["dayHospital", true] },
-      "count": { "kind": "fixed", "value": 2, "round": "up" },
-      "area": {
-        "kind": "fixed",
-        "value": 21,
-        "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Мощность дневного стационара и норму площади на место взять из задания на проектирование и первоисточника."
+      "condition": {
+        "eq": [
+          "dayHospital",
+          true
+        ]
       },
-      "constraints": { "daylight": "required", "floorsForbidden": [-1, 0] },
-      "flows": ["medical"],
+      "count": {
+        "kind": "fixed",
+        "value": 2,
+        "round": "up"
+      },
+      "area": {
+        "kind": "lookup",
+        "unit": "м²",
+        "lookup": {
+          "mode": "match",
+          "cases": [
+            {
+              "when": {
+                "lt": [
+                  "bedsPerRoom",
+                  2
+                ]
+              },
+              "value": 10,
+              "label": "палата на 1 койку"
+            },
+            {
+              "when": {
+                "lt": [
+                  "bedsPerRoom",
+                  3
+                ]
+              },
+              "value": 15,
+              "label": "палата на 2 койки"
+            },
+            {
+              "when": {
+                "gte": [
+                  "bedsPerRoom",
+                  3
+                ]
+              },
+              "value": 21,
+              "label": "палата на 3 койки"
+            }
+          ]
+        },
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Г, таблица Г.1; приложение Р, таблица Р.1",
+          "quote": "Таблица Г.1 «Площади дневного стационара»: палата на 1 койку прочая — 10 м2; на 2 койки — 15 м2; на 3 койки — 21 м2. Для медико-социальных, восстановительного лечения и для больных, передвигающихся с помощью кресел-колясок — 12, 20 и 30 м2 соответственно. Таблица Р.1: палата дневного стационара для взрослых — 6,0 м2 на койку, для детей — 4,5 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Уборная при палате (3 м²) и душевая (2 м²) учитываются отдельно. Для палат медико-социальных, восстановительного лечения и для маломобильных пациентов площади принимаются 12 / 20 / 30 м²."
+      },
+      "constraints": {
+        "daylight": "required",
+        "floorsForbidden": [
+          -1,
+          0
+        ]
+      },
+      "flows": [
+        "medical"
+      ],
       "zone": "clean",
       "norms": []
     },
-
     {
       "id": "clinic.sterile.receive",
       "code": "9.01",
       "name": "Приёмная нестерильных материалов",
       "group": "clinic.sterile",
       "status": "conditional",
-      "condition": { "eq": ["sterilization", "own"] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "eq": [
+          "sterilization",
+          "own"
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 14,
+        "value": 9,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. ЦСО проектируется по принципу поточности от грязной зоны к стерильной — площади взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.21*, поз. 1",
+          "quote": "Помещение приема и хранения нестерильных материалов, белья, инструментов — 9 м2 при мощности амбулаторно-поликлинической организации от 100 до 300 посещений в смену (12 м2 при 450–750; 16 м2 при 1200).",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. таблицы — приказ КДСиЖКХ от 14.06.2019 г. №98-НҚ"
+        },
+        "sourceHint": "Для стационаров состав и площади ЦСО принимаются по таблице Ж.22 (8–24 м² в зависимости от коечной мощности)."
       },
-      "constraints": { "daylight": "not-required" },
-      "flows": ["medical", "waste"],
+      "constraints": {
+        "daylight": "not-required"
+      },
+      "flows": [
+        "medical",
+        "waste"
+      ],
       "zone": "dirty",
       "norms": []
     },
@@ -1649,17 +3258,38 @@
       "name": "Моечная (дезинфекционная)",
       "group": "clinic.sterile",
       "status": "conditional",
-      "condition": { "eq": ["sterilization", "own"] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "eq": [
+          "sterilization",
+          "own"
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 18,
+        "value": 10,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.21*, поз. 2",
+          "quote": "Моечная — 8 м2 (100–150 посещений в смену), 10 м2 (200–450), 12 м2 (500), 16 м2 (750), 20 м2 (1200).",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. таблицы — приказ КДСиЖКХ от 14.06.2019 г. №98-НҚ"
+        },
+        "sourceHint": "Для организаций мощностью до 50 посещений предусматривается моечная-стерилизационная с разделением на чистую и грязную зоны."
       },
-      "constraints": { "daylight": "not-required", "wetZone": true },
-      "flows": ["medical"],
+      "constraints": {
+        "daylight": "not-required",
+        "wetZone": true
+      },
+      "flows": [
+        "medical"
+      ],
       "zone": "dirty",
       "norms": []
     },
@@ -1669,17 +3299,37 @@
       "name": "Упаковочная и стерилизационная",
       "group": "clinic.sterile",
       "status": "conditional",
-      "condition": { "eq": ["sterilization", "own"] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "eq": [
+          "sterilization",
+          "own"
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 24,
+        "value": 15,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь зависит от производительности стерилизаторов — принимается по технологическому заданию."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.21*, поз. 5",
+          "quote": "Стерилизационная-автоклавная (из стерильной и нестерильной зон) — 6–8 м2 (до 50 посещений), 10 м2 (100–150), 13 м2 (200–250), 15 м2 (300–450), 20 м2 (500), 24 м2 (750), 28 м2 (1200).",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. таблицы — приказ КДСиЖКХ от 14.06.2019 г. №98-НҚ"
+        },
+        "sourceHint": "Помещение изготовления, укладки перевязочных материалов и упаковки белья (10–24 м²) предусматривается при мощности от 450 посещений в смену (поз. 3)."
       },
-      "constraints": { "daylight": "not-required" },
-      "flows": ["medical"],
+      "constraints": {
+        "daylight": "not-required"
+      },
+      "flows": [
+        "medical"
+      ],
       "zone": "neutral",
       "norms": []
     },
@@ -1689,42 +3339,85 @@
       "name": "Склад стерильных материалов",
       "group": "clinic.sterile",
       "status": "conditional",
-      "condition": { "eq": ["sterilization", "own"] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "eq": [
+          "sterilization",
+          "own"
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 16,
+        "value": 11,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.21*, поз. 6",
+          "quote": "Склад стерильных материалов — 8 м2 (100–250 посещений в смену), 11 м2 (300–450), 15 м2 (500), 17 м2 (750), 21 м2 (1200).",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. таблицы — приказ КДСиЖКХ от 14.06.2019 г. №98-НҚ"
+        }
       },
-      "constraints": { "daylight": "not-required" },
-      "flows": ["medical", "goods"],
+      "constraints": {
+        "daylight": "not-required"
+      },
+      "flows": [
+        "medical",
+        "goods"
+      ],
       "zone": "clean",
       "norms": []
     },
-
     {
       "id": "clinic.catering.kitchen",
       "code": "10.01",
       "name": "Кухня (горячий цех)",
       "group": "clinic.catering",
       "status": "conditional",
-      "condition": { "in": ["catering", ["own", "finishing"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "catering",
+          [
+            "own",
+            "finishing"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 60,
+        "value": 30,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площади цехов пищеблока принимаются по числу довольствующихся и технологическому проекту — взять из санитарных правил и технологического задания."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.25, поз. 6",
+          "quote": "Варочный цех — 30 м2 при вместимости стационара до 120 коек; 35 м2 (120), 45 м2 (180), 55 м2 (240), 65 м2 (300), 90 м2 (600), 110 м2 (1000). Площадь уточняется в соответствии с расстановкой оборудования.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Для кухни-доготовочной варочный зал — 30–55 м² по таблице Ж.26. При привозном питании пищеблок заменяется буфетными отделений (таблица К.1*, поз. 36)."
       },
       "constraints": {
         "daylight": "desirable",
         "wetZone": true,
-        "notAbove": ["clinic.ward.room"]
+        "notAbove": [
+          "clinic.ward.room"
+        ]
       },
-      "flows": ["food", "staff"],
+      "flows": [
+        "food",
+        "staff"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -1734,17 +3427,38 @@
       "name": "Заготовочные цеха",
       "group": "clinic.catering",
       "status": "conditional",
-      "condition": { "eq": ["catering", "own"] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "eq": [
+          "catering",
+          "own"
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 45,
+        "value": 34,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Раздельные цеха для сырой и готовой продукции обязательны — состав и площади взять из санитарных правил."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.25, поз. 2, 3, 4, 7",
+          "quote": "При вместимости стационара до 120 коек: цех заготовки овощей — 8 м2; цех заготовки мяса и птицы — 10 м2; цех заготовки рыбы — 10 м2; холодная заготовочная — 6 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "34 м² — сумма заготовочных цехов для стационара до 120 коек. Дополнительно: помещение первичной обработки овощей — 10 м², помещение для опалки птиц — 8 м², цех мучных изделий — 8 м²."
       },
-      "constraints": { "daylight": "desirable", "wetZone": true },
-      "flows": ["food"],
+      "constraints": {
+        "daylight": "desirable",
+        "wetZone": true
+      },
+      "flows": [
+        "food"
+      ],
       "zone": "dirty",
       "norms": []
     },
@@ -1754,17 +3468,41 @@
       "name": "Складские помещения продуктов",
       "group": "clinic.catering",
       "status": "conditional",
-      "condition": { "in": ["catering", ["own", "finishing"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "catering",
+          [
+            "own",
+            "finishing"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 30,
+        "value": 34,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь зависит от нормативного запаса продуктов в сутках — взять из технологического задания."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.25, поз. 12, 14, 15, 16",
+          "quote": "При вместимости стационара до 120 коек: охлаждаемые камеры для хранения мяса — 6 м2, рыбы — 6 м2, фруктов и зелени — 8 м2; кладовая сухих продуктов — 4 м2; кладовая хлеба — 4 м2; кладовая овощей — 6 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Камера отходов со шлюзом — 4 + 2 м² с отдельным наружным выходом. Овощехранилище — 1,0 кг на одного больного и 0,35 кг на одного работника персонала (поз. 21)."
       },
-      "constraints": { "daylight": "not-required" },
-      "flows": ["food", "goods"],
+      "constraints": {
+        "daylight": "not-required"
+      },
+      "flows": [
+        "food",
+        "goods"
+      ],
       "zone": "dirty",
       "norms": []
     },
@@ -1774,38 +3512,82 @@
       "name": "Моечная кухонной посуды",
       "group": "clinic.catering",
       "status": "conditional",
-      "condition": { "in": ["catering", ["own", "finishing"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "catering",
+          [
+            "own",
+            "finishing"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 14,
+        "value": 6,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.25, поз. 9",
+          "quote": "Моечная кухонной посуды — 6 м2 при вместимости стационара до 120 коек; 8 м2 (120), 10 м2 (180), 12 м2 (240–300), 20 м2 (540), 30 м2 (1000).",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        }
       },
-      "constraints": { "daylight": "not-required", "wetZone": true },
-      "flows": ["food", "waste"],
+      "constraints": {
+        "daylight": "not-required",
+        "wetZone": true
+      },
+      "flows": [
+        "food",
+        "waste"
+      ],
       "zone": "dirty",
       "norms": []
     },
-
     {
       "id": "clinic.laundry.dirty",
       "code": "11.01",
       "name": "Приём и сортировка грязного белья",
       "group": "clinic.laundry",
       "status": "conditional",
-      "condition": { "eq": ["laundry", "own"] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "eq": [
+          "laundry",
+          "own"
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 16,
+        "value": 8,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Прачечная проектируется поточно, без встречных потоков чистого и грязного белья — площади взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.24, поз. 1",
+          "quote": "Цех приема неинфицированного белья: прием, сортировка, хранение белья — 6 м2 (100 кг белья в смену), 8 м2 (300), 15 м2 (500), 22 м2 (700), 34 м2 (1000). Зона ожидания — 6 м2 (300).",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Принята производительность 300 кг белья в смену. Расчётная производительность определяется по коечному фонду и нормам смены белья."
       },
-      "constraints": { "daylight": "not-required", "wetZone": true },
-      "flows": ["linen"],
+      "constraints": {
+        "daylight": "not-required",
+        "wetZone": true
+      },
+      "flows": [
+        "linen"
+      ],
       "zone": "dirty",
       "norms": []
     },
@@ -1815,17 +3597,37 @@
       "name": "Стиральное отделение",
       "group": "clinic.laundry",
       "status": "conditional",
-      "condition": { "eq": ["laundry", "own"] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "eq": [
+          "laundry",
+          "own"
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 30,
+        "value": 36,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь зависит от производительности оборудования — принимается по технологическому заданию."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.24, поз. 2",
+          "quote": "Стиральный цех — 18 м2 (100 кг белья в смену), 36 м2 (300), 44 м2 (500), 65 м2 (700), 75 м2 (1000). Площадь может быть изменена в зависимости от расстановки оборудования.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        }
       },
-      "constraints": { "daylight": "not-required", "wetZone": true },
-      "flows": ["linen"],
+      "constraints": {
+        "daylight": "not-required",
+        "wetZone": true
+      },
+      "flows": [
+        "linen"
+      ],
       "zone": "neutral",
       "norms": []
     },
@@ -1835,42 +3637,80 @@
       "name": "Гладильно-складское отделение чистого белья",
       "group": "clinic.laundry",
       "status": "conditional",
-      "condition": { "eq": ["laundry", "own"] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "eq": [
+          "laundry",
+          "own"
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 24,
+        "value": 40,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.24, поз. 3, 4",
+          "quote": "Сушильно-гладильный цех — 15 м2 (100 кг/смену), 40 м2 (300), 50 м2 (500), 70 м2 (700). Цех разборки, починки, упаковки и хранения белья — 8 м2 (100), 12 м2 (300), 18 м2 (500).",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Цех разборки, починки, упаковки и хранения белья (12 м²) и помещение выдачи белья (4 м²) предусматриваются дополнительно."
       },
-      "constraints": { "daylight": "not-required" },
-      "flows": ["linen"],
+      "constraints": {
+        "daylight": "not-required"
+      },
+      "flows": [
+        "linen"
+      ],
       "zone": "clean",
       "norms": []
     },
-
     {
       "id": "clinic.morgue.autopsy",
       "code": "12.01",
       "name": "Секционная",
       "group": "clinic.morgue",
       "status": "conditional",
-      "condition": { "eq": ["morgue", true] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "eq": [
+          "morgue",
+          true
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 30,
+        "value": 18,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Состав и площади патологоанатомического отделения взять из санитарных правил."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.18*, поз. 34, 36",
+          "quote": "Секционная на один стол с передвижным рентгеновским аппаратом — 18 м2 (при 1–5 врачах-патологоанатомах), 25 м2 (при 10 и более). Предсекционная при секционных — 10 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 12.04.2023 г. №62-НҚ"
+        },
+        "sourceHint": "Количество патологоанатомических столов определяется из расчёта 1 стол на 120 круглосуточных стационарных коек (примечание 7 к таблице Ж.18*). Предсекционная (10 м²) предусматривается дополнительно."
       },
       "constraints": {
         "daylight": "desirable",
         "wetZone": true,
         "separateEntrance": true
       },
-      "flows": ["medical", "waste"],
+      "flows": [
+        "medical",
+        "waste"
+      ],
       "zone": "dirty",
       "notes": "Отделение размещается изолированно, с самостоятельным въездом, вне зоны видимости палат и входа для посетителей.",
       "norms": []
@@ -1881,17 +3721,38 @@
       "name": "Помещение хранения тел",
       "group": "clinic.morgue",
       "status": "conditional",
-      "condition": { "eq": ["morgue", true] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "eq": [
+          "morgue",
+          true
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 20,
+        "value": 15,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Вместимость холодильных камер принимается по коечной мощности — взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.18*, поз. 33",
+          "quote": "Помещение для холодильных камер: невскрытых трупов — 15 м2 (1 врач), 18 м2 (2), 24 м2 (5), 36 м2 (10); вскрытых трупов — 15–48 м2; трупов, поступающих на хранение — 15–36 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 12.04.2023 г. №62-НҚ"
+        },
+        "sourceHint": "Количество холодильных камер определяется из расчёта 1 секционное место на 50 круглосуточных стационарных коек (примечание 7 к таблице Ж.18*)."
       },
-      "constraints": { "daylight": "not-required", "separateEntrance": true },
-      "flows": ["medical"],
+      "constraints": {
+        "daylight": "not-required",
+        "separateEntrance": true
+      },
+      "flows": [
+        "medical"
+      ],
       "zone": "dirty",
       "norms": []
     },
@@ -1901,37 +3762,72 @@
       "name": "Помещение прощания",
       "group": "clinic.morgue",
       "status": "conditional",
-      "condition": { "eq": ["morgue", true] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "eq": [
+          "morgue",
+          true
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 30,
+        "value": 50,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблица Ж.18*, поз. 48, 50",
+          "quote": "Ритуальная группа: траурный зал с магнитофоном — 50 м2 (при 1–10 врачах-патологоанатомах), 60 м2 (при 15 и свыше); вестибюль для посетителей — 18–30 м2; туалет при вестибюле — 3 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 12.04.2023 г. №62-НҚ"
+        },
+        "sourceHint": "Вестибюль для посетителей (18 м²) и туалет при нём (3 м²) предусматриваются дополнительно."
       },
-      "constraints": { "daylight": "desirable", "separateEntrance": true },
-      "flows": ["visitors"],
+      "constraints": {
+        "daylight": "desirable",
+        "separateEntrance": true
+      },
+      "flows": [
+        "visitors"
+      ],
       "zone": "neutral",
       "norms": []
     },
-
     {
       "id": "clinic.admin.chief",
       "code": "13.01",
       "name": "Кабинет главного врача",
       "group": "clinic.admin",
       "status": "required",
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 18,
+        "value": 10,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь административных кабинетов взять из нормативной таблицы."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблицы Ж.27 и Ж.1, поз. 1",
+          "quote": "Таблица Ж.27: кабинет главного врача — 10 м2, приемная главного врача — 10 м2 (для стационаров вместимостью от 120 до 600 коек). Таблица Ж.1, поз. 1: кабинет главного врача — 10 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Приёмная главного врача (10 м² по таблице Ж.27, 6 м² по таблице Ж.1) предусматривается дополнительно."
       },
-      "constraints": { "daylight": "required" },
-      "flows": ["staff"],
+      "constraints": {
+        "daylight": "required"
+      },
+      "flows": [
+        "staff"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -1941,16 +3837,31 @@
       "name": "Административные кабинеты",
       "group": "clinic.admin",
       "status": "required",
-      "count": { "kind": "fixed", "value": 3, "round": "up" },
+      "count": {
+        "kind": "fixed",
+        "value": 3,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 14,
+        "value": 10,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Число и площадь кабинетов принимаются по штатному расписанию."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблицы Ж.27 и Ж.1, поз. 8",
+          "quote": "Таблица Ж.27: канцелярия, бухгалтерия — 10 м2; касса — 8 м2; медицинская канцелярия — 8–10 м2; кабинет по охране труда и технике безопасности — 10 м2; комната инженерно-технического персонала — 10 м2. Таблица Ж.1, поз. 8: канцелярия, бухгалтерия — 10–15 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Статистический и организационно-методический кабинеты — 4 м² на одно рабочее место, но не менее 12 м² (таблица Ж.27)."
       },
-      "constraints": { "daylight": "required" },
-      "flows": ["staff"],
+      "constraints": {
+        "daylight": "required"
+      },
+      "flows": [
+        "staff"
+      ],
       "zone": "clean",
       "norms": []
     },
@@ -1960,16 +3871,31 @@
       "name": "Архив медицинской документации",
       "group": "clinic.admin",
       "status": "required",
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 20,
+        "value": 12,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь принимается по объёму хранения и сроку хранения документации."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблицы Ж.1 поз. 10 и Ж.27",
+          "quote": "Таблица Ж.1, поз. 10: медицинский архив — 12 м2 (200–300 посещений в смену), 16 м2 (450), 22 м2 (600). Таблица Ж.27: медицинский архив — 0,3 м2 на 10 коек.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Для стационара площадь архива считается по показателю 0,3 м² на 10 коек (таблица Ж.27) и суммируется с поликлинической частью."
       },
-      "constraints": { "daylight": "not-required" },
-      "flows": ["staff"],
+      "constraints": {
+        "daylight": "not-required"
+      },
+      "flows": [
+        "staff"
+      ],
       "zone": "neutral",
       "norms": []
     },
@@ -1979,16 +3905,32 @@
       "name": "Санитарно-бытовые помещения персонала",
       "group": "clinic.admin",
       "status": "required",
-      "count": { "kind": "fixed", "value": 2, "round": "up" },
+      "count": {
+        "kind": "fixed",
+        "value": 2,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 24,
+        "value": 12,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Гардеробные персонала проектируются раздельными для домашней и рабочей одежды — состав и площади взять из санитарных правил."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение К, таблица К.1*, поз. 44, 45; приложение Ж, таблица Ж.1, поз. 14; п. 4.3.2.20",
+          "quote": "Таблица К.1*: кабина личной гигиены персонала — 3 м2; помещение для персонала (со шлюзом и умывальником) и душем — 3 + 3 м2. Таблица Ж.1, поз. 14: гардероб домашней и рабочей одежды персонала — 0,55 м2 на один двойной шкаф. П. 4.3.2.20: одна душевая кабина на десять человек в инфекционных и противотуберкулезных стационарах, в остальных — одна душевая кабина на пятнадцать человек.",
+          "source": "norm",
+          "verified": true,
+          "edition": "Изм.ред. — приказ КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "Площадь уточняется по штатной численности: гардероб — 0,55 м² на двойной шкаф, душевые — 1 кабина на 15 работающих в наибольшей смене, санитарные приборы — 1 на 50 мужчин и 1 на 30 женщин (п. 4.3.2.21)."
       },
-      "constraints": { "daylight": "not-required", "wetZone": true },
-      "flows": ["staff"],
+      "constraints": {
+        "daylight": "not-required",
+        "wetZone": true
+      },
+      "flows": [
+        "staff"
+      ],
       "zone": "neutral",
       "norms": []
     },
@@ -1998,37 +3940,75 @@
       "name": "Конференц-зал",
       "group": "clinic.admin",
       "status": "optional",
-      "condition": { "in": ["extras", ["conference"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "extras",
+          [
+            "conference"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 60,
+        "value": 45,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь принимается по числу мест и заданию на проектирование."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблицы Ж.27 и Ж.1, поз. 23, 24",
+          "quote": "Конференц-зал — 0,9 м2 на одно место (с учетом организации эстрады и устройством пюпитров); фойе при конференц-зале — 0,3 м2 на одно место в зале. Таблица Ж.1: конференц-зал рассчитывается на 50 % персонала.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Принято 50 мест × 0,9 м². Число мест определяется как 50 % численности персонала; фойе (0,3 м²/место) предусматривается дополнительно."
       },
-      "constraints": { "daylight": "desirable" },
-      "flows": ["staff"],
+      "constraints": {
+        "daylight": "desirable"
+      },
+      "flows": [
+        "staff"
+      ],
       "zone": "clean",
       "norms": []
     },
-
     {
       "id": "clinic.tech.waste",
       "code": "14.01",
       "name": "Помещение сбора медицинских отходов",
       "group": "clinic.tech",
       "status": "required",
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
-        "value": 14,
+        "value": 10,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Требования к сбору, временному хранению и удалению медицинских отходов по классам опасности взять из санитарных правил."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "п. 4.3.12.1, 4.3.12.2, 4.3.12.13",
+          "quote": "П. 4.3.12.13: для размещения установки предусматриваются помещение временного хранения отходов площадью не менее 10,0 м2, помещение размещения установки площадью не менее 20,0 м2 (если иное не предусмотрено производителем). П. 4.3.12.1: комната для временного хранения медицинских отходов оборудуется вытяжной вентиляцией, холодильным оборудованием для хранения биологических отходов, стеллажами, контейнерами, раковиной, бактерицидной лампой. П. 4.3.12.2: помещение располагается в непосредственной близости от выхода из корпуса с подъездными путями для вывоза.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "При размещении собственной установки по обезвреживанию отходов дополнительно требуется помещение установки не менее 20 м² и служебно-бытовые помещения. Для врачебной амбулатории комната временного хранения медицинских отходов — 4 м² (таблица Д.1*)."
       },
-      "constraints": { "daylight": "not-required", "separateEntrance": true, "wetZone": true },
-      "flows": ["waste"],
+      "constraints": {
+        "daylight": "not-required",
+        "separateEntrance": true,
+        "wetZone": true
+      },
+      "flows": [
+        "waste"
+      ],
       "zone": "dirty",
       "norms": []
     },
@@ -2038,16 +4018,33 @@
       "name": "Кладовая уборочного инвентаря",
       "group": "clinic.tech",
       "status": "required",
-      "count": { "kind": "perUnit", "per": "floor", "divisor": 1, "round": "up" },
+      "count": {
+        "kind": "perUnit",
+        "per": "floor",
+        "divisor": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
         "value": 4,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Инвентарь маркируется и хранится раздельно по зонам — требование уточнить по санитарным правилам."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "приложение Ж, таблицы Ж.6 поз. 43, Ж.10* поз. 12, Ж.15 поз. 18; приложение Д, таблица Д.1*",
+          "quote": "Кладовая уборочного инвентаря — 4 м2 (с трапом, поливочным краном и сушкой). Таблица Д.1*: помещение для уборочного инвентаря — 4 м2; помещение для хранения дезинфицирующих средств — 6 м2.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Помещение хранения дезинфицирующих средств (6 м²) предусматривается отдельно (таблица Д.1*)."
       },
-      "constraints": { "daylight": "not-required", "wetZone": true },
-      "flows": ["waste"],
+      "constraints": {
+        "daylight": "not-required",
+        "wetZone": true
+      },
+      "flows": [
+        "waste"
+      ],
       "zone": "dirty",
       "norms": []
     },
@@ -2057,16 +4054,31 @@
       "name": "Венткамеры",
       "group": "clinic.tech",
       "status": "required",
-      "count": { "kind": "fixed", "value": 2, "round": "up" },
+      "count": {
+        "kind": "fixed",
+        "value": 2,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
         "value": 40,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Площадь определяется расчётом воздухообмена; для операционных и палат интенсивной терапии требуются автономные установки — уточнить в смежном разделе ОВ."
+        "norm": {
+          "doc": "СП РК 3.02-107-2014",
+          "clause": "п. 4.2.19; раздел 4.6.2",
+          "quote": "Двери кладовых для хранения горючих материалов, мастерских для переработки горючих материалов, электрощитовых, вентиляционных камер и других пожароопасных технических помещений должны быть противопожарными.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "Площадь венткамер нормой не задана — определяется расстановкой оборудования по расчёту воздухообмена (СП РК 4.02-101-2012; кратность воздухообмена по помещениям ЛПУ — таблица Ш.2 СП РК 3.02-113-2014*). 40 м² на камеру — ориентировочный показатель для здания 3 этажей."
       },
-      "constraints": { "daylight": "not-required" },
-      "flows": ["staff"],
+      "constraints": {
+        "daylight": "not-required"
+      },
+      "flows": [
+        "staff"
+      ],
       "zone": "neutral",
       "norms": []
     },
@@ -2076,16 +4088,31 @@
       "name": "Электрощитовая",
       "group": "clinic.tech",
       "status": "required",
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
         "value": 18,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Категория надёжности электроснабжения для операционных и реанимации — по смежному разделу ЭОМ."
+        "norm": {
+          "doc": "СП РК 3.02-107-2014",
+          "clause": "п. 4.2.19; раздел 4.6.3",
+          "quote": "Двери электрощитовых, вентиляционных камер и других пожароопасных технических помещений должны быть противопожарными. Электрооборудование зданий проектируется по СП РК 4.04-106-2013 «Электроснабжение жилых и общественных зданий».",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 09.07.2021 г. №98-НҚ"
+        },
+        "sourceHint": "Площадь электрощитовой нормой не задана — определяется составом и габаритами щитового оборудования по СП РК 4.04-106-2013 и ПУЭ. Электроприёмники ЛПУ относятся к I категории надёжности (операционные, реанимация, лифты)."
       },
-      "constraints": { "daylight": "not-required" },
-      "flows": ["staff"],
+      "constraints": {
+        "daylight": "not-required"
+      },
+      "flows": [
+        "staff"
+      ],
       "zone": "neutral",
       "norms": []
     },
@@ -2095,37 +4122,77 @@
       "name": "Помещение медицинских газов",
       "group": "clinic.tech",
       "status": "conditional",
-      "condition": { "in": ["extras", ["oxygen"]] },
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "condition": {
+        "in": [
+          "extras",
+          [
+            "oxygen"
+          ]
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
         "value": 16,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Размещение и площадь помещения газификаторов и баллонов регулируются требованиями промышленной безопасности — уточнить по профильному документу."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "п. 4.3.11.1.2, 4.3.11.1.4",
+          "quote": "Комплекс лечебного газоснабжения включает системы снабжения медицинским кислородом, закисью азота, сжатым воздухом, углекислым газом и обеспечения вакуумом. Указанные системы должны проектироваться, как правило, централизованными. Снабжение кислородом осуществляется от центральных пунктов или кислородно-газификационных станций в зависимости от количества потребляемого кислорода и местных условий.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Площадь помещения медицинских газов нормой не задана — определяется составом станции (рампы, компрессоры, вакуумные насосы) и расчётом потребления по технологическому заданию. Помещения, в которых используется закись азота, оборудуются системами удаления наркозного газа (п. 4.3.11.1.5)."
       },
-      "constraints": { "daylight": "not-required", "separateEntrance": true },
-      "flows": ["medical", "goods"],
+      "constraints": {
+        "daylight": "not-required",
+        "separateEntrance": true
+      },
+      "flows": [
+        "medical",
+        "goods"
+      ],
       "zone": "neutral",
       "norms": []
     },
-
     {
       "id": "clinic.circulation.corridor",
       "code": "15.01",
       "name": "Коридоры и холлы",
       "group": "clinic.circulation",
       "status": "required",
-      "count": { "kind": "fixed", "value": 1, "round": "up" },
+      "count": {
+        "kind": "fixed",
+        "value": 1,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
         "value": 400,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Ширина коридоров в отделениях определяется требованием разворота и транспортировки каталки, а также эвакуационным расчётом — взять из первоисточника."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "п. 4.3.2.12, таблица 2; п. 4.3.2.13",
+          "quote": "Таблица 2 — ширина коридоров, не менее: палатные отделения — 2,4 м; организации, оказывающие амбулаторно-поликлиническую помощь, лабораторные отделения — 2,0 м; операционные блоки, родовые и реанимационные отделения, диспансеры, женские консультации — 2,8 м; больницы восстановительного лечения неврологического и ортопедического профиля (коридоры, используемые под ожидальные) — 3,2 м; складские помещения, молочные кухни, аптеки — 1,8 м. П. 4.3.2.13: коридоры палатных секций должны иметь естественное освещение через окна в торцовых стенах и в световых карманах (холлах).",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Норма задаёт ширину, а не площадь: площадь коридоров и холлов определяется планировкой как произведение нормируемой ширины на длину. 400 м² — ориентир для здания 3 этажей. П. 4.3.2.14 допускает сокращать площади общих помещений с учётом технологических решений."
       },
-      "constraints": { "daylight": "desirable" },
-      "flows": ["visitors", "staff", "medical"],
+      "constraints": {
+        "daylight": "desirable"
+      },
+      "flows": [
+        "visitors",
+        "staff",
+        "medical"
+      ],
       "zone": "neutral",
       "norms": []
     },
@@ -2135,16 +4202,33 @@
       "name": "Лестнично-лифтовые узлы",
       "group": "clinic.circulation",
       "status": "required",
-      "count": { "kind": "fixed", "value": 2, "round": "up" },
+      "count": {
+        "kind": "fixed",
+        "value": 2,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
         "value": 45,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Число и параметры эвакуационных путей — по расчёту согласно СН РК 2.02-01-2023."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "п. 4.3.5.1.8; п. 4.3.5.2.4",
+          "quote": "П. 4.3.5.1.8: здания высотой более двух этажей оборудуются лифтами. При этом следует определить лифты на «условно грязные» и «условно чистые». П. 4.3.5.2.4: для палатных отделений инфекционных стационаров следует предусматривать изолированный вход непосредственно с улицы и лестнично-лифтовые узлы раздельно для «грязных» и «чистых» маршрутов.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Площадь лестнично-лифтовых узлов определяется расчётом эвакуации по СН РК 2.02-01-2023 и числом лифтов по расчёту пассажиро- и грузопотоков. 45 м² — ориентир для узла с двумя лифтами и лестничной клеткой."
       },
-      "constraints": { "daylight": "desirable" },
-      "flows": ["visitors", "staff", "medical"],
+      "constraints": {
+        "daylight": "desirable"
+      },
+      "flows": [
+        "visitors",
+        "staff",
+        "medical"
+      ],
       "zone": "neutral",
       "norms": []
     },
@@ -2154,17 +4238,40 @@
       "name": "Лифты для чистых и грязных потоков",
       "group": "clinic.circulation",
       "status": "conditional",
-      "condition": { "gt": ["floors", 1] },
-      "count": { "kind": "fixed", "value": 2, "round": "up" },
+      "condition": {
+        "gt": [
+          "floors",
+          1
+        ]
+      },
+      "count": {
+        "kind": "fixed",
+        "value": 2,
+        "round": "up"
+      },
       "area": {
         "kind": "fixed",
         "value": 12,
         "unit": "м²",
-        "norm": null,
-        "sourceHint": "Плейсхолдер. Разделение лифтов на чистый и грязный потоки, а также требование больничного лифта под каталку — уточнить по санитарным правилам."
+        "norm": {
+          "doc": "СП РК 3.02-113-2014*",
+          "clause": "п. 4.3.5.1.8; п. 4.3.5.3.16",
+          "quote": "П. 4.3.5.1.8: здания высотой более двух этажей оборудуются лифтами; следует определить лифты на «условно грязные» и «условно чистые». П. 4.3.5.3.16: пища доставляется в отделение специальным лифтом в сопровождении персонала, а пищевые отходы удаляются другим, «грязным» лифтом, без сопровождения.",
+          "source": "norm",
+          "verified": true,
+          "edition": "с изм. по приказу КДСиЖКХ от 12.12.2024 г. №160-НҚ"
+        },
+        "sourceHint": "Площадь лифтовых холлов и шахт определяется габаритами больничного лифта (кабина под каталку) и требованиями к незадымляемости по СН РК 2.02-01-2023."
       },
-      "constraints": { "daylight": "not-required" },
-      "flows": ["medical", "linen", "waste", "food"],
+      "constraints": {
+        "daylight": "not-required"
+      },
+      "flows": [
+        "medical",
+        "linen",
+        "waste",
+        "food"
+      ],
       "zone": "neutral",
       "norms": []
     }
@@ -2173,7 +4280,16 @@
     {
       "id": "clinic-no-capacity",
       "level": "error",
-      "when": { "and": [{ "lt": ["structure_units", 1] }] },
+      "when": {
+        "and": [
+          {
+            "lt": [
+              "structure_units",
+              1
+            ]
+          }
+        ]
+      },
       "title": "Структура подразделений не задана",
       "detail": "В матрице «Структура подразделений» все строки имеют нулевое количество. Задайте хотя бы одно отделение, иначе состав помещений рассчитать не по чему."
     },
@@ -2181,7 +4297,23 @@
       "id": "clinic-poly-without-visits",
       "level": "error",
       "when": {
-        "and": [{ "in": ["form", ["poly", "both"]] }, { "lt": ["structure_tag_visits_places", 1] }]
+        "and": [
+          {
+            "in": [
+              "form",
+              [
+                "poly",
+                "both"
+              ]
+            ]
+          },
+          {
+            "lt": [
+              "structure_tag_visits_places",
+              1
+            ]
+          }
+        ]
       },
       "title": "Поликлиника без заданной мощности",
       "detail": "Выбрана форма с поликлинической частью, но ни одно поликлиническое отделение не имеет мощности в посещениях в смену. Заполните строки поликлиники в матрице подразделений."
@@ -2191,8 +4323,21 @@
       "level": "error",
       "when": {
         "and": [
-          { "in": ["form", ["inpatient", "both"]] },
-          { "lt": ["structure_tag_beds_places", 1] }
+          {
+            "in": [
+              "form",
+              [
+                "inpatient",
+                "both"
+              ]
+            ]
+          },
+          {
+            "lt": [
+              "structure_tag_beds_places",
+              1
+            ]
+          }
         ]
       },
       "title": "Стационар без коечного фонда",
@@ -2201,14 +4346,44 @@
     {
       "id": "clinic-beds-without-form",
       "level": "warning",
-      "when": { "and": [{ "eq": ["form", "poly"] }, { "gt": ["structure_tag_beds_places", 0] }] },
+      "when": {
+        "and": [
+          {
+            "eq": [
+              "form",
+              "poly"
+            ]
+          },
+          {
+            "gt": [
+              "structure_tag_beds_places",
+              0
+            ]
+          }
+        ]
+      },
       "title": "Койки заданы при форме «поликлиника»",
       "detail": "В матрице заданы палатные отделения, хотя форма организации — амбулаторно-поликлиническая. Либо смените форму на «стационар с поликлиникой», либо обнулите койки."
     },
     {
       "id": "clinic-operating-without-sterile",
       "level": "warning",
-      "when": { "and": [{ "gt": ["operatingRooms", 0] }, { "eq": ["sterilization", "outsource"] }] },
+      "when": {
+        "and": [
+          {
+            "gt": [
+              "operatingRooms",
+              0
+            ]
+          },
+          {
+            "eq": [
+              "sterilization",
+              "outsource"
+            ]
+          }
+        ]
+      },
       "title": "Операционный блок при сторонней стерилизации",
       "detail": "При наличии операционных обеспечение стерильными материалами через стороннюю организацию требует обоснования и договорной схемы. Проверьте допустимость по санитарным правилам и заданию на проектирование."
     },
@@ -2216,7 +4391,20 @@
       "id": "clinic-beds-without-catering",
       "level": "warning",
       "when": {
-        "and": [{ "gt": ["structure_tag_beds_places", 0] }, { "eq": ["catering", "delivered"] }]
+        "and": [
+          {
+            "gt": [
+              "structure_tag_beds_places",
+              0
+            ]
+          },
+          {
+            "eq": [
+              "catering",
+              "delivered"
+            ]
+          }
+        ]
       },
       "title": "Круглосуточный стационар на привозном питании",
       "detail": "При круглосуточном пребывании пациентов организация питания привозным способом требует как минимум буфетных с доготовкой в отделениях. Проверьте требование по санитарным правилам."
@@ -2224,7 +4412,22 @@
     {
       "id": "clinic-beds-without-laundry",
       "level": "info",
-      "when": { "and": [{ "gt": ["structure_tag_beds_places", 0] }, { "eq": ["laundry", "outsource"] }] },
+      "when": {
+        "and": [
+          {
+            "gt": [
+              "structure_tag_beds_places",
+              0
+            ]
+          },
+          {
+            "eq": [
+              "laundry",
+              "outsource"
+            ]
+          }
+        ]
+      },
       "title": "Стационар без собственной прачечной",
       "detail": "При сторонней прачечной в отделениях всё равно необходимы раздельные кладовые чистого и грязного белья и помещение временного хранения. Они в составе учтены."
     },
@@ -2232,7 +4435,20 @@
       "id": "clinic-emergency-missing",
       "level": "warning",
       "when": {
-        "and": [{ "gt": ["structure_tag_beds_places", 0] }, { "eq": ["emergency", false] }]
+        "and": [
+          {
+            "gt": [
+              "structure_tag_beds_places",
+              0
+            ]
+          },
+          {
+            "eq": [
+              "emergency",
+              false
+            ]
+          }
+        ]
       },
       "title": "Стационар без приёмного отделения",
       "detail": "Для стационара с круглосуточным пребыванием приёмное отделение с санитарным пропускником — обязательный элемент структуры. Включите его в параметрах."
@@ -2240,14 +4456,24 @@
     {
       "id": "clinic-morgue-adjacency",
       "level": "info",
-      "when": { "eq": ["morgue", true] },
+      "when": {
+        "eq": [
+          "morgue",
+          true
+        ]
+      },
       "title": "Патологоанатомическое отделение в составе",
       "detail": "Отделение размещается изолированно, с самостоятельным въездом, вне зоны видимости окон палат и входа для посетителей. В диаграмме заданы связи типа «соседство недопустимо» с пищеблоком и палатными отделениями."
     },
     {
       "id": "clinic-basement",
       "level": "warning",
-      "when": { "eq": ["hasBasement", true] },
+      "when": {
+        "eq": [
+          "hasBasement",
+          true
+        ]
+      },
       "title": "Задан подвальный этаж",
       "detail": "Санитарные правила (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020), п. 18: не размещаются в цокольных и подвальных этажах операционные, перевязочные, процедурные, манипуляционные, родовые, стоматологические кабинеты, приёмные и палатные отделения. Допускаются кабинеты восстановительного лечения — залы ЛФК, лечебные бассейны, водолечение, массаж, электро-светолечение."
     },
@@ -2256,8 +4482,21 @@
       "level": "error",
       "when": {
         "and": [
-          { "in": ["placement", ["built-in", "built-attached"]] },
-          { "gt": ["structure_tag_visits_places", 100] }
+          {
+            "in": [
+              "placement",
+              [
+                "built-in",
+                "built-attached"
+              ]
+            ]
+          },
+          {
+            "gt": [
+              "structure_tag_visits_places",
+              100
+            ]
+          }
         ]
       },
       "title": "Встроенная поликлиника мощнее 100 посещений в смену",
@@ -2268,8 +4507,21 @@
       "level": "error",
       "when": {
         "and": [
-          { "in": ["placement", ["built-in", "built-attached"]] },
-          { "gt": ["structure_tag_beds_places", 0] }
+          {
+            "in": [
+              "placement",
+              [
+                "built-in",
+                "built-attached"
+              ]
+            ]
+          },
+          {
+            "gt": [
+              "structure_tag_beds_places",
+              0
+            ]
+          }
         ]
       },
       "title": "Круглосуточный стационар во встроенном помещении",
@@ -2278,21 +4530,49 @@
     {
       "id": "clinic-operating-stacked",
       "level": "info",
-      "when": { "gt": ["operatingRooms", 1] },
+      "when": {
+        "gt": [
+          "operatingRooms",
+          1
+        ]
+      },
       "title": "Несколько операционных: проверьте вертикальную компоновку",
       "detail": "Санитарные правила (приказ МЗ РК от 11.08.2020 № ҚР ДСМ-96/2020), п. 10: при расположении операционных друг над другом септические операционные размещаются выше асептических. Операционные блоки проектируются непроходными."
     },
     {
       "id": "clinic-radiation",
       "level": "info",
-      "when": { "in": ["diagnostics", ["xray", "ct"]] },
+      "when": {
+        "in": [
+          "diagnostics",
+          [
+            "xray",
+            "ct"
+          ]
+        ]
+      },
       "title": "Помещения с источниками ионизирующего излучения",
       "detail": "Для рентгеновских кабинетов и КТ требуется расчёт стационарной радиационной защиты и санитарно-эпидемиологическое заключение. Площади принимаются по технологическому заданию поставщика оборудования, а не по типовой таблице."
     },
     {
       "id": "clinic-fire-class",
       "level": "warning",
-      "when": { "and": [{ "gt": ["structure_tag_beds_places", 0] }, { "eq": ["fireClass", "Ф3.4"] }] },
+      "when": {
+        "and": [
+          {
+            "gt": [
+              "structure_tag_beds_places",
+              0
+            ]
+          },
+          {
+            "eq": [
+              "fireClass",
+              "Ф3.4"
+            ]
+          }
+        ]
+      },
       "title": "Класс пожарной опасности при круглосуточных палатах",
       "detail": "При наличии палат с круглосуточным пребыванием класс функциональной пожарной опасности Ф3.4 (поликлиника), как правило, неприменим. Уточните класс по СН РК 2.02-01-2023."
     }
