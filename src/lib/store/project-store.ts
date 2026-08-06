@@ -307,6 +307,16 @@ export const useProjectStore = create<ProjectState>()(
 /** Однократное восстановление проекта из localStorage. */
 export async function hydrateProject(): Promise<void> {
   if (useProjectStore.getState().hydrated) return;
-  await useProjectStore.persist.rehydrate();
-  useProjectStore.setState({ hydrated: true });
+  try {
+    await useProjectStore.persist.rehydrate();
+  } catch (err) {
+    // localStorage может быть недоступен: расширение браузера его блокирует,
+    // строгий приватный режим, переполнена квота, сохранён битый JSON.
+    // Это не повод не запускать приложение — стартуем с параметрами
+    // по умолчанию, иначе пользователь навсегда упирается в «Загрузка проекта…».
+    console.warn('Проект из localStorage восстановить не удалось, старт с нуля:', err);
+  } finally {
+    // hydrated выставляется в любом случае — и при успехе, и при ошибке.
+    useProjectStore.setState({ hydrated: true });
+  }
 }
