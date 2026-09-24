@@ -1,0 +1,2 @@
+# Authenticated ciphertext must remain byte-identical on every platform.
+public/corpus/**/*.bin binary
