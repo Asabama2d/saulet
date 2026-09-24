@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { topicMatches } from '../src/lib/norms/topics';
+import { markContents, topicMatches } from '../src/lib/norms/topics';
 import type { CorpusClause, CorpusDocument } from '../src/lib/norms/types';
 
 export function parseDocument(raw: string, path: string, doc: number) {
@@ -28,8 +28,8 @@ export function parseDocument(raw: string, path: string, doc: number) {
     if (body.length >= 12) {
       const kk = (body.match(/[әғқңөұүһі]/gi) || []).length;
       const ru = (body.match(/[а-яё]/gi) || []).length;
-      clauses.push({ id: `${id}:${start}`, doc, label, kind, page: startPage, endPage: page, start, end,
-        excerpt: body.slice(0, 360), topics: topicMatches(body), language: kk > ru * 0.012 ? 'kk' : ru > 20 ? 'ru' : 'other' });
+      clauses.push(markContents({ id: `${id}:${start}`, doc, label, kind, page: startPage, endPage: page, start, end,
+        excerpt: body.slice(0, 360), topics: topicMatches(body), language: kk > ru * 0.012 ? 'kk' : ru > 20 ? 'ru' : 'other' }));
     }
     start = end; startPage = page;
   };

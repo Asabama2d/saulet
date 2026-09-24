@@ -1,4 +1,4 @@
-import { normalizeSearch } from './topics';
+import { markContents, normalizeSearch } from './topics';
 import type { CorpusDocument, CorpusIndex, CorpusSearchIndex } from './types';
 
 function lowerBound(words: string[], query: string) {
@@ -30,7 +30,10 @@ export function searchCorpus(search: CorpusSearchIndex, documents: CorpusDocumen
 export interface CorpusFilter { topics: string[]; topicMode: 'any' | 'all'; language: string; section: string; doc: number | null; matches?: Set<number> }
 export function applyDocumentTopics(index: CorpusIndex): CorpusIndex {
   const context = index.documents.map((doc) => doc.topics.filter((t) => ['mall', 'schools', 'clinics', 'food'].includes(t)));
-  for (const clause of index.clauses) if (context[clause.doc].length) clause.topics = [...new Set([...clause.topics, ...context[clause.doc]])];
+  for (const clause of index.clauses) {
+    markContents(clause);
+    if (context[clause.doc].length) clause.topics = [...new Set([...clause.topics, ...context[clause.doc]])];
+  }
   return index;
 }
 

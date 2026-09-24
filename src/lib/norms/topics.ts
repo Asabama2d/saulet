@@ -1,4 +1,4 @@
-import type { NormTopic } from './types';
+import type { CorpusClause, NormTopic } from './types';
 
 // Explicit lexical links, not compliance conclusions. Stems cover inflections.
 export const TOPICS: NormTopic[] = [
@@ -33,4 +33,11 @@ export function normalizeSearch(value: string): string {
 export function topicMatches(text: string): string[] {
   const words = normalizeSearch(text).split(/\s+/);
   return TOPICS.filter((topic) => topic.roots.some((root) => words.some((word) => word.startsWith(root)))).map((topic) => topic.id);
+}
+
+export function markContents(clause: CorpusClause): CorpusClause {
+  if (clause.kind === 'clause' && /\.{4}|…{2}/.test(clause.excerpt)) {
+    clause.kind = 'fragment'; clause.label = `Оглавление · стр. ${clause.page || '—'}`;
+  }
+  return clause;
 }

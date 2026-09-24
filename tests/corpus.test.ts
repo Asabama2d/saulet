@@ -59,6 +59,12 @@ test('dates are not misrepresented as clause numbers', () => {
   assert.ok(!result.clauses.some((c) => c.label === 'п. 06.06.2006'));
 });
 
+test('wrapped table-of-contents lines are labelled as contents, not requirements', () => {
+  const result = parseDocument(source + '\n### 6.1 Требования из оглавления\n............................. 15\n', 'test.md', 0);
+  assert.ok(!result.clauses.some((c) => c.label === 'п. 6.1'));
+  assert.ok(result.clauses.some((c) => c.label.startsWith('Оглавление')));
+});
+
 test('full-text prefix search intersects terms; document metadata matches all of its clauses', () => {
   const search = { vocabulary: ['двери', 'дверных', 'торгового', 'эвакуации'], postings: [[1], [2], [3], [1, 4]] };
   assert.deepEqual([...searchClauses(search, index, 'двер эвакуа')], [1]);
