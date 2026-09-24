@@ -5,7 +5,8 @@ import { ChevronDown, Download, FileSpreadsheet, FileText, Moon, Save, Sun, Uplo
 import { useTheme } from 'next-themes';
 import * as XLSX from 'xlsx';
 import { knowledgeBase } from '@/lib/knowledge/loader';
-import { useProjectStore, type SerializedProject } from '@/lib/store/project-store';
+import { useProjectStore } from '@/lib/store/project-store';
+import { MAX_PROJECT_BYTES, parseProjectText } from '@/lib/store/project-file';
 import { useComputation } from '@/lib/engine/use-computation';
 import { buildWorkbook } from '@/lib/export/workbook';
 import { buildRevitCsv } from '@/lib/export/revit-csv';
@@ -66,6 +67,7 @@ function ProjectIO() {
   const overrides = useProjectStore((s) => s.overrides);
   const result = useComputation();
   const inputRef = React.useRef<HTMLInputElement>(null);
+  const [message, setMessage] = React.useState<string | null>(null);
 
   const notes = React.useMemo(
     () => Object.fromEntries(Object.entries(overrides).map(([key, o]) => [key, o.note])),
@@ -101,11 +103,15 @@ function ProjectIO() {
 
   const open = async (file: File) => {
     try {
-      const parsed = JSON.parse(await file.text()) as SerializedProject;
-      if (parsed.app !== 'bubble-diagram') throw new Error('Это не файл проекта');
+      if (file.size > MAX_PROJECT_BYTES) throw new Error('Файл проекта больше 5 МБ');
+      const parsed = parseProjectText(await file.text());
+      if (!confirm('Открыть проект из файла? Текущий проект будет заменён. Сохраните его в JSON, если хотите вернуться к нему.')) return;
       loadProject(parsed);
+      setMessage(parsed.knowledgeVersion !== knowledgeBase.version
+        ? `Проект открыт. Версия базы в файле: ${parsed.knowledgeVersion}; сейчас: ${knowledgeBase.version}. Проверьте пересчитанные площади.`
+        : 'Проект открыт');
     } catch (error) {
-      alert(`Не удалось открыть проект: ${error instanceof Error ? error.message : error}`);
+      setMessage(`Не удалось открыть проект: ${error instanceof Error ? error.message : error}`);
     }
   };
 
@@ -113,6 +119,16 @@ function ProjectIO() {
 
   return (
     <>
+      <Button size="sm" variant="ghost" onClick={saveProject} title="Сохранить проект в JSON">
+        <Save className="size-3.5" />
+        Сохранить
+      </Button>
+      {message ? (
+        <div role="status" className="fixed bottom-3 left-3 right-3 z-50 flex items-center gap-3 rounded border border-line bg-bg p-3 text-[12px] shadow-lg sm:left-auto sm:max-w-lg">
+          <span>{message}</span>
+          <Button size="sm" variant="ghost" onClick={() => setMessage(null)} aria-label="Закрыть уведомление">×</Button>
+        </div>
+      ) : null}
       <Menu
         trigger={({ toggle }) => (
           <Button size="sm" variant="ghost" onClick={toggle} title="Выгрузки">
@@ -195,24 +211,28 @@ export function TopBar() {
     knowledgeBase.buildingTypes[0];
 
   return (
-    <header className="flex h-11 shrink-0 items-center gap-3 border-b border-line px-3">
+    <header className="flex shrink-0 flex-wrap items-center gap-2 border-b border-line px-3 py-1.5">
       <div className="flex shrink-0 items-baseline gap-2">
-        <span className="whitespace-nowrap text-[13px] font-semibold">Предпроектная планировка</span>
+        <span className="whitespace-nowrap text-[13px] font-semibold">Saulet</span>
         <span className="hidden whitespace-nowrap text-[11px] text-muted lg:inline">
           состав помещений · нормы РК
         </span>
       </div>
 
-      <div className="ml-2 w-64 shrink-0" title={currentType.name}>
+      <div className="w-56 min-w-0 flex-1 sm:max-w-72" title={currentType.name}>
         <Select
           ariaLabel="Назначение здания"
           value={buildingTypeId}
-          onValueChange={setBuildingType}
+          onValueChange={(id) => {
+            if (id !== buildingTypeId && confirm('Сменить назначение здания? Параметры и ручные правки будут сброшены. Сохраните текущий проект в JSON, если он нужен.')) {
+              setBuildingType(id);
+            }
+          }}
           options={knowledgeBase.buildingTypes.map((t) => ({ value: t.id, label: t.name }))}
         />
       </div>
 
-      <div className="ml-auto flex items-center gap-2">
+      <div className="ml-auto flex max-w-full flex-wrap items-center gap-1">
         <Tooltip
           content={`Нормативная база версии ${knowledgeBase.version}. Редакции документов проверять на дату начала проектирования — нормативы РК обновляются приказами несколько раз в год.`}
           side="bottom"
@@ -222,7 +242,7 @@ export function TopBar() {
             {plural(knowledgeBase.documents.length, 'документ', 'документа', 'документов')}
           </span>
         </Tooltip>
-        <VerificationIndicator />
+        <div className="hidden xl:block"><VerificationIndicator /></div>
         <ProjectIO />
         <ThemeToggle />
       </div>

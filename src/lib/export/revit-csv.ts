@@ -17,7 +17,7 @@ const COLUMNS = ['Name', 'Number', 'Department', 'Area', 'Level', 'Comments'] as
 
 function escape(value: string | number): string {
   const text = String(value);
-  return /[",\n;]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+  return /[",\r\n;]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
 }
 
 export function buildRevitCsv(
@@ -38,6 +38,9 @@ export function buildRevitCsv(
     );
   }
   const usedByCode = new Map<string, number>();
+  // Reserve literal codes: repeated A must not steal A-1 from another room.
+  const reservedCodes = new Set(totalByCode.keys());
+  const usedNumbers = new Set<string>();
 
   for (const instance of result.instances) {
     const level = floorName(floorAssignment[instance.room.id]);
@@ -56,7 +59,13 @@ export function buildRevitCsv(
     for (let index = 0; index < instance.count; index += 1) {
       const seat = (usedByCode.get(code) ?? 0) + 1;
       usedByCode.set(code, seat);
-      const number = single ? code : `${code}-${seat}`;
+      let number = single && code.trim() ? code : `${code.trim() || 'ROOM'}-${seat}`;
+      let suffix = seat;
+      while (usedNumbers.has(number) || (number !== code && reservedCodes.has(number))) {
+        suffix += 1;
+        number = `${code.trim() || 'ROOM'}-${suffix}`;
+      }
+      usedNumbers.add(number);
       lines.push(
         [
           escape(instance.variant ? `${instance.room.name} (${instance.variant.label})` : instance.room.name),

@@ -10,6 +10,9 @@ import { SummaryPanel } from '@/components/panels/summary-panel';
 import { ChecksPanel } from '@/components/panels/checks-panel';
 import { BubbleDiagram } from '@/components/diagram/bubble-diagram';
 import { TopBar } from './top-bar';
+import { Button } from '@/components/ui/button';
+import { download, stamped } from '@/lib/export/download';
+import { cn } from '@/lib/utils';
 
 function RightPanel() {
   const { issues } = useComputation();
@@ -46,13 +49,20 @@ function RightPanel() {
 }
 
 function Workspace() {
+  const [panel, setPanel] = React.useState<'workspace' | 'params' | 'summary'>('workspace');
   return (
+    <div className="flex min-h-0 flex-1 flex-col">
+      <nav aria-label="Панели проекта" className="flex shrink-0 flex-wrap gap-1 border-b border-line p-1.5 xl:hidden">
+        {([['workspace', 'Планировка'], ['params', 'Параметры'], ['summary', 'Сводка и проверки']] as const).map(([id, label]) => (
+          <Button key={id} size="sm" variant={panel === id ? 'default' : 'ghost'} aria-pressed={panel === id} onClick={() => setPanel(id)}>{label}</Button>
+        ))}
+      </nav>
     <div className="flex min-h-0 flex-1">
-      <aside className="w-[304px] shrink-0 border-r border-line bg-panel">
+      <aside className={cn('min-h-0 w-full shrink-0 border-r border-line bg-panel xl:block xl:w-[280px]', panel !== 'params' && 'hidden')}>
         <ParamsPanel />
       </aside>
 
-      <main className="flex min-w-0 flex-1 flex-col">
+      <main className={cn('min-w-0 flex-1 flex-col xl:flex', panel === 'workspace' ? 'flex' : 'hidden')}>
         {/*
           min-w-0 обязателен на каждом звене: таблица экспликации шире экрана,
           и без него её минимальная ширина растягивает всю оболочку.
@@ -76,9 +86,29 @@ function Workspace() {
         </Tabs>
       </main>
 
-      <aside className="w-[336px] shrink-0 border-l border-line bg-panel">
+      <aside className={cn('min-h-0 w-full shrink-0 border-l border-line bg-panel xl:block xl:w-[312px]', panel !== 'summary' && 'hidden')}>
         <RightPanel />
       </aside>
+    </div>
+    </div>
+  );
+}
+
+function StorageNotice() {
+  const problem = useProjectStore((s) => s.storageProblem);
+  const resume = useProjectStore((s) => s.resumeAutosave);
+  if (!problem) return null;
+  return (
+    <div role="alert" className="flex shrink-0 flex-wrap items-center gap-2 border-b border-warn bg-warn-soft px-3 py-2 text-[12px]">
+      <span className="flex-1">{problem.message}</span>
+      {problem.recovery !== null ? (
+        <Button size="sm" variant="outline" onClick={() => download(new Blob([problem.recovery!], { type: 'application/json' }), stamped('saulet-recovery', 'json'))}>
+          Скачать исходные данные
+        </Button>
+      ) : null}
+      <Button size="sm" variant="outline" onClick={() => {
+        if (problem.recovery === null || confirm('Заменить старое автосохранение текущим проектом? Сначала скачайте исходные данные, если они нужны.')) resume();
+      }}>Возобновить сохранение</Button>
     </div>
   );
 }
@@ -93,7 +123,8 @@ export function AppShell() {
   return (
     <TooltipProvider delayDuration={200}>
       <div className="flex h-full flex-col">
-        <TopBar />
+        {hydrated ? <TopBar /> : null}
+        <StorageNotice />
         {hydrated ? (
           <Workspace />
         ) : (

@@ -16,6 +16,8 @@ import { ChevronDown, Image as ImageIcon, Maximize2, PinOff, Plus, RefreshCw } f
 import '@xyflow/react/dist/style.css';
 
 import { useComputation } from '@/lib/engine/use-computation';
+import { availableFloors } from '@/lib/engine/floors';
+import { floorName } from '@/lib/export/floors';
 import { useProjectStore } from '@/lib/store/project-store';
 import { buildGraph, type DiagramEdge } from '@/lib/diagram/build-graph';
 import { runLayout } from '@/lib/diagram/layout';
@@ -90,12 +92,10 @@ function DiagramInner() {
 
   /** Дорожки этажей сверху вниз: не назначено, затем этажи по убыванию. */
   const bands = React.useMemo<FloorBand[]>(() => {
-    const scope = result.scope;
-    const count = typeof scope.floors === 'number' ? scope.floors : 1;
     const list: FloorBand[] = [{ floor: null, label: 'Не назначено', y: 0 }];
-    for (let i = count; i >= 1; i -= 1) list.push({ floor: i, label: `${i} этаж`, y: 0 });
-    if (scope.hasGroundFloor === true) list.push({ floor: 0, label: 'Цокольный этаж', y: 0 });
-    if (scope.hasBasement === true) list.push({ floor: -1, label: 'Подвал', y: 0 });
+    for (const floor of availableFloors(result.scope).reverse()) {
+      list.push({ floor, label: floorName(floor), y: 0 });
+    }
     return list.map((band, index) => ({ ...band, y: index * BAND_HEIGHT }));
   }, [result.scope]);
 
@@ -496,7 +496,7 @@ function DiagramInner() {
           data-export="hide"
         />
 
-        <Panel position="top-left" className="!m-2" data-export="hide">
+        <Panel position="top-left" className="!m-2 !right-2" data-export="hide">
           <div className="flex flex-wrap items-center gap-1.5 rounded-[3px] border border-line bg-bg/95 px-1.5 py-1 backdrop-blur">
             <Button
               size="sm"
@@ -582,8 +582,8 @@ function DiagramInner() {
           </div>
         </Panel>
 
-        <Panel position="top-right" className="!m-2">
-          <div className="flex flex-col gap-2">
+        <Panel position="top-right" className="!m-2 !top-28 max-h-[calc(100%-10rem)] overflow-y-auto sm:!top-20 lg:!top-12">
+          <div className="flex flex-col items-end gap-2">
             <div data-export="hide">
               <LayersPanel usedFlows={usedFlows} />
             </div>

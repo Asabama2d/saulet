@@ -2,9 +2,11 @@
 
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import type { BuildingType, FlowType } from '@/types/knowledge';
+import type { FlowType } from '@/types/knowledge';
 import { getBuildingType, knowledgeBase } from '@/lib/knowledge/loader';
-import { normalizeMatrix } from '@/lib/engine/compute';
+import { defaultParams, parseProject, type SerializedProject } from './project-file';
+import { createProjectStorage, type StorageProblem } from './project-storage';
+export { defaultParams, type SerializedProject } from './project-file';
 import type { RoomOverride } from '@/lib/engine/types';
 import type { CustomEdge, CustomRoom, EdgeOverride } from '@/lib/engine/manual';
 
@@ -40,6 +42,8 @@ interface ProjectState {
   /** увеличивается при «Пересобрать раскладку» */
   layoutSeed: number;
   hydrated: boolean;
+  storageProblem: StorageProblem | null;
+  resumeAutosave: () => void;
 
   setBuildingType: (id: string) => void;
   setParam: (id: string, value: unknown) => void;
@@ -65,36 +69,17 @@ interface ProjectState {
   setColorMode: (mode: 'group' | 'zone') => void;
   setFlowFilter: (flows: FlowType[]) => void;
   relayout: () => void;
-  loadProject: (data: SerializedProject) => void;
+  loadProject: (data: unknown) => void;
   exportProject: () => SerializedProject;
 }
 
-export interface SerializedProject {
-  app: 'bubble-diagram';
-  version: 2;
-  knowledgeVersion: string;
-  buildingTypeId: string;
-  params: Record<string, unknown>;
-  overrides: Record<string, RoomOverride>;
-  customRooms?: CustomRoom[];
-  customEdges?: CustomEdge[];
-  edgeOverrides?: Record<string, EdgeOverride>;
-  floorAssignment?: Record<string, number>;
-  pinned: Record<string, NodePin>;
-  collapseRepeats: boolean;
-  collapsedGroups?: string[];
-}
-
-export function defaultParams(type: BuildingType): Record<string, unknown> {
-  const params: Record<string, unknown> = {};
-  for (const param of type.parameters) {
-    params[param.id] =
-      param.control === 'group-matrix' ? normalizeMatrix(param, param.default) : param.default;
-  }
-  return params;
-}
-
 const initialTypeId = knowledgeBase.buildingTypes[0].id;
+const projectStorage = createProjectStorage(() => localStorage, (problem) => {
+  const current = useProjectStore.getState().storageProblem;
+  if (current?.message !== problem?.message || current?.recovery !== problem?.recovery) {
+    useProjectStore.setState({ storageProblem: problem });
+  }
+});
 
 export const useProjectStore = create<ProjectState>()(
   persist(
@@ -114,6 +99,11 @@ export const useProjectStore = create<ProjectState>()(
       flowFilter: [],
       layoutSeed: 1,
       hydrated: false,
+      storageProblem: null,
+      resumeAutosave: () => {
+        projectStorage.resume();
+        set({ storageProblem: null });
+      },
 
       setBuildingType: (id) =>
         set({
@@ -126,6 +116,9 @@ export const useProjectStore = create<ProjectState>()(
           floorAssignment: {},
           collapsedGroups: [],
           pinned: {},
+          layoutMode: 'free',
+          colorMode: 'group',
+          flowFilter: [],
           layoutSeed: get().layoutSeed + 1,
         }),
 
@@ -167,6 +160,9 @@ export const useProjectStore = create<ProjectState>()(
           customRooms: s.customRooms.filter((r) => r.id !== id),
           // связи осиротевшего помещения снимаются вместе с ним
           customEdges: s.customEdges.filter((e) => e.from !== id && e.to !== id),
+          overrides: Object.fromEntries(Object.entries(s.overrides).filter(([key]) => !key.startsWith(`${id}@`))),
+          floorAssignment: Object.fromEntries(Object.entries(s.floorAssignment).filter(([key]) => key !== id)),
+          pinned: Object.fromEntries(Object.entries(s.pinned).filter(([key]) => key !== id && !key.startsWith(`${id}@`))),
           layoutSeed: s.layoutSeed + 1,
         })),
 
@@ -230,7 +226,8 @@ export const useProjectStore = create<ProjectState>()(
 
       relayout: () => set((s) => ({ layoutSeed: s.layoutSeed + 1 })),
 
-      loadProject: (data) =>
+      loadProject: (input) => {
+        const data = parseProject(input);
         set((s) => ({
           buildingTypeId: data.buildingTypeId,
           params: data.params,
@@ -242,8 +239,12 @@ export const useProjectStore = create<ProjectState>()(
           pinned: data.pinned ?? {},
           collapseRepeats: data.collapseRepeats ?? true,
           collapsedGroups: data.collapsedGroups ?? [],
+          layoutMode: data.layoutMode,
+          colorMode: data.colorMode,
+          flowFilter: data.flowFilter,
           layoutSeed: s.layoutSeed + 1,
-        })),
+        }));
+      },
 
       exportProject: () => {
         const s = get();
@@ -261,13 +262,16 @@ export const useProjectStore = create<ProjectState>()(
           pinned: s.pinned,
           collapseRepeats: s.collapseRepeats,
           collapsedGroups: s.collapsedGroups,
+          layoutMode: s.layoutMode,
+          colorMode: s.colorMode,
+          flowFilter: s.flowFilter,
         };
       },
     }),
     {
       name: 'bubble-diagram.project',
       version: 2,
-      storage: createJSONStorage(() => localStorage),
+      storage: createJSONStorage(() => projectStorage.storage),
       // Восстановление откладывается до монтирования на клиенте: иначе первый
       // серверный рендер и первый клиентский расходятся.
       skipHydration: true,

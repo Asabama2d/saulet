@@ -2,6 +2,7 @@ import type { BuildingType, Room, RoomGroup } from '@/types/knowledge';
 import { evaluateRule, type Scope } from './expr';
 import { ruleKey, type CustomEdge, type EdgeOverride } from './manual';
 import { EDGE_STYLE } from '@/lib/diagram/style';
+import { availableFloors } from './floors';
 import type { Issue, RoomInstance, Totals } from './types';
 
 /**
@@ -36,16 +37,6 @@ function floorIn(floor: number): string {
   if (floor === -1) return 'в подвале';
   if (floor === 0) return 'на цокольном этаже';
   return `на ${floor} этаже`;
-}
-
-/** Этажи, физически существующие в здании при текущих параметрах. */
-function availableFloors(scope: Scope): number[] {
-  const floors = typeof scope.floors === 'number' ? scope.floors : 1;
-  const list: number[] = [];
-  if (scope.hasBasement === true) list.push(-1);
-  if (scope.hasGroundFloor === true) list.push(0);
-  for (let i = 1; i <= floors; i += 1) list.push(i);
-  return list;
 }
 
 export function collectIssues({

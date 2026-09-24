@@ -16,7 +16,7 @@ const FLOWS = Object.keys(FLOW_LABEL) as FlowType[];
  * в контексте всего объекта, а не сам по себе.
  */
 export function LayersPanel({ usedFlows }: { usedFlows: Set<FlowType> }) {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const flowFilter = useProjectStore((s) => s.flowFilter);
   const setFlowFilter = useProjectStore((s) => s.setFlowFilter);
   const colorMode = useProjectStore((s) => s.colorMode);
@@ -34,10 +34,11 @@ export function LayersPanel({ usedFlows }: { usedFlows: Set<FlowType> }) {
   const assigned = Object.keys(floorAssignment).length;
 
   return (
-    <div className="pointer-events-auto w-52 rounded-[3px] border border-line bg-bg/95 backdrop-blur">
+    <div className={cn('pointer-events-auto rounded-[3px] border border-line bg-bg/95 backdrop-blur', open ? 'w-52' : 'w-28')}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
         className="flex w-full items-center gap-1 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-muted hover:bg-raised"
       >
         <ChevronDown className={cn('size-3 transition-transform', !open && '-rotate-90')} />
