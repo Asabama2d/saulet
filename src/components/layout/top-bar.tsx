@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import Link from 'next/link';
 import { ChevronDown, Download, FileSpreadsheet, FileText, Moon, Save, Sun, Upload } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import * as XLSX from 'xlsx';
@@ -234,7 +233,6 @@ export function TopBar() {
       </div>
 
       <div className="ml-auto flex max-w-full flex-wrap items-center gap-1">
-        <Link href="/norms" className="rounded border border-line px-2 py-1 text-xs font-medium text-accent hover:bg-accent-soft">Атлас норм</Link>
         <Tooltip
           content={`Нормативная база версии ${knowledgeBase.version}. Редакции документов проверять на дату начала проектирования — нормативы РК обновляются приказами несколько раз в год.`}
           side="bottom"

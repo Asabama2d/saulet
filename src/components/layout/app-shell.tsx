@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import dynamic from 'next/dynamic';
 import { hydrateProject, useProjectStore } from '@/lib/store/project-store';
 import { useComputation } from '@/lib/engine/use-computation';
 import { TooltipProvider, Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/primitives';
@@ -13,6 +14,11 @@ import { TopBar } from './top-bar';
 import { Button } from '@/components/ui/button';
 import { download, stamped } from '@/lib/export/download';
 import { cn } from '@/lib/utils';
+
+type WorkspaceView = 'diagram' | 'table' | 'norms';
+const NormExplorer = dynamic(() => import('@/components/norms/norm-explorer').then((module) => module.NormExplorer), {
+  loading: () => <div role="status" className="p-4 text-xs text-muted">Загрузка норм…</div>,
+});
 
 function RightPanel() {
   const { issues } = useComputation();
@@ -48,30 +54,37 @@ function RightPanel() {
   );
 }
 
-function Workspace() {
+function Workspace({ initialView }: { initialView: WorkspaceView }) {
   const [panel, setPanel] = React.useState<'workspace' | 'params' | 'summary'>('workspace');
+  const [view, setView] = React.useState<WorkspaceView>(initialView);
+  const [normsVisited, setNormsVisited] = React.useState(initialView === 'norms');
+  const normsOpen = view === 'norms';
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <nav aria-label="Панели проекта" className="flex shrink-0 flex-wrap gap-1 border-b border-line p-1.5 xl:hidden">
+      <nav aria-label="Панели проекта" className={cn('shrink-0 flex-wrap gap-1 border-b border-line p-1.5 xl:hidden', normsOpen ? 'hidden' : 'flex')}>
         {([['workspace', 'Планировка'], ['params', 'Параметры'], ['summary', 'Сводка и проверки']] as const).map(([id, label]) => (
           <Button key={id} size="sm" variant={panel === id ? 'default' : 'ghost'} aria-pressed={panel === id} onClick={() => setPanel(id)}>{label}</Button>
         ))}
       </nav>
     <div className="flex min-h-0 flex-1">
-      <aside className={cn('min-h-0 w-full shrink-0 border-r border-line bg-panel xl:block xl:w-[280px]', panel !== 'params' && 'hidden')}>
+      <aside className={normsOpen ? 'hidden' : cn('min-h-0 w-full shrink-0 border-r border-line bg-panel xl:block xl:w-[280px]', panel !== 'params' && 'hidden')}>
         <ParamsPanel />
       </aside>
 
-      <main className={cn('min-w-0 flex-1 flex-col xl:flex', panel === 'workspace' ? 'flex' : 'hidden')}>
+      <main className={cn('min-w-0 flex-1 flex-col xl:flex', normsOpen || panel === 'workspace' ? 'flex' : 'hidden')}>
         {/*
           min-w-0 обязателен на каждом звене: таблица экспликации шире экрана,
           и без него её минимальная ширина растягивает всю оболочку.
         */}
-        <Tabs defaultValue="diagram" className="flex min-h-0 min-w-0 flex-1 flex-col">
+        <Tabs value={view} onValueChange={(value) => {
+          setView(value as WorkspaceView);
+          if (value === 'norms') setNormsVisited(true);
+        }} className="flex min-h-0 min-w-0 flex-1 flex-col">
           <div className="flex items-center gap-2 border-b border-line px-2 py-1.5">
             <TabsList>
               <TabsTrigger value="diagram">Диаграмма</TabsTrigger>
               <TabsTrigger value="table">Экспликация</TabsTrigger>
+              <TabsTrigger value="norms">Нормы</TabsTrigger>
             </TabsList>
           </div>
           <TabsContent
@@ -83,10 +96,13 @@ function Workspace() {
           <TabsContent value="table" className="min-h-0 min-w-0 flex-1 data-[state=inactive]:hidden">
             <ExplicationTable />
           </TabsContent>
+          <TabsContent value="norms" forceMount className="min-h-0 min-w-0 flex-1 data-[state=inactive]:hidden">
+            {normsVisited ? <NormExplorer /> : null}
+          </TabsContent>
         </Tabs>
       </main>
 
-      <aside className={cn('min-h-0 w-full shrink-0 border-l border-line bg-panel xl:block xl:w-[312px]', panel !== 'summary' && 'hidden')}>
+      <aside className={normsOpen ? 'hidden' : cn('min-h-0 w-full shrink-0 border-l border-line bg-panel xl:block xl:w-[312px]', panel !== 'summary' && 'hidden')}>
         <RightPanel />
       </aside>
     </div>
@@ -113,7 +129,7 @@ function StorageNotice() {
   );
 }
 
-export function AppShell() {
+export function AppShell({ initialView = 'diagram' }: { initialView?: WorkspaceView }) {
   const hydrated = useProjectStore((s) => s.hydrated);
 
   React.useEffect(() => {
@@ -126,7 +142,7 @@ export function AppShell() {
         {hydrated ? <TopBar /> : null}
         <StorageNotice />
         {hydrated ? (
-          <Workspace />
+          <Workspace initialView={initialView} />
         ) : (
           <div className="flex flex-1 items-center justify-center text-[12px] text-muted">
             Загрузка проекта…

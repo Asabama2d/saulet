@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import Link from 'next/link';
-import { ArrowLeft, ArrowRight, BookOpen, FileKey, LockKeyhole, Network, Search, X } from 'lucide-react';
+import { ArrowRight, BookOpen, FileKey, LockKeyhole, Network, Search, X } from 'lucide-react';
 import { deriveCorpusKey, fetchCorpusFile, validateManifest } from '@/lib/norms/crypto';
 import { applyDocumentTopics, filterClauses, rankClause } from '@/lib/norms/search';
 import { Dialog } from '@/components/ui/dialog';
@@ -40,8 +39,7 @@ function Unlock({ onUnlock }: { onUnlock: (session: CorpusSession) => void }) {
     } catch (e) { setError(e instanceof DOMException ? 'Неверный пароль или повреждён файл базы.' : e instanceof Error ? e.message : 'Не удалось открыть базу. Повторите попытку.'); }
     finally { setBusy(false); }
   }
-  return <main className="relative flex h-full min-h-0 flex-col overflow-y-auto bg-[#0c1420] text-slate-100">
-    <header className="z-10 flex items-center justify-between border-b border-slate-700/50 px-5 py-4"><Link href="/" className="flex items-center gap-2 text-sm text-slate-300"><ArrowLeft size={16} />Saulet · к планировке</Link><span className="text-xs text-slate-400">Нормативная база РК</span></header>
+  return <section aria-label="Нормативная база" className="relative flex h-full min-h-0 flex-col overflow-y-auto bg-[#0c1420] text-slate-100">
     <div className="relative mx-auto flex w-full max-w-6xl flex-1 items-center gap-12 px-6 py-12 lg:px-12">
       <div className="hidden flex-1 lg:block" aria-hidden="true"><svg viewBox="0 0 560 560" className="w-full">
         {Array.from({ length: 95 }, (_, i) => { const a = i * 2.39996, r = 30 + Math.sqrt(i) * 23, x = Math.round((280 + Math.cos(a) * r) * 100) / 100, y = Math.round((280 + Math.sin(a) * r) * 100) / 100; return <g key={i}><line x1="280" y1="280" x2={x} y2={y} stroke="#76a7b9" strokeOpacity="0.11" /><circle cx={x} cy={y} r={i % 9 === 0 ? 5 : 2.2} fill={['#67d5cf', '#ba9aef', '#f3b770'][i % 3]} opacity={i % 4 === 0 ? 1 : 0.5} /></g>; })}
@@ -66,7 +64,7 @@ function Unlock({ onUnlock }: { onUnlock: (session: CorpusSession) => void }) {
         <p className="mt-7 flex items-start gap-2 text-[11px] leading-relaxed text-slate-500"><LockKeyhole size={14} className="mt-0.5 shrink-0" />Документы зашифрованы. Пароль открывает их только в этой вкладке и не отправляется на сервер.</p>
       </div>
     </div>
-  </main>;
+  </section>;
 }
 
 function Explorer({ session, onLock }: { session: CorpusSession; onLock: () => void }) {
@@ -127,9 +125,9 @@ function Explorer({ session, onLock }: { session: CorpusSession; onLock: () => v
   function reset() { setTopics([]); setLanguage('all'); setSection(''); setDocFilter(null); setQuery(''); setSearchQuery(''); setSearchResult(null); requestId.current++; setSearching(false); setSearchError(''); resetPage(); }
   function selectClause(id: number) { setSelected({ doc: index.clauses[id].doc, clause: id }); }
 
-  return <main className="flex h-full min-h-0 flex-col bg-bg">
+  return <section aria-label="Нормативная база" className="flex h-full min-h-0 flex-col bg-bg">
     <header className="flex shrink-0 flex-wrap items-center gap-3 border-b border-line px-4 py-3">
-      <Link href="/" className="flex items-center gap-2 text-sm font-semibold"><ArrowLeft size={15} />Saulet</Link><span className="h-4 border-l border-line" /><h1 className="flex items-center gap-2 text-sm font-medium"><Network size={17} className="text-accent" />Атлас норм</h1>
+      <h1 className="flex items-center gap-2 text-sm font-medium"><Network size={17} className="text-accent" />Атлас норм</h1>
       <span className="hidden text-xs text-muted sm:block">{number(index.documents.length)} документов · {index.created.slice(0, 10)}</span>
       <button onClick={() => setCoverage(true)} className="ml-auto text-xs text-muted underline decoration-dotted underline-offset-4">Состав базы</button><button onClick={onLock} className="flex items-center gap-1.5 rounded border border-line px-2 py-1 text-xs"><LockKeyhole size={13} />Закрыть доступ</button>
     </header>
@@ -167,7 +165,7 @@ function Explorer({ session, onLock }: { session: CorpusSession; onLock: () => v
       {selected && <SourcePanel key={`${selected.doc}:${selected.clause}`} session={session} docId={selected.doc} clauseId={selected.clause} onClose={() => setSelected(null)} onTopic={(id) => { setTopics([id]); setDocFilter(null); resetPage(); }} />}
     </div>
     <Dialog open={coverage} onOpenChange={setCoverage} title="Состав нормативной базы" description="Полнота, происхождение и ограничения корпуса" width="w-[680px]"><div className="space-y-4 text-xs leading-relaxed"><p>Загружены все {index.documents.length} Markdown-документов из реестра. Полные тексты сохранены, включая таблицы, русскую и казахскую части. Год в шифре не подтверждает дату последней редакции.</p><p>Нумерация, границы фрагментов, языки и тематические связи распознаны автоматически. Импорт не изменяет расчётные правила планировщика. Поиск помогает найти источник для проверки; он не является автоматическим заключением о соответствии.</p><p>Некоторые исходники не были преобразованы в Markdown. Перечень из локальной базы:</p><pre className="whitespace-pre-wrap break-words font-sans">{index.coverage}</pre></div></Dialog>
-  </main>;
+  </section>;
 }
 
 export function NormExplorer() {
