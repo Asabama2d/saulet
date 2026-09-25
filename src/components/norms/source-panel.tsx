@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Copy, Download, X } from 'lucide-react';
 import { fetchCorpusFile } from '@/lib/norms/crypto';
 import { citation } from '@/lib/norms/search';
@@ -32,6 +32,16 @@ export function SourcePanel({ session, docId, clauseId, onClose, onTopic }: {
   const [mode, setMode] = useState<'clause' | 'page'>(clause ? 'clause' : 'page');
   const [page, setPage] = useState(clause?.page || 1);
   const [copied, setCopied] = useState('');
+  const closeButton = useRef<HTMLButtonElement>(null);
+  const close = useRef(onClose);
+  useEffect(() => { close.current = onClose; }, [onClose]);
+  useEffect(() => {
+    const previous = document.activeElement;
+    closeButton.current?.focus({ preventScroll: true });
+    const escape = (event: KeyboardEvent) => { if (event.key === 'Escape') close.current(); };
+    window.addEventListener('keydown', escape);
+    return () => { window.removeEventListener('keydown', escape); if (previous instanceof HTMLElement && previous.isConnected) previous.focus({ preventScroll: true }); };
+  }, []);
   useEffect(() => {
     const controller = new AbortController();
     fetchCorpusFile<{ text: string }>(session.key, session.manifest, doc.id, controller.signal)
@@ -49,12 +59,11 @@ export function SourcePanel({ session, docId, clauseId, onClose, onTopic }: {
   const actual = Math.max(0, current);
   const rendered = text ? mode === 'clause' && clause ? text.slice(clause.start, clause.end) : text.slice(pages[actual]?.start || 0, pages[actual]?.end ?? text.length) : '';
   const reference = clauseId === null || mode === 'page' ? `${doc.code} «${doc.title}» · стр. ${pages[actual]?.number || 1} · ${doc.source}` : citation(session.index, clauseId);
-  return <aside aria-label="Текст нормы" className="absolute inset-y-0 right-0 z-20 flex w-full flex-col border-l border-line bg-bg shadow-2xl md:w-[480px] xl:relative xl:w-[440px] xl:shrink-0">
+  return <aside aria-label="Текст нормы" className="norm-source-enter absolute inset-y-0 right-0 z-20 flex w-full flex-col border-l border-line bg-bg shadow-2xl md:w-[520px]">
     <div className="border-b border-line p-4">
-      <div className="mb-3 flex items-center justify-between gap-3"><span className="text-xs font-medium text-accent">Источник · {doc.section}</span><button onClick={onClose} aria-label="Закрыть документ" className="rounded p-1 hover:bg-raised"><X size={18} /></button></div>
+      <div className="mb-3 flex items-center justify-between gap-3"><span className="text-xs font-medium text-accent">Источник · {doc.section}</span><button ref={closeButton} onClick={onClose} aria-label="Закрыть документ" className="norm-icon-button"><X size={18} /></button></div>
       <h2 className="text-base font-semibold">{doc.code}</h2><p className="mt-1 text-sm text-muted">{doc.title}</p>
-      <div className="mt-3 flex flex-wrap gap-2 text-[11px]"><span className="rounded bg-raised px-2 py-1">Год в шифре: {doc.year || 'не указан'}</span><span className="rounded bg-warn-soft px-2 py-1 text-warn">Актуальность не проверена</span></div>
-      <p className="mt-2 text-[11px] text-muted">Текст распознан из исходника. Для заключения проверьте редакцию, область применения и числовые значения.</p>
+      <details className="mt-3 text-xs text-muted"><summary className="cursor-pointer">Актуальность не проверена</summary><p className="mt-2 leading-relaxed">Год в шифре: {doc.year || 'не указан'}. Текст распознан из исходника. Для заключения проверьте редакцию, область применения и числовые значения.</p></details>
     </div>
     <div className="flex flex-wrap items-center gap-2 border-b border-line px-4 py-2 text-xs">
       {clause && <button className={`rounded px-2 py-1 ${mode === 'clause' ? 'bg-accent-soft text-accent' : 'hover:bg-raised'}`} onClick={() => setMode('clause')}>{clause.label}</button>}

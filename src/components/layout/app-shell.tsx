@@ -54,10 +54,9 @@ function RightPanel() {
   );
 }
 
-function Workspace({ initialView }: { initialView: WorkspaceView }) {
+function Workspace({ view, onViewChange }: { view: WorkspaceView; onViewChange: (view: WorkspaceView) => void }) {
   const [panel, setPanel] = React.useState<'workspace' | 'params' | 'summary'>('workspace');
-  const [view, setView] = React.useState<WorkspaceView>(initialView);
-  const [normsVisited, setNormsVisited] = React.useState(initialView === 'norms');
+  const [normsVisited, setNormsVisited] = React.useState(view === 'norms');
   const normsOpen = view === 'norms';
   return (
     <div className="flex min-h-0 flex-1 flex-col">
@@ -77,7 +76,7 @@ function Workspace({ initialView }: { initialView: WorkspaceView }) {
           и без него её минимальная ширина растягивает всю оболочку.
         */}
         <Tabs value={view} onValueChange={(value) => {
-          setView(value as WorkspaceView);
+          onViewChange(value as WorkspaceView);
           if (value === 'norms') setNormsVisited(true);
         }} className="flex min-h-0 min-w-0 flex-1 flex-col">
           <div className="flex items-center gap-2 border-b border-line px-2 py-1.5">
@@ -131,6 +130,7 @@ function StorageNotice() {
 
 export function AppShell({ initialView = 'diagram' }: { initialView?: WorkspaceView }) {
   const hydrated = useProjectStore((s) => s.hydrated);
+  const [view, setView] = React.useState<WorkspaceView>(initialView);
 
   React.useEffect(() => {
     void hydrateProject();
@@ -139,10 +139,10 @@ export function AppShell({ initialView = 'diagram' }: { initialView?: WorkspaceV
   return (
     <TooltipProvider delayDuration={200}>
       <div className="flex h-full flex-col">
-        {hydrated ? <TopBar /> : null}
+        {hydrated ? <TopBar compact={view === 'norms'} /> : null}
         <StorageNotice />
         {hydrated ? (
-          <Workspace initialView={initialView} />
+          <Workspace view={view} onViewChange={setView} />
         ) : (
           <div className="flex flex-1 items-center justify-center text-[12px] text-muted">
             Загрузка проекта…

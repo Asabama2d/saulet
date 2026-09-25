@@ -203,7 +203,7 @@ function ProjectIO() {
   );
 }
 
-export function TopBar() {
+export function TopBar({ compact = false }: { compact?: boolean }) {
   const buildingTypeId = useProjectStore((s) => s.buildingTypeId);
   const setBuildingType = useProjectStore((s) => s.setBuildingType);
   const currentType =
@@ -219,7 +219,7 @@ export function TopBar() {
         </span>
       </div>
 
-      <div className="w-56 min-w-0 flex-1 sm:max-w-72" title={currentType.name}>
+      {!compact && <div className="w-56 min-w-0 flex-1 sm:max-w-72" title={currentType.name}>
         <Select
           ariaLabel="Назначение здания"
           value={buildingTypeId}
@@ -230,10 +230,10 @@ export function TopBar() {
           }}
           options={knowledgeBase.buildingTypes.map((t) => ({ value: t.id, label: t.name }))}
         />
-      </div>
+      </div>}
 
       <div className="ml-auto flex max-w-full flex-wrap items-center gap-1">
-        <Tooltip
+        {!compact && <><Tooltip
           content={`Нормативная база версии ${knowledgeBase.version}. Редакции документов проверять на дату начала проектирования — нормативы РК обновляются приказами несколько раз в год.`}
           side="bottom"
         >
@@ -243,7 +243,7 @@ export function TopBar() {
           </span>
         </Tooltip>
         <div className="hidden xl:block"><VerificationIndicator /></div>
-        <ProjectIO />
+        <ProjectIO /></>}
         <ThemeToggle />
       </div>
     </header>

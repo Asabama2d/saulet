@@ -155,6 +155,40 @@
   }
 }
 
+.norm-icon-button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+  min-width: 36px; min-height: 36px; border-radius: 9px; color: var(--app-muted);
+}
+.norm-icon-button:hover { background: var(--app-panel); color: var(--app-fg); }
+.norm-icon-button:disabled { opacity: .3; }
+.norm-filter-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 9px; border-radius: 8px; background: var(--app-panel); }
+.norm-focus-graph { position: relative; width: 100%; height: clamp(350px, 49vh, 480px); }
+.norm-focus-position { position: absolute; transform: translate(-50%, -50%); width: 178px; max-width: 27%; }
+.norm-focus-node {
+  width: 100%; min-height: 68px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 7px; padding: 13px 16px; border-radius: 18px; border: 1px solid var(--app-line);
+  color: var(--app-fg); background: var(--app-bg); text-align: center; font-size: 13px;
+  transition: border-color 150ms ease, background 150ms ease;
+}
+.norm-focus-node:hover { border-color: var(--app-accent); background: var(--app-panel); }
+.norm-focus-node svg { color: var(--app-muted); flex-shrink: 0; }
+.norm-focus-node.is-center { border-color: var(--app-accent); background: var(--app-accent-soft); min-height: 86px; }
+.norm-focus-node.is-center svg { color: var(--app-accent); }
+.norm-focus-detail { flex-basis: 100%; color: var(--app-muted); font-size: 11px; }
+.norm-focus-center { z-index: 1; }
+@keyframes norm-reveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes norm-source { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+.norm-reveal { animation: norm-reveal 200ms ease-out; }
+.norm-source-enter { animation: norm-source 220ms ease-out; }
+@media (max-width: 600px) {
+  .norm-focus-graph { height: 380px; }
+  .norm-focus-position { max-width: 29%; }
+  .norm-focus-node { font-size: 12px; padding: 10px 7px; gap: 4px; border-radius: 14px; min-height: 66px; }
+  .norm-focus-node svg { display: none; }
+  .norm-focus-detail { display: none; }
+  .norm-focus-node.is-center { min-height: 80px; }
+}
+@media (pointer: coarse) { .norm-workspace button, .norm-icon-button { min-height: 44px; } }
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

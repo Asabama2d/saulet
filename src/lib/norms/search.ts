@@ -27,6 +27,17 @@ export function searchCorpus(search: CorpusSearchIndex, documents: CorpusDocumen
   return new Set([...tokenSets[0]].filter((id) => tokenSets.every((set) => set.has(id))));
 }
 
+/** OR between alternative phrases; AND between words within each phrase. */
+export function searchTextAlternatives(search: CorpusSearchIndex, alternatives: readonly string[]): Set<number> {
+  const result = new Set<number>();
+  for (const alternative of alternatives) {
+    // Empty document metadata means a facet cannot match every clause merely
+    // because its document title contains the word.
+    for (const id of searchCorpus(search, [], [], alternative)) result.add(id);
+  }
+  return result;
+}
+
 export interface CorpusFilter { topics: string[]; topicMode: 'any' | 'all'; language: string; section: string; doc: number | null; matches?: Set<number> }
 export function applyDocumentTopics(index: CorpusIndex): CorpusIndex {
   const context = index.documents.map((doc) => doc.topics.filter((t) => ['mall', 'schools', 'clinics', 'food'].includes(t)));

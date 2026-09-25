@@ -4,7 +4,8 @@ import { createCipheriv, pbkdf2Sync, randomBytes } from 'node:crypto';
 import { gzipSync } from 'node:zlib';
 import { parseDocument } from '../scripts/corpus-parser';
 import { CORPUS_ITERATIONS, decryptCorpusFile, deriveCorpusKey, validateManifest } from '../src/lib/norms/crypto';
-import { applyDocumentTopics, filterClauses, searchClauses } from '../src/lib/norms/search';
+import { applyDocumentTopics, filterClauses, searchClauses, searchTextAlternatives } from '../src/lib/norms/search';
+import { relatedTopics } from '../src/lib/norms/focus';
 import { TOPICS, topicMatches } from '../src/lib/norms/topics';
 import type { CorpusIndex } from '../src/lib/norms/types';
 
@@ -34,6 +35,22 @@ pages: 3
 `;
 const parsed = parseDocument(source, 'СП РК/test.md', 0);
 const index: CorpusIndex = { version: 1, created: '', documents: [parsed.document], clauses: parsed.clauses, topics: TOPICS, coverage: '' };
+
+test('context search combines bilingual alternatives and phrase words without matching document metadata', () => {
+  const search = { vocabulary: ['двери', 'ені', 'отқа', 'төзімді', 'ширина'], postings: [[0], [1], [2, 3], [2], [4]] };
+  // Includes a synonym appearing deep in the full text, regardless of excerpt.
+  assert.deepEqual([...searchTextAlternatives(search, ['ширин', 'ені'])].sort(), [1, 4]);
+  assert.deepEqual([...searchTextAlternatives(search, ['отқа төзімді'])], [2]);
+  assert.equal(searchTextAlternatives(search, ['учебный']).size, 0, 'document title must not satisfy a text facet');
+});
+
+test('focus links only contain co-occurring topics from the current scope', () => {
+  const visible = filterClauses(index, { topics: ['doors'], topicMode: 'all', language: 'ru', section: '', doc: null });
+  const linked = relatedTopics(index, visible, ['doors'], 6);
+  assert.ok(linked.some((t) => t.id === 'evacuation'));
+  assert.ok(!linked.some((t) => t.id === 'mall' || t.id === 'doors'));
+  assert.deepEqual(relatedTopics(index, [], ['doors']), []);
+});
 
 test('parser preserves full text, offsets, original page and distinct bilingual occurrences', () => {
   assert.equal(parsed.text, source);

@@ -1,5 +1,6 @@
 import { fetchCorpusFile } from './crypto';
-import { searchCorpus } from './search';
+import { searchCorpus, searchTextAlternatives } from './search';
+import { FACETS, type FacetId } from './focus';
 import type { CorpusDocument, CorpusManifest, CorpusSearchIndex } from './types';
 
 let search: Promise<CorpusSearchIndex> | null = null;
@@ -11,7 +12,10 @@ self.onmessage = async (event: MessageEvent) => {
   try {
     search ??= fetchCorpusFile<CorpusSearchIndex>(config.key, config.manifest, 'search');
     const data = await search;
-    const ids = [...searchCorpus(data, config.documents, config.clauseDocs, message.query)];
+    const facet = Object.hasOwn(FACETS, message.facet) ? FACETS[message.facet as FacetId] : null;
+    const matches = message.query ? searchCorpus(data, config.documents, config.clauseDocs, message.query) : null;
+    const context = facet ? searchTextAlternatives(data, facet.roots) : null;
+    const ids = [...(context ?? matches ?? [])].filter((id) => !matches || matches.has(id));
     self.postMessage({ id: message.id, ids });
   } catch {
     search = null;
